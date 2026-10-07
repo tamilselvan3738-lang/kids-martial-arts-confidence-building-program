@@ -1,0 +1,2758 @@
+<!DOCTYPE html>
+<html lang="en" class="dark" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Martial Arts Programs & Belt Progression - Kids Martial Arts Academy</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/logo-icon.svg" />
+  <link rel="shortcut icon" href="assets/logo-icon.svg" />
+  <link rel="apple-touch-icon" href="assets/logo-icon.svg" />
+
+  <!-- Google Fonts: Outfit & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome 6.5.1 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              crimson: '#E11D48',
+              crimsonDark: '#9F1239',
+              fire: '#FF385C',
+              gold: '#F59E0B',
+              goldLight: '#FDE047',
+              navy: '#0F172A',
+              slate: '#1E293B',
+              darkBg: '#080B11',
+              darkCard: '#111726',
+              lightBg: '#F8FAFC',
+              lightCard: '#FFFFFF'
+            }
+          },
+          fontFamily: {
+            outfit: ['Outfit', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Motion (Official Framer Motion Engine) -->
+  <script src="https://cdn.jsdelivr.net/npm/motion@11.11.17/dist/motion.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Ambient Subtle Dots Pattern */
+    .bg-grid-ambient {
+      background-size: 32px 32px;
+      background-image: 
+        radial-gradient(circle, rgba(225, 29, 72, 0.08) 1px, transparent 1px);
+    }
+    .dark .bg-grid-ambient {
+      background-image: 
+        radial-gradient(circle, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+    }
+
+    /* Floating Island Navbar Styles (Exact Match) */
+    .navbar-creative-island {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(226, 232, 240, 0.85);
+      box-shadow: 
+        0 14px 34px -8px rgba(15, 23, 42, 0.08),
+        0 2px 6px -1px rgba(15, 23, 42, 0.03),
+        inset 0 1px 0 rgba(255, 255, 255, 0.95);
+      position: relative;
+    }
+    .dark .navbar-creative-island {
+      background: rgba(13, 19, 31, 0.86);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      box-shadow: 
+        0 18px 45px -10px rgba(0, 0, 0, 0.7),
+        0 4px 12px -2px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12),
+        inset 0 0 14px rgba(225, 29, 72, 0.04);
+    }
+
+    .navbar-creative-island::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 12%;
+      right: 12%;
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent 0%, rgba(225, 29, 72, 0.7) 25%, rgba(245, 158, 11, 0.85) 50%, rgba(225, 29, 72, 0.7) 75%, transparent 100%);
+      border-radius: 9999px;
+      pointer-events: none;
+    }
+
+    #navGlider {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background: rgba(225, 29, 72, 0.08);
+      border-radius: 0.65rem;
+      pointer-events: none;
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 0.15s ease, transform 0.15s ease;
+      z-index: 0;
+    }
+    .dark #navGlider {
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    /* 3D Tactile Buttons */
+    .btn-3d {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.12s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                  box-shadow 0.12s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  filter 0.15s ease;
+      transform: translateY(0);
+    }
+
+    .btn-3d-login {
+      background: linear-gradient(180deg, #FF3B62 0%, #E11D48 60%, #BE123C 100%);
+      color: #FFFFFF;
+      box-shadow: 0 4px 0 #881337, 0 8px 16px rgba(225, 29, 72, 0.35);
+      border-top: 1px solid rgba(255, 255, 255, 0.45);
+      border-left: 1px solid rgba(255, 255, 255, 0.2);
+      border-right: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .btn-3d-login:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 0 #881337, 0 12px 20px rgba(225, 29, 72, 0.45);
+      filter: brightness(1.05);
+    }
+    .btn-3d-login:active {
+      transform: translateY(3.5px);
+      box-shadow: 0 0.5px 0 #881337, 0 3px 6px rgba(225, 29, 72, 0.2);
+    }
+
+    .btn-3d-dashboard {
+      background: linear-gradient(180deg, #F1F5F9 0%, #E2E8F0 100%);
+      color: #1E293B;
+      box-shadow: 0 3px 0 #94A3B8, 0 5px 10px rgba(0, 0, 0, 0.05);
+      border-top: 1px solid rgba(255, 255, 255, 0.85);
+    }
+    .dark .btn-3d-dashboard {
+      background: linear-gradient(180deg, #26334D 0%, #172033 100%);
+      color: #F8FAFC;
+      box-shadow: 0 3px 0 #0A0F1A, 0 5px 10px rgba(0, 0, 0, 0.45);
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    }
+    .btn-3d-dashboard:hover {
+      transform: translateY(-1.5px);
+      box-shadow: 0 4.5px 0 #94A3B8, 0 8px 14px rgba(0, 0, 0, 0.08);
+    }
+    .dark .btn-3d-dashboard:hover {
+      box-shadow: 0 4.5px 0 #0A0F1A, 0 8px 14px rgba(0, 0, 0, 0.55);
+    }
+    .btn-3d-dashboard:active {
+      transform: translateY(2.5px);
+      box-shadow: 0 0.5px 0 #94A3B8, 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    .dark .btn-3d-dashboard:active {
+      box-shadow: 0 0.5px 0 #0A0F1A, 0 2px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .btn-3d-switch {
+      background: linear-gradient(180deg, #F8FAFC 0%, #E2E8F0 100%);
+      color: #334155;
+      box-shadow: 0 3px 0 #94A3B8, 0 4px 8px rgba(0, 0, 0, 0.06);
+      border-top: 1px solid rgba(255, 255, 255, 0.85);
+    }
+    .dark .btn-3d-switch {
+      background: linear-gradient(180deg, #1E293B 0%, #0F172A 100%);
+      color: #E2E8F0;
+      box-shadow: 0 3px 0 #020617, 0 4px 8px rgba(0, 0, 0, 0.45);
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .btn-3d-switch:hover {
+      transform: translateY(-1.5px);
+      box-shadow: 0 4.5px 0 #94A3B8, 0 6px 12px rgba(0, 0, 0, 0.1);
+    }
+    .dark .btn-3d-switch:hover {
+      box-shadow: 0 4.5px 0 #020617, 0 6px 12px rgba(0, 0, 0, 0.5);
+    }
+    .btn-3d-switch:active {
+      transform: translateY(2.5px);
+      box-shadow: 0 0.5px 0 #94A3B8, 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    .dark .btn-3d-switch:active {
+      box-shadow: 0 0.5px 0 #020617, 0 2px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .btn-3d-hamburger {
+      background: linear-gradient(180deg, #FF3B62 0%, #E11D48 100%);
+      color: white;
+      box-shadow: 0 3.5px 0 #881337, 0 6px 12px rgba(225, 29, 72, 0.35);
+      border-top: 1px solid rgba(255, 255, 255, 0.35);
+    }
+    .btn-3d-hamburger:hover {
+      transform: translateY(-1.5px);
+      box-shadow: 0 5px 0 #881337, 0 8px 14px rgba(225, 29, 72, 0.45);
+    }
+    .btn-3d-hamburger:active {
+      transform: translateY(2.5px);
+      box-shadow: 0 0.5px 0 #881337, 0 2px 4px rgba(225, 29, 72, 0.2);
+    }
+
+    /* Nav Item Link Styling */
+    .nav-item-link {
+      position: relative;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      color: #475569;
+      border-radius: 0.65rem;
+      z-index: 1;
+      transition: color 0.18s ease, background-color 0.18s ease;
+    }
+    .dark .nav-item-link {
+      color: #94A3B8;
+    }
+    .nav-item-link:hover {
+      color: #E11D48;
+    }
+    .dark .nav-item-link:hover {
+      color: #FFFFFF;
+    }
+    .nav-item-link.active {
+      color: #E11D48 !important;
+      font-weight: 800 !important;
+    }
+    .dark .nav-item-link.active {
+      color: #FF3B62 !important;
+      font-weight: 800 !important;
+    }
+    .nav-item-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 15%;
+      right: 15%;
+      height: 2.5px;
+      background: linear-gradient(90deg, #FF3B62, #F59E0B);
+      border-radius: 9999px;
+      box-shadow: 0 1px 6px rgba(225, 29, 72, 0.5);
+    }
+    .dark .nav-item-link.active::after {
+      box-shadow: 0 1px 8px rgba(255, 59, 98, 0.7);
+    }
+
+    /* Mobile Drawer Active State */
+    .drawer-anim-item.active,
+    a.drawer-anim-item.active,
+    .active-drawer-link {
+      color: #E11D48 !important;
+      background: rgba(225, 29, 72, 0.08) !important;
+      font-weight: 800 !important;
+      border-left: 3.5px solid #E11D48 !important;
+    }
+    .dark .drawer-anim-item.active,
+    .dark a.drawer-anim-item.active,
+    .dark .active-drawer-link {
+      color: #FF4D6D !important;
+      background: rgba(225, 29, 72, 0.16) !important;
+      border-left: 3.5px solid #FF4D6D !important;
+    }
+    [dir="rtl"] .drawer-anim-item.active,
+    [dir="rtl"] a.drawer-anim-item.active,
+    [dir="rtl"] .active-drawer-link {
+      border-left: none !important;
+      border-right: 3.5px solid #E11D48 !important;
+    }
+    [dir="rtl"].dark .drawer-anim-item.active,
+    [dir="rtl"].dark a.drawer-anim-item.active,
+    [dir="rtl"].dark .active-drawer-link {
+      border-right: 3.5px solid #FF4D6D !important;
+    }
+
+    .creative-dropdown {
+      transform-origin: top center;
+      transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.2s;
+    }
+
+    [dir="rtl"] .creative-dropdown {
+      text-align: right;
+    }
+
+    /* 3D Tactile Card Hover */
+    .card-3d-hover {
+      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.25s ease;
+    }
+    .card-3d-hover:hover {
+      transform: translateY(-6px) scale3d(1.012, 1.012, 1.012);
+      box-shadow: 0 24px 48px -12px rgba(15, 23, 42, 0.14), 0 0 20px rgba(225, 29, 72, 0.1);
+    }
+    .dark .card-3d-hover:hover {
+      box-shadow: 0 26px 54px -12px rgba(0, 0, 0, 0.75), 0 0 24px rgba(225, 29, 72, 0.22);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0B0F17;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #E11D48;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #F59E0B;
+    }
+  
+
+    /* ==========================================================================
+       ENTERPRISE MOBILE-FIRST RESPONSIVE MASTER STYLESHEET
+       Strict mobile optimization for 320px, 480px, 768px, 1024px
+       Zero horizontal overflow | Adaptive typography | Fluid grid & flex layout
+       ========================================================================== */
+
+    /* 1. Global Box-Sizing & Overflow Quarantine */
+    *, *::before, *::after {
+      box-sizing: border-box !important;
+    }
+
+    html {
+      width: 100% !important;
+      max-width: 100% !important;
+      overflow-x: hidden;
+      overflow-x: clip !important;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      width: 100% !important;
+      max-width: 100% !important;
+      overflow-x: clip !important;
+      position: relative !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    /* Guaranteed Persistent Sticky Navbar Across All Screen Sizes */
+    #mainHeader,
+    header {
+      position: -webkit-sticky !important;
+      position: sticky !important;
+      top: 0 !important;
+      z-index: 50 !important;
+    }
+
+    /* 2. Media & Visual Elements Strict Fluid Bounds */
+    img, svg, video, canvas, audio, iframe, embed, object {
+      max-width: 100% !important;
+      height: auto;
+    }
+
+    /* 3. Text Overflow Immunity */
+    h1, h2, h3, h4, h5, h6, p, span, a, button, li, dt, dd, blockquote, label {
+      overflow-wrap: break-word !important;
+      word-wrap: break-word !important;
+      max-width: 100%;
+    }
+
+    /* 4. Section & Container Strict Layout Integrity */
+    section {
+      width: 100% !important;
+      max-width: 100% !important;
+      position: relative !important;
+      overflow-x: hidden;
+      overflow-x: clip !important;
+      overflow-y: visible !important;
+    }
+
+    .container, .max-w-7xl, .max-w-6xl, .max-w-5xl, .max-w-4xl, .max-w-3xl, .max-w-2xl {
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+
+    /* 5. Responsive Form Controls & Interactive Buttons */
+    input, select, textarea {
+      max-width: 100% !important;
+    }
+
+    button, a.btn-3d, .btn-3d {
+      max-width: 100% !important;
+      white-space: normal;
+    }
+
+    /* 6. Breakpoint Optimization: <= 1024px (Small Laptops & Tablets) */
+    @media (max-width: 1024px) {
+      .max-w-7xl, .max-w-6xl {
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+      }
+      header nav, header {
+        max-width: 100% !important;
+      }
+    }
+
+    /* 7. Breakpoint Optimization: <= 768px (Tablets & Mobile Landscape) */
+    @media (max-width: 768px) {
+      /* Fluid Headings */
+      h1, .text-5xl, .text-6xl, .text-7xl {
+        font-size: clamp(1.85rem, 5.5vw, 2.75rem) !important;
+        line-height: 1.15 !important;
+      }
+      h2, .text-3xl, .text-4xl {
+        font-size: clamp(1.4rem, 4.2vw, 2.1rem) !important;
+        line-height: 1.22 !important;
+      }
+      h3, .text-2xl {
+        font-size: clamp(1.2rem, 3.2vw, 1.55rem) !important;
+        line-height: 1.28 !important;
+      }
+
+      /* Consistent Section Spacing */
+      section {
+        padding-top: clamp(2.5rem, 6vw, 4rem) !important;
+        padding-bottom: clamp(2.5rem, 6vw, 4rem) !important;
+      }
+
+      /* Stack two-column split heroes & banners */
+      .grid.lg\:grid-cols-2, .grid.lg\:grid-cols-3, .grid.lg\:grid-cols-4 {
+        grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+      }
+    }
+
+    /* 8. Breakpoint Optimization: <= 480px (Standard Mobile Portrait) */
+    @media (max-width: 480px) {
+      /* Uniform padding on all main containers */
+      .px-4, .px-6, .px-8, .sm\:px-6, .lg\:px-8 {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+      }
+
+      /* Mobile Adaptive Typography */
+      h1, .text-5xl, .text-6xl, .text-7xl {
+        font-size: clamp(1.55rem, 7vw, 2.15rem) !important;
+        line-height: 1.18 !important;
+      }
+      h2, .text-3xl, .text-4xl {
+        font-size: clamp(1.3rem, 5.2vw, 1.7rem) !important;
+        line-height: 1.25 !important;
+      }
+      h3, .text-2xl {
+        font-size: clamp(1.1rem, 4vw, 1.35rem) !important;
+        line-height: 1.3 !important;
+      }
+      p, .text-base, .text-lg {
+        font-size: 0.925rem !important;
+        line-height: 1.55 !important;
+      }
+
+      /* Stack card grids vertically on mobile */
+      .grid.sm\:grid-cols-2,
+      .grid.sm\:grid-cols-3,
+      .grid.sm\:grid-cols-4,
+      .grid.md\:grid-cols-2,
+      .grid.md\:grid-cols-3 {
+        grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+      }
+
+      /* Full width buttons in CTAs */
+      .flex.flex-wrap.items-center.gap-3 > button,
+      .flex.flex-wrap.items-center.gap-3 > a.btn-3d,
+      .hero-btn-group > * {
+        width: 100% !important;
+        justify-content: center !important;
+        text-align: center !important;
+      }
+
+      /* Modals fit comfortably */
+      #loginModalContent, .modal-content {
+        width: 95% !important;
+        max-width: 95% !important;
+        padding: 1.25rem !important;
+      }
+
+      /* Mobile drawer fits without overflow */
+      #mobileDrawer {
+        width: min(85vw, 290px) !important;
+      }
+    }
+
+    /* 9. Breakpoint Optimization: <= 320px (Small Screen / iPhone SE) */
+    @media (max-width: 320px) {
+      .px-4, .px-6, .px-8, .sm\:px-6, .lg\:px-8 {
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+      }
+
+      /* Ultra-compact Typography */
+      h1, .text-5xl, .text-6xl, .text-7xl {
+        font-size: 1.4rem !important;
+        line-height: 1.2 !important;
+      }
+      h2, .text-3xl, .text-4xl {
+        font-size: 1.2rem !important;
+        line-height: 1.22 !important;
+      }
+      h3, .text-2xl {
+        font-size: 1.05rem !important;
+      }
+      body, p, .text-base {
+        font-size: 0.85rem !important;
+      }
+      .text-sm {
+        font-size: 0.8rem !important;
+      }
+      .text-xs {
+        font-size: 0.7rem !important;
+      }
+
+      /* Compact Buttons */
+      .btn-3d {
+        padding-left: 0.65rem !important;
+        padding-right: 0.65rem !important;
+        font-size: 0.75rem !important;
+      }
+
+      /* Force all multi-col grids to 1 col (except drawer inline buttons) */
+      .grid-cols-2, .grid-cols-3, .grid-cols-4, .grid-cols-5, .grid-cols-6 {
+        grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+      }
+      #mobileDrawer .grid-cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      }
+    }
+
+  </style>
+</head>
+
+<body class="bg-slate-50 dark:bg-brand-darkBg text-slate-800 dark:text-slate-100 min-h-screen bg-grid-ambient transition-colors duration-300 relative selection:bg-brand-crimson selection:text-white">
+
+  <!-- Ambient Cursor Spotlight (Framer Motion Enhanced) -->
+  <div id="ambientCursorSpotlight" class="fixed top-0 left-0 w-96 h-96 rounded-full pointer-events-none -translate-x-1/2 -translate-y-1/2 z-0 opacity-0 transition-opacity duration-300 mix-blend-screen" style="background: radial-gradient(circle, rgba(225, 29, 72, 0.12) 0%, rgba(245, 158, 11, 0.05) 50%, transparent 75%); filter: blur(35px);"></div>
+
+  <!-- EXACT NAVBAR FROM NAVBAR.HTML -->
+  <header id="mainHeader" class="sticky top-0 z-50 w-full px-3 sm:px-6 lg:px-8 pt-4 pb-2">
+    <nav id="mainNavbar" class="navbar-creative-island max-w-7xl mx-auto rounded-2xl px-3 sm:px-4.5 py-1.5 sm:py-2 transition-all duration-300">
+      <div class="flex items-center justify-between gap-2 lg:gap-3">
+
+        <!-- ====================================================
+             1. LEFT: COMPACT LOGO (FURTHER REDUCED SIZE)
+             ==================================================== -->
+        <a href="index.html" id="brandLogo" class="group flex items-center gap-2 shrink-0 focus:outline-none" aria-label="Kids Martial Arts & Confidence Building Program">
+          
+          <!-- Compact Shield Logo Emblem (~28px) with Spring Hover -->
+          <div id="logoIconContainer" class="relative w-7 h-7 sm:w-7.5 sm:h-7.5 rounded-lg bg-gradient-to-b from-rose-500 via-brand-crimson to-rose-700 p-0.5 shadow-sm shadow-rose-950/20 shrink-0 cursor-pointer">
+            <div class="w-full h-full bg-slate-950 rounded-[5px] flex items-center justify-center overflow-hidden relative">
+              <div class="absolute inset-0 bg-radial-gradient from-amber-400/25 to-transparent"></div>
+              
+              <!-- Clean Scaled Vector Emblem -->
+              <svg viewBox="0 0 100 100" class="w-5 h-5 sm:w-5.5 sm:h-5.5 text-white" fill="none">
+                <circle cx="50" cy="50" r="26" fill="#F59E0B" fill-opacity="0.2" />
+                <!-- 3 Top Stars -->
+                <polygon points="34,16 35.5,19 39,19.5 36.5,22 37,25 34,23.5 31,25 31.5,22 29,19.5 32.5,19" fill="#FDE047" />
+                <polygon points="50,11 52,15 57,15.5 53.5,19 54.5,23.5 50,21 45.5,23.5 46.5,19 43,15.5 48,15" fill="#FDE047" />
+                <polygon points="66,16 67.5,19 71,19.5 68.5,22 69,25 66,23.5 63,25 63.5,22 61,19.5 64.5,19" fill="#FDE047" />
+                <!-- Kicking Martial Artist Silhouette -->
+                <circle cx="43" cy="30" r="6" fill="#FFFFFF" />
+                <path d="M40 31 Q33 30 28 35" stroke="#FDE047" stroke-width="2" stroke-linecap="round" />
+                <path d="M41 36 L48 39 L47 52 L39 51 Z" fill="#FFFFFF" />
+                <path d="M42 38 L34 41" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" />
+                <path d="M47 39 L57 35 L62 38" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" />
+                <path d="M45 50 L56 46 L73 39" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" />
+                <path d="M73 39 L76 34 L80 39 L75 42 Z" fill="#FDE047" />
+                <path d="M40 51 L35 59 L42 63" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" />
+                <path d="M38 50 C42 51 46 51 48 50" stroke="#0F172A" stroke-width="3.5" stroke-linecap="round" />
+                <path d="M42 51 L38 65 M44 51 L47 67" stroke="#0F172A" stroke-width="2.5" stroke-linecap="round" />
+                <circle cx="39" cy="62" r="1.2" fill="#F59E0B" />
+                <circle cx="45" cy="64" r="1.2" fill="#F59E0B" />
+              </svg>
+            </div>
+            
+            <div class="absolute -top-1 -right-1 rtl:-left-1 rtl:-right-auto w-3 h-3 rounded-full bg-amber-400 border border-slate-950 flex items-center justify-center text-[6px] font-black text-slate-950">
+              ★
+            </div>
+          </div>
+
+          <!-- Delicate Compact Typography -->
+          <div class="flex flex-col text-left rtl:text-right">
+            <span class="font-outfit font-black text-xs sm:text-[13.5px] tracking-tight leading-none text-slate-900 dark:text-white group-hover:text-brand-crimson transition-colors">
+              <span class="text-brand-crimson">KIDS</span> MARTIAL ARTS
+            </span>
+            <span class="text-[7.5px] sm:text-[8px] font-bold text-amber-500 dark:text-amber-400 tracking-wider uppercase font-outfit leading-tight mt-0.5">
+              &amp; CONFIDENCE BUILDING PROGRAM
+            </span>
+          </div>
+        </a>
+
+        <!-- ====================================================
+             2. CENTER (LAPTOP VIEW): NAVBAR MENU
+             ==================================================== -->
+        <div id="navLinksContainer" class="hidden lg:flex items-center justify-center space-x-0.5 xl:space-x-1 rtl:space-x-reverse relative py-1">
+          
+          <!-- Dynamic Framer Motion Gliding Pill Background -->
+          <div id="navGlider"></div>
+
+          <!-- 2.1 HOME (ON HOVER: ONLY SHOW HOME 1 AND HOME 2) -->
+          <div class="relative group" id="desktopHomeDropdown">
+            <a href="index.html" class="nav-item-link  px-2.5 py-1.5 text-xs xl:text-sm flex items-center gap-1 focus:outline-none" aria-haspopup="true">
+              <span>Home</span>
+              <i class="fa-solid fa-chevron-down text-[8px] opacity-60 group-hover:rotate-180 transition-transform duration-200"></i>
+            </a>
+            
+            <!-- Shows ONLY Home 1 and Home 2 -->
+            <div class="creative-dropdown absolute top-full left-0 rtl:left-auto rtl:right-0 mt-2 w-32 p-1 rounded-xl bg-white dark:bg-slate-900 shadow-xl border border-slate-200 dark:border-slate-800 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+              <a href="index.html" class="dropdown-item block px-3 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-slate-200 hover:bg-rose-50 dark:hover:bg-rose-950/40 hover:text-brand-crimson transition-colors">
+                Home 1
+              </a>
+              <a href="home-2.html" class="dropdown-item block px-3 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-slate-200 hover:bg-rose-50 dark:hover:bg-rose-950/40 hover:text-brand-crimson transition-colors mt-0.5">
+                Home 2
+              </a>
+            </div>
+          </div>
+
+          <!-- 2.2 ABOUT -->
+          <a href="about.html" class="nav-item-link  px-2.5 py-1.5 text-xs xl:text-sm">
+            About
+          </a>
+
+          <!-- 2.3 PROGRAMS (ONLY PROGRAMS - NO OPTIONS ON HOVER) -->
+          <a href="programs.html" class="nav-item-link active px-2.5 py-1.5 text-xs xl:text-sm">
+            Programs
+          </a>
+
+          <!-- 2.4 BELT SYSTEM -->
+          <a href="belt-system.html" class="nav-item-link  px-2.5 py-1.5 text-xs xl:text-sm flex items-center gap-1.5">
+            <span>Belt System</span>
+            <span class="w-1.5 h-1.5 rounded-full inline-block bg-gradient-to-r from-amber-400 to-rose-500"></span>
+          </a>
+
+          <!-- 2.5 INSTRUCTORS -->
+          <a href="instructors.html" class="nav-item-link  px-2.5 py-1.5 text-xs xl:text-sm">
+            Instructors
+          </a>
+
+          <!-- 2.6 EVENTS -->
+          <a href="events.html" class="nav-item-link  px-2.5 py-1.5 text-xs xl:text-sm">
+            Events
+          </a>
+
+          <!-- 2.7 SAFETY -->
+          <a href="safety.html" class="nav-item-link  px-2.5 py-1.5 text-xs xl:text-sm flex items-center gap-1">
+            <i class="fa-solid fa-shield-heart text-[10px] text-emerald-500"></i>
+            <span>Safety</span>
+          </a>
+
+          <!-- 2.8 CONTACT -->
+          <a href="contact.html" class="nav-item-link  px-2.5 py-1.5 text-xs xl:text-sm">
+            Contact
+          </a>
+
+          <!-- 2.9 DASHBOARD (IMMEDIATELY AFTER CONTACT - NO GAP) -->
+          <div class="relative group ml-1 rtl:ml-0 rtl:mr-1" id="desktopDashboardDropdown">
+            <button class="btn-3d btn-3d-dashboard px-2.5 py-1.5 text-xs rounded-xl flex items-center gap-1.5" title="Dojo Dashboards" aria-haspopup="true">
+              <i class="fa-solid fa-gauge-high text-amber-500 text-[10px]"></i>
+              <span>Dashboard</span>
+              <i class="fa-solid fa-chevron-down text-[8px] opacity-60 group-hover:rotate-180 transition-transform duration-200"></i>
+            </button>
+
+            <!-- Shows ONLY Admin Dashboard and User Dashboard -->
+            <div class="creative-dropdown absolute top-full right-0 rtl:right-auto rtl:left-0 mt-2 w-38 p-1 rounded-xl bg-white dark:bg-slate-900 shadow-xl border border-slate-200 dark:border-slate-800 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+              <a href="admin-dashboard.html" class="dropdown-item block px-3 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-brand-crimson transition-colors">
+                Admin Dashboard
+              </a>
+              <a href="user-dashboard.html" class="dropdown-item block px-3 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-amber-500 transition-colors mt-0.5">
+                User Dashboard
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ====================================================
+             3. RIGHT (LAPTOP VIEW): GAP & REMAINING CONTROLS
+             ==================================================== -->
+        <div class="hidden lg:flex items-center space-x-1.5 xl:space-x-2 rtl:space-x-reverse shrink-0">
+
+          <!-- Prominent Gap After Dashboard in Laptop View -->
+          <div class="w-6 sm:w-8 xl:w-10 shrink-0" aria-hidden="true"></div>
+
+          <!-- 3.1 DARK MODE TOGGLE (3D SWITCH) -->
+          <button id="themeToggleBtn" onclick="toggleTheme()" class="btn-3d btn-3d-switch w-7.5 h-7.5 sm:w-8 sm:h-8 rounded-xl flex items-center justify-center text-xs" title="Toggle Dark/Light Mode" aria-label="Toggle theme">
+            <i id="themeIcon" class="fa-solid fa-sun text-amber-400"></i>
+          </button>
+
+          <!-- 3.2 RTL TOGGLE (ONLY RIGHT-LEFT ICON - NO TEXT) -->
+          <button id="rtlToggleBtn" onclick="toggleRTL()" class="btn-3d btn-3d-switch w-7.5 h-7.5 sm:w-8 sm:h-8 rounded-xl flex items-center justify-center text-xs" title="Toggle RTL / LTR" aria-label="Toggle RTL">
+            <i id="rtlIcon" class="fa-solid fa-right-left text-[11px] text-brand-crimson"></i>
+          </button>
+
+          <!-- 3.3 3D LOGIN BUTTON -->
+          <a href="login.html" id="loginBtnTrigger" class="btn-3d btn-3d-login px-3.5 py-1.5 text-xs rounded-xl flex items-center gap-1.5 shadow-md" aria-label="Login">
+            <i class="fa-solid fa-lock text-[10px] text-rose-200"></i>
+            <span>Login</span>
+          </a>
+
+        </div>
+
+        <!-- ====================================================
+             4. MOBILE & TABLET VIEW: HAMBURGER AT RIGHT
+             ==================================================== -->
+        <div class="flex items-center lg:hidden">
+          <!-- 3D Hamburger Menu Button -->
+          <button id="hamburgerBtn" onclick="toggleMobileMenu()" class="btn-3d btn-3d-hamburger w-8 h-8 rounded-xl flex items-center justify-center p-2 focus:outline-none" aria-label="Navigation Menu" aria-expanded="false">
+            <div class="w-4 h-3 flex flex-col justify-between items-center relative">
+              <span id="bar1" class="w-full h-0.5 bg-white rounded-full transition-all duration-300 transform origin-left"></span>
+              <span id="bar2" class="w-full h-0.5 bg-white rounded-full transition-all duration-300"></span>
+              <span id="bar3" class="w-full h-0.5 bg-white rounded-full transition-all duration-300 transform origin-left"></span>
+            </div>
+          </button>
+        </div>
+
+      </div>
+    </nav>
+  </header>
+
+  <!-- EXACT MOBILE DRAWER FROM NAVBAR.HTML -->
+  <aside id="mobileDrawer" class="fixed top-0 right-0 rtl:right-auto rtl:left-0 w-72 max-w-[85vw] h-full bg-white dark:bg-slate-900 border-l rtl:border-l-0 rtl:border-r border-slate-200 dark:border-slate-800 z-50 shadow-2xl flex flex-col transform translate-x-full rtl:-translate-x-full transition-transform duration-300 ease-out">
+    
+    <!-- Drawer Header: Exact Navbar Logo Lockup -->
+    <div class="p-3.5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+      <a href="index.html" onclick="toggleMobileMenu()" class="flex items-center gap-2 focus:outline-none">
+        <!-- Exact Emblem -->
+        <div class="relative w-7 h-7 rounded-lg bg-gradient-to-b from-rose-500 via-brand-crimson to-rose-700 p-0.5 shadow-sm shadow-rose-950/20 shrink-0">
+          <div class="w-full h-full bg-slate-950 rounded-[5px] flex items-center justify-center overflow-hidden relative">
+            <div class="absolute inset-0 bg-radial-gradient from-amber-400/25 to-transparent"></div>
+            <svg viewBox="0 0 100 100" class="w-5 h-5 text-white" fill="none">
+              <circle cx="50" cy="50" r="26" fill="#F59E0B" fill-opacity="0.2" />
+              <polygon points="34,16 35.5,19 39,19.5 36.5,22 37,25 34,23.5 31,25 31.5,22 29,19.5 32.5,19" fill="#FDE047" />
+              <polygon points="50,11 52,15 57,15.5 53.5,19 54.5,23.5 50,21 45.5,23.5 46.5,19 43,15.5 48,15" fill="#FDE047" />
+              <polygon points="66,16 67.5,19 71,19.5 68.5,22 69,25 66,23.5 63,25 63.5,22 61,19.5 64.5,19" fill="#FDE047" />
+              <circle cx="43" cy="30" r="6" fill="#FFFFFF" />
+              <path d="M40 31 Q33 30 28 35" stroke="#FDE047" stroke-width="2" stroke-linecap="round" />
+              <path d="M41 36 L48 39 L47 52 L39 51 Z" fill="#FFFFFF" />
+              <path d="M42 38 L34 41" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" />
+              <path d="M47 39 L57 35 L62 38" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" />
+              <path d="M45 50 L56 46 L73 39" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" />
+              <path d="M73 39 L76 34 L80 39 L75 42 Z" fill="#FDE047" />
+              <path d="M40 51 L35 59 L42 63" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" />
+              <path d="M38 50 C42 51 46 51 48 50" stroke="#0F172A" stroke-width="3.5" stroke-linecap="round" />
+              <path d="M42 51 L38 65 M44 51 L47 67" stroke="#0F172A" stroke-width="2.5" stroke-linecap="round" />
+              <circle cx="39" cy="62" r="1.2" fill="#F59E0B" />
+              <circle cx="45" cy="64" r="1.2" fill="#F59E0B" />
+            </svg>
+          </div>
+          <div class="absolute -top-1 -right-1 rtl:-left-1 rtl:-right-auto w-3 h-3 rounded-full bg-amber-400 border border-slate-950 flex items-center justify-center text-[6px] font-black text-slate-950">
+            ★
+          </div>
+        </div>
+
+        <!-- Exact Brand Typography -->
+        <div class="flex flex-col text-left rtl:text-right">
+          <span class="font-outfit font-black text-xs sm:text-[13.5px] tracking-tight leading-none text-slate-900 dark:text-white">
+            <span class="text-brand-crimson">KIDS</span> MARTIAL ARTS
+          </span>
+          <span class="text-[7.5px] sm:text-[8px] font-bold text-amber-500 dark:text-amber-400 tracking-wider uppercase font-outfit leading-tight mt-0.5">
+            &amp; CONFIDENCE BUILDING PROGRAM
+          </span>
+        </div>
+      </a>
+
+      <button onclick="toggleMobileMenu()" class="btn-3d btn-3d-switch w-7 h-7 rounded-lg flex items-center justify-center text-slate-400 hover:text-brand-crimson">
+        <i class="fa-solid fa-xmark text-xs"></i>
+      </button>
+    </div>
+
+    <!-- Drawer Body -->
+    <div class="flex-1 overflow-y-auto p-3.5 space-y-3">
+      
+      <!-- Nav Items List -->
+      <div id="mobileItemsList" class="space-y-1">
+        
+        <!-- Home Accordion (Only Home 1 and Home 2) -->
+        <div class="drawer-anim-item rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden ">
+          <div class="w-full flex items-center justify-between p-2.5 font-outfit font-bold text-xs text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/50">
+            <a href="index.html" onclick="toggleMobileMenu()" class="flex items-center gap-2 flex-1">
+              <i class="fa-solid fa-house text-brand-crimson text-[11px]"></i>
+              <span>Home</span>
+            </a>
+            <button type="button" onclick="toggleAccordion('mobileHomeSubmenu', 'homeArrow')" class="p-1 focus:outline-none" aria-label="Toggle Home Submenu">
+              <i id="homeArrow" class="fa-solid fa-chevron-down text-[10px] text-slate-400 transition-transform duration-200"></i>
+            </button>
+          </div>
+          <div id="mobileHomeSubmenu" class="hidden bg-slate-50 dark:bg-slate-950/40 p-1.5 space-y-1 border-t border-slate-200/60 dark:border-slate-800/60">
+            <a href="index.html" onclick="toggleMobileMenu()" class="block p-1.5 rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-brand-crimson">
+              Home 1
+            </a>
+            <a href="home-2.html" onclick="toggleMobileMenu()" class="block p-1.5 rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-brand-crimson">
+              Home 2
+            </a>
+          </div>
+        </div>
+
+        <!-- About -->
+        <a href="about.html" onclick="toggleMobileMenu()" class="drawer-anim-item  flex items-center gap-2 p-2.5 rounded-xl font-outfit font-bold text-xs text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60">
+          <i class="fa-solid fa-circle-info text-amber-500 text-[11px]"></i>
+          <span>About</span>
+        </a>
+
+        <!-- Programs (Direct Link - No Options) -->
+        <a href="programs.html" onclick="toggleMobileMenu()" class="drawer-anim-item active flex items-center gap-2 p-2.5 rounded-xl font-outfit font-bold text-xs text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60">
+          <i class="fa-solid fa-shapes text-rose-500 text-[11px]"></i>
+          <span>Programs</span>
+        </a>
+
+        <!-- Belt System -->
+        <a href="belt-system.html" onclick="toggleMobileMenu()" class="drawer-anim-item  flex items-center justify-between p-2.5 rounded-xl font-outfit font-bold text-xs text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60">
+          <span class="flex items-center gap-2">
+            <i class="fa-solid fa-ribbon text-amber-500 text-[11px]"></i>
+            <span>Belt System</span>
+          </span>
+          <span class="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-amber-400 to-rose-500"></span>
+        </a>
+
+        <!-- Instructors -->
+        <a href="instructors.html" onclick="toggleMobileMenu()" class="drawer-anim-item  flex items-center gap-2 p-2.5 rounded-xl font-outfit font-bold text-xs text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60">
+          <i class="fa-solid fa-user-ninja text-blue-500 text-[11px]"></i>
+          <span>Instructors</span>
+        </a>
+
+        <!-- Events -->
+        <a href="events.html" onclick="toggleMobileMenu()" class="drawer-anim-item  flex items-center gap-2 p-2.5 rounded-xl font-outfit font-bold text-xs text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60">
+          <i class="fa-solid fa-calendar-days text-purple-500 text-[11px]"></i>
+          <span>Events</span>
+        </a>
+
+        <!-- Safety -->
+        <a href="safety.html" onclick="toggleMobileMenu()" class="drawer-anim-item  flex items-center gap-2 p-2.5 rounded-xl font-outfit font-bold text-xs text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60">
+          <i class="fa-solid fa-shield-halved text-emerald-500 text-[11px]"></i>
+          <span>Safety</span>
+        </a>
+
+        <!-- Contact -->
+        <a href="contact.html" onclick="toggleMobileMenu()" class="drawer-anim-item  flex items-center gap-2 p-2.5 rounded-xl font-outfit font-bold text-xs text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60">
+          <i class="fa-solid fa-location-dot text-rose-500 text-[11px]"></i>
+          <span>Contact</span>
+        </a>
+
+        <!-- Dashboards (Only Admin Dashboard & User Dashboard) -->
+        <div class="drawer-anim-item pt-2 border-t border-slate-200 dark:border-slate-800">
+          <div class="text-[9px] font-black uppercase text-slate-400 tracking-wider px-2 mb-1">
+            Dashboards
+          </div>
+          <a href="admin-dashboard.html" onclick="toggleMobileMenu()" class="flex items-center gap-2 p-2 rounded-lg font-outfit font-bold text-xs text-slate-700 dark:text-slate-300 hover:text-brand-crimson">
+            <i class="fa-solid fa-user-shield text-brand-crimson text-xs"></i>
+            <span>Admin Dashboard</span>
+          </a>
+          <a href="user-dashboard.html" onclick="toggleMobileMenu()" class="flex items-center gap-2 p-2 rounded-lg font-outfit font-bold text-xs text-slate-700 dark:text-slate-300 hover:text-amber-500 mt-0.5">
+            <i class="fa-solid fa-user-graduate text-amber-500 text-xs"></i>
+            <span>User Dashboard</span>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Settings (Dark Mode & RTL Icon Buttons) -->
+      <div class="drawer-anim-item p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 space-y-2">
+        <div class="text-[9px] font-bold font-outfit text-slate-400 uppercase tracking-wider">
+          Preferences
+        </div>
+        
+        <div class="grid grid-cols-2 gap-2">
+          <button onclick="toggleTheme()" class="btn-3d btn-3d-switch p-2 rounded-lg flex items-center justify-center gap-1.5 text-xs font-bold" title="Toggle Dark/Light">
+            <i class="fa-solid fa-moon text-amber-400 text-xs"></i>
+            <span id="mobileThemeLabel">Dark</span>
+          </button>
+
+          <!-- RTL Button - Icon Only in mobile toggle too -->
+          <button onclick="toggleRTL()" class="btn-3d btn-3d-switch p-2 rounded-lg flex items-center justify-center text-xs font-bold" title="Toggle RTL">
+            <i class="fa-solid fa-right-left text-brand-crimson text-xs"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Drawer Footer: 3D Login Button -->
+    <div class="p-3 border-t border-slate-200 dark:border-slate-800">
+      <a href="login.html" onclick="toggleMobileMenu()" class="btn-3d btn-3d-login w-full py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-2">
+        <i class="fa-solid fa-lock text-xs"></i>
+        <span>Login</span>
+      </a>
+    </div>
+
+  </aside>
+
+  <!-- EXACT 3D LOGIN MODAL FROM NAVBAR.HTML -->
+  <div id="loginModalBackdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+    <div id="loginModalContent" class="w-full max-w-sm bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 shadow-2xl border border-slate-200 dark:border-slate-800 transform scale-95 transition-transform duration-300 relative">
+      
+      <button onclick="closeLoginModal()" class="absolute top-4 right-4 rtl:right-auto rtl:left-4 text-slate-400 hover:text-slate-600 dark:hover:text-white">
+        <i class="fa-solid fa-xmark text-sm"></i>
+      </button>
+
+      <div class="text-center mb-5">
+        <div class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-rose-500/10 text-brand-crimson text-xl mb-2">
+          <i class="fa-solid fa-user-ninja"></i>
+        </div>
+        <h3 class="font-outfit text-lg font-black text-slate-900 dark:text-white">
+          Dojo Member Login
+        </h3>
+        <p class="text-[11px] text-slate-400 mt-0.5">
+          Access your student belt progress &amp; schedule
+        </p>
+      </div>
+
+      <form onsubmit="handleLoginSubmit(event)" class="space-y-3">
+        <div>
+          <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+            Email / Student ID
+          </label>
+          <input type="text" required placeholder="member@example.com" class="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 text-xs focus:outline-none focus:ring-2 focus:ring-brand-crimson transition-all" />
+        </div>
+
+        <div>
+          <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+            Password / PIN
+          </label>
+          <input type="password" required placeholder="••••••••" class="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 text-xs focus:outline-none focus:ring-2 focus:ring-brand-crimson transition-all" />
+        </div>
+
+        <button type="submit" class="btn-3d btn-3d-login w-full py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 mt-2">
+          <span>Sign In</span>
+          <i class="fa-solid fa-arrow-right rtl:rotate-180 text-[10px]"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MAIN CONTENT: PROGRAMS & BELT PROGRESSION (7 UNIQUE SECTIONS)
+       ======================================================== -->
+  <main id="programsMainContent" class="relative z-10 flex flex-col space-y-16 sm:space-y-24 py-8 sm:py-12 overflow-hidden">
+
+    <!-- ========================================================
+         SECTION 1: PROGRAM OVERVIEW
+         "The Master Belt Spectrum Horizon & Command Bridge"
+         ======================================================== -->
+    <section id="section-prog-overview" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-4">
+      <div class="relative rounded-3xl p-6 sm:p-10 lg:p-12 overflow-hidden border border-slate-200/90 dark:border-slate-800/80 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-2xl">
+        
+        <!-- Ambient Dojo Energy Glow Edge -->
+        <div class="absolute -top-32 -left-32 w-80 h-80 rounded-full bg-brand-crimson/10 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-32 -right-32 w-80 h-80 rounded-full bg-amber-500/10 blur-3xl pointer-events-none"></div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          
+          <!-- Column Left: Illustrated Scroll Roadmap Visual -->
+          <div id="overviewScrollCol" class="lg:col-span-5 relative">
+            <div class="relative rounded-3xl overflow-hidden shadow-2xl border-2 border-slate-200/80 dark:border-slate-700/80 group">
+              <img src="images/programs_overview_roadmap.jpg" alt="Master Sensei Presenting Martial Arts Belt Progression Roadmap" class="w-full h-80 sm:h-96 lg:h-[440px] object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/20 to-transparent"></div>
+              
+              <!-- Floating Scroll Seal Badge -->
+              <div class="absolute top-4 left-4 rtl:left-auto rtl:right-4 px-3 py-1.5 rounded-xl bg-black/75 backdrop-blur-md border border-white/20 text-white text-[11px] font-bold flex items-center gap-2 shadow-lg">
+                <i class="fa-solid fa-scroll text-amber-400"></i>
+                <span>Traditional &amp; Pediatric Belt Roadmap</span>
+              </div>
+
+              <!-- Bottom Quote Overlay -->
+              <div class="absolute bottom-4 left-4 right-4 p-3.5 rounded-2xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border border-slate-200 dark:border-slate-800 shadow-xl flex items-center gap-3 text-left rtl:text-right">
+                <div class="w-9 h-9 rounded-xl bg-brand-crimson/10 text-brand-crimson flex items-center justify-center text-base shrink-0">
+                  <i class="fa-solid fa-user-ninja"></i>
+                </div>
+                <div>
+                  <h4 class="font-outfit font-black text-xs text-slate-900 dark:text-white">Structured Step-by-Step Mastery</h4>
+                  <p class="text-[11px] text-slate-500 dark:text-slate-400">Every stripe builds real cognitive, physical &amp; emotional maturity</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column Right: Program Overview Narrative & Master Belt Spectrum -->
+          <div id="overviewCommandCol" class="lg:col-span-7 space-y-6 text-left rtl:text-right">
+            
+            <!-- Tag Pill -->
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-rose-50 dark:bg-rose-950/60 border border-rose-200 dark:border-rose-800/80 text-brand-crimson dark:text-rose-400 text-xs font-bold uppercase tracking-wider shadow-sm">
+              <span class="w-2 h-2 rounded-full bg-brand-crimson animate-ping"></span>
+              <i class="fa-solid fa-layer-group text-[11px]"></i>
+              <span>Program Overview • The Complete Belt Progression Journey</span>
+            </div>
+
+            <h1 class="font-outfit font-black text-2xl sm:text-4xl lg:text-5xl text-slate-900 dark:text-white leading-[1.15] tracking-tight">
+              An 8-Stage Ladder of Character, Courage &amp; <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-crimson via-rose-500 to-amber-500">Unshakable Self-Worth</span>.
+            </h1>
+
+            <p class="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+              At our Academy, our martial arts curriculum is divided into progressive rank phases meticulously calibrated for child development psychology. We do not rush children through meaningless fast-track testing; each belt stage is a celebrated milestone that instills lifelong motor agility, respectful boundaries, anti-bullying armor, and executive focus.
+            </p>
+
+            <!-- Master Belt Spectrum Color Strip (8 Ranks) -->
+            <div class="space-y-2 pt-1">
+              <div class="flex items-center justify-between text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                <span>The 8-Belt Progression Horizon</span>
+                <span>White ➔ Black Belt</span>
+              </div>
+              <div id="beltSpectrumBar" class="grid grid-cols-8 gap-1.5 sm:gap-2">
+                <a href="#section-little-warriors" class="spectrum-segment p-2 rounded-xl bg-slate-100 dark:bg-slate-800 border-2 border-slate-300 dark:border-slate-600 text-center text-[10px] font-black text-slate-700 dark:text-slate-200 hover:border-brand-crimson transition-all" title="Little Warriors">
+                  <span class="block text-xs"><i class="fa-solid fa-baby"></i></span>
+                  <span class="hidden sm:inline">Warriors</span>
+                </a>
+                <a href="#section-white-yellow" class="spectrum-segment p-2 rounded-xl bg-slate-100 dark:bg-slate-800 border-2 border-slate-300 dark:border-slate-500 text-center text-[10px] font-black text-slate-700 dark:text-slate-200 hover:border-brand-crimson transition-all" title="White Belt">
+                  <span class="block w-2.5 h-2.5 mx-auto rounded-full bg-slate-200 border border-slate-400 mb-1"></span>
+                  <span class="hidden sm:inline">White</span>
+                </a>
+                <a href="#section-white-yellow" class="spectrum-segment p-2 rounded-xl bg-amber-50 dark:bg-amber-950/40 border-2 border-amber-400 text-center text-[10px] font-black text-amber-600 dark:text-amber-400 hover:border-amber-500 transition-all" title="Yellow Belt">
+                  <span class="block w-2.5 h-2.5 mx-auto rounded-full bg-amber-400 mb-1"></span>
+                  <span class="hidden sm:inline">Yellow</span>
+                </a>
+                <a href="#section-orange-green" class="spectrum-segment p-2 rounded-xl bg-orange-50 dark:bg-orange-950/40 border-2 border-orange-500 text-center text-[10px] font-black text-orange-600 dark:text-orange-400 hover:border-orange-600 transition-all" title="Orange Belt">
+                  <span class="block w-2.5 h-2.5 mx-auto rounded-full bg-orange-500 mb-1"></span>
+                  <span class="hidden sm:inline">Orange</span>
+                </a>
+                <a href="#section-orange-green" class="spectrum-segment p-2 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border-2 border-emerald-500 text-center text-[10px] font-black text-emerald-600 dark:text-emerald-400 hover:border-emerald-600 transition-all" title="Green Belt">
+                  <span class="block w-2.5 h-2.5 mx-auto rounded-full bg-emerald-500 mb-1"></span>
+                  <span class="hidden sm:inline">Green</span>
+                </a>
+                <a href="#section-blue-brown" class="spectrum-segment p-2 rounded-xl bg-blue-50 dark:bg-blue-950/40 border-2 border-blue-500 text-center text-[10px] font-black text-blue-600 dark:text-blue-400 hover:border-blue-600 transition-all" title="Blue Belt">
+                  <span class="block w-2.5 h-2.5 mx-auto rounded-full bg-blue-500 mb-1"></span>
+                  <span class="hidden sm:inline">Blue</span>
+                </a>
+                <a href="#section-blue-brown" class="spectrum-segment p-2 rounded-xl bg-amber-900/10 dark:bg-amber-950/50 border-2 border-amber-700 text-center text-[10px] font-black text-amber-700 dark:text-amber-300 hover:border-amber-600 transition-all" title="Brown Belt">
+                  <span class="block w-2.5 h-2.5 mx-auto rounded-full bg-amber-700 mb-1"></span>
+                  <span class="hidden sm:inline">Brown</span>
+                </a>
+                <a href="#section-black-belt" class="spectrum-segment p-2 rounded-xl bg-slate-900 border-2 border-amber-400 text-center text-[10px] font-black text-amber-400 hover:border-brand-crimson transition-all shadow-md" title="Black Belt Journey">
+                  <span class="block w-2.5 h-2.5 mx-auto rounded-full bg-black border border-amber-400 mb-1"></span>
+                  <span class="hidden sm:inline">Black</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Key Program Differentiators (3 Bento Badges) -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+              <div class="p-3 rounded-2xl bg-slate-50/90 dark:bg-slate-800/70 border border-slate-200/80 dark:border-slate-700/60 text-center">
+                <span class="counter-number block font-outfit font-black text-lg sm:text-xl text-brand-crimson" data-target="8" data-suffix=" Ranks">8 Ranks</span>
+                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Structured Path</span>
+              </div>
+              <div class="p-3 rounded-2xl bg-slate-50/90 dark:bg-slate-800/70 border border-slate-200/80 dark:border-slate-700/60 text-center">
+                <span class="block font-outfit font-black text-lg sm:text-xl text-amber-500">1:6 Ratio</span>
+                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Coaching Focus</span>
+              </div>
+              <div class="p-3 rounded-2xl bg-slate-50/90 dark:bg-slate-800/70 border border-slate-200/80 dark:border-slate-700/60 text-center">
+                <span class="block font-outfit font-black text-lg sm:text-xl text-emerald-500">Zero Fear</span>
+                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Positive Culture</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================
+         SECTION 2: LITTLE WARRIORS PROGRAM (AGES 3–5)
+         "Playful Ninja Agility & Stepping-Stone Tri-Pod Bento"
+         ======================================================== -->
+    <section id="section-little-warriors" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-14 space-y-3">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 dark:bg-amber-950/50 border border-amber-200 dark:border-amber-800/80 text-amber-600 dark:text-amber-400 text-xs font-bold uppercase tracking-wider">
+          <i class="fa-solid fa-paw text-[11px]"></i>
+          <span>Little Warriors • Early Childhood Foundations (Ages 3 to 5)</span>
+        </div>
+        <h2 class="font-outfit font-black text-2xl sm:text-4xl text-slate-900 dark:text-white">
+          Where Tiny Ninjas Build Giant Confidence
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+          Designed specifically for preschool minds and bodies. We transform raw energy into bilateral coordination, listening compliance, and safe falling reflexes through gamified movement.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        
+        <!-- Left Column: Little Warriors Action Image -->
+        <div id="littleWarriorsVisualCol" class="lg:col-span-5 relative">
+          <div class="relative rounded-3xl overflow-hidden shadow-2xl border-2 border-slate-200 dark:border-slate-700 group">
+            <img src="images/programs_little_warriors.jpg" alt="Little Warriors Preschool Martial Arts Class Balance and Coordination" class="w-full h-80 sm:h-96 object-cover transition-transform duration-700 group-hover:scale-105" />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/20 to-transparent"></div>
+            
+            <div class="absolute top-4 left-4 rtl:left-auto rtl:right-4 px-3 py-1.5 rounded-xl bg-amber-500 text-slate-950 text-xs font-black flex items-center gap-1.5 shadow-lg">
+              <i class="fa-solid fa-shield-cat"></i>
+              <span>Ages 3 to 5 Curriculum</span>
+            </div>
+
+            <div class="absolute bottom-4 left-4 right-4 p-3.5 rounded-2xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border border-slate-200 dark:border-slate-800 text-left rtl:text-right shadow-xl">
+              <h4 class="font-outfit font-black text-xs text-slate-900 dark:text-white">The Listening Freeze Principle</h4>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Children master rapid compliance through joyful games: freeze instantly when Sensei calls &ldquo;Kiai!&rdquo;</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: 3 Playful Pods Bento -->
+        <div id="littleWarriorsPodsCol" class="lg:col-span-7 space-y-4 text-left rtl:text-right">
+          
+          <!-- Pod 1: Beginner Movement Skills -->
+          <div class="warrior-pod p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-md card-3d-hover">
+            <div class="flex items-start gap-4">
+              <div class="w-11 h-11 rounded-xl bg-rose-500/10 text-brand-crimson flex items-center justify-center text-xl shrink-0 mt-0.5">
+                <i class="fa-solid fa-child-reaching"></i>
+              </div>
+              <div class="space-y-1">
+                <div class="flex items-center gap-2">
+                  <span class="px-2 py-0.5 rounded-md bg-rose-100 dark:bg-rose-950/60 text-brand-crimson text-[10px] font-black uppercase">Pillar 01</span>
+                  <h3 class="font-outfit font-black text-base text-slate-900 dark:text-white">Beginner Movement Skills</h3>
+                </div>
+                <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                  Animal-based movement conditioning: Bear Crawls for scapular stability, Frog Jumps for explosive lower-body power, and Turtle Rolls for safe head-tucked falling mechanics.
+                </p>
+                <div class="flex flex-wrap gap-2 pt-1 text-[11px] font-semibold text-slate-500 dark:text-slate-400">
+                  <span class="inline-flex items-center gap-1">✓ Safe Tumbling</span>
+                  <span class="inline-flex items-center gap-1">✓ Spatial Boundaries</span>
+                  <span class="inline-flex items-center gap-1">✓ Core Trunk Strength</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pod 2: Balance & Coordination -->
+          <div class="warrior-pod p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-md card-3d-hover">
+            <div class="flex items-start gap-4">
+              <div class="w-11 h-11 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center text-xl shrink-0 mt-0.5">
+                <i class="fa-solid fa-scale-unbalanced-flip"></i>
+              </div>
+              <div class="space-y-1">
+                <div class="flex items-center gap-2">
+                  <span class="px-2 py-0.5 rounded-md bg-amber-100 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 text-[10px] font-black uppercase">Pillar 02</span>
+                  <h3 class="font-outfit font-black text-base text-slate-900 dark:text-white">Balance &amp; Coordination</h3>
+                </div>
+                <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                  Single-leg balancing on soft sensory domes, hand-eye target tapping, and vestibular balance obstacle courses that dramatically accelerate gross motor milestones.
+                </p>
+                <div class="flex flex-wrap gap-2 pt-1 text-[11px] font-semibold text-slate-500 dark:text-slate-400">
+                  <span class="inline-flex items-center gap-1">✓ Single-Leg Flamingo Stand</span>
+                  <span class="inline-flex items-center gap-1">✓ Bilateral Motor Drills</span>
+                  <span class="inline-flex items-center gap-1">✓ Agility Stepping Stones</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pod 3: Basic Discipline Activities -->
+          <div class="warrior-pod p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-md card-3d-hover">
+            <div class="flex items-start gap-4">
+              <div class="w-11 h-11 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-xl shrink-0 mt-0.5">
+                <i class="fa-solid fa-heart-circle-check"></i>
+              </div>
+              <div class="space-y-1">
+                <div class="flex items-center gap-2">
+                  <span class="px-2 py-0.5 rounded-md bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 text-[10px] font-black uppercase">Pillar 03</span>
+                  <h3 class="font-outfit font-black text-base text-slate-900 dark:text-white">Basic Discipline Activities</h3>
+                </div>
+                <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                  Building polite manners, holding eye contact with coaches, practicing the traditional bowing oath, and mastering the habit of placing shoes and water bottles neatly in dojo cubbies.
+                </p>
+                <div class="flex flex-wrap gap-2 pt-1 text-[11px] font-semibold text-slate-500 dark:text-slate-400">
+                  <span class="inline-flex items-center gap-1">✓ 3-Second Listening Freeze</span>
+                  <span class="inline-flex items-center gap-1">✓ Yes Sensei Courtesy</span>
+                  <span class="inline-flex items-center gap-1">✓ Cubby Tidy Habit</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================
+         SECTION 3: WHITE BELT & YELLOW BELT PROGRAMS (AGES 6–8)
+         "The Dual-Rank Parallel Tatami Arena & Technique Showcase"
+         ======================================================== -->
+    <section id="section-white-yellow" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-14 space-y-3">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-200 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-bold uppercase tracking-wider">
+          <i class="fa-solid fa-ribbon text-[11px] text-amber-400"></i>
+          <span>Novice Cohorts • White &amp; Yellow Belts (Ages 6 to 8)</span>
+        </div>
+        <h2 class="font-outfit font-black text-2xl sm:text-4xl text-slate-900 dark:text-white">
+          From the Clean White Canvas to the First Sunbeam
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+          Where martial fundamentals, proper stances, crisp defensive blocks, and radiant vocal confidence take root.
+        </p>
+      </div>
+
+      <!-- Action Photo Banner -->
+      <div id="whiteYellowPhotoBanner" class="relative rounded-3xl overflow-hidden border-2 border-slate-200 dark:border-slate-800 shadow-2xl mb-8 group">
+        <img src="images/programs_white_yellow_belts.jpg" alt="White Belt and Yellow Belt Children Practicing Crisp Karate Stances" class="w-full h-72 sm:h-88 lg:h-96 object-cover transition-transform duration-700 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/20 to-transparent"></div>
+        <div class="absolute bottom-4 left-4 right-4 p-4 rounded-2xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border border-slate-200 dark:border-slate-800 flex items-center justify-between text-left rtl:text-right shadow-xl">
+          <div>
+            <h4 class="font-outfit font-black text-xs sm:text-sm text-slate-900 dark:text-white">Precision in Posture: Zenkutsu-Dachi &amp; Age-Uke</h4>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400">Building bilateral core power, balance, and unwavering focus on the mat</p>
+          </div>
+          <span class="px-3 py-1 rounded-xl bg-brand-crimson text-white text-xs font-black shrink-0 hidden sm:inline-block">Foundational Ranks</span>
+        </div>
+      </div>
+
+      <!-- Parallel Tatami Arena: White Belt (Left) vs Yellow Belt (Right) -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        
+        <!-- Arena Left: WHITE BELT PROGRAM -->
+        <div id="whiteBeltArena" class="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 shadow-lg text-left rtl:text-right space-y-4 card-3d-hover relative overflow-hidden">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <span class="w-4 h-8 rounded-md bg-slate-200 dark:bg-slate-700 border-2 border-slate-400"></span>
+              <div>
+                <span class="text-[10px] font-black uppercase tracking-wider text-slate-400">Phase 01</span>
+                <h3 class="font-outfit font-black text-xl text-slate-900 dark:text-white">White Belt Program</h3>
+              </div>
+            </div>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-bold">The Clean Canvas</span>
+          </div>
+
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+            Every master began here. The White Belt curriculum introduces students to ancient martial traditions, posture discipline, and foundational self-defense safety blocks.
+          </p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+            <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60">
+              <h4 class="font-outfit font-bold text-xs text-brand-crimson mb-1">Martial Arts Fundamentals</h4>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-snug">Dojo etiquette, uniform folding, belt knotting, and traditional Rei bowing ceremonies.</p>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60">
+              <h4 class="font-outfit font-bold text-brand-crimson text-xs mb-1">Basic Stances</h4>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-snug">Front Stance (Zenkutsu-dachi) and Horse-Riding Stance (Kiba-dachi) for rooted stability.</p>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60">
+              <h4 class="font-outfit font-bold text-brand-crimson text-xs mb-1">Basic Blocks</h4>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-snug">High Block (Age-uke) and Downward Sweeping Block (Gedan-barai) to deflect incoming forces.</p>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60">
+              <h4 class="font-outfit font-bold text-brand-crimson text-xs mb-1">Beginner Fitness</h4>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-snug">Agility ladder runs, core sit-up holds, safe break-falls, and foundational stamina.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Arena Right: YELLOW BELT PROGRAM -->
+        <div id="yellowBeltArena" class="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border-2 border-amber-400/80 shadow-lg text-left rtl:text-right space-y-4 card-3d-hover relative overflow-hidden">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <span class="w-4 h-8 rounded-md bg-amber-400 border-2 border-amber-500"></span>
+              <div>
+                <span class="text-[10px] font-black uppercase tracking-wider text-amber-500">Phase 02</span>
+                <h3 class="font-outfit font-black text-xl text-slate-900 dark:text-white">Yellow Belt Program</h3>
+              </div>
+            </div>
+            <span class="px-2.5 py-1 rounded-lg bg-amber-100 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 text-xs font-bold">First Rays of Sun</span>
+          </div>
+
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+            The seed has sprouted. Yellow Belts combine stances with sharp offensive strikes, master target focus, and unlock vocal confidence through vocal Kiai power.
+          </p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+            <div class="p-3 rounded-xl bg-amber-50/50 dark:bg-slate-800/60 border border-amber-200 dark:border-slate-700/60">
+              <h4 class="font-outfit font-bold text-amber-600 dark:text-amber-400 text-xs mb-1">Fundamental Techniques</h4>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-snug">Front Snap Kick (Mae-geri), Straight Punch (Choku-tsuki), and palm heel self-defense strikes.</p>
+            </div>
+            <div class="p-3 rounded-xl bg-amber-50/50 dark:bg-slate-800/60 border border-amber-200 dark:border-slate-700/60">
+              <h4 class="font-outfit font-bold text-amber-600 dark:text-amber-400 text-xs mb-1">Movement Combinations</h4>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-snug">Step-and-strike sequences, high-block into reverse punch, and multi-directional shifts.</p>
+            </div>
+            <div class="p-3 rounded-xl bg-amber-50/50 dark:bg-slate-800/60 border border-amber-200 dark:border-slate-700/60">
+              <h4 class="font-outfit font-bold text-amber-600 dark:text-amber-400 text-xs mb-1">Focus Training</h4>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-snug">Single-point target focus on focus pads, maintaining eye contact, and silencing distraction.</p>
+            </div>
+            <div class="p-3 rounded-xl bg-amber-50/50 dark:bg-slate-800/60 border border-amber-200 dark:border-slate-700/60">
+              <h4 class="font-outfit font-bold text-amber-600 dark:text-amber-400 text-xs mb-1">Confidence Exercises</h4>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-snug">Loud resonant Kiai shouting drills that eliminate social timidity and public speaking fear.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================
+         SECTION 4: ORANGE & GREEN BELT PROGRAMS (AGES 8–10)
+         "The Stepping-Stone Kinetic Pillar Bridge & Sparring Simulator"
+         ======================================================== -->
+    <section id="section-orange-green" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-14 space-y-3">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 dark:bg-orange-950/50 border border-orange-200 dark:border-orange-800/80 text-orange-600 dark:text-orange-400 text-xs font-bold uppercase tracking-wider">
+          <i class="fa-solid fa-fire-burner text-[11px]"></i>
+          <span>Intermediate Ranks • Orange &amp; Green Belts (Ages 8 to 10)</span>
+        </div>
+        <h2 class="font-outfit font-black text-2xl sm:text-4xl text-slate-900 dark:text-white">
+          Precision, Controlled Sparring &amp; Rising Leadership
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+          Students advance from static forms to dynamic sparring reactions, distance control, personal discipline, and measurable goal setting.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        
+        <!-- Left Wing: ORANGE BELT PROGRAM -->
+        <div id="orangeBeltWing" class="lg:col-span-4 p-6 rounded-3xl bg-white dark:bg-slate-900 border-2 border-orange-400/80 shadow-lg text-left rtl:text-right space-y-4 card-3d-hover">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <span class="w-3.5 h-7 rounded-md bg-orange-500 border border-orange-600"></span>
+              <h3 class="font-outfit font-black text-lg text-slate-900 dark:text-white">Orange Belt Program</h3>
+            </div>
+            <span class="text-[11px] font-bold text-orange-500 uppercase">The Fiery Spark</span>
+          </div>
+
+          <div class="space-y-3 pt-1">
+            <div class="p-3 rounded-xl bg-orange-50/40 dark:bg-slate-800/60 border border-orange-200/60 dark:border-slate-700/60">
+              <h4 class="font-outfit font-bold text-xs text-orange-600 dark:text-orange-400 mb-0.5">Intermediate Techniques</h4>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400">Roundhouse kick (Mawashi-geri), knife-hand strike (Shuto-uchi), and back stance balance.</p>
+            </div>
+            <div class="p-3 rounded-xl bg-orange-50/40 dark:bg-slate-800/60 border border-orange-200/60 dark:border-slate-700/60">
+              <h4 class="font-outfit font-bold text-orange-600 dark:text-orange-400 mb-0.5">Controlled Sparring Skills</h4>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400">Distance management, zero-contact touch tag drills, and soft protective foam gear sparring.</p>
+            </div>
+            <div class="p-3 rounded-xl bg-orange-50/40 dark:bg-slate-800/60 border border-orange-200/60 dark:border-slate-700/60">
+              <h4 class="font-outfit font-bold text-orange-600 dark:text-orange-400 mb-0.5">Reaction Training</h4>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400">Split-second visual pad reactions and fluid duck-and-counter defensive head movement.</p>
+            </div>
+            <div class="p-3 rounded-xl bg-orange-50/40 dark:bg-slate-800/60 border border-orange-200/60 dark:border-slate-700/60">
+              <h4 class="font-outfit font-bold text-orange-600 dark:text-orange-400 mb-0.5">Personal Discipline</h4>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400">Tracking daily homework independently, packing own sparring bag, and morning routine grit.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Center: Sparring Action Image & Reflex Simulator Widget -->
+        <div id="orangeGreenVisualHub" class="lg:col-span-4 space-y-4">
+          <div class="relative rounded-3xl overflow-hidden shadow-2xl border-2 border-slate-200 dark:border-slate-700 group">
+            <img src="images/programs_orange_green_belts.jpg" alt="Orange and Green Belt Karate Students Practicing Controlled Sparring" class="w-full h-72 sm:h-80 object-cover transition-transform duration-700 group-hover:scale-105" />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/20 to-transparent"></div>
+            
+            <div class="absolute bottom-3 left-3 right-3 p-3 rounded-2xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border border-slate-200 dark:border-slate-800 text-left rtl:text-right shadow-lg">
+              <span class="block text-[10px] font-black uppercase text-orange-500">Controlled Precision</span>
+              <h5 class="font-outfit font-bold text-xs text-slate-900 dark:text-white">Safety-First Sparring Standards</h5>
+            </div>
+          </div>
+
+          <!-- Interactive Reaction Speed Simulator Card -->
+          <div class="p-4 rounded-2xl bg-slate-100/90 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-center space-y-2">
+            <div class="flex items-center justify-between text-xs font-bold text-slate-600 dark:text-slate-300">
+              <span>Reaction Reflex Drill</span>
+              <span id="reactionDisplay" class="text-brand-crimson font-mono">0.24s (Sensei Speed)</span>
+            </div>
+            <button type="button" onclick="testReactionSpeed()" class="w-full py-2 rounded-xl bg-gradient-to-r from-orange-500 to-emerald-500 text-white text-xs font-black shadow-md hover:brightness-105 transition-all">
+              <i class="fa-solid fa-bolt mr-1"></i> Test Your Ninja Reaction Reflex
+            </button>
+          </div>
+        </div>
+
+        <!-- Right Wing: GREEN BELT PROGRAM -->
+        <div id="greenBeltWing" class="lg:col-span-4 p-6 rounded-3xl bg-white dark:bg-slate-900 border-2 border-emerald-500/80 shadow-lg text-left rtl:text-right space-y-4 card-3d-hover">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <span class="w-3.5 h-7 rounded-md bg-emerald-500 border border-emerald-600"></span>
+              <h3 class="font-outfit font-black text-lg text-slate-900 dark:text-white">Green Belt Program</h3>
+            </div>
+            <span class="text-[11px] font-bold text-emerald-500 uppercase">The Sprouting Tree</span>
+          </div>
+
+          <div class="space-y-3 pt-1">
+            <div class="p-3 rounded-xl bg-emerald-50/40 dark:bg-slate-800/60 border border-emerald-200/60 dark:border-slate-700/60">
+              <h4 class="font-outfit font-bold text-xs text-emerald-600 dark:text-emerald-400 mb-0.5">Advanced Fundamentals</h4>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400">Side Piercing Kick (Yoko-geri), Backfist Strike (Uraken), and dynamic jumping evasions.</p>
+            </div>
+            <div class="p-3 rounded-xl bg-emerald-50/40 dark:bg-slate-800/60 border border-emerald-200/60 dark:border-slate-700/60">
+              <h4 class="font-outfit font-bold text-emerald-600 dark:text-emerald-400 mb-0.5">Technique Combinations</h4>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400">5-part continuous fluid counter katas (Heian Nidan / Taeguk Il-Jang) with power breathing.</p>
+            </div>
+            <div class="p-3 rounded-xl bg-emerald-50/40 dark:bg-slate-800/60 border border-emerald-200/60 dark:border-slate-700/60">
+              <h4 class="font-outfit font-bold text-emerald-600 dark:text-emerald-400 mb-0.5">Leadership Activities</h4>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400">Leading class warm-up jumping jacks, counting in traditional Japanese, and greeting novices.</p>
+            </div>
+            <div class="p-3 rounded-xl bg-emerald-50/40 dark:bg-slate-800/60 border border-emerald-200/60 dark:border-slate-700/60">
+              <h4 class="font-outfit font-bold text-emerald-600 dark:text-emerald-400 mb-0.5">Goal Setting</h4>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400">Quarterly stripe milestone tracking sheets and personal confidence goal charting.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================
+         SECTION 5: BLUE & BROWN BELT PROGRAMS (AGES 10–13)
+         "The Senior Executive Bento & Mentorship Pavilion"
+         ======================================================== -->
+    <section id="section-blue-brown" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-14 space-y-3">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-800/80 text-blue-600 dark:text-blue-400 text-xs font-bold uppercase tracking-wider">
+          <i class="fa-solid fa-user-ninja text-[11px]"></i>
+          <span>Advanced Senior Cohorts • Blue &amp; Brown Belts (Ages 10 to 13)</span>
+        </div>
+        <h2 class="font-outfit font-black text-2xl sm:text-4xl text-slate-900 dark:text-white">
+          Tactical Strategy, Mentorship &amp; High-Level Refinement
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+          Where youth transition from students into mentors — refining micro-mechanics, executing complex strategies, and guiding younger belts with patient empathy.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        
+        <!-- Left Col: Senior Mentorship Action Photo -->
+        <div id="seniorMentorshipPhotoCol" class="lg:col-span-5 relative">
+          <div class="relative rounded-3xl overflow-hidden shadow-2xl border-2 border-slate-200 dark:border-slate-700 group">
+            <img src="images/programs_blue_brown_belts.jpg" alt="Blue Belt and Brown Belt Students Mentoring Junior White Belt" class="w-full h-80 sm:h-96 lg:h-[450px] object-cover transition-transform duration-700 group-hover:scale-105" />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/25 to-transparent"></div>
+            
+            <div class="absolute top-4 left-4 rtl:left-auto rtl:right-4 px-3.5 py-1.5 rounded-xl bg-blue-600 text-white text-xs font-bold flex items-center gap-2 shadow-lg">
+              <i class="fa-solid fa-hands-holding-child"></i>
+              <span>Senior Peer Mentorship In Action</span>
+            </div>
+
+            <div class="absolute bottom-4 left-4 right-4 p-4 rounded-2xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border border-slate-200 dark:border-slate-800 text-left rtl:text-right shadow-xl">
+              <h4 class="font-outfit font-black text-xs sm:text-sm text-slate-900 dark:text-white">To Teach is to Learn Twice</h4>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">By assisting Little Warriors and White Belts, senior youth develop profound patience and servant leadership.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Col: Blue Belt & Brown Belt Dual Bento Cards -->
+        <div class="lg:col-span-7 space-y-6">
+          
+          <!-- Blue Belt Showcase Card -->
+          <div id="blueBeltBentoCard" class="p-6 rounded-3xl bg-white dark:bg-slate-900 border-2 border-blue-500/80 shadow-xl text-left rtl:text-right card-3d-hover">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-2.5">
+                <span class="w-3.5 h-7 rounded-md bg-blue-600 border border-blue-400"></span>
+                <h3 class="font-outfit font-black text-lg text-slate-900 dark:text-white">Blue Belt Program</h3>
+              </div>
+              <span class="px-2.5 py-1 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 text-xs font-bold">The Vast Horizon</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div class="p-3 rounded-xl bg-blue-50/40 dark:bg-slate-800/60 border border-blue-200/60 dark:border-slate-700/60">
+                <h4 class="font-outfit font-bold text-xs text-blue-600 dark:text-blue-400 mb-0.5">Advanced Martial Arts Skills</h4>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400">Jump front kicks (Tobi Mae-geri), hook kicks, and dynamic swept evasions.</p>
+              </div>
+              <div class="p-3 rounded-xl bg-blue-50/40 dark:bg-slate-800/60 border border-blue-200/60 dark:border-slate-700/60">
+                <h4 class="font-outfit font-bold text-blue-600 dark:text-blue-400 mb-0.5">Strategy Development</h4>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400">Ring awareness, baiting counter-strikes, and defensive angle cutoff timing.</p>
+              </div>
+              <div class="p-3 rounded-xl bg-blue-50/40 dark:bg-slate-800/60 border border-blue-200/60 dark:border-slate-700/60">
+                <h4 class="font-outfit font-bold text-blue-600 dark:text-blue-400 mb-0.5">Mentoring Skills</h4>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400">Assigned junior buddy coaching during forms and partner footwork drills.</p>
+              </div>
+              <div class="p-3 rounded-xl bg-blue-50/40 dark:bg-slate-800/60 border border-blue-200/60 dark:border-slate-700/60">
+                <h4 class="font-outfit font-bold text-blue-600 dark:text-blue-400 mb-0.5">Mental Strength Training</h4>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400">Breathing through intense physical fatigue and stress visualization drills.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Brown Belt Showcase Card -->
+          <div id="brownBeltBentoCard" class="p-6 rounded-3xl bg-white dark:bg-slate-900 border-2 border-amber-700/80 shadow-xl text-left rtl:text-right card-3d-hover">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-2.5">
+                <span class="w-3.5 h-7 rounded-md bg-amber-800 border border-amber-600"></span>
+                <h3 class="font-outfit font-black text-lg text-slate-900 dark:text-white">Brown Belt Program</h3>
+              </div>
+              <span class="px-2.5 py-1 rounded-lg bg-amber-900/10 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 text-xs font-bold">The Grounded Mountain</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div class="p-3 rounded-xl bg-amber-900/5 dark:bg-slate-800/60 border border-amber-700/30 dark:border-slate-700/60">
+                <h4 class="font-outfit font-bold text-amber-700 dark:text-amber-300 text-xs mb-0.5">Advanced Technique Refinement</h4>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400">Micro-adjustments in hip torque, joint lock mechanics, and kata bunkai applications.</p>
+              </div>
+              <div class="p-3 rounded-xl bg-amber-900/5 dark:bg-slate-800/60 border border-amber-700/30 dark:border-slate-700/60">
+                <h4 class="font-outfit font-bold text-amber-700 dark:text-amber-300 text-xs mb-0.5">Leadership Responsibilities</h4>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400">Serving as floor captain, supervising bow-in rituals, and modeling dojo etiquette.</p>
+              </div>
+              <div class="p-3 rounded-xl bg-amber-900/5 dark:bg-slate-800/60 border border-amber-700/30 dark:border-slate-700/60">
+                <h4 class="font-outfit font-bold text-amber-700 dark:text-amber-300 text-xs mb-0.5">Teaching Assistance</h4>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400">Holding kicking targets for beginners and coaching Little Warriors through warmups.</p>
+              </div>
+              <div class="p-3 rounded-xl bg-amber-900/5 dark:bg-slate-800/60 border border-amber-700/30 dark:border-slate-700/60">
+                <h4 class="font-outfit font-bold text-amber-700 dark:text-amber-300 text-xs mb-0.5">Performance Preparation</h4>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400">Demonstration team synchronized katas, pine board breaking, and Dan prep clinics.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================
+         SECTION 6: BLACK BELT JOURNEY (THE SUMMIT OF MASTERY)
+         "The Black Belt Crucible & Shodan Dan Summit Monolith"
+         ======================================================== -->
+    <section id="section-black-belt" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      <div class="relative rounded-3xl p-6 sm:p-10 lg:p-12 overflow-hidden border-2 border-amber-400/80 bg-gradient-to-br from-slate-950 via-slate-900 to-black text-white shadow-2xl">
+        
+        <!-- Ambient Gold & Crimson Crucible Glow -->
+        <div class="absolute -top-32 -right-32 w-80 h-80 rounded-full bg-amber-400/15 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-32 -left-32 w-80 h-80 rounded-full bg-brand-crimson/20 blur-3xl pointer-events-none"></div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          
+          <!-- Column Left: Black Belt Kata Visual -->
+          <div id="blackBeltVisualCol" class="lg:col-span-5 relative">
+            <div class="relative rounded-3xl overflow-hidden shadow-2xl border-2 border-amber-400/60 group">
+              <img src="images/programs_black_belt_journey.jpg" alt="Dedicated Junior Black Belt Martial Artist Executing Traditional Kata" class="w-full h-80 sm:h-96 lg:h-[460px] object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"></div>
+              
+              <!-- Golden Dan Seal Stamp -->
+              <div id="blackBeltSealStamp" class="absolute top-4 left-4 rtl:left-auto rtl:right-4 px-3.5 py-1.5 rounded-xl bg-amber-400 text-slate-950 text-xs font-black flex items-center gap-2 shadow-xl">
+                <i class="fa-solid fa-crown"></i>
+                <span>Junior Black Belt Dan Degree</span>
+              </div>
+
+              <!-- Quote Pill -->
+              <div class="absolute bottom-4 left-4 right-4 p-3.5 rounded-2xl bg-black/90 backdrop-blur-md border border-amber-400/40 text-left rtl:text-right shadow-xl">
+                <h4 class="font-outfit font-black text-xs text-amber-400">The Black Belt Mindset</h4>
+                <p class="text-[11px] text-slate-300 mt-0.5">&ldquo;A black belt is not something you wear; it is someone you become.&rdquo;</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column Right: The 5 Pillars of Black Belt Crucible -->
+          <div id="blackBeltCrucibleCol" class="lg:col-span-7 space-y-6 text-left rtl:text-right">
+            
+            <div class="space-y-2">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/20 border border-amber-400/50 text-amber-300 text-xs font-bold uppercase tracking-wider">
+                <i class="fa-solid fa-trophy text-[11px]"></i>
+                <span>Black Belt Journey • The Shodan Summit</span>
+              </div>
+              <h2 class="font-outfit font-black text-2xl sm:text-4xl text-white">
+                The Black Belt Journey: Character Forged in Iron
+              </h2>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                Earning an authentic Black Belt takes 3+ years of rigorous dedication. It represents the transformation of a child into an inspiring, humble leader who commands respect wherever they walk.
+              </p>
+            </div>
+
+            <!-- The 5 Pillars of Black Belt Preparation -->
+            <div class="space-y-3">
+              
+              <div class="dan-pillar p-3.5 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-amber-400/60 transition-all flex items-start gap-3">
+                <span class="w-7 h-7 rounded-lg bg-amber-400 text-slate-950 flex items-center justify-center text-xs font-black shrink-0 mt-0.5">1</span>
+                <div>
+                  <h4 class="font-outfit font-bold text-xs sm:text-sm text-amber-300">Black Belt Requirements</h4>
+                  <p class="text-[11px] text-slate-400 leading-relaxed">Mastery of 8 traditional katas, 1,000-pushup cumulative stamina test, and academic school report submission (B average required).</p>
+                </div>
+              </div>
+
+              <div class="dan-pillar p-3.5 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-amber-400/60 transition-all flex items-start gap-3">
+                <span class="w-7 h-7 rounded-lg bg-amber-400 text-slate-950 flex items-center justify-center text-xs font-black shrink-0 mt-0.5">2</span>
+                <div>
+                  <h4 class="font-outfit font-bold text-xs sm:text-sm text-amber-300">Long-Term Goal Planning</h4>
+                  <p class="text-[11px] text-slate-400 leading-relaxed">Multi-year timeline architecture: teaching children how to break 36-month lofty ambitions into daily 1% compounding habits.</p>
+                </div>
+              </div>
+
+              <div class="dan-pillar p-3.5 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-amber-400/60 transition-all flex items-start gap-3">
+                <span class="w-7 h-7 rounded-lg bg-amber-400 text-slate-950 flex items-center justify-center text-xs font-black shrink-0 mt-0.5">3</span>
+                <div>
+                  <h4 class="font-outfit font-bold text-xs sm:text-sm text-amber-300">Leadership Development</h4>
+                  <p class="text-[11px] text-slate-400 leading-relaxed">Certified Junior Sensei credential, teaching full 45-minute junior clinics, and delivering an oral thesis on martial virtues.</p>
+                </div>
+              </div>
+
+              <div class="dan-pillar p-3.5 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-amber-400/60 transition-all flex items-start gap-3">
+                <span class="w-7 h-7 rounded-lg bg-amber-400 text-slate-950 flex items-center justify-center text-xs font-black shrink-0 mt-0.5">4</span>
+                <div>
+                  <h4 class="font-outfit font-bold text-xs sm:text-sm text-amber-300">Advanced Training</h4>
+                  <p class="text-[11px] text-slate-400 leading-relaxed">Auditory blindfold sparring evasion, multiple attacker de-escalation drills, and advanced tactical joint lock releases.</p>
+                </div>
+              </div>
+
+              <div class="dan-pillar p-3.5 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-amber-400/60 transition-all flex items-start gap-3">
+                <span class="w-7 h-7 rounded-lg bg-amber-400 text-slate-950 flex items-center justify-center text-xs font-black shrink-0 mt-0.5">5</span>
+                <div>
+                  <h4 class="font-outfit font-bold text-xs sm:text-sm text-amber-300">Black Belt Preparation</h4>
+                  <p class="text-[11px] text-slate-400 leading-relaxed">6-month intensive candidate boot camp, breaking 3 solid pine boards, and reading the Black Belt Honor Oath to family.</p>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================
+         SECTION 7: PROGRAM PLACEMENT & TRIAL CLASS BOOKING TERMINAL
+         "The Interactive Belt Placement Advisor & VIP Welcome Terminal"
+         ======================================================== -->
+    <section id="section-program-navigator" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pb-8">
+      <div class="relative rounded-3xl p-6 sm:p-10 lg:p-12 overflow-hidden border border-slate-200 dark:border-slate-800 bg-gradient-to-br from-white via-slate-50 to-white dark:from-slate-900 dark:via-brand-darkCard dark:to-slate-900 shadow-2xl">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          
+          <!-- Column Left: Interactive Placement Advisor -->
+          <div id="placementAdvisorCol" class="lg:col-span-7 space-y-5 text-left rtl:text-right">
+            
+            <div class="space-y-2">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800/80 text-emerald-600 dark:text-emerald-400 text-xs font-bold uppercase tracking-wider">
+                <i class="fa-solid fa-magnifying-glass text-[11px]"></i>
+                <span>Program Placement Advisor • Instant Recommendation</span>
+              </div>
+              <h2 class="font-outfit font-black text-2xl sm:text-3xl text-slate-900 dark:text-white">
+                Find Your Child&apos;s Perfect Starting Program
+              </h2>
+              <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                Select your child&apos;s age and experience level to view their recommended curriculum track:
+              </p>
+            </div>
+
+            <!-- Selector Filters -->
+            <div class="space-y-3">
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">Child&apos;s Age Bracket:</label>
+                <div class="flex flex-wrap gap-2">
+                  <button type="button" onclick="setPlacementAge('3-5')" id="ageBtn3-5" class="placement-age-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-brand-crimson">Ages 3–5 (Preschool)</button>
+                  <button type="button" onclick="setPlacementAge('6-8')" id="ageBtn6-8" class="placement-age-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-brand-crimson text-white shadow-sm">Ages 6–8 (Elementary)</button>
+                  <button type="button" onclick="setPlacementAge('9-11')" id="ageBtn9-11" class="placement-age-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-brand-crimson">Ages 9–11 (Juniors)</button>
+                  <button type="button" onclick="setPlacementAge('12+')" id="ageBtn12" class="placement-age-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-brand-crimson">Ages 12+ (Teens)</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dynamic Recommendation Result Card -->
+            <div id="placementResultCard" class="p-5 rounded-2xl bg-slate-100 dark:bg-slate-800/80 border-2 border-brand-crimson shadow-md space-y-2">
+              <div class="flex items-center justify-between">
+                <span id="placementCohortBadge" class="px-2.5 py-0.5 rounded-md bg-brand-crimson text-white text-[10px] font-black uppercase">Recommended Track</span>
+                <span id="placementBeltBadge" class="text-xs font-bold text-amber-500">Starts at White Belt</span>
+              </div>
+              <h4 id="placementTitle" class="font-outfit font-black text-base text-slate-900 dark:text-white">
+                Novice Foundations Program (White &amp; Yellow Belts)
+              </h4>
+              <p id="placementDesc" class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                Ideal for 6 to 8-year-olds. Develops foundational karate stances, safety blocks, vocal confidence (Kiai), and positive listening habits.
+              </p>
+              <div class="flex items-center gap-4 pt-1 text-[11px] font-bold text-slate-500 dark:text-slate-400">
+                <span><i class="fa-solid fa-clock text-amber-500 mr-1"></i> 45 Min Classes</span>
+                <span><i class="fa-solid fa-user-ninja text-brand-crimson mr-1"></i> Uniform Included Free</span>
+                <span><i class="fa-solid fa-shield-halved text-blue-500 mr-1"></i> 1:6 Coach Ratio</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Column Right: VIP Trial Reception Photo & Booking Card -->
+          <div id="trialReceptionCol" class="lg:col-span-5 relative space-y-4">
+            <div class="relative rounded-3xl overflow-hidden shadow-2xl border-2 border-slate-200 dark:border-slate-700 group">
+              <img src="images/programs_trial_booking.jpg" alt="Smiling Parent and Child Receiving Free Uniform at Dojo Reception" class="w-full h-72 sm:h-80 object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/25 to-transparent"></div>
+              
+              <div class="absolute top-4 left-4 rtl:left-auto rtl:right-4 px-3 py-1.5 rounded-xl bg-emerald-500 text-white text-xs font-bold flex items-center gap-1.5 shadow-lg">
+                <i class="fa-solid fa-gift"></i>
+                <span>Includes Free Uniform ($45 Value)</span>
+              </div>
+
+              <div class="absolute bottom-4 left-4 right-4 p-3.5 rounded-2xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border border-slate-200 dark:border-slate-800 text-left rtl:text-right shadow-xl">
+                <h4 class="font-outfit font-black text-xs text-slate-900 dark:text-white">Claim 1 Free Trial Class &amp; Uniform</h4>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">No obligation, no contracts. Step onto the mats and experience our positive coaching.</p>
+              </div>
+            </div>
+
+            <button type="button" onclick="alert('Free Trial Class & Uniform Confirmed! We look forward to meeting you on the mat.')" class="btn-3d btn-3d-login w-full py-3 rounded-2xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 shadow-xl">
+              <i class="fa-solid fa-calendar-check"></i>
+              <span>Book Free Trial Class &amp; Claim Uniform</span>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- EXACT COMPREHENSIVE DOJO FOOTER FROM NAVBAR.HTML -->
+  <footer id="mainFooter" class="relative z-30 w-full mt-auto border-t border-slate-200/80 dark:border-slate-800/80 bg-white/70 dark:bg-slate-950/80 backdrop-blur-xl transition-colors duration-300">
+    
+    <!-- Top Ambient Glow Edge -->
+    <div class="absolute -top-px left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-crimson/40 to-transparent"></div>
+
+    <!-- FOOTER CONTENT COLUMNS -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-10 text-left rtl:text-right">
+        
+        <!-- Column 1: Brand & Mission (Spans 2 cols on desktop) -->
+        <div class="lg:col-span-2 space-y-4">
+          
+          <!-- Scaled Brand Logo Lockup -->
+          <a href="index.html" class="flex items-center gap-2.5 focus:outline-none">
+            <div class="relative w-7 h-7 rounded-lg bg-gradient-to-b from-rose-500 via-brand-crimson to-rose-700 p-0.5 shadow-sm shrink-0">
+              <div class="w-full h-full bg-slate-950 rounded-[5px] flex items-center justify-center overflow-hidden">
+                <svg viewBox="0 0 100 100" class="w-5 h-5 text-white" fill="none">
+                  <circle cx="50" cy="50" r="26" fill="#F59E0B" fill-opacity="0.2" />
+                  <polygon points="34,16 35.5,19 39,19.5 36.5,22 37,25 34,23.5 31,25 31.5,22 29,19.5 32.5,19" fill="#FDE047" />
+                  <polygon points="50,11 52,15 57,15.5 53.5,19 54.5,23.5 50,21 45.5,23.5 46.5,19 43,15.5 48,15" fill="#FDE047" />
+                  <polygon points="66,16 67.5,19 71,19.5 68.5,22 69,25 66,23.5 63,25 63.5,22 61,19.5 64.5,19" fill="#FDE047" />
+                  <circle cx="43" cy="30" r="6" fill="#FFFFFF" />
+                  <path d="M41 36 L48 39 L47 52 L39 51 Z" fill="#FFFFFF" />
+                  <path d="M45 50 L56 46 L73 39" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" />
+                  <path d="M40 51 L35 59 L42 63" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" />
+                  <path d="M38 50 C42 51 46 51 48 50" stroke="#0F172A" stroke-width="3.5" stroke-linecap="round" />
+                </svg>
+              </div>
+            </div>
+            <div class="flex flex-col">
+              <span class="font-outfit font-black text-xs sm:text-sm text-slate-900 dark:text-white leading-tight">
+                <span class="text-brand-crimson">KIDS</span> MARTIAL ARTS
+              </span>
+              <span class="text-[7.5px] font-bold text-amber-500 uppercase font-outfit mt-0.5">
+                &amp; CONFIDENCE BUILDING PROGRAM
+              </span>
+            </div>
+          </a>
+
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed max-w-sm">
+            Empowering children through age-appropriate martial arts training. Building strong bodies, courageous minds, unwavering focus, and bully-proof confidence.
+          </p>
+
+          <!-- Trust Badges Strip -->
+          <div class="flex flex-wrap items-center gap-2 pt-1 text-[11px] font-semibold text-slate-600 dark:text-slate-300">
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+              <i class="fa-solid fa-shield-halved text-emerald-500 text-xs"></i>
+              Certified Safe Dojo
+            </span>
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+              <i class="fa-solid fa-medal text-amber-400 text-xs"></i>
+              Black Belt Mentors
+            </span>
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+              <i class="fa-solid fa-heart text-brand-crimson text-xs"></i>
+              Bully-Proof
+            </span>
+          </div>
+
+          <!-- 3D Tactile Social Media Icons -->
+          <div class="pt-2 flex items-center space-x-2 rtl:space-x-reverse">
+            <a href="#" class="btn-3d btn-3d-switch w-8 h-8 rounded-xl flex items-center justify-center text-xs text-slate-600 dark:text-slate-300 hover:text-brand-crimson" title="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="#" class="btn-3d btn-3d-switch w-8 h-8 rounded-xl flex items-center justify-center text-xs text-slate-600 dark:text-slate-300 hover:text-blue-500" title="Facebook">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="#" class="btn-3d btn-3d-switch w-8 h-8 rounded-xl flex items-center justify-center text-xs text-slate-600 dark:text-slate-300 hover:text-red-500" title="YouTube">
+              <i class="fa-brands fa-youtube"></i>
+            </a>
+            <a href="#" class="btn-3d btn-3d-switch w-8 h-8 rounded-xl flex items-center justify-center text-xs text-slate-600 dark:text-slate-300 hover:text-brand-crimson" title="TikTok">
+              <i class="fa-brands fa-tiktok"></i>
+            </a>
+            <a href="#" class="btn-3d btn-3d-switch w-8 h-8 rounded-xl flex items-center justify-center text-xs text-slate-600 dark:text-slate-300 hover:text-emerald-500" title="WhatsApp">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+          </div>
+
+        </div>
+
+        <!-- Column 2: Navigation & Home -->
+        <div class="space-y-3">
+          <h4 class="font-outfit font-extrabold text-xs uppercase tracking-wider text-slate-900 dark:text-white">
+            Navigation
+          </h4>
+          <ul class="space-y-2 text-xs">
+            <li>
+              <a href="index.html" class="text-slate-500 dark:text-slate-400 hover:text-brand-crimson transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-angle-right rtl:rotate-180 text-[10px] text-brand-crimson"></i>
+                <span>Home 1 (Dojo Hero)</span>
+              </a>
+            </li>
+            <li>
+              <a href="home-2.html" class="text-slate-500 dark:text-slate-400 hover:text-brand-crimson transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-angle-right rtl:rotate-180 text-[10px] text-brand-crimson"></i>
+                <span>Home 2 (Fun Ninjas)</span>
+              </a>
+            </li>
+            <li>
+              <a href="about.html" class="text-slate-500 dark:text-slate-400 hover:text-brand-crimson transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-angle-right rtl:rotate-180 text-[10px] text-brand-crimson"></i>
+                <span>About Our Mission</span>
+              </a>
+            </li>
+            <li>
+              <a href="programs.html" class="text-slate-500 dark:text-slate-400 hover:text-brand-crimson transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-angle-right rtl:rotate-180 text-[10px] text-brand-crimson"></i>
+                <span>Youth Programs</span>
+              </a>
+            </li>
+            <li>
+              <a href="belt-system.html" class="text-slate-500 dark:text-slate-400 hover:text-brand-crimson transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-angle-right rtl:rotate-180 text-[10px] text-brand-crimson"></i>
+                <span>Belt System Roadmap</span>
+              </a>
+            </li>
+            <li>
+              <a href="instructors.html" class="text-slate-500 dark:text-slate-400 hover:text-brand-crimson transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-angle-right rtl:rotate-180 text-[10px] text-brand-crimson"></i>
+                <span>Senseis &amp; Coaches</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Academy & Community -->
+        <div class="space-y-3">
+          <h4 class="font-outfit font-extrabold text-xs uppercase tracking-wider text-slate-900 dark:text-white">
+            Academy &amp; Safety
+          </h4>
+          <ul class="space-y-2 text-xs">
+            <li>
+              <a href="safety.html" class="text-slate-500 dark:text-slate-400 hover:text-brand-crimson transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-angle-right rtl:rotate-180 text-[10px] text-emerald-500"></i>
+                <span>Dojo Safety Standards</span>
+              </a>
+            </li>
+            <li>
+              <a href="events.html" class="text-slate-500 dark:text-slate-400 hover:text-brand-crimson transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-angle-right rtl:rotate-180 text-[10px] text-brand-crimson"></i>
+                <span>Belt Graduations &amp; Camps</span>
+              </a>
+            </li>
+            <li>
+              <a href="contact.html" class="text-slate-500 dark:text-slate-400 hover:text-brand-crimson transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-angle-right rtl:rotate-180 text-[10px] text-brand-crimson"></i>
+                <span>Contact &amp; Dojo Tour</span>
+              </a>
+            </li>
+            <li>
+              <a href="admin-dashboard.html" class="text-slate-500 dark:text-slate-400 hover:text-brand-crimson transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-angle-right rtl:rotate-180 text-[10px] text-brand-crimson"></i>
+                <span>Admin Portal</span>
+              </a>
+            </li>
+            <li>
+              <a href="user-dashboard.html" class="text-slate-500 dark:text-slate-400 hover:text-amber-500 transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-angle-right rtl:rotate-180 text-[10px] text-amber-500"></i>
+                <span>Student / Parent Portal</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Dojo Location & Contact -->
+        <div class="space-y-3">
+          <h4 class="font-outfit font-extrabold text-xs uppercase tracking-wider text-slate-900 dark:text-white">
+            Visit Our Dojo
+          </h4>
+          <div class="space-y-2.5 text-xs text-slate-500 dark:text-slate-400">
+            <div class="flex items-start gap-2">
+              <i class="fa-solid fa-location-dot text-brand-crimson text-xs mt-0.5 shrink-0"></i>
+              <span>742 Champions Way, Suite 100, Dojo Center</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-phone text-amber-500 text-xs shrink-0"></i>
+              <span>(800) 555-KICK</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-clock text-slate-400 text-xs shrink-0"></i>
+              <span>Mon - Sat: 9:00 AM - 7:30 PM</span>
+            </div>
+            <div class="pt-2">
+              <!-- 3D Trigger to Member Login -->
+              <a href="login.html" class="btn-3d btn-3d-dashboard w-full py-2 text-xs rounded-xl flex items-center justify-center gap-1.5">
+                <i class="fa-solid fa-lock text-[10px] text-amber-500"></i>
+                <span>Member Portal Login</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- Top Martial Rank Belt Scroll Progress Bar -->
+  <div id="scrollProgressBar" class="fixed top-0 left-0 h-1 z-50 pointer-events-none transition-all duration-75" style="width: 0%; background: linear-gradient(90deg, #FDE047, #F59E0B, #E11D48, #9F1239); box-shadow: 0 0 12px rgba(225, 29, 72, 0.85);"></div>
+
+  <!-- Floating Circular Scroll Progress Back-To-Top Button -->
+  <button id="backToTopBtn" onclick="scrollToTop()" class="fixed bottom-6 right-6 rtl:right-auto rtl:left-6 z-40 p-2.5 rounded-2xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border border-slate-200 dark:border-slate-800 shadow-2xl flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300 group" title="Return to Top" aria-label="Return to top">
+    <svg class="w-8 h-8 -rotate-90 pointer-events-none" viewBox="0 0 36 36">
+      <path class="text-slate-200 dark:text-slate-800" stroke-width="3" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+      <path id="backToTopCircle" class="text-brand-crimson transition-all duration-100" stroke-dasharray="100, 100" stroke-dashoffset="100" stroke-width="3" stroke-linecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+    </svg>
+    <i class="fa-solid fa-arrow-up absolute text-xs text-slate-800 dark:text-white group-hover:-translate-y-0.5 transition-transform"></i>
+  </button>
+
+  <!-- ========================================================
+       JAVASCRIPT: ADVANCED FRAMER MOTION PHYSICS & INTERACTION
+       ======================================================== -->
+  <script>
+    let isDarkMode = true;
+    let isRTL = false;
+    let isMobileMenuOpen = false;
+
+    const htmlElem = document.documentElement;
+    const themeIcon = document.getElementById('themeIcon');
+    const mobileThemeLabel = document.getElementById('mobileThemeLabel');
+    const rtlIcon = document.getElementById('rtlIcon');
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const bar1 = document.getElementById('bar1');
+    const bar2 = document.getElementById('bar2');
+    const bar3 = document.getElementById('bar3');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    const mobileDrawerOverlay = document.getElementById('mobileDrawerOverlay');
+    const loginModalBackdrop = document.getElementById('loginModalBackdrop');
+    const loginModalContent = document.getElementById('loginModalContent');
+    const navGlider = document.getElementById('navGlider');
+    const navLinksContainer = document.getElementById('navLinksContainer');
+    const brandLogo = document.getElementById('brandLogo');
+    const logoIconContainer = document.getElementById('logoIconContainer');
+
+    // ----------------------------------------------------
+    // INITIALIZATION & FRAMER MOTION SPRINGS
+    // ----------------------------------------------------
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.Motion && window.Motion.animate) {
+        const { animate, spring } = window.Motion;
+        
+        // 1. Entrance drop animation with spring physics
+        const headerAnim = animate('#mainHeader', 
+          { y: [-25, 0], opacity: [0, 1] }, 
+          { duration: 0.6, easing: spring({ stiffness: 380, damping: 26 }) }
+        );
+        if (headerAnim && headerAnim.finished) {
+          headerAnim.finished.then(() => {
+            const h = document.getElementById('mainHeader');
+            if (h) h.style.transform = '';
+          });
+        }
+
+        // 2. Initial Logo subtle spring pop
+        animate(logoIconContainer, 
+          { scale: [0.75, 1.05, 1] }, 
+          { duration: 0.5, delay: 0.15, easing: spring({ stiffness: 400, damping: 20 }) }
+        );
+
+        // Initialize Section-by-Section Unique Framer Motion
+        initUniqueProgramsAnimations();
+      }
+
+      // Check Saved Preferences
+      const savedTheme = localStorage.getItem('dojo_theme');
+      if (savedTheme === 'light') {
+        setTheme(false);
+      } else {
+        setTheme(true);
+      }
+
+      const savedRTL = localStorage.getItem('dojo_rtl');
+      if (savedRTL === 'true') {
+        setRTL(true);
+      }
+
+      // Initialize Framer Motion Nav Glider Pill
+      setActiveNavState();
+      setupNavGlider();
+
+      // Initialize Interactive Logo Wobble
+      setupLogoHoverAnimation();
+
+      // Initialize Dropdown Pop Animations
+      setupDropdownAnimations();
+
+      // Initialize Additional Interactive Animations
+      setupScrollProgressBar();
+      setupStickyNavbarScroll();
+      setupCursorSpotlight();
+      setupMagneticTilt();
+      setupOverviewRoadmapParallax();
+    });
+
+    // ----------------------------------------------------
+    // SCROLL PROGRESS BAR & BACK TO TOP TRACKER
+    // ----------------------------------------------------
+    function setupStickyNavbarScroll() {
+      const mainHeader = document.getElementById('mainHeader');
+      if (!mainHeader) return;
+      window.addEventListener('scroll', () => {
+        const top = window.scrollY || document.documentElement.scrollTop;
+        if (top > 25) {
+          mainHeader.classList.remove('pt-4');
+          mainHeader.classList.add('pt-1.5', 'sm:pt-2');
+        } else {
+          mainHeader.classList.remove('pt-1.5', 'sm:pt-2');
+          mainHeader.classList.add('pt-4');
+        }
+      }, { passive: true });
+    }
+
+    function setupScrollProgressBar() {
+      const bar = document.getElementById('scrollProgressBar');
+      const backToTopBtn = document.getElementById('backToTopBtn');
+      const circle = document.getElementById('backToTopCircle');
+
+      window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) : 0;
+        const percent = Math.min(Math.max(progress * 100, 0), 100);
+
+        if (bar) {
+          bar.style.width = percent + '%';
+        }
+
+        if (circle) {
+          const offset = 100 - percent;
+          circle.style.strokeDashoffset = offset;
+        }
+
+        if (backToTopBtn) {
+          if (scrollTop > 350) {
+            backToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+            backToTopBtn.classList.add('opacity-100');
+          } else {
+            backToTopBtn.classList.add('opacity-0', 'pointer-events-none');
+            backToTopBtn.classList.remove('opacity-100');
+          }
+        }
+      }, { passive: true });
+    }
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ----------------------------------------------------
+    // INTERACTIVE AMBIENT CURSOR SPOTLIGHT
+    // ----------------------------------------------------
+    function setupCursorSpotlight() {
+      const spotlight = document.getElementById('ambientCursorSpotlight');
+      if (!spotlight || window.matchMedia('(pointer: coarse)').matches) return;
+
+      let mouseX = -500, mouseY = -500;
+      let currentX = -500, currentY = -500;
+      let hasMoved = false;
+
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        if (!hasMoved) {
+          hasMoved = true;
+          spotlight.style.opacity = '1';
+        }
+      }, { passive: true });
+
+      function renderSpotlight() {
+        currentX += (mouseX - currentX) * 0.12;
+        currentY += (mouseY - currentY) * 0.12;
+        spotlight.style.transform = 'translate(' + currentX + 'px, ' + currentY + 'px) translate(-50%, -50%)';
+        requestAnimationFrame(renderSpotlight);
+      }
+      requestAnimationFrame(renderSpotlight);
+    }
+
+    // ----------------------------------------------------
+    // 3D MAGNETIC TILT PHYSICS ON HOVER
+    // ----------------------------------------------------
+    function setupMagneticTilt() {
+      if (window.matchMedia('(pointer: coarse)').matches) return;
+      const tiltCards = document.querySelectorAll('.card-3d-hover');
+
+      tiltCards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width - 0.5;
+          const y = (e.clientY - rect.top) / rect.height - 0.5;
+          
+          const tiltX = -y * 8;
+          const tiltY = x * 8;
+          
+          card.style.transform = 'perspective(900px) rotateX(' + tiltX.toFixed(2) + 'deg) rotateY(' + tiltY.toFixed(2) + 'deg) translateY(-6px) scale3d(1.015, 1.015, 1.015)';
+        });
+
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) translateY(0px) scale3d(1, 1, 1)';
+        });
+      });
+    }
+
+    // ----------------------------------------------------
+    // ANIMATED NUMBER COUNTERS (ROLLING COUNTERS)
+    // ----------------------------------------------------
+    function setupStatCounters() {
+      const counters = document.querySelectorAll('.counter-number');
+      counters.forEach(counter => {
+        const target = parseFloat(counter.getAttribute('data-target')) || 0;
+        const suffix = counter.getAttribute('data-suffix') || '';
+        const decimals = parseInt(counter.getAttribute('data-decimals')) || 0;
+        animateCounterNumber(counter, target, 1600, suffix, decimals);
+      });
+    }
+
+    function animateCounterNumber(el, target, duration = 1500, suffix = '', decimals = 0) {
+      if (!el || el.dataset.counted === 'true') return;
+      el.dataset.counted = 'true';
+      const startTime = performance.now();
+      const startVal = 0;
+      
+      function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        const currentVal = startVal + (target - startVal) * ease;
+        
+        if (decimals > 0) {
+          el.textContent = currentVal.toFixed(decimals) + suffix;
+        } else {
+          el.textContent = Math.floor(currentVal).toLocaleString() + suffix;
+        }
+        
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        }
+      }
+      requestAnimationFrame(update);
+    }
+
+    // ----------------------------------------------------
+    // SECTION 1: OVERVIEW ROADMAP MOUSE PARALLAX
+    // ----------------------------------------------------
+    function setupOverviewRoadmapParallax() {
+      const col = document.getElementById('overviewScrollCol');
+      if (!col || window.matchMedia('(pointer: coarse)').matches) return;
+
+      col.addEventListener('mousemove', (e) => {
+        const rect = col.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+        if (window.Motion && window.Motion.animate) {
+          window.Motion.animate(col.querySelector('div'), 
+            { transform: 'perspective(1000px) rotateY(' + (x * 12) + 'deg) rotateX(' + (-y * 12) + 'deg) scale(1.02)' }, 
+            { duration: 0.3 }
+          );
+        }
+      });
+
+      col.addEventListener('mouseleave', () => {
+        if (window.Motion && window.Motion.animate) {
+          window.Motion.animate(col.querySelector('div'), 
+            { transform: 'perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)' }, 
+            { duration: 0.5 }
+          );
+        }
+      });
+    }
+
+    // ----------------------------------------------------
+    // SECTION 4: INTERACTIVE REACTION SPEED SIMULATOR
+    // ----------------------------------------------------
+    function testReactionSpeed() {
+      const display = document.getElementById('reactionDisplay');
+      if (!display) return;
+
+      display.textContent = 'Measuring...';
+      const randomSpeed = (Math.random() * 0.12 + 0.18).toFixed(2);
+
+      setTimeout(() => {
+        display.textContent = randomSpeed + 's (Ninja Fast!)';
+        if (window.Motion && window.Motion.animate) {
+          window.Motion.animate(display, 
+            { scale: [0.8, 1.3, 1] }, 
+            { duration: 0.35, easing: window.Motion.spring({ stiffness: 450, damping: 18 }) }
+          );
+        }
+      }, 350);
+    }
+
+    // ----------------------------------------------------
+    // SECTION 7: PROGRAM PLACEMENT FILTER
+    // ----------------------------------------------------
+    const placementData = {
+      '3-5': {
+        cohort: 'Little Warriors Track',
+        belt: 'White Ribbon Beginner',
+        title: 'Little Warriors Preschool Foundations (Ages 3 to 5)',
+        desc: 'Focuses on gross motor play, balance domes, listening freeze games, and safe tumbling rolls. 30-minute high-energy sessions.'
+      },
+      '6-8': {
+        cohort: 'Novice Belt Track',
+        belt: 'White & Yellow Belt Journey',
+        title: 'Novice Foundations Program (White & Yellow Belts)',
+        desc: 'Ideal for 6 to 8-year-olds. Develops foundational karate stances, safety blocks, vocal confidence (Kiai), and positive listening habits.'
+      },
+      '9-11': {
+        cohort: 'Intermediate Leadership Track',
+        belt: 'Orange & Green Belt Pathway',
+        title: 'Intermediate Athlete Program (Orange & Green Belts)',
+        desc: 'Focuses on controlled sparring distance, reaction pads, multi-move fluid combinations, and independent personal discipline.'
+      },
+      '12+': {
+        cohort: 'Senior Executive Dan Track',
+        belt: 'Blue & Brown to Black Belt Summit',
+        title: 'Junior Warriors & Black Belt Candidates (Ages 12+)',
+        desc: 'Rigorous martial strategy, junior mentorship roles, teaching assistance, and long-term Black Belt Dan crucible preparation.'
+      }
+    };
+
+    function setPlacementAge(ageKey) {
+      const data = placementData[ageKey];
+      if (!data) return;
+
+      const btns = document.querySelectorAll('.placement-age-btn');
+      btns.forEach(btn => {
+        btn.className = 'placement-age-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-brand-crimson';
+      });
+
+      const activeBtn = document.getElementById('ageBtn' + ageKey);
+      if (activeBtn) {
+        activeBtn.className = 'placement-age-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-brand-crimson text-white shadow-sm';
+      }
+
+      const cohortBadge = document.getElementById('placementCohortBadge');
+      const beltBadge = document.getElementById('placementBeltBadge');
+      const title = document.getElementById('placementTitle');
+      const desc = document.getElementById('placementDesc');
+      const card = document.getElementById('placementResultCard');
+
+      if (cohortBadge) cohortBadge.textContent = data.cohort;
+      if (beltBadge) beltBadge.textContent = data.belt;
+      if (title) title.textContent = data.title;
+      if (desc) desc.textContent = data.desc;
+
+      if (window.Motion && window.Motion.animate && card) {
+        window.Motion.animate(card, 
+          { scale: [0.97, 1.02, 1] }, 
+          { duration: 0.35, easing: window.Motion.spring({ stiffness: 420, damping: 20 }) }
+        );
+      }
+    }
+
+    // ----------------------------------------------------
+    // UNIQUE & CREATIVE FRAMER MOTION ANIMATION FOR EACH SECTION
+    // ----------------------------------------------------
+    function initUniqueProgramsAnimations() {
+      if (!window.Motion || !window.Motion.animate) return;
+      const { animate, spring, inView, stagger } = window.Motion;
+
+      // ====================================================
+      // SECTION 1: OVERVIEW - "BELT SPECTRUM HORIZON RIPPLE & SCROLL REVEAL"
+      // ====================================================
+      inView('#section-prog-overview', () => {
+        const tag = document.querySelector('#overviewCommandCol .inline-flex');
+        if (tag) {
+          animate(tag, 
+            { scale: [0.6, 1.25, 1], opacity: [0, 1] }, 
+            { duration: 0.55, easing: spring({ stiffness: 450, damping: 20 }) }
+          );
+        }
+
+        animate('#overviewCommandCol h1', 
+          { rotateX: [-32, 0], y: [35, 0], opacity: [0, 1] }, 
+          { duration: 0.75, delay: 0.1, easing: spring({ stiffness: 350, damping: 24 }) }
+        );
+
+        animate('#overviewScrollCol > div', 
+          { rotateY: [-20, 0], scale: [0.9, 1], opacity: [0, 1] }, 
+          { duration: 0.85, delay: 0.15, easing: spring({ stiffness: 300, damping: 24 }) }
+        );
+
+        const beltSegments = document.querySelectorAll('#beltSpectrumBar .spectrum-segment');
+        if (beltSegments.length) {
+          animate(beltSegments, 
+            { scale: [0.6, 1.15, 1], opacity: [0, 1] }, 
+            { delay: stagger(0.06, { start: 0.25 }), duration: 0.45, easing: spring({ stiffness: 420, damping: 20 }) }
+          );
+        }
+
+        setupStatCounters();
+      });
+
+      // ====================================================
+      // SECTION 2: LITTLE WARRIORS - "PLAYFUL NINJA BOUNCE & TRI-POD POP"
+      // ====================================================
+      inView('#section-little-warriors', () => {
+        animate('#littleWarriorsVisualCol > div', 
+          { rotate: [-5, 5, 0], scale: [0.9, 1], opacity: [0, 1] }, 
+          { duration: 0.8, easing: spring({ stiffness: 320, damping: 22 }) }
+        );
+
+        const pods = document.querySelectorAll('#littleWarriorsPodsCol .warrior-pod');
+        if (pods.length) {
+          animate(pods, 
+            { scaleY: [0.75, 1.15, 1], scaleX: [1.15, 0.92, 1], y: [40, 0], opacity: [0, 1] }, 
+            { delay: stagger(0.12, { start: 0.15 }), duration: 0.65, easing: spring({ stiffness: 380, damping: 20 }) }
+          );
+        }
+      });
+
+      // ====================================================
+      // SECTION 3: WHITE & YELLOW - "DUAL TATAMI PARALLEL SLIDE"
+      // ====================================================
+      inView('#section-white-yellow', () => {
+        animate('#whiteYellowPhotoBanner', 
+          { y: [-35, 0], scale: [0.94, 1], opacity: [0, 1] }, 
+          { duration: 0.75, easing: spring({ stiffness: 320, damping: 24 }) }
+        );
+
+        animate('#whiteBeltArena', 
+          { x: [-60, 0], rotateY: [-12, 0], opacity: [0, 1] }, 
+          { duration: 0.8, delay: 0.15, easing: spring({ stiffness: 340, damping: 24 }) }
+        );
+
+        animate('#yellowBeltArena', 
+          { x: [60, 0], rotateY: [12, 0], opacity: [0, 1] }, 
+          { duration: 0.8, delay: 0.25, easing: spring({ stiffness: 340, damping: 24 }) }
+        );
+      });
+
+      // ====================================================
+      // SECTION 4: ORANGE & GREEN - "KINETIC SPARRING PULSE & ZIG-ZAG UNFOLD"
+      // ====================================================
+      inView('#section-orange-green', () => {
+        animate('#orangeBeltWing', 
+          { rotateX: [16, 0], y: [45, 0], opacity: [0, 1] }, 
+          { duration: 0.75, easing: spring({ stiffness: 340, damping: 24 }) }
+        );
+
+        animate('#orangeGreenVisualHub', 
+          { scale: [0.88, 1], opacity: [0, 1] }, 
+          { duration: 0.7, delay: 0.12, easing: spring({ stiffness: 360, damping: 22 }) }
+        );
+
+        animate('#greenBeltWing', 
+          { x: [45, 0], y: [-20, 0], opacity: [0, 1] }, 
+          { duration: 0.75, delay: 0.22, easing: spring({ stiffness: 340, damping: 24 }) }
+        );
+      });
+
+      // ====================================================
+      // SECTION 5: BLUE & BROWN - "EXECUTIVE OBSIDIAN SLIDE & MENTORSHIP RIPPLE"
+      // ====================================================
+      inView('#section-blue-brown', () => {
+        animate('#seniorMentorshipPhotoCol > div', 
+          { x: [-45, 0], opacity: [0, 1] }, 
+          { duration: 0.8, easing: spring({ stiffness: 320, damping: 24 }) }
+        );
+
+        animate('#blueBeltBentoCard', 
+          { x: [50, 0], opacity: [0, 1] }, 
+          { duration: 0.75, delay: 0.15, easing: spring({ stiffness: 350, damping: 22 }) }
+        );
+
+        animate('#brownBeltBentoCard', 
+          { x: [50, 0], opacity: [0, 1] }, 
+          { duration: 0.75, delay: 0.3, easing: spring({ stiffness: 350, damping: 22 }) }
+        );
+      });
+
+      // ====================================================
+      // SECTION 6: BLACK BELT - "GOLDEN DAN CRUCIBLE IGNITION & SUMMIT STAMP"
+      // ====================================================
+      inView('#section-black-belt', () => {
+        animate('#blackBeltVisualCol > div', 
+          { scale: [1.1, 1], opacity: [0, 1] }, 
+          { duration: 0.85, easing: 'easeOut' }
+        );
+
+        const seal = document.getElementById('blackBeltSealStamp');
+        if (seal) {
+          animate(seal, 
+            { scale: [0.5, 1.35, 1], opacity: [0, 1] }, 
+            { duration: 0.6, delay: 0.25, easing: spring({ stiffness: 480, damping: 18 }) }
+          );
+        }
+
+        const danPillars = document.querySelectorAll('#blackBeltCrucibleCol .dan-pillar');
+        if (danPillars.length) {
+          animate(danPillars, 
+            { rotateX: [-30, 0], y: [45, 0], opacity: [0, 1] }, 
+            { delay: stagger(0.08, { start: 0.2 }), duration: 0.6, easing: spring({ stiffness: 380, damping: 22 }) }
+          );
+        }
+      });
+
+      // ====================================================
+      // SECTION 7: PLACEMENT & TRIAL - "BILATERAL TERMINAL CONVERGENCE"
+      // ====================================================
+      inView('#section-program-navigator', () => {
+        animate('#placementAdvisorCol', 
+          { x: [-45, 0], opacity: [0, 1] }, 
+          { duration: 0.75, easing: spring({ stiffness: 320, damping: 24 }) }
+        );
+
+        animate('#trialReceptionCol', 
+          { x: [45, 0], opacity: [0, 1] }, 
+          { duration: 0.75, delay: 0.15, easing: spring({ stiffness: 320, damping: 24 }) }
+        );
+      });
+    }
+
+    // ----------------------------------------------------
+    // FRAMER MOTION: MAGNETIC GLIDING PILL INDICATOR
+    // ----------------------------------------------------
+        // ----------------------------------------------------
+    // DYNAMIC ACTIVE NAV STATE & GLIDER TRACKING
+    // ----------------------------------------------------
+    function setActiveNavState() {
+      const pathname = window.location.pathname.replace(/\\/g, '/');
+      const filename = pathname.split('/').pop() || 'index.html';
+      const currentPage = (filename === '' || filename === '/') ? 'index.html' : filename;
+
+      // 1. Desktop Nav Links
+      const navLinks = document.querySelectorAll('#navLinksContainer .nav-item-link');
+      let activeItem = null;
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        const href = link.getAttribute('href');
+        if (href && (href === currentPage || (currentPage === 'index.html' && (href === 'index.html' || href === '#home1')))) {
+          link.classList.add('active');
+          activeItem = link;
+        }
+      });
+
+      // Special check for Home dropdown (if on index.html or home-2.html)
+      const homeLink = document.querySelector('#desktopHomeDropdown > a, #desktopHomeDropdown > button');
+      if (homeLink) {
+        if (currentPage === 'index.html' || currentPage === 'home-2.html') {
+          homeLink.classList.add('active');
+          activeItem = homeLink;
+        } else {
+          homeLink.classList.remove('active');
+        }
+      }
+
+      // Home dropdown items active styling
+      const homeItems = document.querySelectorAll('#desktopHomeDropdown .dropdown-item');
+      homeItems.forEach(item => {
+        const href = item.getAttribute('href');
+        if (href && href === currentPage) {
+          item.classList.add('text-brand-crimson', 'font-black', 'bg-rose-50', 'dark:bg-rose-950/50');
+        } else {
+          item.classList.remove('text-brand-crimson', 'font-black', 'bg-rose-50', 'dark:bg-rose-950/50');
+        }
+      });
+
+      // Mobile drawer links active styling
+      const mobileItems = document.querySelectorAll('#mobileDrawer a');
+      mobileItems.forEach(item => {
+        item.classList.remove('active', 'active-drawer-link');
+        const href = item.getAttribute('href');
+        if (href && href === currentPage) {
+          item.classList.add('active', 'active-drawer-link');
+        }
+      });
+
+      return activeItem;
+    }
+
+    function setupNavGlider() {
+      if (!navLinksContainer || !navGlider) return;
+
+      const snapGliderToActive = () => {
+        const activeLink = navLinksContainer.querySelector('.nav-item-link.active');
+        if (activeLink) {
+          const containerRect = navLinksContainer.getBoundingClientRect();
+          const linkRect = activeLink.getBoundingClientRect();
+          const leftOffset = linkRect.left - containerRect.left;
+          const width = linkRect.width;
+
+          navGlider.style.opacity = '1';
+          navGlider.style.transform = 'scale(1)';
+
+          if (window.Motion && window.Motion.animate) {
+            window.Motion.animate(navGlider, 
+              { transform: `translateX(${leftOffset}px)`, width: `${width}px` }, 
+              { duration: 0.28, easing: window.Motion.spring({ stiffness: 450, damping: 28 }) }
+            );
+          } else {
+            navGlider.style.transform = `translateX(${leftOffset}px)`;
+            navGlider.style.width = `${width}px`;
+          }
+        } else {
+          navGlider.style.opacity = '0';
+          navGlider.style.transform = 'scale(0.9)';
+        }
+      };
+
+      const links = navLinksContainer.querySelectorAll('.nav-item-link');
+
+      links.forEach(link => {
+        link.addEventListener('mouseenter', () => {
+          const containerRect = navLinksContainer.getBoundingClientRect();
+          const linkRect = link.getBoundingClientRect();
+          const leftOffset = linkRect.left - containerRect.left;
+          const width = linkRect.width;
+
+          navGlider.style.opacity = '1';
+          navGlider.style.transform = 'scale(1)';
+
+          if (window.Motion && window.Motion.animate) {
+            window.Motion.animate(navGlider, 
+              { transform: `translateX(${leftOffset}px)`, width: `${width}px` }, 
+              { duration: 0.25, easing: window.Motion.spring({ stiffness: 450, damping: 28 }) }
+            );
+          } else {
+            navGlider.style.transform = `translateX(${leftOffset}px)`;
+            navGlider.style.width = `${width}px`;
+          }
+        });
+      });
+
+      const dashboardBtn = document.getElementById('desktopDashboardDropdown');
+      if (dashboardBtn) {
+        dashboardBtn.addEventListener('mouseenter', () => {
+          navGlider.style.opacity = '0';
+        });
+      }
+
+      navLinksContainer.addEventListener('mouseleave', () => {
+        snapGliderToActive();
+      });
+
+      window.addEventListener('resize', snapGliderToActive);
+
+      // Initial alignment
+      setTimeout(snapGliderToActive, 120);
+    }
+
+    // ----------------------------------------------------
+    // FRAMER MOTION: LOGO HOVER KARATE SPRING BOUNCE
+    // ----------------------------------------------------
+    function setupLogoHoverAnimation() {
+      if (!brandLogo || !logoIconContainer) return;
+
+      brandLogo.addEventListener('mouseenter', () => {
+        if (window.Motion && window.Motion.animate) {
+          window.Motion.animate(logoIconContainer, 
+            { rotate: [-10, 8, -4, 0], scale: [1, 1.15, 1] }, 
+            { duration: 0.45, easing: window.Motion.spring({ stiffness: 450, damping: 18 }) }
+          );
+        }
+      });
+    }
+
+    // ----------------------------------------------------
+    // FRAMER MOTION: DROPDOWN SPRING POPUPS
+    // ----------------------------------------------------
+    function setupDropdownAnimations() {
+      const dropdownGroups = document.querySelectorAll('.group');
+
+      dropdownGroups.forEach(group => {
+        const menu = group.querySelector('.creative-dropdown');
+        if (!menu) return;
+
+        group.addEventListener('mouseenter', () => {
+          if (window.Motion && window.Motion.animate) {
+            window.Motion.animate(menu, 
+              { opacity: [0, 1], scale: [0.92, 1], y: [-6, 0] }, 
+              { duration: 0.22, easing: window.Motion.spring({ stiffness: 400, damping: 25 }) }
+            );
+          }
+        });
+      });
+    }
+
+    // ----------------------------------------------------
+    // THEME CONTROLS (WITH 360° SPRING SPIN)
+    // ----------------------------------------------------
+    function toggleTheme() {
+      setTheme(!isDarkMode);
+    }
+
+    function setTheme(dark) {
+      isDarkMode = dark;
+      if (dark) {
+        htmlElem.classList.add('dark');
+        htmlElem.classList.remove('light');
+        if (themeIcon) themeIcon.className = 'fa-solid fa-sun text-amber-400';
+        if (mobileThemeLabel) mobileThemeLabel.textContent = 'Dark';
+        localStorage.setItem('dojo_theme', 'dark');
+      } else {
+        htmlElem.classList.remove('dark');
+        htmlElem.classList.add('light');
+        if (themeIcon) themeIcon.className = 'fa-solid fa-moon text-slate-700';
+        if (mobileThemeLabel) mobileThemeLabel.textContent = 'Light';
+        localStorage.setItem('dojo_theme', 'light');
+      }
+
+      // Framer Motion 360° spring spin
+      if (window.Motion && window.Motion.animate && themeIcon) {
+        window.Motion.animate(themeIcon, 
+          { rotate: [0, 360], scale: [0.7, 1.2, 1] }, 
+          { duration: 0.4, easing: window.Motion.spring({ stiffness: 380, damping: 22 }) }
+        );
+      }
+    }
+
+    // ----------------------------------------------------
+    // RTL CONTROLS (WITH 3D ROTATE FLIP)
+    // ----------------------------------------------------
+    function toggleRTL() {
+      setRTL(!isRTL);
+    }
+
+    function setRTL(rtl) {
+      isRTL = rtl;
+      if (rtl) {
+        htmlElem.setAttribute('dir', 'rtl');
+        localStorage.setItem('dojo_rtl', 'true');
+      } else {
+        htmlElem.setAttribute('dir', 'ltr');
+        localStorage.setItem('dojo_rtl', 'false');
+      }
+
+      // Framer Motion icon spin & flip
+      if (window.Motion && window.Motion.animate) {
+        if (rtlIcon) {
+          window.Motion.animate(rtlIcon, 
+            { rotateY: rtl ? [0, 180] : [180, 0], scale: [0.8, 1.2, 1] }, 
+            { duration: 0.35, easing: window.Motion.spring({ stiffness: 420, damping: 20 }) }
+          );
+        }
+        window.Motion.animate('#mainNavbar', 
+          { scale: [0.99, 1] }, 
+          { duration: 0.22 }
+        );
+      }
+    }
+
+    // ----------------------------------------------------
+    // MOBILE HAMBURGER & DRAWER (WITH STAGGERED SPRING)
+    // ----------------------------------------------------
+    function toggleMobileMenu() {
+      isMobileMenuOpen = !isMobileMenuOpen;
+      hamburgerBtn.setAttribute('aria-expanded', isMobileMenuOpen);
+
+      if (isMobileMenuOpen) {
+        bar1.classList.add('rotate-45', 'translate-y-1.5');
+        bar2.classList.add('opacity-0');
+        bar3.classList.add('-rotate-45', '-translate-y-1.5');
+
+        mobileDrawerOverlay.classList.remove('pointer-events-none');
+        mobileDrawerOverlay.classList.remove('opacity-0');
+        mobileDrawerOverlay.classList.add('opacity-100');
+
+        mobileDrawer.classList.remove('translate-x-full', 'rtl:-translate-x-full');
+        mobileDrawer.classList.add('translate-x-0');
+
+        if (window.Motion && window.Motion.animate) {
+          const isCurrentRTL = htmlElem.getAttribute('dir') === 'rtl';
+          const startX = isCurrentRTL ? '-100%' : '100%';
+          
+          window.Motion.animate(mobileDrawer, 
+            { transform: ['translateX(' + startX + ')', 'translateX(0%)'] }, 
+            { duration: 0.35, easing: window.Motion.spring({ stiffness: 360, damping: 28 }) }
+          );
+
+          const drawerItems = document.querySelectorAll('.drawer-anim-item');
+          if (drawerItems.length) {
+            window.Motion.animate(drawerItems, 
+              { transform: ['translateX(20px)', 'translateX(0px)'], opacity: [0, 1] }, 
+              { delay: window.Motion.stagger(0.03), easing: window.Motion.spring({ stiffness: 400, damping: 26 }) }
+            );
+          }
+        }
+      } else {
+        bar1.classList.remove('rotate-45', 'translate-y-1.5');
+        bar2.classList.remove('opacity-0');
+        bar3.classList.remove('-rotate-45', '-translate-y-1.5');
+
+        mobileDrawerOverlay.classList.add('opacity-0');
+        mobileDrawerOverlay.classList.add('pointer-events-none');
+        mobileDrawerOverlay.classList.remove('opacity-100');
+
+        mobileDrawer.classList.add('translate-x-full', 'rtl:-translate-x-full');
+        mobileDrawer.classList.remove('translate-x-0');
+      }
+    }
+
+    function toggleAccordion(contentId, arrowId) {
+      const content = document.getElementById(contentId);
+      const arrow = document.getElementById(arrowId);
+      if (content) {
+        const isHidden = content.classList.contains('hidden');
+        if (isHidden) {
+          content.classList.remove('hidden');
+          if (arrow) arrow.classList.add('rotate-180');
+          if (window.Motion && window.Motion.animate) {
+            window.Motion.animate(content, { opacity: [0, 1], y: [-6, 0] }, { duration: 0.2 });
+          }
+        } else {
+          content.classList.add('hidden');
+          if (arrow) arrow.classList.remove('rotate-180');
+        }
+      }
+    }
+
+    // ----------------------------------------------------
+    // 3D LOGIN MODAL WITH MOTION
+    // ----------------------------------------------------
+    function openLoginModal() {
+      window.location.href = 'login.html';
+    }
+
+    function closeLoginModal() {
+      loginModalBackdrop.classList.add('opacity-0', 'pointer-events-none');
+      loginModalBackdrop.classList.remove('opacity-100');
+      loginModalContent.classList.remove('scale-100');
+      loginModalContent.classList.add('scale-95');
+    }
+
+    function handleLoginSubmit(e) {
+      e.preventDefault();
+      alert('Login Successful!');
+      closeLoginModal();
+    }
+
+    function openNotice(title) {
+      alert('Navigating to: ' + title);
+    }
+  </script>
+
+</body>
+</html>

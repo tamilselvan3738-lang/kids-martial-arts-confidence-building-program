@@ -1,0 +1,2522 @@
+<!DOCTYPE html>
+<html lang="en" class="dark" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Academy & Parent Support Hub - Kids Martial Arts Academy</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/logo-icon.svg" />
+  <link rel="shortcut icon" href="assets/logo-icon.svg" />
+  <link rel="apple-touch-icon" href="assets/logo-icon.svg" />
+
+  <!-- Google Fonts: Outfit & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome 6.5.1 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              crimson: '#E11D48',
+              crimsonDark: '#9F1239',
+              fire: '#FF385C',
+              gold: '#F59E0B',
+              goldLight: '#FDE047',
+              navy: '#0F172A',
+              slate: '#1E293B',
+              darkBg: '#080B11',
+              darkCard: '#111726',
+              lightBg: '#F8FAFC',
+              lightCard: '#FFFFFF'
+            }
+          },
+          fontFamily: {
+            outfit: ['Outfit', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Motion (Official Framer Motion Engine) -->
+  <script src="https://cdn.jsdelivr.net/npm/motion@11.11.17/dist/motion.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Ambient Subtle Dots Pattern */
+    .bg-grid-ambient {
+      background-size: 32px 32px;
+      background-image: 
+        radial-gradient(circle, rgba(225, 29, 72, 0.08) 1px, transparent 1px);
+    }
+    .dark .bg-grid-ambient {
+      background-image: 
+        radial-gradient(circle, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+    }
+
+    /* ========================================================
+       CREATIVE FLOATING ISLAND NAVBAR STYLES
+       ======================================================== */
+    .navbar-creative-island {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(226, 232, 240, 0.85);
+      box-shadow: 
+        0 14px 34px -8px rgba(15, 23, 42, 0.08),
+        0 2px 6px -1px rgba(15, 23, 42, 0.03),
+        inset 0 1px 0 rgba(255, 255, 255, 0.95);
+      position: relative;
+    }
+    .dark .navbar-creative-island {
+      background: rgba(13, 19, 31, 0.86);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      box-shadow: 
+        0 18px 45px -10px rgba(0, 0, 0, 0.7),
+        0 4px 12px -2px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12),
+        inset 0 0 14px rgba(225, 29, 72, 0.04);
+    }
+
+    /* Top Ambient Crimson/Gold Edge Glow */
+    .navbar-creative-island::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 12%;
+      right: 12%;
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent 0%, rgba(225, 29, 72, 0.7) 25%, rgba(245, 158, 11, 0.85) 50%, rgba(225, 29, 72, 0.7) 75%, transparent 100%);
+      border-radius: 9999px;
+      pointer-events: none;
+    }
+
+        /* Dynamic Gliding Spring Pill Behind Nav Items */
+    #navGlider {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background: rgba(225, 29, 72, 0.08);
+      border-radius: 0.65rem;
+      pointer-events: none;
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 0.15s ease, transform 0.15s ease;
+      z-index: 0;
+    }
+    .dark #navGlider {
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    /* Nav Item Link Styling */
+    .nav-item-link {
+      position: relative;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      color: #475569;
+      border-radius: 0.65rem;
+      z-index: 1;
+      transition: color 0.18s ease, background-color 0.18s ease;
+    }
+    .dark .nav-item-link {
+      color: #94A3B8;
+    }
+    .nav-item-link:hover {
+      color: #E11D48;
+    }
+    .dark .nav-item-link:hover {
+      color: #FFFFFF;
+    }
+    .nav-item-link.active {
+      color: #E11D48 !important;
+      font-weight: 800 !important;
+    }
+    .dark .nav-item-link.active {
+      color: #FF3B62 !important;
+      font-weight: 800 !important;
+    }
+    .nav-item-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 15%;
+      right: 15%;
+      height: 2.5px;
+      background: linear-gradient(90deg, #FF3B62, #F59E0B);
+      border-radius: 9999px;
+      box-shadow: 0 1px 6px rgba(225, 29, 72, 0.5);
+    }
+    .dark .nav-item-link.active::after {
+      box-shadow: 0 1px 8px rgba(255, 59, 98, 0.7);
+    }
+
+    /* Mobile Drawer Active State */
+    .drawer-anim-item.active,
+    a.drawer-anim-item.active,
+    .active-drawer-link {
+      color: #E11D48 !important;
+      background: rgba(225, 29, 72, 0.08) !important;
+      font-weight: 800 !important;
+      border-left: 3.5px solid #E11D48 !important;
+    }
+    .dark .drawer-anim-item.active,
+    .dark a.drawer-anim-item.active,
+    .dark .active-drawer-link {
+      color: #FF4D6D !important;
+      background: rgba(225, 29, 72, 0.16) !important;
+      border-left: 3.5px solid #FF4D6D !important;
+    }
+    [dir="rtl"] .drawer-anim-item.active,
+    [dir="rtl"] a.drawer-anim-item.active,
+    [dir="rtl"] .active-drawer-link {
+      border-left: none !important;
+      border-right: 3.5px solid #E11D48 !important;
+    }
+    [dir="rtl"].dark .drawer-anim-item.active,
+    [dir="rtl"].dark a.drawer-anim-item.active,
+    [dir="rtl"].dark .active-drawer-link {
+      border-right: 3.5px solid #FF4D6D !important;
+    }
+
+    /* Dropdown Menus */
+    .creative-dropdown {
+      transform-origin: top center;
+      transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.2s;
+    }
+
+    [dir="rtl"] .creative-dropdown {
+      text-align: right;
+    }
+  
+
+    /* ==========================================================================
+       ENTERPRISE MOBILE-FIRST RESPONSIVE MASTER STYLESHEET
+       Strict mobile optimization for 320px, 480px, 768px, 1024px
+       Zero horizontal overflow | Adaptive typography | Fluid grid & flex layout
+       ========================================================================== */
+
+    /* 1. Global Box-Sizing & Overflow Quarantine */
+    *, *::before, *::after {
+      box-sizing: border-box !important;
+    }
+
+    html {
+      width: 100% !important;
+      max-width: 100% !important;
+      overflow-x: hidden;
+      overflow-x: clip !important;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      width: 100% !important;
+      max-width: 100% !important;
+      overflow-x: clip !important;
+      position: relative !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    /* Guaranteed Persistent Sticky Navbar Across All Screen Sizes */
+    #mainHeader,
+    header {
+      position: -webkit-sticky !important;
+      position: sticky !important;
+      top: 0 !important;
+      z-index: 50 !important;
+    }
+
+    /* 2. Media & Visual Elements Strict Fluid Bounds */
+    img, svg, video, canvas, audio, iframe, embed, object {
+      max-width: 100% !important;
+      height: auto;
+    }
+
+    /* 3. Text Overflow Immunity */
+    h1, h2, h3, h4, h5, h6, p, span, a, button, li, dt, dd, blockquote, label {
+      overflow-wrap: break-word !important;
+      word-wrap: break-word !important;
+      max-width: 100%;
+    }
+
+    /* 4. Section & Container Strict Layout Integrity */
+    section {
+      width: 100% !important;
+      max-width: 100% !important;
+      position: relative !important;
+      overflow-x: hidden;
+      overflow-x: clip !important;
+      overflow-y: visible !important;
+    }
+
+    .container, .max-w-7xl, .max-w-6xl, .max-w-5xl, .max-w-4xl, .max-w-3xl, .max-w-2xl {
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+
+    /* 5. Responsive Form Controls & Interactive Buttons */
+    input, select, textarea {
+      max-width: 100% !important;
+    }
+
+    button, a.btn-3d, .btn-3d {
+      max-width: 100% !important;
+      white-space: normal;
+    }
+
+    /* 6. Breakpoint Optimization: <= 1024px (Small Laptops & Tablets) */
+    @media (max-width: 1024px) {
+      .max-w-7xl, .max-w-6xl {
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+      }
+      header nav, header {
+        max-width: 100% !important;
+      }
+    }
+
+    /* 7. Breakpoint Optimization: <= 768px (Tablets & Mobile Landscape) */
+    @media (max-width: 768px) {
+      /* Fluid Headings */
+      h1, .text-5xl, .text-6xl, .text-7xl {
+        font-size: clamp(1.85rem, 5.5vw, 2.75rem) !important;
+        line-height: 1.15 !important;
+      }
+      h2, .text-3xl, .text-4xl {
+        font-size: clamp(1.4rem, 4.2vw, 2.1rem) !important;
+        line-height: 1.22 !important;
+      }
+      h3, .text-2xl {
+        font-size: clamp(1.2rem, 3.2vw, 1.55rem) !important;
+        line-height: 1.28 !important;
+      }
+
+      /* Consistent Section Spacing */
+      section {
+        padding-top: clamp(2.5rem, 6vw, 4rem) !important;
+        padding-bottom: clamp(2.5rem, 6vw, 4rem) !important;
+      }
+
+      /* Stack two-column split heroes & banners */
+      .grid.lg\:grid-cols-2, .grid.lg\:grid-cols-3, .grid.lg\:grid-cols-4 {
+        grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+      }
+    }
+
+    /* 8. Breakpoint Optimization: <= 480px (Standard Mobile Portrait) */
+    @media (max-width: 480px) {
+      /* Uniform padding on all main containers */
+      .px-4, .px-6, .px-8, .sm\:px-6, .lg\:px-8 {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+      }
+
+      /* Mobile Adaptive Typography */
+      h1, .text-5xl, .text-6xl, .text-7xl {
+        font-size: clamp(1.55rem, 7vw, 2.15rem) !important;
+        line-height: 1.18 !important;
+      }
+      h2, .text-3xl, .text-4xl {
+        font-size: clamp(1.3rem, 5.2vw, 1.7rem) !important;
+        line-height: 1.25 !important;
+      }
+      h3, .text-2xl {
+        font-size: clamp(1.1rem, 4vw, 1.35rem) !important;
+        line-height: 1.3 !important;
+      }
+      p, .text-base, .text-lg {
+        font-size: 0.925rem !important;
+        line-height: 1.55 !important;
+      }
+
+      /* Stack card grids vertically on mobile */
+      .grid.sm\:grid-cols-2,
+      .grid.sm\:grid-cols-3,
+      .grid.sm\:grid-cols-4,
+      .grid.md\:grid-cols-2,
+      .grid.md\:grid-cols-3 {
+        grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+      }
+
+      /* Full width buttons in CTAs */
+      .flex.flex-wrap.items-center.gap-3 > button,
+      .flex.flex-wrap.items-center.gap-3 > a.btn-3d,
+      .hero-btn-group > * {
+        width: 100% !important;
+        justify-content: center !important;
+        text-align: center !important;
+      }
+
+      /* Modals fit comfortably */
+      #loginModalContent, .modal-content {
+        width: 95% !important;
+        max-width: 95% !important;
+        padding: 1.25rem !important;
+      }
+
+      /* Mobile drawer fits without overflow */
+      #mobileDrawer {
+        width: min(85vw, 290px) !important;
+      }
+    }
+
+    /* 9. Breakpoint Optimization: <= 320px (Small Screen / iPhone SE) */
+    @media (max-width: 320px) {
+      .px-4, .px-6, .px-8, .sm\:px-6, .lg\:px-8 {
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+      }
+
+      /* Ultra-compact Typography */
+      h1, .text-5xl, .text-6xl, .text-7xl {
+        font-size: 1.4rem !important;
+        line-height: 1.2 !important;
+      }
+      h2, .text-3xl, .text-4xl {
+        font-size: 1.2rem !important;
+        line-height: 1.22 !important;
+      }
+      h3, .text-2xl {
+        font-size: 1.05rem !important;
+      }
+      body, p, .text-base {
+        font-size: 0.85rem !important;
+      }
+      .text-sm {
+        font-size: 0.8rem !important;
+      }
+      .text-xs {
+        font-size: 0.7rem !important;
+      }
+
+      /* Compact Buttons */
+      .btn-3d {
+        padding-left: 0.65rem !important;
+        padding-right: 0.65rem !important;
+        font-size: 0.75rem !important;
+      }
+
+      /* Force all multi-col grids to 1 col (except drawer inline buttons) */
+      .grid-cols-2, .grid-cols-3, .grid-cols-4, .grid-cols-5, .grid-cols-6 {
+        grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+      }
+      #mobileDrawer .grid-cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      }
+    }
+
+  </style>
+</head>
+
+<body class="bg-slate-50 dark:bg-brand-darkBg text-slate-800 dark:text-slate-100 min-h-screen bg-grid-ambient transition-colors duration-300">
+
+  <!-- ========================================================
+       CREATIVE FLOATING NAVBAR
+       ======================================================== -->
+  <header id="mainHeader" class="sticky top-0 z-50 w-full px-3 sm:px-6 lg:px-8 pt-4 pb-2">
+    <nav id="mainNavbar" class="navbar-creative-island max-w-7xl mx-auto rounded-2xl px-3 sm:px-4.5 py-1.5 sm:py-2 transition-all duration-300">
+      <div class="flex items-center justify-between gap-2 lg:gap-3">
+
+        <!-- ====================================================
+             1. LEFT: COMPACT LOGO (FURTHER REDUCED SIZE)
+             ==================================================== -->
+        <a href="index.html" id="brandLogo" class="group flex items-center gap-2 shrink-0 focus:outline-none" aria-label="Kids Martial Arts & Confidence Building Program">
+          
+          <!-- Compact Shield Logo Emblem (~28px) with Spring Hover -->
+          <div id="logoIconContainer" class="relative w-7 h-7 sm:w-7.5 sm:h-7.5 rounded-lg bg-gradient-to-b from-rose-500 via-brand-crimson to-rose-700 p-0.5 shadow-sm shadow-rose-950/20 shrink-0 cursor-pointer">
+            <div class="w-full h-full bg-slate-950 rounded-[5px] flex items-center justify-center overflow-hidden relative">
+              <div class="absolute inset-0 bg-radial-gradient from-amber-400/25 to-transparent"></div>
+              
+              <!-- Clean Scaled Vector Emblem -->
+              <svg viewBox="0 0 100 100" class="w-5 h-5 sm:w-5.5 sm:h-5.5 text-white" fill="none">
+                <circle cx="50" cy="50" r="26" fill="#F59E0B" fill-opacity="0.2" />
+                <!-- 3 Top Stars -->
+                <polygon points="34,16 35.5,19 39,19.5 36.5,22 37,25 34,23.5 31,25 31.5,22 29,19.5 32.5,19" fill="#FDE047" />
+                <polygon points="50,11 52,15 57,15.5 53.5,19 54.5,23.5 50,21 45.5,23.5 46.5,19 43,15.5 48,15" fill="#FDE047" />
+                <polygon points="66,16 67.5,19 71,19.5 68.5,22 69,25 66,23.5 63,25 63.5,22 61,19.5 64.5,19" fill="#FDE047" />
+                <!-- Kicking Martial Artist Silhouette -->
+                <circle cx="43" cy="30" r="6" fill="#FFFFFF" />
+                <path d="M40 31 Q33 30 28 35" stroke="#FDE047" stroke-width="2" stroke-linecap="round" />
+                <path d="M41 36 L48 39 L47 52 L39 51 Z" fill="#FFFFFF" />
+                <path d="M42 38 L34 41" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" />
+                <path d="M47 39 L57 35 L62 38" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" />
+                <path d="M45 50 L56 46 L73 39" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" />
+                <path d="M73 39 L76 34 L80 39 L75 42 Z" fill="#FDE047" />
+                <path d="M40 51 L35 59 L42 63" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" />
+                <path d="M38 50 C42 51 46 51 48 50" stroke="#0F172A" stroke-width="3.5" stroke-linecap="round" />
+                <path d="M42 51 L38 65 M44 51 L47 67" stroke="#0F172A" stroke-width="2.5" stroke-linecap="round" />
+                <circle cx="39" cy="62" r="1.2" fill="#F59E0B" />
+                <circle cx="45" cy="64" r="1.2" fill="#F59E0B" />
+              </svg>
+            </div>
+            
+            <div class="absolute -top-1 -right-1 rtl:-left-1 rtl:-right-auto w-3 h-3 rounded-full bg-amber-400 border border-slate-950 flex items-center justify-center text-[6px] font-black text-slate-950">
+              ★
+            </div>
+          </div>
+
+          <!-- Delicate Compact Typography -->
+          <div class="flex flex-col text-left rtl:text-right">
+            <span class="font-outfit font-black text-xs sm:text-[13.5px] tracking-tight leading-none text-slate-900 dark:text-white group-hover:text-brand-crimson transition-colors">
+              <span class="text-brand-crimson">KIDS</span> MARTIAL ARTS
+            </span>
+            <span class="text-[7.5px] sm:text-[8px] font-bold text-amber-500 dark:text-amber-400 tracking-wider uppercase font-outfit leading-tight mt-0.5">
+              &amp; CONFIDENCE BUILDING PROGRAM
+            </span>
+          </div>
+        </a>
+
+        <!-- ====================================================
+             2. CENTER (LAPTOP VIEW): NAVBAR MENU
+             ==================================================== -->
+        <div id="navLinksContainer" class="hidden lg:flex items-center justify-center space-x-0.5 xl:space-x-1 rtl:space-x-reverse relative py-1">
+          
+          <!-- Dynamic Framer Motion Gliding Pill Background -->
+          <div id="navGlider"></div>
+
+          <!-- 2.1 HOME (ON HOVER: ONLY SHOW HOME 1 AND HOME 2) -->
+          <div class="relative group" id="desktopHomeDropdown">
+            <a href="index.html" class="nav-item-link  px-2.5 py-1.5 text-xs xl:text-sm flex items-center gap-1 focus:outline-none" aria-haspopup="true">
+              <span>Home</span>
+              <i class="fa-solid fa-chevron-down text-[8px] opacity-60 group-hover:rotate-180 transition-transform duration-200"></i>
+            </a>
+            
+            <!-- Shows ONLY Home 1 and Home 2 -->
+            <div class="creative-dropdown absolute top-full left-0 rtl:left-auto rtl:right-0 mt-2 w-32 p-1 rounded-xl bg-white dark:bg-slate-900 shadow-xl border border-slate-200 dark:border-slate-800 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+              <a href="index.html" class="dropdown-item block px-3 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-slate-200 hover:bg-rose-50 dark:hover:bg-rose-950/40 hover:text-brand-crimson transition-colors">
+                Home 1
+              </a>
+              <a href="home-2.html" class="dropdown-item block px-3 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-slate-200 hover:bg-rose-50 dark:hover:bg-rose-950/40 hover:text-brand-crimson transition-colors mt-0.5">
+                Home 2
+              </a>
+            </div>
+          </div>
+
+          <!-- 2.2 ABOUT -->
+          <a href="about.html" class="nav-item-link  px-2.5 py-1.5 text-xs xl:text-sm">
+            About
+          </a>
+
+          <!-- 2.3 PROGRAMS (ONLY PROGRAMS - NO OPTIONS ON HOVER) -->
+          <a href="programs.html" class="nav-item-link  px-2.5 py-1.5 text-xs xl:text-sm">
+            Programs
+          </a>
+
+          <!-- 2.4 BELT SYSTEM -->
+          <a href="belt-system.html" class="nav-item-link  px-2.5 py-1.5 text-xs xl:text-sm flex items-center gap-1.5">
+            <span>Belt System</span>
+            <span class="w-1.5 h-1.5 rounded-full inline-block bg-gradient-to-r from-amber-400 to-rose-500"></span>
+          </a>
+
+          <!-- 2.5 INSTRUCTORS -->
+          <a href="instructors.html" class="nav-item-link  px-2.5 py-1.5 text-xs xl:text-sm">
+            Instructors
+          </a>
+
+          <!-- 2.6 EVENTS -->
+          <a href="events.html" class="nav-item-link  px-2.5 py-1.5 text-xs xl:text-sm">
+            Events
+          </a>
+
+          <!-- 2.7 SAFETY -->
+          <a href="safety.html" class="nav-item-link  px-2.5 py-1.5 text-xs xl:text-sm flex items-center gap-1">
+            <i class="fa-solid fa-shield-heart text-[10px] text-emerald-500"></i>
+            <span>Safety</span>
+          </a>
+
+          <!-- 2.8 CONTACT -->
+          <a href="contact.html" class="nav-item-link active px-2.5 py-1.5 text-xs xl:text-sm">
+            Contact
+          </a>
+
+          <!-- 2.9 DASHBOARD (IMMEDIATELY AFTER CONTACT - NO GAP) -->
+          <div class="relative group ml-1 rtl:ml-0 rtl:mr-1" id="desktopDashboardDropdown">
+            <button class="btn-3d btn-3d-dashboard px-2.5 py-1.5 text-xs rounded-xl flex items-center gap-1.5" title="Dojo Dashboards" aria-haspopup="true">
+              <i class="fa-solid fa-gauge-high text-amber-500 text-[10px]"></i>
+              <span>Dashboard</span>
+              <i class="fa-solid fa-chevron-down text-[8px] opacity-60 group-hover:rotate-180 transition-transform duration-200"></i>
+            </button>
+
+            <!-- Shows ONLY Admin Dashboard and User Dashboard -->
+            <div class="creative-dropdown absolute top-full right-0 rtl:right-auto rtl:left-0 mt-2 w-38 p-1 rounded-xl bg-white dark:bg-slate-900 shadow-xl border border-slate-200 dark:border-slate-800 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+              <a href="admin-dashboard.html" class="dropdown-item block px-3 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-brand-crimson transition-colors">
+                Admin Dashboard
+              </a>
+              <a href="user-dashboard.html" class="dropdown-item block px-3 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-amber-500 transition-colors mt-0.5">
+                User Dashboard
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ====================================================
+             3. RIGHT (LAPTOP VIEW): GAP & REMAINING CONTROLS
+             ==================================================== -->
+        <div class="hidden lg:flex items-center space-x-1.5 xl:space-x-2 rtl:space-x-reverse shrink-0">
+
+          <!-- Prominent Gap After Dashboard in Laptop View -->
+          <div class="w-6 sm:w-8 xl:w-10 shrink-0" aria-hidden="true"></div>
+
+          <!-- 3.1 DARK MODE TOGGLE (3D SWITCH) -->
+          <button id="themeToggleBtn" onclick="toggleTheme()" class="btn-3d btn-3d-switch w-7.5 h-7.5 sm:w-8 sm:h-8 rounded-xl flex items-center justify-center text-xs" title="Toggle Dark/Light Mode" aria-label="Toggle theme">
+            <i id="themeIcon" class="fa-solid fa-sun text-amber-400"></i>
+          </button>
+
+          <!-- 3.2 RTL TOGGLE (ONLY RIGHT-LEFT ICON - NO TEXT) -->
+          <button id="rtlToggleBtn" onclick="toggleRTL()" class="btn-3d btn-3d-switch w-7.5 h-7.5 sm:w-8 sm:h-8 rounded-xl flex items-center justify-center text-xs" title="Toggle RTL / LTR" aria-label="Toggle RTL">
+            <i id="rtlIcon" class="fa-solid fa-right-left text-[11px] text-brand-crimson"></i>
+          </button>
+
+          <!-- 3.3 3D LOGIN BUTTON -->
+          <a href="login.html" id="loginBtnTrigger" class="btn-3d btn-3d-login px-3.5 py-1.5 text-xs rounded-xl flex items-center gap-1.5 shadow-md" aria-label="Login">
+            <i class="fa-solid fa-lock text-[10px] text-rose-200"></i>
+            <span>Login</span>
+          </a>
+
+        </div>
+
+        <!-- ====================================================
+             4. MOBILE & TABLET VIEW: HAMBURGER AT RIGHT
+             ==================================================== -->
+        <div class="flex items-center lg:hidden">
+          <!-- 3D Hamburger Menu Button -->
+          <button id="hamburgerBtn" onclick="toggleMobileMenu()" class="btn-3d btn-3d-hamburger w-8 h-8 rounded-xl flex items-center justify-center p-2 focus:outline-none" aria-label="Navigation Menu" aria-expanded="false">
+            <div class="w-4 h-3 flex flex-col justify-between items-center relative">
+              <span id="bar1" class="w-full h-0.5 bg-white rounded-full transition-all duration-300 transform origin-left"></span>
+              <span id="bar2" class="w-full h-0.5 bg-white rounded-full transition-all duration-300"></span>
+              <span id="bar3" class="w-full h-0.5 bg-white rounded-full transition-all duration-300 transform origin-left"></span>
+            </div>
+          </button>
+        </div>
+
+      </div>
+    </nav>
+  </header>
+
+  <!-- ========================================================
+       MOBILE & TABLET SLIDE-OVER DRAWER
+       ======================================================== -->
+  <div id="mobileDrawerOverlay" onclick="toggleMobileMenu()" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
+
+  <aside id="mobileDrawer" class="fixed top-0 right-0 rtl:right-auto rtl:left-0 w-72 max-w-[85vw] h-full bg-white dark:bg-slate-900 border-l rtl:border-l-0 rtl:border-r border-slate-200 dark:border-slate-800 z-50 shadow-2xl flex flex-col transform translate-x-full rtl:-translate-x-full transition-transform duration-300 ease-out">
+    
+    <!-- Drawer Header: Exact Navbar Logo Lockup -->
+    <div class="p-3.5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+      <a href="index.html" onclick="toggleMobileMenu()" class="flex items-center gap-2 focus:outline-none">
+        <!-- Exact Emblem -->
+        <div class="relative w-7 h-7 rounded-lg bg-gradient-to-b from-rose-500 via-brand-crimson to-rose-700 p-0.5 shadow-sm shadow-rose-950/20 shrink-0">
+          <div class="w-full h-full bg-slate-950 rounded-[5px] flex items-center justify-center overflow-hidden relative">
+            <div class="absolute inset-0 bg-radial-gradient from-amber-400/25 to-transparent"></div>
+            <svg viewBox="0 0 100 100" class="w-5 h-5 text-white" fill="none">
+              <circle cx="50" cy="50" r="26" fill="#F59E0B" fill-opacity="0.2" />
+              <polygon points="34,16 35.5,19 39,19.5 36.5,22 37,25 34,23.5 31,25 31.5,22 29,19.5 32.5,19" fill="#FDE047" />
+              <polygon points="50,11 52,15 57,15.5 53.5,19 54.5,23.5 50,21 45.5,23.5 46.5,19 43,15.5 48,15" fill="#FDE047" />
+              <polygon points="66,16 67.5,19 71,19.5 68.5,22 69,25 66,23.5 63,25 63.5,22 61,19.5 64.5,19" fill="#FDE047" />
+              <circle cx="43" cy="30" r="6" fill="#FFFFFF" />
+              <path d="M40 31 Q33 30 28 35" stroke="#FDE047" stroke-width="2" stroke-linecap="round" />
+              <path d="M41 36 L48 39 L47 52 L39 51 Z" fill="#FFFFFF" />
+              <path d="M42 38 L34 41" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" />
+              <path d="M47 39 L57 35 L62 38" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" />
+              <path d="M45 50 L56 46 L73 39" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" />
+              <path d="M73 39 L76 34 L80 39 L75 42 Z" fill="#FDE047" />
+              <path d="M40 51 L35 59 L42 63" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" />
+              <path d="M38 50 C42 51 46 51 48 50" stroke="#0F172A" stroke-width="3.5" stroke-linecap="round" />
+              <path d="M42 51 L38 65 M44 51 L47 67" stroke="#0F172A" stroke-width="2.5" stroke-linecap="round" />
+              <circle cx="39" cy="62" r="1.2" fill="#F59E0B" />
+              <circle cx="45" cy="64" r="1.2" fill="#F59E0B" />
+            </svg>
+          </div>
+          <div class="absolute -top-1 -right-1 rtl:-left-1 rtl:-right-auto w-3 h-3 rounded-full bg-amber-400 border border-slate-950 flex items-center justify-center text-[6px] font-black text-slate-950">
+            ★
+          </div>
+        </div>
+
+        <!-- Exact Brand Typography -->
+        <div class="flex flex-col text-left rtl:text-right">
+          <span class="font-outfit font-black text-xs sm:text-[13.5px] tracking-tight leading-none text-slate-900 dark:text-white">
+            <span class="text-brand-crimson">KIDS</span> MARTIAL ARTS
+          </span>
+          <span class="text-[7.5px] sm:text-[8px] font-bold text-amber-500 dark:text-amber-400 tracking-wider uppercase font-outfit leading-tight mt-0.5">
+            &amp; CONFIDENCE BUILDING PROGRAM
+          </span>
+        </div>
+      </a>
+
+      <button onclick="toggleMobileMenu()" class="btn-3d btn-3d-switch w-7 h-7 rounded-lg flex items-center justify-center text-slate-400 hover:text-brand-crimson">
+        <i class="fa-solid fa-xmark text-xs"></i>
+      </button>
+    </div>
+
+    <!-- Drawer Body -->
+    <div class="flex-1 overflow-y-auto p-3.5 space-y-3">
+      
+      <!-- Nav Items List -->
+      <div id="mobileItemsList" class="space-y-1">
+        
+        <!-- Home Accordion (Only Home 1 and Home 2) -->
+        <div class="drawer-anim-item rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden ">
+          <div class="w-full flex items-center justify-between p-2.5 font-outfit font-bold text-xs text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/50">
+            <a href="index.html" onclick="toggleMobileMenu()" class="flex items-center gap-2 flex-1">
+              <i class="fa-solid fa-house text-brand-crimson text-[11px]"></i>
+              <span>Home</span>
+            </a>
+            <button type="button" onclick="toggleAccordion('mobileHomeSubmenu', 'homeArrow')" class="p-1 focus:outline-none" aria-label="Toggle Home Submenu">
+              <i id="homeArrow" class="fa-solid fa-chevron-down text-[10px] text-slate-400 transition-transform duration-200"></i>
+            </button>
+          </div>
+          <div id="mobileHomeSubmenu" class="hidden bg-slate-50 dark:bg-slate-950/40 p-1.5 space-y-1 border-t border-slate-200/60 dark:border-slate-800/60">
+            <a href="index.html" onclick="toggleMobileMenu()" class="block p-1.5 rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-brand-crimson">
+              Home 1
+            </a>
+            <a href="home-2.html" onclick="toggleMobileMenu()" class="block p-1.5 rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-brand-crimson">
+              Home 2
+            </a>
+          </div>
+        </div>
+
+        <!-- About -->
+        <a href="about.html" onclick="toggleMobileMenu()" class="drawer-anim-item  flex items-center gap-2 p-2.5 rounded-xl font-outfit font-bold text-xs text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60">
+          <i class="fa-solid fa-circle-info text-amber-500 text-[11px]"></i>
+          <span>About</span>
+        </a>
+
+        <!-- Programs (Direct Link - No Options) -->
+        <a href="programs.html" onclick="toggleMobileMenu()" class="drawer-anim-item  flex items-center gap-2 p-2.5 rounded-xl font-outfit font-bold text-xs text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60">
+          <i class="fa-solid fa-shapes text-rose-500 text-[11px]"></i>
+          <span>Programs</span>
+        </a>
+
+        <!-- Belt System -->
+        <a href="belt-system.html" onclick="toggleMobileMenu()" class="drawer-anim-item  flex items-center justify-between p-2.5 rounded-xl font-outfit font-bold text-xs text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60">
+          <span class="flex items-center gap-2">
+            <i class="fa-solid fa-ribbon text-amber-500 text-[11px]"></i>
+            <span>Belt System</span>
+          </span>
+          <span class="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-amber-400 to-rose-500"></span>
+        </a>
+
+        <!-- Instructors -->
+        <a href="instructors.html" onclick="toggleMobileMenu()" class="drawer-anim-item  flex items-center gap-2 p-2.5 rounded-xl font-outfit font-bold text-xs text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60">
+          <i class="fa-solid fa-user-ninja text-blue-500 text-[11px]"></i>
+          <span>Instructors</span>
+        </a>
+
+        <!-- Events -->
+        <a href="events.html" onclick="toggleMobileMenu()" class="drawer-anim-item  flex items-center gap-2 p-2.5 rounded-xl font-outfit font-bold text-xs text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60">
+          <i class="fa-solid fa-calendar-days text-purple-500 text-[11px]"></i>
+          <span>Events</span>
+        </a>
+
+        <!-- Safety -->
+        <a href="safety.html" onclick="toggleMobileMenu()" class="drawer-anim-item  flex items-center gap-2 p-2.5 rounded-xl font-outfit font-bold text-xs text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60">
+          <i class="fa-solid fa-shield-halved text-emerald-500 text-[11px]"></i>
+          <span>Safety</span>
+        </a>
+
+        <!-- Contact -->
+        <a href="contact.html" onclick="toggleMobileMenu()" class="drawer-anim-item active flex items-center gap-2 p-2.5 rounded-xl font-outfit font-bold text-xs text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60">
+          <i class="fa-solid fa-location-dot text-rose-500 text-[11px]"></i>
+          <span>Contact</span>
+        </a>
+
+        <!-- Dashboards (Only Admin Dashboard & User Dashboard) -->
+        <div class="drawer-anim-item pt-2 border-t border-slate-200 dark:border-slate-800">
+          <div class="text-[9px] font-black uppercase text-slate-400 tracking-wider px-2 mb-1">
+            Dashboards
+          </div>
+          <a href="admin-dashboard.html" onclick="toggleMobileMenu()" class="flex items-center gap-2 p-2 rounded-lg font-outfit font-bold text-xs text-slate-700 dark:text-slate-300 hover:text-brand-crimson">
+            <i class="fa-solid fa-user-shield text-brand-crimson text-xs"></i>
+            <span>Admin Dashboard</span>
+          </a>
+          <a href="user-dashboard.html" onclick="toggleMobileMenu()" class="flex items-center gap-2 p-2 rounded-lg font-outfit font-bold text-xs text-slate-700 dark:text-slate-300 hover:text-amber-500 mt-0.5">
+            <i class="fa-solid fa-user-graduate text-amber-500 text-xs"></i>
+            <span>User Dashboard</span>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Settings (Dark Mode & RTL Icon Buttons) -->
+      <div class="drawer-anim-item p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 space-y-2">
+        <div class="text-[9px] font-bold font-outfit text-slate-400 uppercase tracking-wider">
+          Preferences
+        </div>
+        
+        <div class="grid grid-cols-2 gap-2">
+          <button onclick="toggleTheme()" class="btn-3d btn-3d-switch p-2 rounded-lg flex items-center justify-center gap-1.5 text-xs font-bold" title="Toggle Dark/Light">
+            <i class="fa-solid fa-moon text-amber-400 text-xs"></i>
+            <span id="mobileThemeLabel">Dark</span>
+          </button>
+
+          <!-- RTL Button - Icon Only in mobile toggle too -->
+          <button onclick="toggleRTL()" class="btn-3d btn-3d-switch p-2 rounded-lg flex items-center justify-center text-xs font-bold" title="Toggle RTL">
+            <i class="fa-solid fa-right-left text-brand-crimson text-xs"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Drawer Footer: 3D Login Button -->
+    <div class="p-3 border-t border-slate-200 dark:border-slate-800">
+      <a href="login.html" onclick="toggleMobileMenu()" class="btn-3d btn-3d-login w-full py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-2">
+        <i class="fa-solid fa-lock text-xs"></i>
+        <span>Login</span>
+      </a>
+    </div>
+
+  </aside>
+
+  <!-- ========================================================
+       5. 3D LOGIN MODAL
+       ======================================================== -->
+  <div id="loginModalBackdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+    <div id="loginModalContent" class="w-full max-w-sm bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 shadow-2xl border border-slate-200 dark:border-slate-800 transform scale-95 transition-transform duration-300 relative">
+      
+      <button onclick="closeLoginModal()" class="absolute top-4 right-4 rtl:right-auto rtl:left-4 text-slate-400 hover:text-slate-600 dark:hover:text-white">
+        <i class="fa-solid fa-xmark text-sm"></i>
+      </button>
+
+      <div class="text-center mb-5">
+        <div class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-rose-500/10 text-brand-crimson text-xl mb-2">
+          <i class="fa-solid fa-user-ninja"></i>
+        </div>
+        <h3 class="font-outfit text-lg font-black text-slate-900 dark:text-white">
+          Dojo Member Login
+        </h3>
+        <p class="text-[11px] text-slate-400 mt-0.5">
+          Access your student belt progress &amp; schedule
+        </p>
+      </div>
+
+      <form onsubmit="handleLoginSubmit(event)" class="space-y-3">
+        <div>
+          <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+            Email / Student ID
+          </label>
+          <input type="text" required placeholder="member@example.com" class="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 text-xs focus:outline-none focus:ring-2 focus:ring-brand-crimson transition-all" />
+        </div>
+
+        <div>
+          <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+            Password / PIN
+          </label>
+          <input type="password" required placeholder="••••••••" class="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 text-xs focus:outline-none focus:ring-2 focus:ring-brand-crimson transition-all" />
+        </div>
+
+        <button type="submit" class="btn-3d btn-3d-login w-full py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 mt-2">
+          <span>Sign In</span>
+          <i class="fa-solid fa-arrow-right rtl:rotate-180 text-[10px]"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  
+  <!-- ========================================================
+       MAIN CONTACT, PARENT SUPPORT & DOJO FACILITY CONTENT
+       ======================================================== -->
+  <main class="w-full flex-grow relative overflow-hidden">
+
+    <!-- ====================================================
+         SECTION 1: CONTACT ACADEMY & TRAINING CENTER LOCATION
+         Unique Layout: The Global Dojo Map Gateway & Beacon Command Deck
+         ==================================================== -->
+    <section id="section-contact-academy-location" class="relative py-16 sm:py-24 border-b border-slate-200/80 dark:border-slate-800/80 overflow-hidden bg-slate-50/60 dark:bg-slate-900/40">
+      <!-- Ambient Radial Accents -->
+      <div class="absolute -top-32 -left-32 w-96 h-96 bg-brand-crimson/10 dark:bg-brand-crimson/15 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute top-1/2 -right-32 w-96 h-96 bg-amber-500/10 dark:bg-amber-500/15 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute inset-0 bg-grid-ambient pointer-events-none opacity-40"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        <!-- Header -->
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
+          <div class="space-y-4 max-w-2xl text-left rtl:text-right">
+            <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-brand-crimson/10 border border-brand-crimson/25 text-brand-crimson dark:text-rose-400 text-xs font-black uppercase tracking-widest">
+              <i class="fa-solid fa-headset text-xs"></i>
+              <span>Contact Academy</span>
+            </div>
+            <h1 class="font-outfit font-black text-3xl sm:text-4xl lg:text-5xl text-slate-900 dark:text-white leading-[1.15]">
+              Get in Touch & Visit Our <span class="bg-gradient-to-r from-brand-crimson via-rose-500 to-amber-500 bg-clip-text text-transparent">Training Center Location</span>
+            </h1>
+            <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-jakarta">
+              We are excited to welcome your family to our martial arts sanctuary. Contact Academy counselors, book your child's free trial class, or visit our state-of-the-art campus.
+            </p>
+          </div>
+
+          <!-- Live Campus Open Telemetry Chip -->
+          <div class="flex-shrink-0 bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 rounded-2xl p-5 shadow-xl shadow-slate-900/5 backdrop-blur-md">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl font-black">
+                <i class="fa-solid fa-door-open"></i>
+              </div>
+              <div>
+                <div class="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Campus Status</div>
+                <div class="text-xl font-black text-slate-900 dark:text-white font-outfit flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  Open For Visitors
+                </div>
+                <div class="text-[11px] text-slate-500 dark:text-slate-400 font-bold mt-0.5">
+                  Walk-In Tours Welcome Today
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 1 Two-Column Core: Campus Image & Address Cards -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-12">
+          
+          <!-- Column Left: Hero Image with Floating Status Tags -->
+          <div class="lg:col-span-6 relative">
+            <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-700/80 group">
+              <img 
+                src="images/contact_academy_location.jpg" 
+                alt="Modern Kids Martial Arts Academy Training Center Location Exterior" 
+                class="w-full h-[380px] sm:h-[460px] object-cover object-center transform group-hover:scale-105 transition-transform duration-700"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent"></div>
+              
+              <!-- Floating Location Chip -->
+              <div class="absolute top-4 left-4 rtl:left-auto rtl:right-4 bg-white/95 dark:bg-slate-900/90 backdrop-blur-md border border-slate-200 dark:border-slate-700 px-3.5 py-2 rounded-xl shadow-lg flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-lg bg-brand-crimson/15 text-brand-crimson dark:text-rose-400 flex items-center justify-center font-black">
+                  <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <div>
+                  <div class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Campus Address</div>
+                  <div class="text-xs font-black text-slate-900 dark:text-white">842 Confidence Way, Suite 100</div>
+                </div>
+              </div>
+
+              <!-- Floating Bottom Amenities Banner -->
+              <div class="absolute bottom-4 inset-x-4 bg-slate-900/90 dark:bg-slate-950/90 backdrop-blur-md border border-slate-700/80 p-3.5 rounded-2xl text-white flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-500/40 text-amber-400 flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-square-parking text-lg"></i>
+                  </div>
+                  <div>
+                    <div class="text-xs font-bold text-slate-300">Family Parking & Transit</div>
+                    <div class="text-sm font-black text-white">50+ Reserved Spaces • Stroller Friendly</div>
+                  </div>
+                </div>
+                <span class="px-2.5 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-bold">
+                  Free Parking
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column Right: Detailed Training Center Location Specs -->
+          <div class="lg:col-span-6 space-y-5 text-left rtl:text-right">
+            
+            <div class="bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 rounded-2xl p-6 shadow-sm">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-xl bg-brand-crimson/10 text-brand-crimson dark:text-rose-400 flex items-center justify-center text-xl flex-shrink-0">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                </div>
+                <div>
+                  <span class="text-xs font-black uppercase tracking-wider text-brand-crimson dark:text-rose-400">Headquarters</span>
+                  <h3 class="text-lg font-black text-slate-900 dark:text-white font-outfit mt-0.5">Training Center Location</h3>
+                  <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-jakarta mt-1 leading-relaxed">
+                    Located centrally in the Metro Heights family district, adjacent to Oakwood Community Park and Metro Middle School.
+                  </p>
+                  <div class="mt-3 flex items-center gap-3">
+                    <button onclick="alert('Navigating to: 842 Confidence Way, Suite 100, Metro Heights, CA 90210 via Maps.');" class="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-brand-crimson hover:text-white dark:hover:bg-brand-crimson text-slate-800 dark:text-white text-xs font-black transition-colors flex items-center gap-2">
+                      <i class="fa-solid fa-diamond-turn-right text-brand-crimson group-hover:text-white"></i>
+                      <span>Get GPS Directions</span>
+                    </button>
+                    <span class="text-xs text-slate-400 font-bold">Metro Blue Line: 3-min walk</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 rounded-2xl p-6 shadow-sm">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center text-xl flex-shrink-0">
+                  <i class="fa-solid fa-building-shield"></i>
+                </div>
+                <div>
+                  <span class="text-xs font-black uppercase tracking-wider text-amber-500">Facility Features</span>
+                  <h3 class="text-lg font-black text-slate-900 dark:text-white font-outfit mt-0.5">Dojo Amenities & Family Security</h3>
+                  <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-jakarta mt-1 leading-relaxed">
+                    6,500 sq ft dual tatami arenas, air-purified HEPA circulation, private child-safe changing rooms, and soundproof glass viewing pavilion.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 rounded-2xl p-6 shadow-sm">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-xl bg-teal-500/10 text-teal-600 dark:text-teal-400 flex items-center justify-center text-xl flex-shrink-0">
+                  <i class="fa-solid fa-compass"></i>
+                </div>
+                <div>
+                  <span class="text-xs font-black uppercase tracking-wider text-teal-600 dark:text-teal-400">Direct Inquiries</span>
+                  <h3 class="text-lg font-black text-slate-900 dark:text-white font-outfit mt-0.5">Contact Academy Staff Directly</h3>
+                  <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-jakarta mt-1 leading-relaxed">
+                    Our admissions director and coaching supervisors are available 6 days a week to answer all questions regarding your child's journey.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================
+         SECTION 2: CONTACT FORM & PROGRAM INFORMATION
+         Unique Layout: The Fast-Track Concierge Terminal & Inquiry Hub
+         ==================================================== -->
+    <section id="section-contact-form-programs" class="relative py-16 sm:py-24 border-b border-slate-200/80 dark:border-slate-800/80 overflow-hidden bg-white dark:bg-slate-950">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-crimson/10 border border-brand-crimson/25 text-brand-crimson dark:text-rose-400 text-xs font-black uppercase tracking-widest">
+            <i class="fa-solid fa-envelope-open-text text-xs"></i>
+            <span>Interactive Inquiry</span>
+          </div>
+          <h2 class="font-outfit font-black text-3xl sm:text-4xl text-slate-900 dark:text-white">
+            Send an Inquiry via <span class="text-brand-crimson dark:text-rose-400">Contact Form</span> or Explore <span class="bg-gradient-to-r from-brand-crimson via-rose-500 to-amber-500 bg-clip-text text-transparent">Program Information</span>
+          </h2>
+          <p class="text-base text-slate-600 dark:text-slate-300 font-jakarta leading-relaxed">
+            Fill out our express Contact Form for an instant trial class reservation, or explore quick Program Information packages tailored to your child's age group.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+          
+          <!-- Column Left (7 Cols): Comprehensive Interactive Contact Form -->
+          <div class="lg:col-span-7 bg-slate-50 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xl">
+            <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-200 dark:border-slate-800">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-brand-crimson/15 text-brand-crimson dark:text-rose-400 flex items-center justify-center text-lg font-black">
+                  <i class="fa-solid fa-paper-plane"></i>
+                </div>
+                <div>
+                  <h3 class="text-xl font-black text-slate-900 dark:text-white font-outfit">Contact Form</h3>
+                  <span class="text-xs font-bold text-slate-500 dark:text-slate-400">Guaranteed Response in 60 Minutes</span>
+                </div>
+              </div>
+              <span class="text-xs font-black bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-3 py-1 rounded-full">
+                Free Trial Included
+              </span>
+            </div>
+
+            <!-- Form -->
+            <form id="academyContactForm" class="space-y-4" onsubmit="event.preventDefault(); alert('Thank you! Your inquiry has been sent to our admissions director. We will call you within 60 minutes.');">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
+                    Parent / Guardian Full Name
+                  </label>
+                  <input 
+                    type="text" 
+                    required 
+                    placeholder="e.g. Robert Henderson" 
+                    class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand-crimson"
+                  />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
+                    Email Address
+                  </label>
+                  <input 
+                    type="email" 
+                    required 
+                    placeholder="robert@example.com" 
+                    class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand-crimson"
+                  />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
+                    Phone Number
+                  </label>
+                  <input 
+                    type="tel" 
+                    required 
+                    placeholder="(555) 000-0000" 
+                    class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand-crimson"
+                  />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
+                    Child's Age & Name
+                  </label>
+                  <input 
+                    type="text" 
+                    required 
+                    placeholder="e.g. Lucas, Age 7" 
+                    class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand-crimson"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
+                  Select Program Interest
+                </label>
+                <select class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand-crimson">
+                  <option>Little Warriors (Ages 4 - 6) • Focus & Motor Skills</option>
+                  <option>Junior Champions (Ages 7 - 11) • Confidence & Self-Defense</option>
+                  <option>Teen Leaders (Ages 12 - 16) • High Performance Martial Arts</option>
+                  <option>Family Martial Arts Pass • Parents & Kids Training Together</option>
+                  <option>Anti-Bullying & Self-Protection Weekend Clinic</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
+                  Your Message or Special Request
+                </label>
+                <textarea 
+                  rows="3" 
+                  placeholder="Tell us about your child's goals, confidence needs, or scheduling preferences..." 
+                  class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand-crimson"
+                ></textarea>
+              </div>
+
+              <button 
+                type="submit" 
+                class="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-brand-crimson to-rose-600 hover:from-rose-600 hover:to-brand-crimson text-white font-black text-sm uppercase tracking-wider shadow-lg shadow-brand-crimson/25 transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2"
+              >
+                <span>Submit Contact Form & Book Free Trial</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </form>
+          </div>
+
+          <!-- Column Right (5 Cols): Program Information Showcase -->
+          <div class="lg:col-span-5 space-y-6">
+            <div class="relative rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-xl group">
+              <img 
+                src="images/contact_program_info.jpg" 
+                alt="Program Information and Youth Martial Arts Instruction" 
+                class="w-full h-56 object-cover object-center group-hover:scale-105 transition-transform duration-700"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex items-end p-5">
+                <div class="text-white">
+                  <span class="px-2.5 py-1 rounded bg-amber-500 text-slate-950 text-xs font-black uppercase tracking-wider">
+                    Program Information
+                  </span>
+                  <div class="text-sm font-black font-outfit mt-1">Curriculum Designed for Growing Children</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Program Info Cards -->
+            <div class="space-y-3" id="programInfoCardsList">
+              <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                <div>
+                  <h4 class="text-sm font-black text-slate-900 dark:text-white font-outfit">Little Warriors (Ages 4-6)</h4>
+                  <p class="text-xs text-slate-500 dark:text-slate-400">Balance, respect, listening skills, and safe tumbling</p>
+                </div>
+                <span class="px-2.5 py-1 rounded-lg bg-teal-500/10 text-teal-600 dark:text-teal-400 text-xs font-black">
+                  30 Mins
+                </span>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                <div>
+                  <h4 class="text-sm font-black text-slate-900 dark:text-white font-outfit">Junior Champions (Ages 7-11)</h4>
+                  <p class="text-xs text-slate-500 dark:text-slate-400">Karate & Taekwondo forms, self-defense, peer mentorship</p>
+                </div>
+                <span class="px-2.5 py-1 rounded-lg bg-brand-crimson/10 text-brand-crimson dark:text-rose-400 text-xs font-black">
+                  45 Mins
+                </span>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                <div>
+                  <h4 class="text-sm font-black text-slate-900 dark:text-white font-outfit">Teen Leadership (Ages 12-16)</h4>
+                  <p class="text-xs text-slate-500 dark:text-slate-400">High kicks, sparring strategy, and junior sensei certification</p>
+                </div>
+                <span class="px-2.5 py-1 rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400 text-xs font-black">
+                  60 Mins
+                </span>
+              </div>
+            </div>
+
+            <!-- Brochure Download Trigger -->
+            <button onclick="alert('Downloading Comprehensive Program Information Brochure (PDF)...');" class="w-full py-3 px-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-brand-crimson text-slate-800 dark:text-white text-xs font-black flex items-center justify-center gap-2 transition-colors shadow-sm">
+              <i class="fa-solid fa-file-arrow-down text-brand-crimson"></i>
+              <span>Download Complete Program Information Guide</span>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================
+         SECTION 3: PHONE SUPPORT & EMAIL SUPPORT
+         Unique Layout: Direct Dispatch Omnichannel Hub
+         ==================================================== -->
+    <section id="section-phone-email-support" class="relative py-16 sm:py-24 border-b border-slate-200/80 dark:border-slate-800/80 overflow-hidden bg-slate-50/70 dark:bg-slate-900/50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+        <div class="text-center max-w-3xl mx-auto mb-14 space-y-4">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/25 text-blue-600 dark:text-blue-400 text-xs font-black uppercase tracking-widest">
+            <i class="fa-solid fa-headset text-xs"></i>
+            <span>Rapid Dispatch</span>
+          </div>
+          <h2 class="font-outfit font-black text-3xl sm:text-4xl text-slate-900 dark:text-white">
+            Direct Line <span class="text-blue-600 dark:text-blue-400">Phone Support</span> & Fast <span class="text-brand-crimson dark:text-rose-400">Email Support</span>
+          </h2>
+          <p class="text-base text-slate-600 dark:text-slate-300 font-jakarta leading-relaxed">
+            Need immediate help or prefer written documentation? Connect directly with our administration team via phone or dedicated department email channels.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-12">
+          
+          <!-- Column Left (6 Cols): Phone Support Hub -->
+          <div class="lg:col-span-6 bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 rounded-3xl p-7 sm:p-8 shadow-lg space-y-6">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-700/60">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-2xl bg-blue-500/15 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xl font-black">
+                  <i class="fa-solid fa-phone-volume"></i>
+                </div>
+                <div>
+                  <h3 class="text-xl font-black text-slate-900 dark:text-white font-outfit">Phone Support</h3>
+                  <span class="text-xs font-bold text-slate-500 dark:text-slate-400">Live Voice Help 6 Days a Week</span>
+                </div>
+              </div>
+              <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-black">
+                Online Now
+              </span>
+            </div>
+
+            <!-- Big Number -->
+            <div class="bg-slate-50 dark:bg-slate-900/80 rounded-2xl p-5 border border-slate-200 dark:border-slate-700/80 text-center">
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">Direct Academy Hotline</span>
+              <a href="tel:5558425437" class="text-2xl sm:text-3xl font-black text-blue-600 dark:text-blue-400 font-outfit hover:underline">
+                (555) 842-KIDS
+              </a>
+              <span class="text-xs text-slate-500 dark:text-slate-400 block mt-1">Toll-Free • Local Metro Calling</span>
+            </div>
+
+            <!-- Extensions -->
+            <div class="space-y-3">
+              <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-100 dark:border-slate-700/60 text-xs">
+                <span class="font-bold text-slate-700 dark:text-slate-300">Ext 1: New Enrollments & Free Trial Bookings</span>
+                <span class="font-black text-blue-600 dark:text-blue-400">Press 1</span>
+              </div>
+              <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-100 dark:border-slate-700/60 text-xs">
+                <span class="font-bold text-slate-700 dark:text-slate-300">Ext 2: Parent Billing & Uniform Exchanges</span>
+                <span class="font-black text-blue-600 dark:text-blue-400">Press 2</span>
+              </div>
+              <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-100 dark:border-slate-700/60 text-xs">
+                <span class="font-bold text-slate-700 dark:text-slate-300">Ext 3: Head Sensei Marcus Direct Office Hours</span>
+                <span class="font-black text-blue-600 dark:text-blue-400">Press 3</span>
+              </div>
+            </div>
+
+            <button onclick="alert('Instant callback requested! A counselor will call your registered number within 15 minutes.');" class="w-full py-3 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2">
+              <i class="fa-solid fa-phone-volume"></i>
+              <span>Request An Instant Phone Callback</span>
+            </button>
+          </div>
+
+          <!-- Column Right (6 Cols): Email Support Hub -->
+          <div class="lg:col-span-6 bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 rounded-3xl p-7 sm:p-8 shadow-lg space-y-6">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-700/60">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-2xl bg-brand-crimson/15 text-brand-crimson dark:text-rose-400 flex items-center justify-center text-xl font-black">
+                  <i class="fa-solid fa-envelope-circle-check"></i>
+                </div>
+                <div>
+                  <h3 class="text-xl font-black text-slate-900 dark:text-white font-outfit">Email Support</h3>
+                  <span class="text-xs font-bold text-slate-500 dark:text-slate-400">&lt;2 Hours Response Guarantee</span>
+                </div>
+              </div>
+              <span class="px-2.5 py-1 rounded-full bg-brand-crimson/10 text-brand-crimson dark:text-rose-400 text-xs font-black">
+                24/7 Monitored
+              </span>
+            </div>
+
+            <!-- Inboxes Cards -->
+            <div class="space-y-3">
+              <a href="mailto:admissions@zenithdojo.com" class="block p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700/80 hover:border-brand-crimson transition-colors group">
+                <div class="flex items-center justify-between">
+                  <div class="text-xs font-black uppercase text-brand-crimson dark:text-rose-400">Admissions & Trials</div>
+                  <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-400 group-hover:text-brand-crimson"></i>
+                </div>
+                <div class="text-sm font-black text-slate-900 dark:text-white mt-0.5">admissions@zenithdojo.com</div>
+                <div class="text-xs text-slate-500 dark:text-slate-400 mt-1">Trial bookings, scheduling questions, tuition plans</div>
+              </a>
+
+              <a href="mailto:parentcare@zenithdojo.com" class="block p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700/80 hover:border-brand-crimson transition-colors group">
+                <div class="flex items-center justify-between">
+                  <div class="text-xs font-black uppercase text-teal-600 dark:text-teal-400">Parent Support Desk</div>
+                  <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-400 group-hover:text-teal-500"></i>
+                </div>
+                <div class="text-sm font-black text-slate-900 dark:text-white mt-0.5">parentcare@zenithdojo.com</div>
+                <div class="text-xs text-slate-500 dark:text-slate-400 mt-1">Makeup sessions, belt eligibility status, event passes</div>
+              </a>
+
+              <a href="mailto:sensei@zenithdojo.com" class="block p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700/80 hover:border-brand-crimson transition-colors group">
+                <div class="flex items-center justify-between">
+                  <div class="text-xs font-black uppercase text-amber-500">Head Instructor Desk</div>
+                  <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-400 group-hover:text-amber-500"></i>
+                </div>
+                <div class="text-sm font-black text-slate-900 dark:text-white mt-0.5">sensei@zenithdojo.com</div>
+                <div class="text-xs text-slate-500 dark:text-slate-400 mt-1">Curriculum progression, special needs, feedback</div>
+              </a>
+            </div>
+
+            <!-- Email Image preview badge -->
+            <div class="rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700/80">
+              <img 
+                src="images/contact_phone_email.jpg" 
+                alt="Front Desk Concierge Providing Phone Support and Email Support" 
+                class="w-full h-24 object-cover object-center"
+              />
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================
+         SECTION 4: PARENT SUPPORT & FAMILY CARE DESK
+         Unique Layout: Parent Care Lounge & Concierge Ledger
+         ==================================================== -->
+    <section id="section-parent-support" class="relative py-16 sm:py-24 border-b border-slate-200/80 dark:border-slate-800/80 overflow-hidden bg-white dark:bg-slate-950">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+        <div class="text-center max-w-3xl mx-auto mb-14 space-y-4">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/25 text-amber-600 dark:text-amber-400 text-xs font-black uppercase tracking-widest">
+            <i class="fa-solid fa-hand-holding-heart text-xs"></i>
+            <span>Family First</span>
+          </div>
+          <h2 class="font-outfit font-black text-3xl sm:text-4xl text-slate-900 dark:text-white">
+            Dedicated <span class="bg-gradient-to-r from-amber-500 via-rose-500 to-brand-crimson bg-clip-text text-transparent">Parent Support</span> & Family Concierge
+          </h2>
+          <p class="text-base text-slate-600 dark:text-slate-300 font-jakarta leading-relaxed">
+            We partner with you every step of the way. From scheduling adjustments to uniform sizing, our dedicated Parent Support specialists ensure your experience is effortless.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          
+          <!-- Column Left (5 Cols): Image & Concierge Card -->
+          <div class="lg:col-span-5 space-y-6">
+            <div class="relative rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-700/80 shadow-2xl">
+              <img 
+                src="images/contact_parent_support.jpg" 
+                alt="Parent Support Representative Helping Smiling Family" 
+                class="w-full h-80 object-cover object-center"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex items-end p-6">
+                <div class="text-white">
+                  <span class="px-2.5 py-1 rounded bg-amber-500 text-slate-950 text-xs font-black uppercase tracking-wider">
+                    Parent Support
+                  </span>
+                  <div class="text-base font-black font-outfit mt-1">Sarah Jenkins • Family Relations Coordinator</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Family Satisfaction Pledge -->
+            <div class="p-5 rounded-2xl bg-amber-500/10 border border-amber-500/25 text-amber-800 dark:text-amber-300 text-xs font-jakarta flex items-center gap-3">
+              <i class="fa-solid fa-award text-2xl flex-shrink-0 text-amber-500"></i>
+              <span>"Our promise to parents: No high-pressure sales, transparent tuition, and unlimited makeup classes for family travel."</span>
+            </div>
+          </div>
+
+          <!-- Column Right (7 Cols): 4 Parent Support Pillars Grid -->
+          <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4" id="parentSupportGrid">
+            
+            <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800">
+              <div class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-600 dark:text-amber-400 flex items-center justify-center text-lg mb-3">
+                <i class="fa-solid fa-calendar-check"></i>
+              </div>
+              <h4 class="text-base font-black text-slate-900 dark:text-white font-outfit mb-1">Flexible Schedule Swaps</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-300 font-jakarta leading-relaxed">
+                Sick day or family vacation? Reschedule your child's training day anytime through the parent portal with zero hassle or lost fees.
+              </p>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800">
+              <div class="w-10 h-10 rounded-xl bg-brand-crimson/15 text-brand-crimson dark:text-rose-400 flex items-center justify-center text-lg mb-3">
+                <i class="fa-solid fa-shirt"></i>
+              </div>
+              <h4 class="text-base font-black text-slate-900 dark:text-white font-outfit mb-1">Uniform & Gear Exchanges</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-300 font-jakarta leading-relaxed">
+                Kids grow fast. Bring in outgrown academy Gis and exchange them for next-size-up gear at our subsidized student upgrade desk.
+              </p>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800">
+              <div class="w-10 h-10 rounded-xl bg-teal-500/15 text-teal-600 dark:text-teal-400 flex items-center justify-center text-lg mb-3">
+                <i class="fa-solid fa-graduation-cap"></i>
+              </div>
+              <h4 class="text-base font-black text-slate-900 dark:text-white font-outfit mb-1">Academic Honor Roll Stars</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-300 font-jakarta leading-relaxed">
+                Bring in your child's school report card. Students demonstrating good effort earn the coveted Academic Excellence martial arts badge.
+              </p>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800">
+              <div class="w-10 h-10 rounded-xl bg-blue-500/15 text-blue-600 dark:text-blue-400 flex items-center justify-center text-lg mb-3">
+                <i class="fa-solid fa-comments-dollar"></i>
+              </div>
+              <h4 class="text-base font-black text-slate-900 dark:text-white font-outfit mb-1">Transparent Billing Care</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-300 font-jakarta leading-relaxed">
+                No hidden cancellation fees, no surprise annual testing charges. All family tuition details are visible and manageable online.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================
+         SECTION 5: ENROLLMENT ASSISTANCE & NEW STUDENT ONBOARDING
+         Unique Layout: White-Glove VIP Student Onboarding Runway
+         ==================================================== -->
+    <section id="section-enrollment-assistance" class="relative py-16 sm:py-24 border-b border-slate-200/80 dark:border-slate-800/80 overflow-hidden bg-slate-50/60 dark:bg-slate-900/40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+        <div class="text-center max-w-3xl mx-auto mb-14 space-y-4">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-600 dark:text-emerald-400 text-xs font-black uppercase tracking-widest">
+            <i class="fa-solid fa-user-plus text-xs"></i>
+            <span>New Student Concierge</span>
+          </div>
+          <h2 class="font-outfit font-black text-3xl sm:text-4xl text-slate-900 dark:text-white">
+            Personalized <span class="text-emerald-600 dark:text-emerald-400">Enrollment Assistance</span> & Onboarding
+          </h2>
+          <p class="text-base text-slate-600 dark:text-slate-300 font-jakarta leading-relaxed">
+            Starting a new activity can be intimidating for children. Our 4-step Enrollment Assistance process guarantees your child feels celebrated and at ease from minute one.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          
+          <!-- Column Left (7 Cols): 4-Step Onboarding Runway -->
+          <div class="lg:col-span-7 space-y-4" id="onboardingStepsList">
+            
+            <div class="p-5 rounded-2xl bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 shadow-sm flex items-start gap-4">
+              <div class="w-12 h-12 rounded-xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-black text-lg font-outfit flex-shrink-0">
+                01
+              </div>
+              <div>
+                <h4 class="text-base font-black text-slate-900 dark:text-white font-outfit">Complimentary Private Tour & Trial Class</h4>
+                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-jakarta mt-1 leading-relaxed">
+                  Meet the coaching team, tour our clean facility, and let your child participate in an introductory class with zero pressure or financial commitment.
+                </p>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 shadow-sm flex items-start gap-4">
+              <div class="w-12 h-12 rounded-xl bg-teal-500/15 text-teal-600 dark:text-teal-400 flex items-center justify-center font-black text-lg font-outfit flex-shrink-0">
+                02
+              </div>
+              <div>
+                <h4 class="text-base font-black text-slate-900 dark:text-white font-outfit">Readiness & Confidence Evaluation</h4>
+                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-jakarta mt-1 leading-relaxed">
+                  Head Sensei observes your child's balance, attention span, and social comfort to match them into the ideal peer group and instructor pairing.
+                </p>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 shadow-sm flex items-start gap-4">
+              <div class="w-12 h-12 rounded-xl bg-brand-crimson/15 text-brand-crimson dark:text-rose-400 flex items-center justify-center font-black text-lg font-outfit flex-shrink-0">
+                03
+              </div>
+              <div>
+                <h4 class="text-base font-black text-slate-900 dark:text-white font-outfit">Free Uniform (Gi) & White Belt Ceremony</h4>
+                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-jakarta mt-1 leading-relaxed">
+                  Every enrolled warrior receives an official traditional martial arts uniform and has their first White Belt tied in a formal welcoming ceremony.
+                </p>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 shadow-sm flex items-start gap-4">
+              <div class="w-12 h-12 rounded-xl bg-amber-500/15 text-amber-600 dark:text-amber-400 flex items-center justify-center font-black text-lg font-outfit flex-shrink-0">
+                04
+              </div>
+              <div>
+                <h4 class="text-base font-black text-slate-900 dark:text-white font-outfit">30-Day Check-In & Goal Setting</h4>
+                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-jakarta mt-1 leading-relaxed">
+                  At the end of month one, parents receive a comprehensive progress card highlighting new friendships, posture growth, and initial stripe eligibility.
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Column Right (5 Cols): Image & Fast Enrollment Assistance Form -->
+          <div class="lg:col-span-5 space-y-6">
+            <div class="relative rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-700/80 shadow-2xl">
+              <img 
+                src="images/contact_enrollment_assistance.jpg" 
+                alt="Child Receiving Enrollment Assistance and Welcome Guidance" 
+                class="w-full h-72 sm:h-80 object-cover object-center"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex items-end p-6">
+                <div class="text-white">
+                  <span class="px-2.5 py-1 rounded bg-emerald-500 text-white text-xs font-black uppercase tracking-wider">
+                    Enrollment Assistance
+                  </span>
+                  <div class="text-base font-black font-outfit mt-1">Begin Your Family Journey Today</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Guarantee Box -->
+            <div class="bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 rounded-2xl p-6 shadow-sm">
+              <div class="flex items-center gap-3 mb-2">
+                <i class="fa-solid fa-shield-heart text-2xl text-emerald-500"></i>
+                <h4 class="text-base font-black text-slate-900 dark:text-white font-outfit">30-Day Confidence Guarantee</h4>
+              </div>
+              <p class="text-xs text-slate-600 dark:text-slate-300 font-jakarta leading-relaxed">
+                If you or your child do not see a tangible surge in focus, respect, and confidence within the first 30 days of training, we refund your tuition 100%. No questions asked.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================
+         SECTION 6: INSTRUCTOR CONTACT & COACH CONSULTATION STATION
+         Unique Layout: Sensei Office Hours & Mentorship Consultation Dock
+         ==================================================== -->
+    <section id="section-instructor-contact" class="relative py-16 sm:py-24 border-b border-slate-200/80 dark:border-slate-800/80 overflow-hidden bg-white dark:bg-slate-950">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+        <div class="text-center max-w-3xl mx-auto mb-14 space-y-4">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/25 text-blue-600 dark:text-blue-400 text-xs font-black uppercase tracking-widest">
+            <i class="fa-solid fa-user-tie text-xs"></i>
+            <span>Mentorship Faculty</span>
+          </div>
+          <h2 class="font-outfit font-black text-3xl sm:text-4xl text-slate-900 dark:text-white">
+            Direct <span class="text-blue-600 dark:text-blue-400">Instructor Contact</span> & Private Coach Consultations
+          </h2>
+          <p class="text-base text-slate-600 dark:text-slate-300 font-jakarta leading-relaxed">
+            Have questions about your child's technical syllabus, focus at home, or upcoming belt testing? Connect directly with our lead senseis during dedicated coach consultation hours.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          
+          <!-- Column Left (5 Cols): Image & Sensei Office Hours -->
+          <div class="lg:col-span-5 relative">
+            <div class="rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-700/80 shadow-2xl relative group">
+              <img 
+                src="images/contact_instructor_contact.jpg" 
+                alt="Head Sensei in One-on-One Instructor Contact Consultation with Parents" 
+                class="w-full h-80 sm:h-96 object-cover object-center group-hover:scale-105 transition-transform duration-700"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex items-end p-6">
+                <div class="text-white">
+                  <span class="px-2.5 py-1 rounded bg-blue-600 text-white text-xs font-black uppercase tracking-wider">
+                    Instructor Contact
+                  </span>
+                  <div class="text-base font-black font-outfit mt-1">Head Sensei Marcus Sterling (5th Dan)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column Right (7 Cols): Coach Consultation Booking Dock -->
+          <div class="lg:col-span-7 space-y-5" id="coachConsultationDock">
+            
+            <div class="p-6 rounded-3xl bg-slate-50 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 space-y-4">
+              <div class="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
+                <h3 class="text-lg font-black text-slate-900 dark:text-white font-outfit">
+                  Book a 15-Minute Coach Consultation
+                </h3>
+                <span class="text-xs font-bold text-slate-400">Complimentary For Members</span>
+              </div>
+
+              <div class="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-jakarta leading-relaxed">
+                <p>
+                  We believe open parent-instructor communication is the bedrock of rapid confidence building. Use this consultation to discuss:
+                </p>
+                <ul class="space-y-1.5 font-bold text-slate-700 dark:text-slate-300">
+                  <li class="flex items-center gap-2">
+                    <i class="fa-solid fa-check text-blue-500"></i>
+                    <span>Overcoming shyness, hesitation, or attention challenges</span>
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <i class="fa-solid fa-check text-blue-500"></i>
+                    <span>Stance and kata correction tips for home practice</span>
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <i class="fa-solid fa-check text-blue-500"></i>
+                    <span>Readiness evaluation for the upcoming Belt Testing Gala</span>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Interactive Booking Button -->
+              <div class="pt-2">
+                <button 
+                  onclick="alert('Coach consultation calendar opened. Please select your preferred day and sensei at the front desk or parent portal.');" 
+                  class="w-full py-3.5 px-6 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-black text-xs uppercase tracking-wider transition-colors font-outfit flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20"
+                >
+                  <i class="fa-solid fa-calendar-check"></i>
+                  <span>Schedule 1-on-1 Sensei Consultation</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Notice -->
+            <div class="p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-jakarta flex items-center gap-3">
+              <i class="fa-solid fa-info-circle text-blue-500 text-lg flex-shrink-0"></i>
+              <span>Drop-in coach chats are also available 15 minutes before and after each evening class session.</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================
+         SECTION 7: TRAINING HOURS & ACADEMY SCHEDULE MATRIX
+         Unique Layout: Weekly Chrono-Operational Matrix & Holiday Ledger
+         ==================================================== -->
+    <section id="section-training-hours" class="relative py-16 sm:py-24 border-b border-slate-200/80 dark:border-slate-800/80 overflow-hidden bg-slate-900 text-white">
+      <div class="absolute inset-0 bg-grid-ambient pointer-events-none opacity-20"></div>
+      <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-brand-crimson/20 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+        <div class="text-center max-w-3xl mx-auto mb-14 space-y-4">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-crimson/20 border border-brand-crimson/40 text-rose-400 text-xs font-black uppercase tracking-widest">
+            <i class="fa-solid fa-clock text-xs"></i>
+            <span>Dojo Operations</span>
+          </div>
+          <h2 class="font-outfit font-black text-3xl sm:text-4xl text-white">
+            Academy <span class="bg-gradient-to-r from-rose-400 via-amber-400 to-amber-200 bg-clip-text text-transparent">Training Hours</span> & Operating Schedule
+          </h2>
+          <p class="text-base text-slate-300 font-jakarta leading-relaxed">
+            Our multi-ring academy operates 6 days a week with flexible morning, afternoon, and evening class windows designed around busy family calendars.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center mb-12">
+          
+          <!-- Column Left (7 Cols): Master Weekly Training Hours Ledger -->
+          <div class="lg:col-span-7 bg-slate-800/80 border border-slate-700/80 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-4" id="trainingHoursLedger">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-700">
+              <h3 class="text-lg font-black text-white font-outfit flex items-center gap-2">
+                <i class="fa-solid fa-calendar-week text-amber-400"></i>
+                <span>Training Hours</span> Master Matrix
+              </h3>
+              <span class="text-xs font-bold text-emerald-400 bg-emerald-500/20 px-3 py-1 rounded-full">
+                Active Schedule 2026-2027
+              </span>
+            </div>
+
+            <!-- Day Rows -->
+            <div class="space-y-2.5">
+              <div class="flex items-center justify-between p-3.5 rounded-xl bg-slate-900/60 border border-slate-700/60">
+                <div class="flex items-center gap-3">
+                  <span class="w-8 h-8 rounded-lg bg-brand-crimson/20 text-rose-400 flex items-center justify-center text-xs font-black">M</span>
+                  <div>
+                    <div class="text-sm font-black text-white">Monday</div>
+                    <div class="text-[11px] text-slate-400">Little Warriors & Junior White-to-Orange Belts</div>
+                  </div>
+                </div>
+                <span class="text-xs font-black text-amber-400">07:00 AM – 08:30 PM</span>
+              </div>
+
+              <div class="flex items-center justify-between p-3.5 rounded-xl bg-slate-900/60 border border-slate-700/60">
+                <div class="flex items-center gap-3">
+                  <span class="w-8 h-8 rounded-lg bg-brand-crimson/20 text-rose-400 flex items-center justify-center text-xs font-black">T</span>
+                  <div>
+                    <div class="text-sm font-black text-white">Tuesday</div>
+                    <div class="text-[11px] text-slate-400">Intermediate & Advanced Green-to-Black Belts</div>
+                  </div>
+                </div>
+                <span class="text-xs font-black text-amber-400">07:00 AM – 08:30 PM</span>
+              </div>
+
+              <div class="flex items-center justify-between p-3.5 rounded-xl bg-slate-900/60 border border-slate-700/60">
+                <div class="flex items-center gap-3">
+                  <span class="w-8 h-8 rounded-lg bg-brand-crimson/20 text-rose-400 flex items-center justify-center text-xs font-black">W</span>
+                  <div>
+                    <div class="text-sm font-black text-white">Wednesday</div>
+                    <div class="text-[11px] text-slate-400">Little Warriors & Family Martial Arts Sessions</div>
+                  </div>
+                </div>
+                <span class="text-xs font-black text-amber-400">07:00 AM – 08:30 PM</span>
+              </div>
+
+              <div class="flex items-center justify-between p-3.5 rounded-xl bg-slate-900/60 border border-slate-700/60">
+                <div class="flex items-center gap-3">
+                  <span class="w-8 h-8 rounded-lg bg-brand-crimson/20 text-rose-400 flex items-center justify-center text-xs font-black">T</span>
+                  <div>
+                    <div class="text-sm font-black text-white">Thursday</div>
+                    <div class="text-[11px] text-slate-400">Intermediate Sparring & Junior Leadership Guild</div>
+                  </div>
+                </div>
+                <span class="text-xs font-black text-amber-400">07:00 AM – 08:30 PM</span>
+              </div>
+
+              <div class="flex items-center justify-between p-3.5 rounded-xl bg-slate-900/60 border border-slate-700/60">
+                <div class="flex items-center gap-3">
+                  <span class="w-8 h-8 rounded-lg bg-brand-crimson/20 text-rose-400 flex items-center justify-center text-xs font-black">F</span>
+                  <div>
+                    <div class="text-sm font-black text-white">Friday</div>
+                    <div class="text-[11px] text-slate-400">Anti-Bullying Clinics & Demo Team Training</div>
+                  </div>
+                </div>
+                <span class="text-xs font-black text-amber-400">08:00 AM – 08:00 PM</span>
+              </div>
+
+              <div class="flex items-center justify-between p-3.5 rounded-xl bg-slate-900/60 border border-slate-700/60">
+                <div class="flex items-center gap-3">
+                  <span class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center text-xs font-black">S</span>
+                  <div>
+                    <div class="text-sm font-black text-white">Saturday</div>
+                    <div class="text-[11px] text-slate-400">Weekend Warriors & Seasonal Belt Testing Galas</div>
+                  </div>
+                </div>
+                <span class="text-xs font-black text-amber-400">08:00 AM – 04:30 PM</span>
+              </div>
+
+              <div class="flex items-center justify-between p-3.5 rounded-xl bg-slate-900/60 border border-slate-700/60 opacity-80">
+                <div class="flex items-center gap-3">
+                  <span class="w-8 h-8 rounded-lg bg-slate-700 text-slate-400 flex items-center justify-center text-xs font-black">S</span>
+                  <div>
+                    <div class="text-sm font-black text-white">Sunday</div>
+                    <div class="text-[11px] text-slate-400">Master Seminars & Private Events (By Appointment)</div>
+                  </div>
+                </div>
+                <span class="text-xs font-black text-slate-400">10:00 AM – 02:00 PM</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column Right (5 Cols): Image & Holiday Schedule -->
+          <div class="lg:col-span-5 space-y-6">
+            <div class="relative rounded-3xl overflow-hidden border border-slate-700 shadow-2xl">
+              <img 
+                src="images/contact_training_hours.jpg" 
+                alt="Modern Martial Arts Academy Training Center Interior and Training Hours" 
+                class="w-full h-64 object-cover object-center"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex items-end p-6">
+                <div class="text-white">
+                  <span class="px-2.5 py-1 rounded bg-amber-500 text-slate-950 text-xs font-black uppercase tracking-wider">
+                    Dojo Floor
+                  </span>
+                  <div class="text-base font-black font-outfit mt-1">Multi-Ring Tatami Arenas Active Daily</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Holiday Notice -->
+            <div class="p-5 rounded-2xl bg-slate-800/90 border border-slate-700">
+              <div class="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-amber-400 mb-2">
+                <i class="fa-solid fa-umbrella-beach"></i>
+                <span>Seasonal Closures Notice</span>
+              </div>
+              <p class="text-xs text-slate-300 font-jakarta leading-relaxed">
+                The academy is closed on major national holidays (Thanksgiving, Christmas Week, New Year's Day, and 4th of July). Holiday makeup credits are automatically deposited into your parent portal.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+<!-- ========================================================
+       COMPREHENSIVE DOJO FOOTER (BASED ON NAVBAR)
+       ======================================================== -->
+  <footer id="mainFooter" class="relative z-30 w-full mt-auto border-t border-slate-200/80 dark:border-slate-800/80 bg-white/70 dark:bg-slate-950/80 backdrop-blur-xl transition-colors duration-300">
+    
+    <!-- Top Ambient Glow Edge -->
+    <div class="absolute -top-px left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-crimson/40 to-transparent"></div>
+
+    <!-- FOOTER CONTENT COLUMNS -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-10 text-left rtl:text-right">
+        
+        <!-- Column 1: Brand & Mission (Spans 2 cols on desktop) -->
+        <div class="lg:col-span-2 space-y-4">
+          
+          <!-- Scaled Brand Logo Lockup -->
+          <a href="index.html" class="flex items-center gap-2.5 focus:outline-none">
+            <div class="relative w-7 h-7 rounded-lg bg-gradient-to-b from-rose-500 via-brand-crimson to-rose-700 p-0.5 shadow-sm shrink-0">
+              <div class="w-full h-full bg-slate-950 rounded-[5px] flex items-center justify-center overflow-hidden">
+                <svg viewBox="0 0 100 100" class="w-5 h-5 text-white" fill="none">
+                  <circle cx="50" cy="50" r="26" fill="#F59E0B" fill-opacity="0.2" />
+                  <polygon points="34,16 35.5,19 39,19.5 36.5,22 37,25 34,23.5 31,25 31.5,22 29,19.5 32.5,19" fill="#FDE047" />
+                  <polygon points="50,11 52,15 57,15.5 53.5,19 54.5,23.5 50,21 45.5,23.5 46.5,19 43,15.5 48,15" fill="#FDE047" />
+                  <polygon points="66,16 67.5,19 71,19.5 68.5,22 69,25 66,23.5 63,25 63.5,22 61,19.5 64.5,19" fill="#FDE047" />
+                  <circle cx="43" cy="30" r="6" fill="#FFFFFF" />
+                  <path d="M41 36 L48 39 L47 52 L39 51 Z" fill="#FFFFFF" />
+                  <path d="M45 50 L56 46 L73 39" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" />
+                  <path d="M40 51 L35 59 L42 63" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" />
+                  <path d="M38 50 C42 51 46 51 48 50" stroke="#0F172A" stroke-width="3.5" stroke-linecap="round" />
+                </svg>
+              </div>
+            </div>
+            <div class="flex flex-col">
+              <span class="font-outfit font-black text-xs sm:text-sm text-slate-900 dark:text-white leading-tight">
+                <span class="text-brand-crimson">KIDS</span> MARTIAL ARTS
+              </span>
+              <span class="text-[7.5px] font-bold text-amber-500 uppercase font-outfit mt-0.5">
+                &amp; CONFIDENCE BUILDING PROGRAM
+              </span>
+            </div>
+          </a>
+
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed max-w-sm">
+            Empowering children through age-appropriate martial arts training. Building strong bodies, courageous minds, unwavering focus, and bully-proof confidence.
+          </p>
+
+          <!-- Trust Badges Strip -->
+          <div class="flex flex-wrap items-center gap-2 pt-1 text-[11px] font-semibold text-slate-600 dark:text-slate-300">
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+              <i class="fa-solid fa-shield-halved text-emerald-500 text-xs"></i>
+              Certified Safe Dojo
+            </span>
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+              <i class="fa-solid fa-medal text-amber-400 text-xs"></i>
+              Black Belt Mentors
+            </span>
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+              <i class="fa-solid fa-heart text-brand-crimson text-xs"></i>
+              Bully-Proof
+            </span>
+          </div>
+
+          <!-- 3D Tactile Social Media Icons -->
+          <div class="pt-2 flex items-center space-x-2 rtl:space-x-reverse">
+            <a href="#" class="btn-3d btn-3d-switch w-8 h-8 rounded-xl flex items-center justify-center text-xs text-slate-600 dark:text-slate-300 hover:text-brand-crimson" title="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="#" class="btn-3d btn-3d-switch w-8 h-8 rounded-xl flex items-center justify-center text-xs text-slate-600 dark:text-slate-300 hover:text-blue-500" title="Facebook">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="#" class="btn-3d btn-3d-switch w-8 h-8 rounded-xl flex items-center justify-center text-xs text-slate-600 dark:text-slate-300 hover:text-red-500" title="YouTube">
+              <i class="fa-brands fa-youtube"></i>
+            </a>
+            <a href="#" class="btn-3d btn-3d-switch w-8 h-8 rounded-xl flex items-center justify-center text-xs text-slate-600 dark:text-slate-300 hover:text-brand-crimson" title="TikTok">
+              <i class="fa-brands fa-tiktok"></i>
+            </a>
+            <a href="#" class="btn-3d btn-3d-switch w-8 h-8 rounded-xl flex items-center justify-center text-xs text-slate-600 dark:text-slate-300 hover:text-emerald-500" title="WhatsApp">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+          </div>
+
+        </div>
+
+        <!-- Column 2: Navigation & Home -->
+        <div class="space-y-3">
+          <h4 class="font-outfit font-extrabold text-xs uppercase tracking-wider text-slate-900 dark:text-white">
+            Navigation
+          </h4>
+          <ul class="space-y-2 text-xs">
+            <li>
+              <a href="index.html" class="text-slate-500 dark:text-slate-400 hover:text-brand-crimson transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-angle-right rtl:rotate-180 text-[10px] text-brand-crimson"></i>
+                <span>Home 1 (Dojo Hero)</span>
+              </a>
+            </li>
+            <li>
+              <a href="home-2.html" class="text-slate-500 dark:text-slate-400 hover:text-brand-crimson transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-angle-right rtl:rotate-180 text-[10px] text-brand-crimson"></i>
+                <span>Home 2 (Fun Ninjas)</span>
+              </a>
+            </li>
+            <li>
+              <a href="about.html" class="text-slate-500 dark:text-slate-400 hover:text-brand-crimson transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-angle-right rtl:rotate-180 text-[10px] text-brand-crimson"></i>
+                <span>About Our Mission</span>
+              </a>
+            </li>
+            <li>
+              <a href="programs.html" class="text-slate-500 dark:text-slate-400 hover:text-brand-crimson transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-angle-right rtl:rotate-180 text-[10px] text-brand-crimson"></i>
+                <span>Youth Programs</span>
+              </a>
+            </li>
+            <li>
+              <a href="belt-system.html" class="text-slate-500 dark:text-slate-400 hover:text-brand-crimson transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-angle-right rtl:rotate-180 text-[10px] text-brand-crimson"></i>
+                <span>Belt System Roadmap</span>
+              </a>
+            </li>
+            <li>
+              <a href="instructors.html" class="text-slate-500 dark:text-slate-400 hover:text-brand-crimson transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-angle-right rtl:rotate-180 text-[10px] text-brand-crimson"></i>
+                <span>Senseis &amp; Coaches</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Academy & Community -->
+        <div class="space-y-3">
+          <h4 class="font-outfit font-extrabold text-xs uppercase tracking-wider text-slate-900 dark:text-white">
+            Academy &amp; Safety
+          </h4>
+          <ul class="space-y-2 text-xs">
+            <li>
+              <a href="safety.html" class="text-slate-500 dark:text-slate-400 hover:text-brand-crimson transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-angle-right rtl:rotate-180 text-[10px] text-emerald-500"></i>
+                <span>Dojo Safety Standards</span>
+              </a>
+            </li>
+            <li>
+              <a href="events.html" class="text-slate-500 dark:text-slate-400 hover:text-brand-crimson transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-angle-right rtl:rotate-180 text-[10px] text-brand-crimson"></i>
+                <span>Belt Graduations &amp; Camps</span>
+              </a>
+            </li>
+            <li>
+              <a href="contact.html" class="text-slate-500 dark:text-slate-400 hover:text-brand-crimson transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-angle-right rtl:rotate-180 text-[10px] text-brand-crimson"></i>
+                <span>Contact &amp; Dojo Tour</span>
+              </a>
+            </li>
+            <li>
+              <a href="admin-dashboard.html" class="text-slate-500 dark:text-slate-400 hover:text-brand-crimson transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-angle-right rtl:rotate-180 text-[10px] text-brand-crimson"></i>
+                <span>Admin Portal</span>
+              </a>
+            </li>
+            <li>
+              <a href="user-dashboard.html" class="text-slate-500 dark:text-slate-400 hover:text-amber-500 transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-angle-right rtl:rotate-180 text-[10px] text-amber-500"></i>
+                <span>Student / Parent Portal</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Dojo Location & Contact -->
+        <div class="space-y-3">
+          <h4 class="font-outfit font-extrabold text-xs uppercase tracking-wider text-slate-900 dark:text-white">
+            Visit Our Dojo
+          </h4>
+          <div class="space-y-2.5 text-xs text-slate-500 dark:text-slate-400">
+            <div class="flex items-start gap-2">
+              <i class="fa-solid fa-location-dot text-brand-crimson text-xs mt-0.5 shrink-0"></i>
+              <span>742 Champions Way, Suite 100, Dojo Center</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-phone text-amber-500 text-xs shrink-0"></i>
+              <span>(800) 555-KICK</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-clock text-slate-400 text-xs shrink-0"></i>
+              <span>Mon - Sat: 9:00 AM - 7:30 PM</span>
+            </div>
+            <div class="pt-2">
+              <!-- 3D Trigger to Member Login -->
+              <a href="login.html" class="btn-3d btn-3d-dashboard w-full py-2 text-xs rounded-xl flex items-center justify-center gap-1.5">
+                <i class="fa-solid fa-lock text-[10px] text-amber-500"></i>
+                <span>Member Portal Login</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- ========================================================
+       JAVASCRIPT: ADVANCED FRAMER MOTION PHYSICS & INTERACTION
+       ======================================================== -->
+  <script>
+    let isDarkMode = true;
+    let isRTL = false;
+    let isMobileMenuOpen = false;
+
+    const htmlElem = document.documentElement;
+    const themeIcon = document.getElementById('themeIcon');
+    const mobileThemeLabel = document.getElementById('mobileThemeLabel');
+    const rtlIcon = document.getElementById('rtlIcon');
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const bar1 = document.getElementById('bar1');
+    const bar2 = document.getElementById('bar2');
+    const bar3 = document.getElementById('bar3');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    const mobileDrawerOverlay = document.getElementById('mobileDrawerOverlay');
+    const loginModalBackdrop = document.getElementById('loginModalBackdrop');
+    const loginModalContent = document.getElementById('loginModalContent');
+    const navGlider = document.getElementById('navGlider');
+    const navLinksContainer = document.getElementById('navLinksContainer');
+    const brandLogo = document.getElementById('brandLogo');
+    const logoIconContainer = document.getElementById('logoIconContainer');
+
+    // ----------------------------------------------------
+    // INITIALIZATION & FRAMER MOTION SPRINGS
+    // ----------------------------------------------------
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.Motion && window.Motion.animate) {
+        const { animate, spring } = window.Motion;
+        
+        // 1. Entrance drop animation with spring physics
+        const headerAnim = animate('#mainHeader', 
+          { y: [-25, 0], opacity: [0, 1] }, 
+          { duration: 0.6, easing: spring({ stiffness: 380, damping: 26 }) }
+        );
+        if (headerAnim && headerAnim.finished) {
+          headerAnim.finished.then(() => {
+            const h = document.getElementById('mainHeader');
+            if (h) h.style.transform = '';
+          });
+        }
+
+        // 2. Initial Logo subtle spring pop
+        animate(logoIconContainer, 
+          { scale: [0.75, 1.05, 1] }, 
+          { duration: 0.5, delay: 0.15, easing: spring({ stiffness: 400, damping: 20 }) }
+        );
+      }
+
+      // Check Saved Preferences
+      const savedTheme = localStorage.getItem('dojo_theme');
+      if (savedTheme === 'light') {
+        setTheme(false);
+      } else {
+        setTheme(true);
+      }
+
+      const savedRTL = localStorage.getItem('dojo_rtl');
+      if (savedRTL === 'true') {
+        setRTL(true);
+      }
+
+      // Initialize Framer Motion Nav Glider Pill
+      setActiveNavState();
+      setupNavGlider();
+
+      // Initialize Interactive Logo Wobble
+      setupLogoHoverAnimation();
+
+      // Initialize Dropdown Pop Animations
+      setupDropdownAnimations();
+    });
+
+    // ----------------------------------------------------
+    // FRAMER MOTION: MAGNETIC GLIDING PILL INDICATOR
+    // ----------------------------------------------------
+        // ----------------------------------------------------
+    // DYNAMIC ACTIVE NAV STATE & GLIDER TRACKING
+    // ----------------------------------------------------
+    function setActiveNavState() {
+      const pathname = window.location.pathname.replace(/\\/g, '/');
+      const filename = pathname.split('/').pop() || 'index.html';
+      const currentPage = (filename === '' || filename === '/') ? 'index.html' : filename;
+
+      // 1. Desktop Nav Links
+      const navLinks = document.querySelectorAll('#navLinksContainer .nav-item-link');
+      let activeItem = null;
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        const href = link.getAttribute('href');
+        if (href && (href === currentPage || (currentPage === 'index.html' && (href === 'index.html' || href === '#home1')))) {
+          link.classList.add('active');
+          activeItem = link;
+        }
+      });
+
+      // Special check for Home dropdown (if on index.html or home-2.html)
+      const homeLink = document.querySelector('#desktopHomeDropdown > a, #desktopHomeDropdown > button');
+      if (homeLink) {
+        if (currentPage === 'index.html' || currentPage === 'home-2.html') {
+          homeLink.classList.add('active');
+          activeItem = homeLink;
+        } else {
+          homeLink.classList.remove('active');
+        }
+      }
+
+      // Home dropdown items active styling
+      const homeItems = document.querySelectorAll('#desktopHomeDropdown .dropdown-item');
+      homeItems.forEach(item => {
+        const href = item.getAttribute('href');
+        if (href && href === currentPage) {
+          item.classList.add('text-brand-crimson', 'font-black', 'bg-rose-50', 'dark:bg-rose-950/50');
+        } else {
+          item.classList.remove('text-brand-crimson', 'font-black', 'bg-rose-50', 'dark:bg-rose-950/50');
+        }
+      });
+
+      // Mobile drawer links active styling
+      const mobileItems = document.querySelectorAll('#mobileDrawer a');
+      mobileItems.forEach(item => {
+        item.classList.remove('active', 'active-drawer-link');
+        const href = item.getAttribute('href');
+        if (href && href === currentPage) {
+          item.classList.add('active', 'active-drawer-link');
+        }
+      });
+
+      return activeItem;
+    }
+
+    function setupNavGlider() {
+      if (!navLinksContainer || !navGlider) return;
+
+      const snapGliderToActive = () => {
+        const activeLink = navLinksContainer.querySelector('.nav-item-link.active');
+        if (activeLink) {
+          const containerRect = navLinksContainer.getBoundingClientRect();
+          const linkRect = activeLink.getBoundingClientRect();
+          const leftOffset = linkRect.left - containerRect.left;
+          const width = linkRect.width;
+
+          navGlider.style.opacity = '1';
+          navGlider.style.transform = 'scale(1)';
+
+          if (window.Motion && window.Motion.animate) {
+            window.Motion.animate(navGlider, 
+              { transform: `translateX(${leftOffset}px)`, width: `${width}px` }, 
+              { duration: 0.28, easing: window.Motion.spring({ stiffness: 450, damping: 28 }) }
+            );
+          } else {
+            navGlider.style.transform = `translateX(${leftOffset}px)`;
+            navGlider.style.width = `${width}px`;
+          }
+        } else {
+          navGlider.style.opacity = '0';
+          navGlider.style.transform = 'scale(0.9)';
+        }
+      };
+
+      const links = navLinksContainer.querySelectorAll('.nav-item-link');
+
+      links.forEach(link => {
+        link.addEventListener('mouseenter', () => {
+          const containerRect = navLinksContainer.getBoundingClientRect();
+          const linkRect = link.getBoundingClientRect();
+          const leftOffset = linkRect.left - containerRect.left;
+          const width = linkRect.width;
+
+          navGlider.style.opacity = '1';
+          navGlider.style.transform = 'scale(1)';
+
+          if (window.Motion && window.Motion.animate) {
+            window.Motion.animate(navGlider, 
+              { transform: `translateX(${leftOffset}px)`, width: `${width}px` }, 
+              { duration: 0.25, easing: window.Motion.spring({ stiffness: 450, damping: 28 }) }
+            );
+          } else {
+            navGlider.style.transform = `translateX(${leftOffset}px)`;
+            navGlider.style.width = `${width}px`;
+          }
+        });
+      });
+
+      const dashboardBtn = document.getElementById('desktopDashboardDropdown');
+      if (dashboardBtn) {
+        dashboardBtn.addEventListener('mouseenter', () => {
+          navGlider.style.opacity = '0';
+        });
+      }
+
+      navLinksContainer.addEventListener('mouseleave', () => {
+        snapGliderToActive();
+      });
+
+      window.addEventListener('resize', snapGliderToActive);
+
+      // Initial alignment
+      setTimeout(snapGliderToActive, 120);
+    }
+
+    // ----------------------------------------------------
+    // FRAMER MOTION: LOGO HOVER KARATE SPRING BOUNCE
+    // ----------------------------------------------------
+    function setupLogoHoverAnimation() {
+      if (!brandLogo || !logoIconContainer) return;
+
+      brandLogo.addEventListener('mouseenter', () => {
+        if (window.Motion && window.Motion.animate) {
+          window.Motion.animate(logoIconContainer, 
+            { rotate: [-10, 8, -4, 0], scale: [1, 1.15, 1] }, 
+            { duration: 0.45, easing: window.Motion.spring({ stiffness: 450, damping: 18 }) }
+          );
+        }
+      });
+    }
+
+    // ----------------------------------------------------
+    // FRAMER MOTION: DROPDOWN SPRING POPUPS
+    // ----------------------------------------------------
+    function setupDropdownAnimations() {
+      const dropdownGroups = document.querySelectorAll('.group');
+
+      dropdownGroups.forEach(group => {
+        const menu = group.querySelector('.creative-dropdown');
+        if (!menu) return;
+
+        group.addEventListener('mouseenter', () => {
+          if (window.Motion && window.Motion.animate) {
+            window.Motion.animate(menu, 
+              { opacity: [0, 1], scale: [0.92, 1], y: [-6, 0] }, 
+              { duration: 0.22, easing: window.Motion.spring({ stiffness: 400, damping: 25 }) }
+            );
+          }
+        });
+      });
+    }
+
+    // ----------------------------------------------------
+    // THEME CONTROLS (WITH 360° SPRING SPIN)
+    // ----------------------------------------------------
+    function toggleTheme() {
+      setTheme(!isDarkMode);
+    }
+
+    function setTheme(dark) {
+      isDarkMode = dark;
+      if (dark) {
+        htmlElem.classList.add('dark');
+        htmlElem.classList.remove('light');
+        if (themeIcon) themeIcon.className = 'fa-solid fa-sun text-amber-400';
+        if (mobileThemeLabel) mobileThemeLabel.textContent = 'Dark';
+        localStorage.setItem('dojo_theme', 'dark');
+      } else {
+        htmlElem.classList.remove('dark');
+        htmlElem.classList.add('light');
+        if (themeIcon) themeIcon.className = 'fa-solid fa-moon text-slate-700';
+        if (mobileThemeLabel) mobileThemeLabel.textContent = 'Light';
+        localStorage.setItem('dojo_theme', 'light');
+      }
+
+      // Framer Motion 360° spring spin
+      if (window.Motion && window.Motion.animate && themeIcon) {
+        window.Motion.animate(themeIcon, 
+          { rotate: [0, 360], scale: [0.7, 1.2, 1] }, 
+          { duration: 0.4, easing: window.Motion.spring({ stiffness: 380, damping: 22 }) }
+        );
+      }
+    }
+
+    // ----------------------------------------------------
+    // RTL CONTROLS (WITH 3D ROTATE FLIP)
+    // ----------------------------------------------------
+    function toggleRTL() {
+      setRTL(!isRTL);
+    }
+
+    function setRTL(rtl) {
+      isRTL = rtl;
+      if (rtl) {
+        htmlElem.setAttribute('dir', 'rtl');
+        localStorage.setItem('dojo_rtl', 'true');
+      } else {
+        htmlElem.setAttribute('dir', 'ltr');
+        localStorage.setItem('dojo_rtl', 'false');
+      }
+
+      // Framer Motion icon spin & flip
+      if (window.Motion && window.Motion.animate) {
+        if (rtlIcon) {
+          window.Motion.animate(rtlIcon, 
+            { rotateY: rtl ? [0, 180] : [180, 0], scale: [0.8, 1.2, 1] }, 
+            { duration: 0.35, easing: window.Motion.spring({ stiffness: 420, damping: 20 }) }
+          );
+        }
+        window.Motion.animate('#mainNavbar', 
+          { scale: [0.99, 1] }, 
+          { duration: 0.22 }
+        );
+      }
+    }
+
+    // ----------------------------------------------------
+    // MOBILE HAMBURGER & DRAWER (WITH STAGGERED SPRING)
+    // ----------------------------------------------------
+    function toggleMobileMenu() {
+      isMobileMenuOpen = !isMobileMenuOpen;
+      hamburgerBtn.setAttribute('aria-expanded', isMobileMenuOpen);
+
+      if (isMobileMenuOpen) {
+        bar1.classList.add('rotate-45', 'translate-y-1.5');
+        bar2.classList.add('opacity-0');
+        bar3.classList.add('-rotate-45', '-translate-y-1.5');
+
+        mobileDrawerOverlay.classList.remove('pointer-events-none');
+        mobileDrawerOverlay.classList.remove('opacity-0');
+        mobileDrawerOverlay.classList.add('opacity-100');
+
+        mobileDrawer.classList.remove('translate-x-full', 'rtl:-translate-x-full');
+        mobileDrawer.classList.add('translate-x-0');
+
+        if (window.Motion && window.Motion.animate) {
+          const isCurrentRTL = htmlElem.getAttribute('dir') === 'rtl';
+          const startX = isCurrentRTL ? '-100%' : '100%';
+          
+          // Drawer spring entrance
+          window.Motion.animate(mobileDrawer, 
+            { transform: [`translateX(${startX})`, 'translateX(0%)'] }, 
+            { duration: 0.35, easing: window.Motion.spring({ stiffness: 360, damping: 28 }) }
+          );
+
+          // Staggered reveal of drawer items
+          const drawerItems = document.querySelectorAll('.drawer-anim-item');
+          if (drawerItems.length) {
+            window.Motion.animate(drawerItems, 
+              { transform: ['translateX(20px)', 'translateX(0px)'], opacity: [0, 1] }, 
+              { delay: window.Motion.stagger(0.03), easing: window.Motion.spring({ stiffness: 400, damping: 26 }) }
+            );
+          }
+        }
+      } else {
+        bar1.classList.remove('rotate-45', 'translate-y-1.5');
+        bar2.classList.remove('opacity-0');
+        bar3.classList.remove('-rotate-45', '-translate-y-1.5');
+
+        mobileDrawerOverlay.classList.add('opacity-0');
+        mobileDrawerOverlay.classList.add('pointer-events-none');
+        mobileDrawerOverlay.classList.remove('opacity-100');
+
+        mobileDrawer.classList.add('translate-x-full', 'rtl:-translate-x-full');
+        mobileDrawer.classList.remove('translate-x-0');
+      }
+    }
+
+    function toggleAccordion(contentId, arrowId) {
+      const content = document.getElementById(contentId);
+      const arrow = document.getElementById(arrowId);
+      if (content) {
+        const isHidden = content.classList.contains('hidden');
+        if (isHidden) {
+          content.classList.remove('hidden');
+          if (arrow) arrow.classList.add('rotate-180');
+          if (window.Motion && window.Motion.animate) {
+            window.Motion.animate(content, { opacity: [0, 1], y: [-6, 0] }, { duration: 0.2 });
+          }
+        } else {
+          content.classList.add('hidden');
+          if (arrow) arrow.classList.remove('rotate-180');
+        }
+      }
+    }
+
+    // ----------------------------------------------------
+    // 3D LOGIN MODAL WITH MOTION
+    // ----------------------------------------------------
+    function openLoginModal() {
+      window.location.href = 'login.html';
+    }
+
+    function closeLoginModal() {
+      loginModalBackdrop.classList.add('opacity-0', 'pointer-events-none');
+      loginModalBackdrop.classList.remove('opacity-100');
+      loginModalContent.classList.remove('scale-100');
+      loginModalContent.classList.add('scale-95');
+    }
+
+    function handleLoginSubmit(e) {
+      e.preventDefault();
+      alert('Login Successful!');
+      closeLoginModal();
+    }
+
+    function openNotice(title) {
+      alert(`Navigating to: ${title}`);
+    }
+  </script>
+
+
+  <!-- Motion One (Framer Motion equivalent for vanilla HTML) -->
+  <script src="https://cdn.jsdelivr.net/npm/motion@10.16.2/dist/motion.js"></script>
+  <script>
+    function initContactAnimations() {
+      if (typeof Motion === 'undefined') {
+        console.warn("Motion One library not loaded; skipping animation triggers.");
+        return;
+      }
+
+      const { animate, inView, stagger, spring } = Motion;
+
+      // SECTION 1: CONTACT ACADEMY & LOCATION - "ACADEMY BEACON HORIZON"
+      inView('#section-contact-academy-location', () => {
+        animate('#section-contact-academy-location h1', 
+          { x: [-35, 0], opacity: [0, 1] }, 
+          { duration: 0.7, easing: spring({ stiffness: 380, damping: 26 }) }
+        );
+
+        animate('#section-contact-academy-location img', 
+          { scale: [0.94, 1], opacity: [0, 1] }, 
+          { duration: 0.75, easing: spring({ stiffness: 350, damping: 25 }) }
+        );
+      });
+
+      // SECTION 2: CONTACT FORM & PROGRAM INFO - "FORM CONCIERGE POP"
+      inView('#section-contact-form-programs', () => {
+        animate('#section-contact-form-programs h2', 
+          { scale: [0.94, 1], opacity: [0, 1] }, 
+          { duration: 0.6, easing: spring({ stiffness: 400, damping: 25 }) }
+        );
+
+        const formNode = document.querySelector('#academyContactForm');
+        if (formNode) {
+          animate(formNode, 
+            { y: [25, 0], opacity: [0, 1] }, 
+            { duration: 0.65, delay: 0.15, easing: spring({ stiffness: 370, damping: 24 }) }
+          );
+        }
+
+        const infoCards = document.querySelectorAll('#programInfoCardsList > div');
+        if (infoCards.length) {
+          animate(infoCards, 
+            { x: [25, 0], opacity: [0, 1] }, 
+            { delay: stagger(0.08, { start: 0.2 }), duration: 0.5, easing: spring({ stiffness: 390, damping: 24 }) }
+          );
+        }
+      });
+
+      // SECTION 3: PHONE & EMAIL SUPPORT - "OMNICHANNEL DISPATCH SLIDE"
+      inView('#section-phone-email-support', () => {
+        animate('#section-phone-email-support h2', 
+          { y: [-20, 0], opacity: [0, 1] }, 
+          { duration: 0.6, easing: spring({ stiffness: 400, damping: 25 }) }
+        );
+
+        const phoneCol = document.querySelector('#section-phone-email-support .lg\:col-span-6:first-child');
+        const emailCol = document.querySelector('#section-phone-email-support .lg\:col-span-6:last-child');
+        if (phoneCol) {
+          animate(phoneCol, 
+            { x: [-30, 0], opacity: [0, 1] }, 
+            { duration: 0.6, delay: 0.1, easing: spring({ stiffness: 370, damping: 25 }) }
+          );
+        }
+        if (emailCol) {
+          animate(emailCol, 
+            { x: [30, 0], opacity: [0, 1] }, 
+            { duration: 0.6, delay: 0.15, easing: spring({ stiffness: 370, damping: 25 }) }
+          );
+        }
+      });
+
+      // SECTION 4: PARENT SUPPORT - "PARENT CARE LOUNGE FADE"
+      inView('#section-parent-support', () => {
+        animate('#section-parent-support h2', 
+          { opacity: [0, 1], y: [25, 0] }, 
+          { duration: 0.65, easing: spring({ stiffness: 390, damping: 25 }) }
+        );
+
+        const supportCards = document.querySelectorAll('#parentSupportGrid > div');
+        if (supportCards.length) {
+          animate(supportCards, 
+            { scale: [0.92, 1], opacity: [0, 1] }, 
+            { delay: stagger(0.09, { start: 0.15 }), duration: 0.5, easing: spring({ stiffness: 380, damping: 23 }) }
+          );
+        }
+      });
+
+      // SECTION 5: ENROLLMENT ASSISTANCE - "ONBOARDING RUNWAY STEP"
+      inView('#section-enrollment-assistance', () => {
+        animate('#section-enrollment-assistance h2', 
+          { scale: [0.92, 1], opacity: [0, 1] }, 
+          { duration: 0.65, easing: spring({ stiffness: 380, damping: 24 }) }
+        );
+
+        const runwaySteps = document.querySelectorAll('#onboardingStepsList > div');
+        if (runwaySteps.length) {
+          animate(runwaySteps, 
+            { x: [-30, 0], opacity: [0, 1] }, 
+            { delay: stagger(0.1, { start: 0.15 }), duration: 0.55, easing: spring({ stiffness: 390, damping: 25 }) }
+          );
+        }
+      });
+
+      // SECTION 6: INSTRUCTOR CONTACT - "SENSEI CONSULTATION TILT"
+      inView('#section-instructor-contact', () => {
+        animate('#section-instructor-contact h2', 
+          { y: [-20, 0], opacity: [0, 1] }, 
+          { duration: 0.6, easing: spring({ stiffness: 400, damping: 25 }) }
+        );
+
+        const consultDock = document.querySelector('#coachConsultationDock');
+        if (consultDock) {
+          animate(consultDock, 
+            { scale: [0.95, 1], opacity: [0, 1] }, 
+            { duration: 0.6, delay: 0.2, easing: spring({ stiffness: 370, damping: 24 }) }
+          );
+        }
+      });
+
+      // SECTION 7: TRAINING HOURS - "CHRONO MATRIX ELEVATE"
+      inView('#section-training-hours', () => {
+        animate('#section-training-hours h2', 
+          { y: [25, 0], opacity: [0, 1] }, 
+          { duration: 0.65, easing: spring({ stiffness: 380, damping: 25 }) }
+        );
+
+        const hourRows = document.querySelectorAll('#trainingHoursLedger .space-y-2\.5 > div');
+        if (hourRows.length) {
+          animate(hourRows, 
+            { x: [-20, 0], opacity: [0, 1] }, 
+            { delay: stagger(0.06, { start: 0.15 }), duration: 0.45, easing: spring({ stiffness: 420, damping: 26 }) }
+          );
+        }
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initContactAnimations);
+    } else {
+      initContactAnimations();
+    }
+  </script>
+</body>
+</html>

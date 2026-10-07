@@ -1,0 +1,2472 @@
+<!DOCTYPE html>
+<html lang="en" class="dark" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Safety Guidelines & Dojo Protection Protocols - Kids Martial Arts Academy</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/logo-icon.svg" />
+  <link rel="shortcut icon" href="assets/logo-icon.svg" />
+  <link rel="apple-touch-icon" href="assets/logo-icon.svg" />
+
+  <!-- Google Fonts: Outfit & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome 6.5.1 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              crimson: '#E11D48',
+              crimsonDark: '#9F1239',
+              fire: '#FF385C',
+              gold: '#F59E0B',
+              goldLight: '#FDE047',
+              navy: '#0F172A',
+              slate: '#1E293B',
+              darkBg: '#080B11',
+              darkCard: '#111726',
+              lightBg: '#F8FAFC',
+              lightCard: '#FFFFFF'
+            }
+          },
+          fontFamily: {
+            outfit: ['Outfit', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Motion (Official Framer Motion Engine) -->
+  <script src="https://cdn.jsdelivr.net/npm/motion@11.11.17/dist/motion.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Ambient Subtle Dots Pattern */
+    .bg-grid-ambient {
+      background-size: 32px 32px;
+      background-image: 
+        radial-gradient(circle, rgba(225, 29, 72, 0.08) 1px, transparent 1px);
+    }
+    .dark .bg-grid-ambient {
+      background-image: 
+        radial-gradient(circle, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+    }
+
+    /* ========================================================
+       CREATIVE FLOATING ISLAND NAVBAR STYLES
+       ======================================================== */
+    .navbar-creative-island {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(226, 232, 240, 0.85);
+      box-shadow: 
+        0 14px 34px -8px rgba(15, 23, 42, 0.08),
+        0 2px 6px -1px rgba(15, 23, 42, 0.03),
+        inset 0 1px 0 rgba(255, 255, 255, 0.95);
+      position: relative;
+    }
+    .dark .navbar-creative-island {
+      background: rgba(13, 19, 31, 0.86);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      box-shadow: 
+        0 18px 45px -10px rgba(0, 0, 0, 0.7),
+        0 4px 12px -2px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12),
+        inset 0 0 14px rgba(225, 29, 72, 0.04);
+    }
+
+    /* Top Ambient Crimson/Gold Edge Glow */
+    .navbar-creative-island::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 12%;
+      right: 12%;
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent 0%, rgba(225, 29, 72, 0.7) 25%, rgba(245, 158, 11, 0.85) 50%, rgba(225, 29, 72, 0.7) 75%, transparent 100%);
+      border-radius: 9999px;
+      pointer-events: none;
+    }
+
+        /* Dynamic Gliding Spring Pill Behind Nav Items */
+    #navGlider {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background: rgba(225, 29, 72, 0.08);
+      border-radius: 0.65rem;
+      pointer-events: none;
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 0.15s ease, transform 0.15s ease;
+      z-index: 0;
+    }
+    .dark #navGlider {
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    /* Nav Item Link Styling */
+    .nav-item-link {
+      position: relative;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      color: #475569;
+      border-radius: 0.65rem;
+      z-index: 1;
+      transition: color 0.18s ease, background-color 0.18s ease;
+    }
+    .dark .nav-item-link {
+      color: #94A3B8;
+    }
+    .nav-item-link:hover {
+      color: #E11D48;
+    }
+    .dark .nav-item-link:hover {
+      color: #FFFFFF;
+    }
+    .nav-item-link.active {
+      color: #E11D48 !important;
+      font-weight: 800 !important;
+    }
+    .dark .nav-item-link.active {
+      color: #FF3B62 !important;
+      font-weight: 800 !important;
+    }
+    .nav-item-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 15%;
+      right: 15%;
+      height: 2.5px;
+      background: linear-gradient(90deg, #FF3B62, #F59E0B);
+      border-radius: 9999px;
+      box-shadow: 0 1px 6px rgba(225, 29, 72, 0.5);
+    }
+    .dark .nav-item-link.active::after {
+      box-shadow: 0 1px 8px rgba(255, 59, 98, 0.7);
+    }
+
+    /* Mobile Drawer Active State */
+    .drawer-anim-item.active,
+    a.drawer-anim-item.active,
+    .active-drawer-link {
+      color: #E11D48 !important;
+      background: rgba(225, 29, 72, 0.08) !important;
+      font-weight: 800 !important;
+      border-left: 3.5px solid #E11D48 !important;
+    }
+    .dark .drawer-anim-item.active,
+    .dark a.drawer-anim-item.active,
+    .dark .active-drawer-link {
+      color: #FF4D6D !important;
+      background: rgba(225, 29, 72, 0.16) !important;
+      border-left: 3.5px solid #FF4D6D !important;
+    }
+    [dir="rtl"] .drawer-anim-item.active,
+    [dir="rtl"] a.drawer-anim-item.active,
+    [dir="rtl"] .active-drawer-link {
+      border-left: none !important;
+      border-right: 3.5px solid #E11D48 !important;
+    }
+    [dir="rtl"].dark .drawer-anim-item.active,
+    [dir="rtl"].dark a.drawer-anim-item.active,
+    [dir="rtl"].dark .active-drawer-link {
+      border-right: 3.5px solid #FF4D6D !important;
+    }
+
+    /* Dropdown Menus */
+    .creative-dropdown {
+      transform-origin: top center;
+      transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.2s;
+    }
+
+    [dir="rtl"] .creative-dropdown {
+      text-align: right;
+    }
+  
+
+    /* ==========================================================================
+       ENTERPRISE MOBILE-FIRST RESPONSIVE MASTER STYLESHEET
+       Strict mobile optimization for 320px, 480px, 768px, 1024px
+       Zero horizontal overflow | Adaptive typography | Fluid grid & flex layout
+       ========================================================================== */
+
+    /* 1. Global Box-Sizing & Overflow Quarantine */
+    *, *::before, *::after {
+      box-sizing: border-box !important;
+    }
+
+    html {
+      width: 100% !important;
+      max-width: 100% !important;
+      overflow-x: hidden;
+      overflow-x: clip !important;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      width: 100% !important;
+      max-width: 100% !important;
+      overflow-x: clip !important;
+      position: relative !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    /* Guaranteed Persistent Sticky Navbar Across All Screen Sizes */
+    #mainHeader,
+    header {
+      position: -webkit-sticky !important;
+      position: sticky !important;
+      top: 0 !important;
+      z-index: 50 !important;
+    }
+
+    /* 2. Media & Visual Elements Strict Fluid Bounds */
+    img, svg, video, canvas, audio, iframe, embed, object {
+      max-width: 100% !important;
+      height: auto;
+    }
+
+    /* 3. Text Overflow Immunity */
+    h1, h2, h3, h4, h5, h6, p, span, a, button, li, dt, dd, blockquote, label {
+      overflow-wrap: break-word !important;
+      word-wrap: break-word !important;
+      max-width: 100%;
+    }
+
+    /* 4. Section & Container Strict Layout Integrity */
+    section {
+      width: 100% !important;
+      max-width: 100% !important;
+      position: relative !important;
+      overflow-x: hidden;
+      overflow-x: clip !important;
+      overflow-y: visible !important;
+    }
+
+    .container, .max-w-7xl, .max-w-6xl, .max-w-5xl, .max-w-4xl, .max-w-3xl, .max-w-2xl {
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+
+    /* 5. Responsive Form Controls & Interactive Buttons */
+    input, select, textarea {
+      max-width: 100% !important;
+    }
+
+    button, a.btn-3d, .btn-3d {
+      max-width: 100% !important;
+      white-space: normal;
+    }
+
+    /* 6. Breakpoint Optimization: <= 1024px (Small Laptops & Tablets) */
+    @media (max-width: 1024px) {
+      .max-w-7xl, .max-w-6xl {
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+      }
+      header nav, header {
+        max-width: 100% !important;
+      }
+    }
+
+    /* 7. Breakpoint Optimization: <= 768px (Tablets & Mobile Landscape) */
+    @media (max-width: 768px) {
+      /* Fluid Headings */
+      h1, .text-5xl, .text-6xl, .text-7xl {
+        font-size: clamp(1.85rem, 5.5vw, 2.75rem) !important;
+        line-height: 1.15 !important;
+      }
+      h2, .text-3xl, .text-4xl {
+        font-size: clamp(1.4rem, 4.2vw, 2.1rem) !important;
+        line-height: 1.22 !important;
+      }
+      h3, .text-2xl {
+        font-size: clamp(1.2rem, 3.2vw, 1.55rem) !important;
+        line-height: 1.28 !important;
+      }
+
+      /* Consistent Section Spacing */
+      section {
+        padding-top: clamp(2.5rem, 6vw, 4rem) !important;
+        padding-bottom: clamp(2.5rem, 6vw, 4rem) !important;
+      }
+
+      /* Stack two-column split heroes & banners */
+      .grid.lg\:grid-cols-2, .grid.lg\:grid-cols-3, .grid.lg\:grid-cols-4 {
+        grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+      }
+    }
+
+    /* 8. Breakpoint Optimization: <= 480px (Standard Mobile Portrait) */
+    @media (max-width: 480px) {
+      /* Uniform padding on all main containers */
+      .px-4, .px-6, .px-8, .sm\:px-6, .lg\:px-8 {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+      }
+
+      /* Mobile Adaptive Typography */
+      h1, .text-5xl, .text-6xl, .text-7xl {
+        font-size: clamp(1.55rem, 7vw, 2.15rem) !important;
+        line-height: 1.18 !important;
+      }
+      h2, .text-3xl, .text-4xl {
+        font-size: clamp(1.3rem, 5.2vw, 1.7rem) !important;
+        line-height: 1.25 !important;
+      }
+      h3, .text-2xl {
+        font-size: clamp(1.1rem, 4vw, 1.35rem) !important;
+        line-height: 1.3 !important;
+      }
+      p, .text-base, .text-lg {
+        font-size: 0.925rem !important;
+        line-height: 1.55 !important;
+      }
+
+      /* Stack card grids vertically on mobile */
+      .grid.sm\:grid-cols-2,
+      .grid.sm\:grid-cols-3,
+      .grid.sm\:grid-cols-4,
+      .grid.md\:grid-cols-2,
+      .grid.md\:grid-cols-3 {
+        grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+      }
+
+      /* Full width buttons in CTAs */
+      .flex.flex-wrap.items-center.gap-3 > button,
+      .flex.flex-wrap.items-center.gap-3 > a.btn-3d,
+      .hero-btn-group > * {
+        width: 100% !important;
+        justify-content: center !important;
+        text-align: center !important;
+      }
+
+      /* Modals fit comfortably */
+      #loginModalContent, .modal-content {
+        width: 95% !important;
+        max-width: 95% !important;
+        padding: 1.25rem !important;
+      }
+
+      /* Mobile drawer fits without overflow */
+      #mobileDrawer {
+        width: min(85vw, 290px) !important;
+      }
+    }
+
+    /* 9. Breakpoint Optimization: <= 320px (Small Screen / iPhone SE) */
+    @media (max-width: 320px) {
+      .px-4, .px-6, .px-8, .sm\:px-6, .lg\:px-8 {
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+      }
+
+      /* Ultra-compact Typography */
+      h1, .text-5xl, .text-6xl, .text-7xl {
+        font-size: 1.4rem !important;
+        line-height: 1.2 !important;
+      }
+      h2, .text-3xl, .text-4xl {
+        font-size: 1.2rem !important;
+        line-height: 1.22 !important;
+      }
+      h3, .text-2xl {
+        font-size: 1.05rem !important;
+      }
+      body, p, .text-base {
+        font-size: 0.85rem !important;
+      }
+      .text-sm {
+        font-size: 0.8rem !important;
+      }
+      .text-xs {
+        font-size: 0.7rem !important;
+      }
+
+      /* Compact Buttons */
+      .btn-3d {
+        padding-left: 0.65rem !important;
+        padding-right: 0.65rem !important;
+        font-size: 0.75rem !important;
+      }
+
+      /* Force all multi-col grids to 1 col (except drawer inline buttons) */
+      .grid-cols-2, .grid-cols-3, .grid-cols-4, .grid-cols-5, .grid-cols-6 {
+        grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+      }
+      #mobileDrawer .grid-cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      }
+    }
+
+  </style>
+</head>
+
+<body class="bg-slate-50 dark:bg-brand-darkBg text-slate-800 dark:text-slate-100 min-h-screen bg-grid-ambient transition-colors duration-300">
+
+  <!-- ========================================================
+       CREATIVE FLOATING NAVBAR
+       ======================================================== -->
+  <header id="mainHeader" class="sticky top-0 z-50 w-full px-3 sm:px-6 lg:px-8 pt-4 pb-2">
+    <nav id="mainNavbar" class="navbar-creative-island max-w-7xl mx-auto rounded-2xl px-3 sm:px-4.5 py-1.5 sm:py-2 transition-all duration-300">
+      <div class="flex items-center justify-between gap-2 lg:gap-3">
+
+        <!-- ====================================================
+             1. LEFT: COMPACT LOGO (FURTHER REDUCED SIZE)
+             ==================================================== -->
+        <a href="index.html" id="brandLogo" class="group flex items-center gap-2 shrink-0 focus:outline-none" aria-label="Kids Martial Arts & Confidence Building Program">
+          
+          <!-- Compact Shield Logo Emblem (~28px) with Spring Hover -->
+          <div id="logoIconContainer" class="relative w-7 h-7 sm:w-7.5 sm:h-7.5 rounded-lg bg-gradient-to-b from-rose-500 via-brand-crimson to-rose-700 p-0.5 shadow-sm shadow-rose-950/20 shrink-0 cursor-pointer">
+            <div class="w-full h-full bg-slate-950 rounded-[5px] flex items-center justify-center overflow-hidden relative">
+              <div class="absolute inset-0 bg-radial-gradient from-amber-400/25 to-transparent"></div>
+              
+              <!-- Clean Scaled Vector Emblem -->
+              <svg viewBox="0 0 100 100" class="w-5 h-5 sm:w-5.5 sm:h-5.5 text-white" fill="none">
+                <circle cx="50" cy="50" r="26" fill="#F59E0B" fill-opacity="0.2" />
+                <!-- 3 Top Stars -->
+                <polygon points="34,16 35.5,19 39,19.5 36.5,22 37,25 34,23.5 31,25 31.5,22 29,19.5 32.5,19" fill="#FDE047" />
+                <polygon points="50,11 52,15 57,15.5 53.5,19 54.5,23.5 50,21 45.5,23.5 46.5,19 43,15.5 48,15" fill="#FDE047" />
+                <polygon points="66,16 67.5,19 71,19.5 68.5,22 69,25 66,23.5 63,25 63.5,22 61,19.5 64.5,19" fill="#FDE047" />
+                <!-- Kicking Martial Artist Silhouette -->
+                <circle cx="43" cy="30" r="6" fill="#FFFFFF" />
+                <path d="M40 31 Q33 30 28 35" stroke="#FDE047" stroke-width="2" stroke-linecap="round" />
+                <path d="M41 36 L48 39 L47 52 L39 51 Z" fill="#FFFFFF" />
+                <path d="M42 38 L34 41" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" />
+                <path d="M47 39 L57 35 L62 38" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" />
+                <path d="M45 50 L56 46 L73 39" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" />
+                <path d="M73 39 L76 34 L80 39 L75 42 Z" fill="#FDE047" />
+                <path d="M40 51 L35 59 L42 63" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" />
+                <path d="M38 50 C42 51 46 51 48 50" stroke="#0F172A" stroke-width="3.5" stroke-linecap="round" />
+                <path d="M42 51 L38 65 M44 51 L47 67" stroke="#0F172A" stroke-width="2.5" stroke-linecap="round" />
+                <circle cx="39" cy="62" r="1.2" fill="#F59E0B" />
+                <circle cx="45" cy="64" r="1.2" fill="#F59E0B" />
+              </svg>
+            </div>
+            
+            <div class="absolute -top-1 -right-1 rtl:-left-1 rtl:-right-auto w-3 h-3 rounded-full bg-amber-400 border border-slate-950 flex items-center justify-center text-[6px] font-black text-slate-950">
+              ★
+            </div>
+          </div>
+
+          <!-- Delicate Compact Typography -->
+          <div class="flex flex-col text-left rtl:text-right">
+            <span class="font-outfit font-black text-xs sm:text-[13.5px] tracking-tight leading-none text-slate-900 dark:text-white group-hover:text-brand-crimson transition-colors">
+              <span class="text-brand-crimson">KIDS</span> MARTIAL ARTS
+            </span>
+            <span class="text-[7.5px] sm:text-[8px] font-bold text-amber-500 dark:text-amber-400 tracking-wider uppercase font-outfit leading-tight mt-0.5">
+              &amp; CONFIDENCE BUILDING PROGRAM
+            </span>
+          </div>
+        </a>
+
+        <!-- ====================================================
+             2. CENTER (LAPTOP VIEW): NAVBAR MENU
+             ==================================================== -->
+        <div id="navLinksContainer" class="hidden lg:flex items-center justify-center space-x-0.5 xl:space-x-1 rtl:space-x-reverse relative py-1">
+          
+          <!-- Dynamic Framer Motion Gliding Pill Background -->
+          <div id="navGlider"></div>
+
+          <!-- 2.1 HOME (ON HOVER: ONLY SHOW HOME 1 AND HOME 2) -->
+          <div class="relative group" id="desktopHomeDropdown">
+            <a href="index.html" class="nav-item-link  px-2.5 py-1.5 text-xs xl:text-sm flex items-center gap-1 focus:outline-none" aria-haspopup="true">
+              <span>Home</span>
+              <i class="fa-solid fa-chevron-down text-[8px] opacity-60 group-hover:rotate-180 transition-transform duration-200"></i>
+            </a>
+            
+            <!-- Shows ONLY Home 1 and Home 2 -->
+            <div class="creative-dropdown absolute top-full left-0 rtl:left-auto rtl:right-0 mt-2 w-32 p-1 rounded-xl bg-white dark:bg-slate-900 shadow-xl border border-slate-200 dark:border-slate-800 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+              <a href="index.html" class="dropdown-item block px-3 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-slate-200 hover:bg-rose-50 dark:hover:bg-rose-950/40 hover:text-brand-crimson transition-colors">
+                Home 1
+              </a>
+              <a href="home-2.html" class="dropdown-item block px-3 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-slate-200 hover:bg-rose-50 dark:hover:bg-rose-950/40 hover:text-brand-crimson transition-colors mt-0.5">
+                Home 2
+              </a>
+            </div>
+          </div>
+
+          <!-- 2.2 ABOUT -->
+          <a href="about.html" class="nav-item-link  px-2.5 py-1.5 text-xs xl:text-sm">
+            About
+          </a>
+
+          <!-- 2.3 PROGRAMS (ONLY PROGRAMS - NO OPTIONS ON HOVER) -->
+          <a href="programs.html" class="nav-item-link  px-2.5 py-1.5 text-xs xl:text-sm">
+            Programs
+          </a>
+
+          <!-- 2.4 BELT SYSTEM -->
+          <a href="belt-system.html" class="nav-item-link  px-2.5 py-1.5 text-xs xl:text-sm flex items-center gap-1.5">
+            <span>Belt System</span>
+            <span class="w-1.5 h-1.5 rounded-full inline-block bg-gradient-to-r from-amber-400 to-rose-500"></span>
+          </a>
+
+          <!-- 2.5 INSTRUCTORS -->
+          <a href="instructors.html" class="nav-item-link  px-2.5 py-1.5 text-xs xl:text-sm">
+            Instructors
+          </a>
+
+          <!-- 2.6 EVENTS -->
+          <a href="events.html" class="nav-item-link  px-2.5 py-1.5 text-xs xl:text-sm">
+            Events
+          </a>
+
+          <!-- 2.7 SAFETY -->
+          <a href="safety.html" class="nav-item-link active px-2.5 py-1.5 text-xs xl:text-sm flex items-center gap-1">
+            <i class="fa-solid fa-shield-heart text-[10px] text-emerald-500"></i>
+            <span>Safety</span>
+          </a>
+
+          <!-- 2.8 CONTACT -->
+          <a href="contact.html" class="nav-item-link  px-2.5 py-1.5 text-xs xl:text-sm">
+            Contact
+          </a>
+
+          <!-- 2.9 DASHBOARD (IMMEDIATELY AFTER CONTACT - NO GAP) -->
+          <div class="relative group ml-1 rtl:ml-0 rtl:mr-1" id="desktopDashboardDropdown">
+            <button class="btn-3d btn-3d-dashboard px-2.5 py-1.5 text-xs rounded-xl flex items-center gap-1.5" title="Dojo Dashboards" aria-haspopup="true">
+              <i class="fa-solid fa-gauge-high text-amber-500 text-[10px]"></i>
+              <span>Dashboard</span>
+              <i class="fa-solid fa-chevron-down text-[8px] opacity-60 group-hover:rotate-180 transition-transform duration-200"></i>
+            </button>
+
+            <!-- Shows ONLY Admin Dashboard and User Dashboard -->
+            <div class="creative-dropdown absolute top-full right-0 rtl:right-auto rtl:left-0 mt-2 w-38 p-1 rounded-xl bg-white dark:bg-slate-900 shadow-xl border border-slate-200 dark:border-slate-800 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+              <a href="admin-dashboard.html" class="dropdown-item block px-3 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-brand-crimson transition-colors">
+                Admin Dashboard
+              </a>
+              <a href="user-dashboard.html" class="dropdown-item block px-3 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-amber-500 transition-colors mt-0.5">
+                User Dashboard
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ====================================================
+             3. RIGHT (LAPTOP VIEW): GAP & REMAINING CONTROLS
+             ==================================================== -->
+        <div class="hidden lg:flex items-center space-x-1.5 xl:space-x-2 rtl:space-x-reverse shrink-0">
+
+          <!-- Prominent Gap After Dashboard in Laptop View -->
+          <div class="w-6 sm:w-8 xl:w-10 shrink-0" aria-hidden="true"></div>
+
+          <!-- 3.1 DARK MODE TOGGLE (3D SWITCH) -->
+          <button id="themeToggleBtn" onclick="toggleTheme()" class="btn-3d btn-3d-switch w-7.5 h-7.5 sm:w-8 sm:h-8 rounded-xl flex items-center justify-center text-xs" title="Toggle Dark/Light Mode" aria-label="Toggle theme">
+            <i id="themeIcon" class="fa-solid fa-sun text-amber-400"></i>
+          </button>
+
+          <!-- 3.2 RTL TOGGLE (ONLY RIGHT-LEFT ICON - NO TEXT) -->
+          <button id="rtlToggleBtn" onclick="toggleRTL()" class="btn-3d btn-3d-switch w-7.5 h-7.5 sm:w-8 sm:h-8 rounded-xl flex items-center justify-center text-xs" title="Toggle RTL / LTR" aria-label="Toggle RTL">
+            <i id="rtlIcon" class="fa-solid fa-right-left text-[11px] text-brand-crimson"></i>
+          </button>
+
+          <!-- 3.3 3D LOGIN BUTTON -->
+          <a href="login.html" id="loginBtnTrigger" class="btn-3d btn-3d-login px-3.5 py-1.5 text-xs rounded-xl flex items-center gap-1.5 shadow-md" aria-label="Login">
+            <i class="fa-solid fa-lock text-[10px] text-rose-200"></i>
+            <span>Login</span>
+          </a>
+
+        </div>
+
+        <!-- ====================================================
+             4. MOBILE & TABLET VIEW: HAMBURGER AT RIGHT
+             ==================================================== -->
+        <div class="flex items-center lg:hidden">
+          <!-- 3D Hamburger Menu Button -->
+          <button id="hamburgerBtn" onclick="toggleMobileMenu()" class="btn-3d btn-3d-hamburger w-8 h-8 rounded-xl flex items-center justify-center p-2 focus:outline-none" aria-label="Navigation Menu" aria-expanded="false">
+            <div class="w-4 h-3 flex flex-col justify-between items-center relative">
+              <span id="bar1" class="w-full h-0.5 bg-white rounded-full transition-all duration-300 transform origin-left"></span>
+              <span id="bar2" class="w-full h-0.5 bg-white rounded-full transition-all duration-300"></span>
+              <span id="bar3" class="w-full h-0.5 bg-white rounded-full transition-all duration-300 transform origin-left"></span>
+            </div>
+          </button>
+        </div>
+
+      </div>
+    </nav>
+  </header>
+
+  <!-- ========================================================
+       MOBILE & TABLET SLIDE-OVER DRAWER
+       ======================================================== -->
+  <div id="mobileDrawerOverlay" onclick="toggleMobileMenu()" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
+
+  <aside id="mobileDrawer" class="fixed top-0 right-0 rtl:right-auto rtl:left-0 w-72 max-w-[85vw] h-full bg-white dark:bg-slate-900 border-l rtl:border-l-0 rtl:border-r border-slate-200 dark:border-slate-800 z-50 shadow-2xl flex flex-col transform translate-x-full rtl:-translate-x-full transition-transform duration-300 ease-out">
+    
+    <!-- Drawer Header: Exact Navbar Logo Lockup -->
+    <div class="p-3.5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+      <a href="index.html" onclick="toggleMobileMenu()" class="flex items-center gap-2 focus:outline-none">
+        <!-- Exact Emblem -->
+        <div class="relative w-7 h-7 rounded-lg bg-gradient-to-b from-rose-500 via-brand-crimson to-rose-700 p-0.5 shadow-sm shadow-rose-950/20 shrink-0">
+          <div class="w-full h-full bg-slate-950 rounded-[5px] flex items-center justify-center overflow-hidden relative">
+            <div class="absolute inset-0 bg-radial-gradient from-amber-400/25 to-transparent"></div>
+            <svg viewBox="0 0 100 100" class="w-5 h-5 text-white" fill="none">
+              <circle cx="50" cy="50" r="26" fill="#F59E0B" fill-opacity="0.2" />
+              <polygon points="34,16 35.5,19 39,19.5 36.5,22 37,25 34,23.5 31,25 31.5,22 29,19.5 32.5,19" fill="#FDE047" />
+              <polygon points="50,11 52,15 57,15.5 53.5,19 54.5,23.5 50,21 45.5,23.5 46.5,19 43,15.5 48,15" fill="#FDE047" />
+              <polygon points="66,16 67.5,19 71,19.5 68.5,22 69,25 66,23.5 63,25 63.5,22 61,19.5 64.5,19" fill="#FDE047" />
+              <circle cx="43" cy="30" r="6" fill="#FFFFFF" />
+              <path d="M40 31 Q33 30 28 35" stroke="#FDE047" stroke-width="2" stroke-linecap="round" />
+              <path d="M41 36 L48 39 L47 52 L39 51 Z" fill="#FFFFFF" />
+              <path d="M42 38 L34 41" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" />
+              <path d="M47 39 L57 35 L62 38" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" />
+              <path d="M45 50 L56 46 L73 39" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" />
+              <path d="M73 39 L76 34 L80 39 L75 42 Z" fill="#FDE047" />
+              <path d="M40 51 L35 59 L42 63" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" />
+              <path d="M38 50 C42 51 46 51 48 50" stroke="#0F172A" stroke-width="3.5" stroke-linecap="round" />
+              <path d="M42 51 L38 65 M44 51 L47 67" stroke="#0F172A" stroke-width="2.5" stroke-linecap="round" />
+              <circle cx="39" cy="62" r="1.2" fill="#F59E0B" />
+              <circle cx="45" cy="64" r="1.2" fill="#F59E0B" />
+            </svg>
+          </div>
+          <div class="absolute -top-1 -right-1 rtl:-left-1 rtl:-right-auto w-3 h-3 rounded-full bg-amber-400 border border-slate-950 flex items-center justify-center text-[6px] font-black text-slate-950">
+            ★
+          </div>
+        </div>
+
+        <!-- Exact Brand Typography -->
+        <div class="flex flex-col text-left rtl:text-right">
+          <span class="font-outfit font-black text-xs sm:text-[13.5px] tracking-tight leading-none text-slate-900 dark:text-white">
+            <span class="text-brand-crimson">KIDS</span> MARTIAL ARTS
+          </span>
+          <span class="text-[7.5px] sm:text-[8px] font-bold text-amber-500 dark:text-amber-400 tracking-wider uppercase font-outfit leading-tight mt-0.5">
+            &amp; CONFIDENCE BUILDING PROGRAM
+          </span>
+        </div>
+      </a>
+
+      <button onclick="toggleMobileMenu()" class="btn-3d btn-3d-switch w-7 h-7 rounded-lg flex items-center justify-center text-slate-400 hover:text-brand-crimson">
+        <i class="fa-solid fa-xmark text-xs"></i>
+      </button>
+    </div>
+
+    <!-- Drawer Body -->
+    <div class="flex-1 overflow-y-auto p-3.5 space-y-3">
+      
+      <!-- Nav Items List -->
+      <div id="mobileItemsList" class="space-y-1">
+        
+        <!-- Home Accordion (Only Home 1 and Home 2) -->
+        <div class="drawer-anim-item rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden ">
+          <div class="w-full flex items-center justify-between p-2.5 font-outfit font-bold text-xs text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/50">
+            <a href="index.html" onclick="toggleMobileMenu()" class="flex items-center gap-2 flex-1">
+              <i class="fa-solid fa-house text-brand-crimson text-[11px]"></i>
+              <span>Home</span>
+            </a>
+            <button type="button" onclick="toggleAccordion('mobileHomeSubmenu', 'homeArrow')" class="p-1 focus:outline-none" aria-label="Toggle Home Submenu">
+              <i id="homeArrow" class="fa-solid fa-chevron-down text-[10px] text-slate-400 transition-transform duration-200"></i>
+            </button>
+          </div>
+          <div id="mobileHomeSubmenu" class="hidden bg-slate-50 dark:bg-slate-950/40 p-1.5 space-y-1 border-t border-slate-200/60 dark:border-slate-800/60">
+            <a href="index.html" onclick="toggleMobileMenu()" class="block p-1.5 rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-brand-crimson">
+              Home 1
+            </a>
+            <a href="home-2.html" onclick="toggleMobileMenu()" class="block p-1.5 rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-brand-crimson">
+              Home 2
+            </a>
+          </div>
+        </div>
+
+        <!-- About -->
+        <a href="about.html" onclick="toggleMobileMenu()" class="drawer-anim-item  flex items-center gap-2 p-2.5 rounded-xl font-outfit font-bold text-xs text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60">
+          <i class="fa-solid fa-circle-info text-amber-500 text-[11px]"></i>
+          <span>About</span>
+        </a>
+
+        <!-- Programs (Direct Link - No Options) -->
+        <a href="programs.html" onclick="toggleMobileMenu()" class="drawer-anim-item  flex items-center gap-2 p-2.5 rounded-xl font-outfit font-bold text-xs text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60">
+          <i class="fa-solid fa-shapes text-rose-500 text-[11px]"></i>
+          <span>Programs</span>
+        </a>
+
+        <!-- Belt System -->
+        <a href="belt-system.html" onclick="toggleMobileMenu()" class="drawer-anim-item  flex items-center justify-between p-2.5 rounded-xl font-outfit font-bold text-xs text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60">
+          <span class="flex items-center gap-2">
+            <i class="fa-solid fa-ribbon text-amber-500 text-[11px]"></i>
+            <span>Belt System</span>
+          </span>
+          <span class="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-amber-400 to-rose-500"></span>
+        </a>
+
+        <!-- Instructors -->
+        <a href="instructors.html" onclick="toggleMobileMenu()" class="drawer-anim-item  flex items-center gap-2 p-2.5 rounded-xl font-outfit font-bold text-xs text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60">
+          <i class="fa-solid fa-user-ninja text-blue-500 text-[11px]"></i>
+          <span>Instructors</span>
+        </a>
+
+        <!-- Events -->
+        <a href="events.html" onclick="toggleMobileMenu()" class="drawer-anim-item  flex items-center gap-2 p-2.5 rounded-xl font-outfit font-bold text-xs text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60">
+          <i class="fa-solid fa-calendar-days text-purple-500 text-[11px]"></i>
+          <span>Events</span>
+        </a>
+
+        <!-- Safety -->
+        <a href="safety.html" onclick="toggleMobileMenu()" class="drawer-anim-item active flex items-center gap-2 p-2.5 rounded-xl font-outfit font-bold text-xs text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60">
+          <i class="fa-solid fa-shield-halved text-emerald-500 text-[11px]"></i>
+          <span>Safety</span>
+        </a>
+
+        <!-- Contact -->
+        <a href="contact.html" onclick="toggleMobileMenu()" class="drawer-anim-item  flex items-center gap-2 p-2.5 rounded-xl font-outfit font-bold text-xs text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60">
+          <i class="fa-solid fa-location-dot text-rose-500 text-[11px]"></i>
+          <span>Contact</span>
+        </a>
+
+        <!-- Dashboards (Only Admin Dashboard & User Dashboard) -->
+        <div class="drawer-anim-item pt-2 border-t border-slate-200 dark:border-slate-800">
+          <div class="text-[9px] font-black uppercase text-slate-400 tracking-wider px-2 mb-1">
+            Dashboards
+          </div>
+          <a href="admin-dashboard.html" onclick="toggleMobileMenu()" class="flex items-center gap-2 p-2 rounded-lg font-outfit font-bold text-xs text-slate-700 dark:text-slate-300 hover:text-brand-crimson">
+            <i class="fa-solid fa-user-shield text-brand-crimson text-xs"></i>
+            <span>Admin Dashboard</span>
+          </a>
+          <a href="user-dashboard.html" onclick="toggleMobileMenu()" class="flex items-center gap-2 p-2 rounded-lg font-outfit font-bold text-xs text-slate-700 dark:text-slate-300 hover:text-amber-500 mt-0.5">
+            <i class="fa-solid fa-user-graduate text-amber-500 text-xs"></i>
+            <span>User Dashboard</span>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Settings (Dark Mode & RTL Icon Buttons) -->
+      <div class="drawer-anim-item p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 space-y-2">
+        <div class="text-[9px] font-bold font-outfit text-slate-400 uppercase tracking-wider">
+          Preferences
+        </div>
+        
+        <div class="grid grid-cols-2 gap-2">
+          <button onclick="toggleTheme()" class="btn-3d btn-3d-switch p-2 rounded-lg flex items-center justify-center gap-1.5 text-xs font-bold" title="Toggle Dark/Light">
+            <i class="fa-solid fa-moon text-amber-400 text-xs"></i>
+            <span id="mobileThemeLabel">Dark</span>
+          </button>
+
+          <!-- RTL Button - Icon Only in mobile toggle too -->
+          <button onclick="toggleRTL()" class="btn-3d btn-3d-switch p-2 rounded-lg flex items-center justify-center text-xs font-bold" title="Toggle RTL">
+            <i class="fa-solid fa-right-left text-brand-crimson text-xs"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Drawer Footer: 3D Login Button -->
+    <div class="p-3 border-t border-slate-200 dark:border-slate-800">
+      <a href="login.html" onclick="toggleMobileMenu()" class="btn-3d btn-3d-login w-full py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-2">
+        <i class="fa-solid fa-lock text-xs"></i>
+        <span>Login</span>
+      </a>
+    </div>
+
+  </aside>
+
+  <!-- ========================================================
+       5. 3D LOGIN MODAL
+       ======================================================== -->
+  <div id="loginModalBackdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+    <div id="loginModalContent" class="w-full max-w-sm bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 shadow-2xl border border-slate-200 dark:border-slate-800 transform scale-95 transition-transform duration-300 relative">
+      
+      <button onclick="closeLoginModal()" class="absolute top-4 right-4 rtl:right-auto rtl:left-4 text-slate-400 hover:text-slate-600 dark:hover:text-white">
+        <i class="fa-solid fa-xmark text-sm"></i>
+      </button>
+
+      <div class="text-center mb-5">
+        <div class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-rose-500/10 text-brand-crimson text-xl mb-2">
+          <i class="fa-solid fa-user-ninja"></i>
+        </div>
+        <h3 class="font-outfit text-lg font-black text-slate-900 dark:text-white">
+          Dojo Member Login
+        </h3>
+        <p class="text-[11px] text-slate-400 mt-0.5">
+          Access your student belt progress &amp; schedule
+        </p>
+      </div>
+
+      <form onsubmit="handleLoginSubmit(event)" class="space-y-3">
+        <div>
+          <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+            Email / Student ID
+          </label>
+          <input type="text" required placeholder="member@example.com" class="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 text-xs focus:outline-none focus:ring-2 focus:ring-brand-crimson transition-all" />
+        </div>
+
+        <div>
+          <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+            Password / PIN
+          </label>
+          <input type="password" required placeholder="••••••••" class="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 text-xs focus:outline-none focus:ring-2 focus:ring-brand-crimson transition-all" />
+        </div>
+
+        <button type="submit" class="btn-3d btn-3d-login w-full py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 mt-2">
+          <span>Sign In</span>
+          <i class="fa-solid fa-arrow-right rtl:rotate-180 text-[10px]"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  
+  <!-- ========================================================
+       MAIN SAFETY, PROTECTION & WELLNESS CONTENT
+       ======================================================== -->
+  <main class="w-full flex-grow relative overflow-hidden">
+
+    <!-- ====================================================
+         SECTION 1: CHILD SAFETY GUIDELINES & TRAINING SAFETY RULES
+         Unique Layout: The Bio-Shield Citadel & Dojo Rulebook Console
+         ==================================================== -->
+    <section id="section-child-training-safety" class="relative py-16 sm:py-24 border-b border-slate-200/80 dark:border-slate-800/80 overflow-hidden bg-slate-50/60 dark:bg-slate-900/40">
+      <!-- Ambient Radial Accents -->
+      <div class="absolute -top-32 -left-32 w-96 h-96 bg-teal-500/10 dark:bg-teal-500/15 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute top-1/2 -right-32 w-96 h-96 bg-brand-crimson/10 dark:bg-brand-crimson/15 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute inset-0 bg-grid-ambient pointer-events-none opacity-40"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        <!-- Header -->
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
+          <div class="space-y-4 max-w-2xl text-left rtl:text-right">
+            <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-teal-500/10 border border-teal-500/25 text-teal-700 dark:text-teal-300 text-xs font-black uppercase tracking-widest">
+              <i class="fa-solid fa-shield-heart text-xs"></i>
+              <span>Child Safety Guidelines</span>
+            </div>
+            <h1 class="font-outfit font-black text-3xl sm:text-4xl lg:text-5xl text-slate-900 dark:text-white leading-[1.15]">
+              Uncompromising Protection & <span class="bg-gradient-to-r from-teal-500 via-emerald-500 to-brand-crimson bg-clip-text text-transparent">Dojo Safety Culture</span>
+            </h1>
+            <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-jakarta">
+              Your child’s physical security and emotional well-being are our highest sacred duty. Discover our comprehensive Child Safety Guidelines and strict Training Safety Rules engineered by pediatric martial arts specialists.
+            </p>
+          </div>
+
+          <!-- Safety Status Telemetry Badge -->
+          <div class="flex-shrink-0 bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 rounded-2xl p-5 shadow-xl shadow-slate-900/5 backdrop-blur-md">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-xl bg-teal-500/15 text-teal-600 dark:text-teal-400 flex items-center justify-center text-xl font-black">
+                <i class="fa-solid fa-user-shield"></i>
+              </div>
+              <div>
+                <div class="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Academy Safety Rating</div>
+                <div class="text-xl font-black text-slate-900 dark:text-white font-outfit">100% Certified SafeSport</div>
+                <div class="text-[11px] text-emerald-600 dark:text-emerald-400 font-bold flex items-center gap-1 mt-0.5">
+                  <i class="fa-solid fa-circle-check"></i> Zero Incident Record
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 1 Two-Column Core: Image & 3 Safety Pillars -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-12">
+          
+          <!-- Column Left: Hero Image with Floating Trust Chips -->
+          <div class="lg:col-span-6 relative">
+            <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-700/80 group">
+              <img 
+                src="images/safety_child_guidelines.jpg" 
+                alt="Child Safety Guidelines and Respectful Dojo Instruction" 
+                class="w-full h-[380px] sm:h-[460px] object-cover object-center transform group-hover:scale-105 transition-transform duration-700"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent"></div>
+              
+              <!-- Floating Pill 1: Background Checked -->
+              <div class="absolute top-4 left-4 rtl:left-auto rtl:right-4 bg-white/95 dark:bg-slate-900/90 backdrop-blur-md border border-slate-200 dark:border-slate-700 px-3.5 py-2 rounded-xl shadow-lg flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-lg bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-black">
+                  <i class="fa-solid fa-fingerprint"></i>
+                </div>
+                <div>
+                  <div class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Staff Verification</div>
+                  <div class="text-xs font-black text-slate-900 dark:text-white">Annual FBI/DOJ Cleared</div>
+                </div>
+              </div>
+
+              <!-- Floating Pill 2: Anti-Bully Sanctuary -->
+              <div class="absolute bottom-4 inset-x-4 bg-slate-900/90 dark:bg-slate-950/90 backdrop-blur-md border border-slate-700/80 p-3.5 rounded-2xl text-white flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-xl bg-teal-500/20 border border-teal-500/40 text-teal-400 flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-dove text-lg"></i>
+                  </div>
+                  <div>
+                    <div class="text-xs font-bold text-slate-300">Emotional Safety Guarantee</div>
+                    <div class="text-sm font-black text-white">Zero Tolerance Bully-Free Sanctuary</div>
+                  </div>
+                </div>
+                <span class="px-2.5 py-1 rounded-full bg-teal-500/20 border border-teal-500/40 text-teal-300 text-xs font-bold">
+                  Verified
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column Right: Child Safety Guidelines 3 Pillars -->
+          <div class="lg:col-span-6 space-y-5 text-left rtl:text-right">
+            <div class="bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 rounded-2xl p-6 shadow-sm">
+              <h3 class="text-lg font-black text-slate-900 dark:text-white font-outfit flex items-center gap-3 mb-2">
+                <span class="w-8 h-8 rounded-xl bg-teal-500/10 text-teal-600 dark:text-teal-400 flex items-center justify-center text-sm font-black">01</span>
+                Physical Protection & High-Density Tatami Mats
+              </h3>
+              <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-jakarta">
+                Our entire training facility is floored with 2-inch professional shock-absorbing closed-cell tatami foam mats. All wall pillars and mirrors are wrapped in 6-foot heavy foam padding to prevent impact trauma.
+              </p>
+            </div>
+
+            <div class="bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 rounded-2xl p-6 shadow-sm">
+              <h3 class="text-lg font-black text-slate-900 dark:text-white font-outfit flex items-center gap-3 mb-2">
+                <span class="w-8 h-8 rounded-xl bg-brand-crimson/10 text-brand-crimson dark:text-rose-400 flex items-center justify-center text-sm font-black">02</span>
+                Emotional Encouragement & Bullying Prevention
+              </h3>
+              <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-jakarta">
+                Child Safety Guidelines extend beyond bruises. We cultivate an inclusive brotherhood and sisterhood where sarcasm, mockery, or aggressive intimidation are strictly forbidden and immediately resolved with restorative dialogue.
+              </p>
+            </div>
+
+            <div class="bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 rounded-2xl p-6 shadow-sm">
+              <h3 class="text-lg font-black text-slate-900 dark:text-white font-outfit flex items-center gap-3 mb-2">
+                <span class="w-8 h-8 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center text-sm font-black">03</span>
+                Certified Staff & Two-Adult Rule Compliance
+              </h3>
+              <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-jakarta">
+                Every instructor undergoes comprehensive background checks, pediatric CPR/AED certification, and SafeSport misconduct training. We maintain a strict "Two-Adult Rule" guaranteeing no child is ever left alone with a single adult in private.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Training Safety Rules 4-Quadrant Console -->
+        <div class="mt-14">
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <div class="inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-brand-crimson dark:text-rose-400 mb-1">
+                <i class="fa-solid fa-scale-balanced"></i>
+                <span>Dojo Protocol</span>
+              </div>
+              <h3 class="text-2xl font-black text-slate-900 dark:text-white font-outfit">
+                Training Safety Rules
+              </h3>
+            </div>
+            <span class="hidden sm:inline-block text-xs font-bold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700">
+              Mandatory Code of Dojo Conduct
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5" id="trainingSafetyRulesGrid">
+            
+            <div class="bg-white dark:bg-slate-800/95 border border-slate-200 dark:border-slate-700/80 rounded-2xl p-6 shadow-md hover:border-teal-500 transition-all duration-300">
+              <div class="w-12 h-12 rounded-xl bg-teal-500/15 text-teal-600 dark:text-teal-400 flex items-center justify-center text-xl mb-4">
+                <i class="fa-solid fa-person-praying"></i>
+              </div>
+              <h4 class="text-base font-black text-slate-900 dark:text-white font-outfit mb-1">1. Mat Bowing & Attention</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-300 font-jakarta leading-relaxed">
+                Students bow upon entering and leaving the mat to center their minds, signaling total readiness to listen and follow instructor commands.
+              </p>
+            </div>
+
+            <div class="bg-white dark:bg-slate-800/95 border border-slate-200 dark:border-slate-700/80 rounded-2xl p-6 shadow-md hover:border-brand-crimson transition-all duration-300">
+              <div class="w-12 h-12 rounded-xl bg-brand-crimson/15 text-brand-crimson dark:text-rose-400 flex items-center justify-center text-xl mb-4">
+                <i class="fa-solid fa-circle-pause"></i>
+              </div>
+              <h4 class="text-base font-black text-slate-900 dark:text-white font-outfit mb-1">2. Universal "Maté" Freeze</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-300 font-jakarta leading-relaxed">
+                When an instructor shouts "Maté" (Stop!) or blows the safety whistle, all movement, strikes, and sparring cease instantly without question.
+              </p>
+            </div>
+
+            <div class="bg-white dark:bg-slate-800/95 border border-slate-200 dark:border-slate-700/80 rounded-2xl p-6 shadow-md hover:border-amber-500 transition-all duration-300">
+              <div class="w-12 h-12 rounded-xl bg-amber-500/15 text-amber-600 dark:text-amber-400 flex items-center justify-center text-xl mb-4">
+                <i class="fa-solid fa-ring"></i>
+              </div>
+              <h4 class="text-base font-black text-slate-900 dark:text-white font-outfit mb-1">3. Personal Gear Check</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-300 font-jakarta leading-relaxed">
+                Fingernails and toenails must be trimmed short. No watches, rings, jewelry, or hard hairpins are permitted during practice to prevent scratches.
+              </p>
+            </div>
+
+            <div class="bg-white dark:bg-slate-800/95 border border-slate-200 dark:border-slate-700/80 rounded-2xl p-6 shadow-md hover:border-blue-500 transition-all duration-300">
+              <div class="w-12 h-12 rounded-xl bg-blue-500/15 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xl mb-4">
+                <i class="fa-solid fa-arrows-split-up-and-left"></i>
+              </div>
+              <h4 class="text-base font-black text-slate-900 dark:text-white font-outfit mb-1">4. Safe Spatial Bubbles</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-300 font-jakarta leading-relaxed">
+                Students maintain an arm's-length safety perimeter during kicking combinations. Running or unsupervised wrestling is strictly prohibited.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================
+         SECTION 2: PROTECTIVE EQUIPMENT
+         Unique Layout: 3D Anatomical Armor Deck & Precision Gear Vault
+         ==================================================== -->
+    <section id="section-protective-equipment" class="relative py-16 sm:py-24 border-b border-slate-200/80 dark:border-slate-800/80 overflow-hidden bg-white dark:bg-slate-950">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-crimson/10 border border-brand-crimson/25 text-brand-crimson dark:text-rose-400 text-xs font-black uppercase tracking-widest">
+            <i class="fa-solid fa-vest text-xs"></i>
+            <span>Gear Standards</span>
+          </div>
+          <h2 class="font-outfit font-black text-3xl sm:text-4xl text-slate-900 dark:text-white">
+            Mandatory <span class="bg-gradient-to-r from-brand-crimson via-rose-500 to-amber-500 bg-clip-text text-transparent">Protective Equipment</span> & Gear Vault
+          </h2>
+          <p class="text-base text-slate-600 dark:text-slate-300 font-jakarta leading-relaxed">
+            Every piece of Protective Equipment at our academy is rigorously vetted and inspected before each sparring drill. We utilize Olympic-sanctioned dipped-foam gear engineered specifically for growing children.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          
+          <!-- Column Left (7 Cols): Gear Anatomy Grid -->
+          <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4" id="gearAnatomyGrid">
+            
+            <!-- Gear 1 -->
+            <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-brand-crimson/50 transition-colors">
+              <div class="w-10 h-10 rounded-xl bg-brand-crimson/15 text-brand-crimson dark:text-rose-400 flex items-center justify-center text-lg mb-3">
+                <i class="fa-solid fa-helmet-safety"></i>
+              </div>
+              <h4 class="text-base font-black text-slate-900 dark:text-white font-outfit mb-1">Dipped-Foam Headgear</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-300 font-jakarta leading-relaxed">
+                3/4-inch high-density shock dissipation foam with reinforced ear canals and clear panoramic peripheral sightlines.
+              </p>
+              <span class="inline-block mt-2 text-[10px] font-black uppercase tracking-wider text-brand-crimson dark:text-rose-400">
+                Mandatory for Sparring
+              </span>
+            </div>
+
+            <!-- Gear 2 -->
+            <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-brand-crimson/50 transition-colors">
+              <div class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-600 dark:text-amber-400 flex items-center justify-center text-lg mb-3">
+                <i class="fa-solid fa-teeth-open"></i>
+              </div>
+              <h4 class="text-base font-black text-slate-900 dark:text-white font-outfit mb-1">Dual-Layer Mouthguard</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-300 font-jakarta leading-relaxed">
+                Custom-molded boil & bite thermal polymers that cushion the jaw joint, shielding teeth and dissipating upward impact.
+              </p>
+              <span class="inline-block mt-2 text-[10px] font-black uppercase tracking-wider text-amber-500">
+                All Contact Classes
+              </span>
+            </div>
+
+            <!-- Gear 3 -->
+            <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-brand-crimson/50 transition-colors">
+              <div class="w-10 h-10 rounded-xl bg-teal-500/15 text-teal-600 dark:text-teal-400 flex items-center justify-center text-lg mb-3">
+                <i class="fa-solid fa-shield-halved"></i>
+              </div>
+              <h4 class="text-base font-black text-slate-900 dark:text-white font-outfit mb-1">Chest Protector (Hogu)</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-300 font-jakarta leading-relaxed">
+                Lightweight anatomical foam vest guarding ribs, sternum, and clavicle while preserving full flexibility for kicking.
+              </p>
+              <span class="inline-block mt-2 text-[10px] font-black uppercase tracking-wider text-teal-600 dark:text-teal-400">
+                Torso Shield
+              </span>
+            </div>
+
+            <!-- Gear 4 -->
+            <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-brand-crimson/50 transition-colors">
+              <div class="w-10 h-10 rounded-xl bg-blue-500/15 text-blue-600 dark:text-blue-400 flex items-center justify-center text-lg mb-3">
+                <i class="fa-solid fa-mitten"></i>
+              </div>
+              <h4 class="text-base font-black text-slate-900 dark:text-white font-outfit mb-1">Sparring Gloves & Shin Pads</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-300 font-jakarta leading-relaxed">
+                Thumb-locked contoured gloves preventing hyper-extension, paired with contoured instep shin cushions for bone protection.
+              </p>
+              <span class="inline-block mt-2 text-[10px] font-black uppercase tracking-wider text-blue-500">
+                Impact Dampening
+              </span>
+            </div>
+
+          </div>
+
+          <!-- Column Right (5 Cols): Protective Equipment In Action Image & Sanitization Protocol -->
+          <div class="lg:col-span-5 space-y-6">
+            <div class="relative rounded-3xl overflow-hidden shadow-2xl border-2 border-brand-crimson/30 dark:border-rose-500/30">
+              <img 
+                src="images/safety_protective_gear.jpg" 
+                alt="Child Fitted with Complete Martial Arts Protective Equipment by Coach" 
+                class="w-full h-80 sm:h-96 object-cover object-center"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex items-end p-6">
+                <div class="text-white">
+                  <span class="px-2.5 py-1 rounded bg-brand-crimson text-white text-xs font-black uppercase tracking-wider">
+                    Equipment Check
+                  </span>
+                  <div class="text-base font-black font-outfit mt-1">Instructor Gear Inspection Before Every Sparring Round</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sanitization Note Card -->
+            <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 flex items-center gap-4">
+              <div class="w-12 h-12 rounded-xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl flex-shrink-0">
+                <i class="fa-solid fa-spray-can-sparkles"></i>
+              </div>
+              <div>
+                <h5 class="text-sm font-black text-slate-900 dark:text-white font-outfit">Medical-Grade Gear Sanitation</h5>
+                <p class="text-xs text-slate-600 dark:text-slate-300 font-jakarta mt-0.5">
+                  Academy loaner gear is sterilized after every single session using hospital-grade botanical UV antimicrobial sanitizers.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================
+         SECTION 3: INSTRUCTOR-TO-STUDENT GUIDANCE & SAFE TRAINING PRACTICES
+         Unique Layout: Mentorship Ratio Orbit & Progressive Practice Laboratory
+         ==================================================== -->
+    <section id="section-instructor-safe-practices" class="relative py-16 sm:py-24 border-b border-slate-200/80 dark:border-slate-800/80 overflow-hidden bg-slate-50/70 dark:bg-slate-900/50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+        <div class="text-center max-w-3xl mx-auto mb-14 space-y-4">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/25 text-blue-600 dark:text-blue-400 text-xs font-black uppercase tracking-widest">
+            <i class="fa-solid fa-hand-holding-hand text-xs"></i>
+            <span>Pediatric Pedagogy</span>
+          </div>
+          <h2 class="font-outfit font-black text-3xl sm:text-4xl text-slate-900 dark:text-white">
+            Attentive <span class="text-blue-600 dark:text-blue-400">Instructor-to-Student Guidance</span> & <span class="bg-gradient-to-r from-teal-500 to-emerald-500 bg-clip-text text-transparent">Safe Training Practices</span>
+          </h2>
+          <p class="text-base text-slate-600 dark:text-slate-300 font-jakarta leading-relaxed">
+            Safety starts with skilled, watchful mentorship. Our low student-to-teacher ratio allows coaches to guide every kick, breakfall roll, and movement with personalized biomechanical oversight.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center mb-12">
+          
+          <!-- Column Left (5 Cols): Image with Ratio Pill -->
+          <div class="lg:col-span-5 relative">
+            <div class="rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-700/80 shadow-2xl relative group">
+              <img 
+                src="images/safety_instructor_guidance.jpg" 
+                alt="Instructor-to-Student Guidance with Attentive Coach on Dojo Mat" 
+                class="w-full h-[400px] object-cover object-center group-hover:scale-105 transition-transform duration-700"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex items-end p-6">
+                <div class="text-white">
+                  <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-600 text-xs font-black uppercase tracking-wider mb-1">
+                    <i class="fa-solid fa-users"></i>
+                    <span>1:6 Ratio</span>
+                  </div>
+                  <div class="text-base font-black font-outfit">Eye-Level Coaching & Positive Reinforcement</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column Right (7 Cols): Instructor-to-Student Guidance Standards -->
+          <div class="lg:col-span-7 space-y-4">
+            <h3 class="text-xl font-black text-slate-900 dark:text-white font-outfit flex items-center gap-2 mb-2">
+              <i class="fa-solid fa-compass text-blue-500"></i>
+              <span>Instructor-to-Student Guidance</span> Protocols
+            </h3>
+
+            <div class="p-5 rounded-2xl bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 shadow-sm">
+              <h4 class="text-base font-black text-slate-900 dark:text-white font-outfit mb-1">1. Eye-Level Kinetic Communication</h4>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-jakarta leading-relaxed">
+                Instructors crouch to the child's height to eliminate intimidation, offering patient visual demonstrations and clear, age-appropriate verbal cues before any contact begins.
+              </p>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 shadow-sm">
+              <h4 class="text-base font-black text-slate-900 dark:text-white font-outfit mb-1">2. Respectful Boundary & Target-First Spotting</h4>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-jakarta leading-relaxed">
+                Corrections are delivered by positioning target shields, foam noodles, and floor markers rather than unnecessary physical touching, honoring each child's bodily boundaries.
+              </p>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 shadow-sm">
+              <h4 class="text-base font-black text-slate-900 dark:text-white font-outfit mb-1">3. Neurodivergent & Sensory-Friendly Pacing</h4>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-jakarta leading-relaxed">
+                Our faculty is trained in pediatric sensory regulation. If a child feels overwhelmed or overstimulated, they are offered quiet mat breaks without penalty or shame.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Safe Training Practices Flowchart Strip -->
+        <div class="bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 rounded-3xl p-6 sm:p-8 shadow-md">
+          <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-100 dark:border-slate-700/60">
+            <div>
+              <span class="text-xs font-black uppercase tracking-wider text-teal-600 dark:text-teal-400">Class Workflow</span>
+              <h3 class="text-xl font-black text-slate-900 dark:text-white font-outfit">Safe Training Practices: 4-Phase Class Architecture</h3>
+            </div>
+            <span class="text-xs font-bold text-slate-500 dark:text-slate-400">Zero Cold-Start Rule</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="safePracticesFlow">
+            <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-700/60">
+              <span class="text-xs font-black text-teal-600 dark:text-teal-400 font-outfit">Phase 1 (10 Min)</span>
+              <h5 class="text-sm font-black text-slate-900 dark:text-white font-outfit mt-1">Joint Mobilization Warmup</h5>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Low-impact dynamic stretches warming ankles, hips, and core safely.</p>
+            </div>
+            <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-700/60">
+              <span class="text-xs font-black text-blue-600 dark:text-blue-400 font-outfit">Phase 2 (15 Min)</span>
+              <h5 class="text-sm font-black text-slate-900 dark:text-white font-outfit mt-1">Shadow Form & Geometry</h5>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Practicing techniques in air before making any contact with pads or partners.</p>
+            </div>
+            <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-700/60">
+              <span class="text-xs font-black text-amber-500 font-outfit">Phase 3 (15 Min)</span>
+              <h5 class="text-sm font-black text-slate-900 dark:text-white font-outfit mt-1">Touch-Contact Target Work</h5>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Controlled sparring drills strictly limited to 10% touch-speed with full gear.</p>
+            </div>
+            <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-700/60">
+              <span class="text-xs font-black text-emerald-500 font-outfit">Phase 4 (5 Min)</span>
+              <h5 class="text-sm font-black text-slate-900 dark:text-white font-outfit mt-1">Mindful Breathing & Bow</h5>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Mokuso cooldown meditation returning heart rate to baseline with respect.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================
+         SECTION 4: PARENT PARTICIPATION GUIDELINES
+         Unique Layout: The Observation Pavilion & Family Partnership Charter
+         ==================================================== -->
+    <section id="section-parent-guidelines" class="relative py-16 sm:py-24 border-b border-slate-200/80 dark:border-slate-800/80 overflow-hidden bg-white dark:bg-slate-950">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+        <div class="text-center max-w-3xl mx-auto mb-14 space-y-4">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/25 text-amber-600 dark:text-amber-400 text-xs font-black uppercase tracking-widest">
+            <i class="fa-solid fa-people-roof text-xs"></i>
+            <span>Parental Alliance</span>
+          </div>
+          <h2 class="font-outfit font-black text-3xl sm:text-4xl text-slate-900 dark:text-white">
+            Constructive <span class="bg-gradient-to-r from-amber-500 via-rose-500 to-brand-crimson bg-clip-text text-transparent">Parent Participation Guidelines</span>
+          </h2>
+          <p class="text-base text-slate-600 dark:text-slate-300 font-jakarta leading-relaxed">
+            Parents are our indispensable co-pilots in building resilient young warriors. We have established clear Parent Participation Guidelines to create an inspiring, pressure-free atmosphere for all children.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          
+          <!-- Column Left (7 Cols): The Parental Code of Encouragement -->
+          <div class="lg:col-span-7 space-y-5" id="parentGuidelinesList">
+            
+            <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 flex items-start gap-4">
+              <div class="w-12 h-12 rounded-xl bg-amber-500/15 text-amber-600 dark:text-amber-400 flex items-center justify-center text-xl flex-shrink-0">
+                <i class="fa-solid fa-heart"></i>
+              </div>
+              <div>
+                <h4 class="text-base font-black text-slate-900 dark:text-white font-outfit">Celebrate Effort Over Winning</h4>
+                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-jakarta mt-1 leading-relaxed">
+                  Praise your child for standing tall after a stumble, attending class on days they feel tired, and trying difficult combinations. Character is built in the effort, not just the medal.
+                </p>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 flex items-start gap-4">
+              <div class="w-12 h-12 rounded-xl bg-brand-crimson/15 text-brand-crimson dark:text-rose-400 flex items-center justify-center text-xl flex-shrink-0">
+                <i class="fa-solid fa-volume-xmark"></i>
+              </div>
+              <div>
+                <h4 class="text-base font-black text-slate-900 dark:text-white font-outfit">The No-Sideline-Coaching Rule</h4>
+                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-jakarta mt-1 leading-relaxed">
+                  To prevent split attention and confusion for your child, kindly refrain from shouting instructions from the viewing lounge. Allow the instructors to be the single voice of direction during mat time.
+                </p>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 flex items-start gap-4">
+              <div class="w-12 h-12 rounded-xl bg-teal-500/15 text-teal-600 dark:text-teal-400 flex items-center justify-center text-xl flex-shrink-0">
+                <i class="fa-solid fa-door-open"></i>
+              </div>
+              <div>
+                <h4 class="text-base font-black text-slate-900 dark:text-white font-outfit">100% Glass-Partition Transparency</h4>
+                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-jakarta mt-1 leading-relaxed">
+                  You are welcome to observe every class from our dedicated viewing pavilion. We never hold private or closed-door sessions away from parental view.
+                </p>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 flex items-start gap-4">
+              <div class="w-12 h-12 rounded-xl bg-blue-500/15 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xl flex-shrink-0">
+                <i class="fa-solid fa-comments"></i>
+              </div>
+              <div>
+                <h4 class="text-base font-black text-slate-900 dark:text-white font-outfit">Open Sensei Communication Hours</h4>
+                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-jakarta mt-1 leading-relaxed">
+                  Have questions about your child's progress or behavioral goals? Instructors are available 15 minutes before and after each class block for parent dialogue.
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Column Right (5 Cols): Observation Lounge Image & Amenities -->
+          <div class="lg:col-span-5 space-y-6">
+            <div class="relative rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-700/80 shadow-2xl">
+              <img 
+                src="images/safety_parent_guidelines.jpg" 
+                alt="Parents Watching Children Safely from Modern Glass Viewing Lounge" 
+                class="w-full h-80 object-cover object-center"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex items-end p-6">
+                <div class="text-white">
+                  <span class="px-2.5 py-1 rounded bg-amber-500 text-slate-950 text-xs font-black uppercase tracking-wider">
+                    Viewing Lounge
+                  </span>
+                  <div class="text-base font-black font-outfit mt-1">Comfortable Observation With Acoustic Glass</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Parent Comfort Card -->
+            <div class="bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-6">
+              <div class="flex items-center gap-2 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">
+                <i class="fa-solid fa-mug-hot text-amber-500"></i>
+                <span>Lounge Amenities for Parents</span>
+              </div>
+              <p class="text-xs text-slate-600 dark:text-slate-300 font-jakarta leading-relaxed">
+                Enjoy high-speed optical Wi-Fi, organic herbal tea, charging stations, and comfortable ergonomic seating while watching your child conquer new milestones.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================
+         SECTION 5: ATTENDANCE & PICKUP POLICY
+         Unique Layout: Secure Check-In/Check-Out Gate & Digital Guardian Ledger
+         ==================================================== -->
+    <section id="section-attendance-pickup" class="relative py-16 sm:py-24 border-b border-slate-200/80 dark:border-slate-800/80 overflow-hidden bg-slate-50/60 dark:bg-slate-900/40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+        <div class="text-center max-w-3xl mx-auto mb-14 space-y-4">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-600 dark:text-emerald-400 text-xs font-black uppercase tracking-widest">
+            <i class="fa-solid fa-id-badge text-xs"></i>
+            <span>Perimeter Security</span>
+          </div>
+          <h2 class="font-outfit font-black text-3xl sm:text-4xl text-slate-900 dark:text-white">
+            Strict <span class="text-emerald-600 dark:text-emerald-400">Attendance & Pickup Policy</span> & Guardian Release Gate
+          </h2>
+          <p class="text-base text-slate-600 dark:text-slate-300 font-jakarta leading-relaxed">
+            We operate an airline-grade check-in and pickup security protocol. No child ever exits our facility without a matched, pre-authorized adult guardian.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          
+          <!-- Column Left (5 Cols): Reception Desk Image & Fast Check-In Metric -->
+          <div class="lg:col-span-5 space-y-6">
+            <div class="relative rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-700/80 shadow-2xl">
+              <img 
+                src="images/safety_attendance_pickup.jpg" 
+                alt="Father and Daughter Using Digital Check-In Tablet at Dojo Reception" 
+                class="w-full h-80 object-cover object-center"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex items-end p-6">
+                <div class="text-white">
+                  <span class="px-2.5 py-1 rounded bg-emerald-500 text-white text-xs font-black uppercase tracking-wider">
+                    Digital Check-In
+                  </span>
+                  <div class="text-base font-black font-outfit mt-1">Tablet Confirmation for Every Student</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Security Commitment Pill -->
+            <div class="p-4 rounded-2xl bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 shadow-sm flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-black">
+                <i class="fa-solid fa-lock"></i>
+              </div>
+              <div>
+                <div class="text-xs font-black text-slate-900 dark:text-white">Zero Curbside Waiting Policy</div>
+                <div class="text-[11px] text-slate-500 dark:text-slate-400">Children remain in the supervised lobby until guardian physically enters</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column Right (7 Cols): The 4-Step Attendance & Pickup Policy Roadmap -->
+          <div class="lg:col-span-7 space-y-4" id="pickupPolicySteps">
+            
+            <div class="p-5 rounded-2xl bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 shadow-sm flex items-start gap-4">
+              <div class="w-10 h-10 rounded-xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-black text-sm font-outfit flex-shrink-0">
+                01
+              </div>
+              <div>
+                <h4 class="text-base font-black text-slate-900 dark:text-white font-outfit">Digital Kiosk Arrival Scan</h4>
+                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-jakarta mt-1 leading-relaxed">
+                  Upon entering the dojo lobby, students or parents enter their unique 4-digit PIN into the reception terminal. This instantly logs attendance and updates belt testing eligibility.
+                </p>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 shadow-sm flex items-start gap-4">
+              <div class="w-10 h-10 rounded-xl bg-blue-500/15 text-blue-600 dark:text-blue-400 flex items-center justify-center font-black text-sm font-outfit flex-shrink-0">
+                02
+              </div>
+              <div>
+                <h4 class="text-base font-black text-slate-900 dark:text-white font-outfit">Authorized Guardian Registry Match</h4>
+                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-jakarta mt-1 leading-relaxed">
+                  Only individuals listed in the student's authorized pickup profile can sign out a child. Alternate relatives or friends must be registered in advance with photo ID verification.
+                </p>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 shadow-sm flex items-start gap-4">
+              <div class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-600 dark:text-amber-400 flex items-center justify-center font-black text-sm font-outfit flex-shrink-0">
+                03
+              </div>
+              <div>
+                <h4 class="text-base font-black text-slate-900 dark:text-white font-outfit">Early Departure & Medical Slips</h4>
+                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-jakarta mt-1 leading-relaxed">
+                  Need to pick up early for a doctor's appointment? Inform the front desk upon arrival. Coaches safely transition your child without disrupting ongoing group instruction.
+                </p>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 shadow-sm flex items-start gap-4">
+              <div class="w-10 h-10 rounded-xl bg-purple-500/15 text-purple-600 dark:text-purple-400 flex items-center justify-center font-black text-sm font-outfit flex-shrink-0">
+                04
+              </div>
+              <div>
+                <h4 class="text-base font-black text-slate-900 dark:text-white font-outfit">Delayed Pickup Safe-Haven Zone</h4>
+                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-jakarta mt-1 leading-relaxed">
+                  Traffic delays happen. Children waiting for late pickup remain safely seated in our quiet study nook under continuous staff supervision until you arrive.
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================
+         SECTION 6: HEALTH & FITNESS CONSIDERATIONS
+         Unique Layout: Pediatric Vitality Matrix & Wellness Station
+         ==================================================== -->
+    <section id="section-health-fitness" class="relative py-16 sm:py-24 border-b border-slate-200/80 dark:border-slate-800/80 overflow-hidden bg-white dark:bg-slate-950">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+        <div class="text-center max-w-3xl mx-auto mb-14 space-y-4">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-teal-500/10 border border-teal-500/25 text-teal-700 dark:text-teal-300 text-xs font-black uppercase tracking-widest">
+            <i class="fa-solid fa-heart-pulse text-xs"></i>
+            <span>Pediatric Wellness</span>
+          </div>
+          <h2 class="font-outfit font-black text-3xl sm:text-4xl text-slate-900 dark:text-white">
+            Holistic <span class="bg-gradient-to-r from-teal-500 via-emerald-500 to-amber-500 bg-clip-text text-transparent">Health & Fitness Considerations</span>
+          </h2>
+          <p class="text-base text-slate-600 dark:text-slate-300 font-jakarta leading-relaxed">
+            Every child’s physiology is unique. We tailor training intensity, hydration intervals, and medical accommodations to support each young warrior’s healthy physical development.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          
+          <!-- Column Left (5 Cols): Wellness Station Image -->
+          <div class="lg:col-span-5 relative">
+            <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-700/80 group">
+              <img 
+                src="images/safety_health_fitness.jpg" 
+                alt="Young Student at Dojo Wellness Station with Water Bottle and Coach Checking Pulse" 
+                class="w-full h-[400px] object-cover object-center group-hover:scale-105 transition-transform duration-700"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex items-end p-6">
+                <div class="text-white">
+                  <span class="px-2.5 py-1 rounded bg-teal-500 text-slate-950 text-xs font-black uppercase tracking-wider">
+                    Hydrate & Recover
+                  </span>
+                  <div class="text-base font-black font-outfit mt-1">Structured 15-Minute Hydration Breaks</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column Right (7 Cols): 4 Health Consideration Cards Grid -->
+          <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4" id="healthConsiderationsGrid">
+            
+            <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800">
+              <div class="w-10 h-10 rounded-xl bg-teal-500/15 text-teal-600 dark:text-teal-400 flex items-center justify-center text-lg mb-3">
+                <i class="fa-solid fa-lungs"></i>
+              </div>
+              <h4 class="text-base font-black text-slate-900 dark:text-white font-outfit mb-1">Asthma & Allergy Action Plans</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-300 font-jakarta leading-relaxed">
+                Emergency inhalers and EpiPens are tagged in our front-office medical cabinet. Coaches know individual triggers before class starts.
+              </p>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800">
+              <div class="w-10 h-10 rounded-xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-lg mb-3">
+                <i class="fa-solid fa-bottle-water"></i>
+              </div>
+              <h4 class="text-base font-black text-slate-900 dark:text-white font-outfit mb-1">Hydration & Thermoregulation</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-300 font-jakarta leading-relaxed">
+                Mandatory water breaks are built into every 15-minute training cycle. Reverse-osmosis filtered water is free for all students.
+              </p>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800">
+              <div class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-600 dark:text-amber-400 flex items-center justify-center text-lg mb-3">
+                <i class="fa-solid fa-bone"></i>
+              </div>
+              <h4 class="text-base font-black text-slate-900 dark:text-white font-outfit mb-1">Growth-Plate Safe Conditioning</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-300 font-jakarta leading-relaxed">
+                No heavy weights or spinal axial loads. All youth strength development utilizes bodyweight calisthenics and plyometrics.
+              </p>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800">
+              <div class="w-10 h-10 rounded-xl bg-brand-crimson/15 text-brand-crimson dark:text-rose-400 flex items-center justify-center text-lg mb-3">
+                <i class="fa-solid fa-notes-medical"></i>
+              </div>
+              <h4 class="text-base font-black text-slate-900 dark:text-white font-outfit mb-1">Graduated Return-to-Mat Policy</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-300 font-jakarta leading-relaxed">
+                Students recovering from illness, fractures, or concussions must provide physician clearance before resuming physical contact.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================
+         SECTION 7: EMERGENCY PROCEDURES & PARENT SAFETY RESOURCES
+         Unique Layout: Rapid Response Command Station & Knowledge Vault
+         ==================================================== -->
+    <section id="section-emergency-resources" class="relative py-16 sm:py-24 border-b border-slate-200/80 dark:border-slate-800/80 overflow-hidden bg-slate-900 text-white">
+      <div class="absolute inset-0 bg-grid-ambient pointer-events-none opacity-20"></div>
+      <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-brand-crimson/20 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+        <div class="text-center max-w-3xl mx-auto mb-14 space-y-4">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-crimson/20 border border-brand-crimson/40 text-rose-400 text-xs font-black uppercase tracking-widest">
+            <i class="fa-solid fa-truck-medical text-xs"></i>
+            <span>Rapid Response</span>
+          </div>
+          <h2 class="font-outfit font-black text-3xl sm:text-4xl text-white">
+            Ready Action <span class="bg-gradient-to-r from-rose-400 via-amber-400 to-amber-200 bg-clip-text text-transparent">Emergency Procedures</span> & <span class="text-teal-400">Parent Safety Resources</span>
+          </h2>
+          <p class="text-base text-slate-300 font-jakarta leading-relaxed">
+            Preparedness brings peace of mind. Review our 4-tier Emergency Action Plan and access downloadable safety resources for your family.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-12">
+          
+          <!-- Column Left (7 Cols): Emergency Procedures 4-Tier Protocol -->
+          <div class="lg:col-span-7 space-y-4" id="emergencyProceduresDeck">
+            <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+              <h3 class="text-lg font-black text-white font-outfit flex items-center gap-2">
+                <i class="fa-solid fa-kit-medical text-brand-crimson"></i>
+                <span>Emergency Procedures</span> Action Plan
+              </h3>
+              <span class="text-xs font-bold text-slate-400">Response Speed: &lt;30 Seconds</span>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-slate-800/80 border border-slate-700/80 hover:border-brand-crimson/50 transition-colors">
+              <div class="flex items-start gap-4">
+                <span class="w-10 h-10 rounded-xl bg-brand-crimson/20 text-rose-400 flex items-center justify-center font-black text-sm flex-shrink-0">
+                  L1
+                </span>
+                <div>
+                  <h4 class="text-base font-black text-white font-outfit">Minor Tumble & First-Aid Response</h4>
+                  <p class="text-xs sm:text-sm text-slate-300 font-jakarta mt-1 leading-relaxed">
+                    Cold compression applied immediately for mild sprains or bumps. Student is escorted to comfortable rest bench and parent is sent an immediate SMS update.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-slate-800/80 border border-slate-700/80 hover:border-brand-crimson/50 transition-colors">
+              <div class="flex items-start gap-4">
+                <span class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-black text-sm flex-shrink-0">
+                  L2
+                </span>
+                <div>
+                  <h4 class="text-base font-black text-white font-outfit">Automated External Defibrillator (AED) on Site</h4>
+                  <p class="text-xs sm:text-sm text-slate-300 font-jakarta mt-1 leading-relaxed">
+                    Wall-mounted ZOLL Pediatric-capable AED unit located at mat entry, inspected weekly. All full-time coaches certified bi-annually in pediatric CPR.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-slate-800/80 border border-slate-700/80 hover:border-brand-crimson/50 transition-colors">
+              <div class="flex items-start gap-4">
+                <span class="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center font-black text-sm flex-shrink-0">
+                  L3
+                </span>
+                <div>
+                  <h4 class="text-base font-black text-white font-outfit">Direct EMS Paramedic Integration</h4>
+                  <p class="text-xs sm:text-sm text-slate-300 font-jakarta mt-1 leading-relaxed">
+                    Direct emergency dispatch hotkey connects directly to the local fire department and paramedic station located only 1.2 miles from our academy doors.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-slate-800/80 border border-slate-700/80 hover:border-brand-crimson/50 transition-colors">
+              <div class="flex items-start gap-4">
+                <span class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-black text-sm flex-shrink-0">
+                  L4
+                </span>
+                <div>
+                  <h4 class="text-base font-black text-white font-outfit">Dual Emergency Evacuation Corridors</h4>
+                  <p class="text-xs sm:text-sm text-slate-300 font-jakarta mt-1 leading-relaxed">
+                    Direct-to-outside panic push-bar exits at both ends of the dojo. Students participate in seasonal calm evacuation drills to ensure zero panic during alarms.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Column Right (5 Cols): Parent Safety Resources & Download Hub -->
+          <div class="lg:col-span-5 space-y-6">
+            <div class="relative rounded-3xl overflow-hidden border border-slate-700 shadow-2xl">
+              <img 
+                src="images/safety_emergency_resources.jpg" 
+                alt="Emergency First Aid Cabinet and Parent Safety Resources Station" 
+                class="w-full h-56 object-cover object-center"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex items-end p-5">
+                <div class="text-white">
+                  <span class="px-2.5 py-1 rounded bg-rose-500 text-white text-xs font-black uppercase tracking-wider">
+                    Equipment Ready
+                  </span>
+                  <div class="text-sm font-black font-outfit mt-1">AED & Trauma First-Aid Station</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Parent Safety Resources Card -->
+            <div class="p-6 rounded-3xl bg-slate-800/90 border border-slate-700 space-y-4">
+              <h3 class="text-lg font-black text-white font-outfit flex items-center gap-2">
+                <i class="fa-solid fa-folder-open text-teal-400"></i>
+                <span>Parent Safety Resources</span>
+              </h3>
+              <p class="text-xs text-slate-300 font-jakarta leading-relaxed">
+                Download copies of our comprehensive safety manual, concussion protocol documentation, and incident reporting forms.
+              </p>
+
+              <div class="space-y-2.5 pt-2">
+                <button 
+                  onclick="alert('Downloading Academy Safety Manual & Concussion Protocol (PDF)...');" 
+                  class="w-full py-3 px-4 rounded-xl bg-slate-700 hover:bg-slate-600 text-white font-bold text-xs flex items-center justify-between transition-colors"
+                >
+                  <span class="flex items-center gap-2">
+                    <i class="fa-solid fa-file-pdf text-rose-400"></i>
+                    <span>Academy Safety Manual (PDF)</span>
+                  </span>
+                  <i class="fa-solid fa-download text-slate-400"></i>
+                </button>
+
+                <button 
+                  onclick="alert('SafeSport Anonymous Hotline: 1-800-202-4010. Available 24/7.');" 
+                  class="w-full py-3 px-4 rounded-xl bg-slate-700 hover:bg-slate-600 text-white font-bold text-xs flex items-center justify-between transition-colors"
+                >
+                  <span class="flex items-center gap-2">
+                    <i class="fa-solid fa-phone text-emerald-400"></i>
+                    <span>SafeSport 24/7 Ethics Hotline</span>
+                  </span>
+                  <span class="text-[10px] text-emerald-400 font-bold">1-800-202-4010</span>
+                </button>
+
+                <button 
+                  onclick="alert('Incident Report Form initiated. Please visit the front desk or complete the digital portal ticket.');" 
+                  class="w-full py-3 px-4 rounded-xl bg-slate-700 hover:bg-slate-600 text-white font-bold text-xs flex items-center justify-between transition-colors"
+                >
+                  <span class="flex items-center gap-2">
+                    <i class="fa-solid fa-clipboard-question text-amber-400"></i>
+                    <span>Submit Incident / Feedback Ticket</span>
+                  </span>
+                  <i class="fa-solid fa-arrow-up-right-from-square text-slate-400"></i>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+<!-- ========================================================
+       COMPREHENSIVE DOJO FOOTER (BASED ON NAVBAR)
+       ======================================================== -->
+  <footer id="mainFooter" class="relative z-30 w-full mt-auto border-t border-slate-200/80 dark:border-slate-800/80 bg-white/70 dark:bg-slate-950/80 backdrop-blur-xl transition-colors duration-300">
+    
+    <!-- Top Ambient Glow Edge -->
+    <div class="absolute -top-px left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-crimson/40 to-transparent"></div>
+
+    <!-- FOOTER CONTENT COLUMNS -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-10 text-left rtl:text-right">
+        
+        <!-- Column 1: Brand & Mission (Spans 2 cols on desktop) -->
+        <div class="lg:col-span-2 space-y-4">
+          
+          <!-- Scaled Brand Logo Lockup -->
+          <a href="index.html" class="flex items-center gap-2.5 focus:outline-none">
+            <div class="relative w-7 h-7 rounded-lg bg-gradient-to-b from-rose-500 via-brand-crimson to-rose-700 p-0.5 shadow-sm shrink-0">
+              <div class="w-full h-full bg-slate-950 rounded-[5px] flex items-center justify-center overflow-hidden">
+                <svg viewBox="0 0 100 100" class="w-5 h-5 text-white" fill="none">
+                  <circle cx="50" cy="50" r="26" fill="#F59E0B" fill-opacity="0.2" />
+                  <polygon points="34,16 35.5,19 39,19.5 36.5,22 37,25 34,23.5 31,25 31.5,22 29,19.5 32.5,19" fill="#FDE047" />
+                  <polygon points="50,11 52,15 57,15.5 53.5,19 54.5,23.5 50,21 45.5,23.5 46.5,19 43,15.5 48,15" fill="#FDE047" />
+                  <polygon points="66,16 67.5,19 71,19.5 68.5,22 69,25 66,23.5 63,25 63.5,22 61,19.5 64.5,19" fill="#FDE047" />
+                  <circle cx="43" cy="30" r="6" fill="#FFFFFF" />
+                  <path d="M41 36 L48 39 L47 52 L39 51 Z" fill="#FFFFFF" />
+                  <path d="M45 50 L56 46 L73 39" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" />
+                  <path d="M40 51 L35 59 L42 63" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" />
+                  <path d="M38 50 C42 51 46 51 48 50" stroke="#0F172A" stroke-width="3.5" stroke-linecap="round" />
+                </svg>
+              </div>
+            </div>
+            <div class="flex flex-col">
+              <span class="font-outfit font-black text-xs sm:text-sm text-slate-900 dark:text-white leading-tight">
+                <span class="text-brand-crimson">KIDS</span> MARTIAL ARTS
+              </span>
+              <span class="text-[7.5px] font-bold text-amber-500 uppercase font-outfit mt-0.5">
+                &amp; CONFIDENCE BUILDING PROGRAM
+              </span>
+            </div>
+          </a>
+
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed max-w-sm">
+            Empowering children through age-appropriate martial arts training. Building strong bodies, courageous minds, unwavering focus, and bully-proof confidence.
+          </p>
+
+          <!-- Trust Badges Strip -->
+          <div class="flex flex-wrap items-center gap-2 pt-1 text-[11px] font-semibold text-slate-600 dark:text-slate-300">
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+              <i class="fa-solid fa-shield-halved text-emerald-500 text-xs"></i>
+              Certified Safe Dojo
+            </span>
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+              <i class="fa-solid fa-medal text-amber-400 text-xs"></i>
+              Black Belt Mentors
+            </span>
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+              <i class="fa-solid fa-heart text-brand-crimson text-xs"></i>
+              Bully-Proof
+            </span>
+          </div>
+
+          <!-- 3D Tactile Social Media Icons -->
+          <div class="pt-2 flex items-center space-x-2 rtl:space-x-reverse">
+            <a href="#" class="btn-3d btn-3d-switch w-8 h-8 rounded-xl flex items-center justify-center text-xs text-slate-600 dark:text-slate-300 hover:text-brand-crimson" title="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="#" class="btn-3d btn-3d-switch w-8 h-8 rounded-xl flex items-center justify-center text-xs text-slate-600 dark:text-slate-300 hover:text-blue-500" title="Facebook">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="#" class="btn-3d btn-3d-switch w-8 h-8 rounded-xl flex items-center justify-center text-xs text-slate-600 dark:text-slate-300 hover:text-red-500" title="YouTube">
+              <i class="fa-brands fa-youtube"></i>
+            </a>
+            <a href="#" class="btn-3d btn-3d-switch w-8 h-8 rounded-xl flex items-center justify-center text-xs text-slate-600 dark:text-slate-300 hover:text-brand-crimson" title="TikTok">
+              <i class="fa-brands fa-tiktok"></i>
+            </a>
+            <a href="#" class="btn-3d btn-3d-switch w-8 h-8 rounded-xl flex items-center justify-center text-xs text-slate-600 dark:text-slate-300 hover:text-emerald-500" title="WhatsApp">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+          </div>
+
+        </div>
+
+        <!-- Column 2: Navigation & Home -->
+        <div class="space-y-3">
+          <h4 class="font-outfit font-extrabold text-xs uppercase tracking-wider text-slate-900 dark:text-white">
+            Navigation
+          </h4>
+          <ul class="space-y-2 text-xs">
+            <li>
+              <a href="index.html" class="text-slate-500 dark:text-slate-400 hover:text-brand-crimson transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-angle-right rtl:rotate-180 text-[10px] text-brand-crimson"></i>
+                <span>Home 1 (Dojo Hero)</span>
+              </a>
+            </li>
+            <li>
+              <a href="home-2.html" class="text-slate-500 dark:text-slate-400 hover:text-brand-crimson transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-angle-right rtl:rotate-180 text-[10px] text-brand-crimson"></i>
+                <span>Home 2 (Fun Ninjas)</span>
+              </a>
+            </li>
+            <li>
+              <a href="about.html" class="text-slate-500 dark:text-slate-400 hover:text-brand-crimson transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-angle-right rtl:rotate-180 text-[10px] text-brand-crimson"></i>
+                <span>About Our Mission</span>
+              </a>
+            </li>
+            <li>
+              <a href="programs.html" class="text-slate-500 dark:text-slate-400 hover:text-brand-crimson transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-angle-right rtl:rotate-180 text-[10px] text-brand-crimson"></i>
+                <span>Youth Programs</span>
+              </a>
+            </li>
+            <li>
+              <a href="belt-system.html" class="text-slate-500 dark:text-slate-400 hover:text-brand-crimson transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-angle-right rtl:rotate-180 text-[10px] text-brand-crimson"></i>
+                <span>Belt System Roadmap</span>
+              </a>
+            </li>
+            <li>
+              <a href="instructors.html" class="text-slate-500 dark:text-slate-400 hover:text-brand-crimson transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-angle-right rtl:rotate-180 text-[10px] text-brand-crimson"></i>
+                <span>Senseis &amp; Coaches</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Academy & Community -->
+        <div class="space-y-3">
+          <h4 class="font-outfit font-extrabold text-xs uppercase tracking-wider text-slate-900 dark:text-white">
+            Academy &amp; Safety
+          </h4>
+          <ul class="space-y-2 text-xs">
+            <li>
+              <a href="safety.html" class="text-slate-500 dark:text-slate-400 hover:text-brand-crimson transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-angle-right rtl:rotate-180 text-[10px] text-emerald-500"></i>
+                <span>Dojo Safety Standards</span>
+              </a>
+            </li>
+            <li>
+              <a href="events.html" class="text-slate-500 dark:text-slate-400 hover:text-brand-crimson transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-angle-right rtl:rotate-180 text-[10px] text-brand-crimson"></i>
+                <span>Belt Graduations &amp; Camps</span>
+              </a>
+            </li>
+            <li>
+              <a href="contact.html" class="text-slate-500 dark:text-slate-400 hover:text-brand-crimson transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-angle-right rtl:rotate-180 text-[10px] text-brand-crimson"></i>
+                <span>Contact &amp; Dojo Tour</span>
+              </a>
+            </li>
+            <li>
+              <a href="admin-dashboard.html" class="text-slate-500 dark:text-slate-400 hover:text-brand-crimson transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-angle-right rtl:rotate-180 text-[10px] text-brand-crimson"></i>
+                <span>Admin Portal</span>
+              </a>
+            </li>
+            <li>
+              <a href="user-dashboard.html" class="text-slate-500 dark:text-slate-400 hover:text-amber-500 transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-angle-right rtl:rotate-180 text-[10px] text-amber-500"></i>
+                <span>Student / Parent Portal</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Dojo Location & Contact -->
+        <div class="space-y-3">
+          <h4 class="font-outfit font-extrabold text-xs uppercase tracking-wider text-slate-900 dark:text-white">
+            Visit Our Dojo
+          </h4>
+          <div class="space-y-2.5 text-xs text-slate-500 dark:text-slate-400">
+            <div class="flex items-start gap-2">
+              <i class="fa-solid fa-location-dot text-brand-crimson text-xs mt-0.5 shrink-0"></i>
+              <span>742 Champions Way, Suite 100, Dojo Center</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-phone text-amber-500 text-xs shrink-0"></i>
+              <span>(800) 555-KICK</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-clock text-slate-400 text-xs shrink-0"></i>
+              <span>Mon - Sat: 9:00 AM - 7:30 PM</span>
+            </div>
+            <div class="pt-2">
+              <!-- 3D Trigger to Member Login -->
+              <a href="login.html" class="btn-3d btn-3d-dashboard w-full py-2 text-xs rounded-xl flex items-center justify-center gap-1.5">
+                <i class="fa-solid fa-lock text-[10px] text-amber-500"></i>
+                <span>Member Portal Login</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- ========================================================
+       JAVASCRIPT: ADVANCED FRAMER MOTION PHYSICS & INTERACTION
+       ======================================================== -->
+  <script>
+    let isDarkMode = true;
+    let isRTL = false;
+    let isMobileMenuOpen = false;
+
+    const htmlElem = document.documentElement;
+    const themeIcon = document.getElementById('themeIcon');
+    const mobileThemeLabel = document.getElementById('mobileThemeLabel');
+    const rtlIcon = document.getElementById('rtlIcon');
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const bar1 = document.getElementById('bar1');
+    const bar2 = document.getElementById('bar2');
+    const bar3 = document.getElementById('bar3');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    const mobileDrawerOverlay = document.getElementById('mobileDrawerOverlay');
+    const loginModalBackdrop = document.getElementById('loginModalBackdrop');
+    const loginModalContent = document.getElementById('loginModalContent');
+    const navGlider = document.getElementById('navGlider');
+    const navLinksContainer = document.getElementById('navLinksContainer');
+    const brandLogo = document.getElementById('brandLogo');
+    const logoIconContainer = document.getElementById('logoIconContainer');
+
+    // ----------------------------------------------------
+    // INITIALIZATION & FRAMER MOTION SPRINGS
+    // ----------------------------------------------------
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.Motion && window.Motion.animate) {
+        const { animate, spring } = window.Motion;
+        
+        // 1. Entrance drop animation with spring physics
+        const headerAnim = animate('#mainHeader', 
+          { y: [-25, 0], opacity: [0, 1] }, 
+          { duration: 0.6, easing: spring({ stiffness: 380, damping: 26 }) }
+        );
+        if (headerAnim && headerAnim.finished) {
+          headerAnim.finished.then(() => {
+            const h = document.getElementById('mainHeader');
+            if (h) h.style.transform = '';
+          });
+        }
+
+        // 2. Initial Logo subtle spring pop
+        animate(logoIconContainer, 
+          { scale: [0.75, 1.05, 1] }, 
+          { duration: 0.5, delay: 0.15, easing: spring({ stiffness: 400, damping: 20 }) }
+        );
+      }
+
+      // Check Saved Preferences
+      const savedTheme = localStorage.getItem('dojo_theme');
+      if (savedTheme === 'light') {
+        setTheme(false);
+      } else {
+        setTheme(true);
+      }
+
+      const savedRTL = localStorage.getItem('dojo_rtl');
+      if (savedRTL === 'true') {
+        setRTL(true);
+      }
+
+      // Initialize Framer Motion Nav Glider Pill
+      setActiveNavState();
+      setupNavGlider();
+
+      // Initialize Interactive Logo Wobble
+      setupLogoHoverAnimation();
+
+      // Initialize Dropdown Pop Animations
+      setupDropdownAnimations();
+    });
+
+    // ----------------------------------------------------
+    // FRAMER MOTION: MAGNETIC GLIDING PILL INDICATOR
+    // ----------------------------------------------------
+        // ----------------------------------------------------
+    // DYNAMIC ACTIVE NAV STATE & GLIDER TRACKING
+    // ----------------------------------------------------
+    function setActiveNavState() {
+      const pathname = window.location.pathname.replace(/\\/g, '/');
+      const filename = pathname.split('/').pop() || 'index.html';
+      const currentPage = (filename === '' || filename === '/') ? 'index.html' : filename;
+
+      // 1. Desktop Nav Links
+      const navLinks = document.querySelectorAll('#navLinksContainer .nav-item-link');
+      let activeItem = null;
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        const href = link.getAttribute('href');
+        if (href && (href === currentPage || (currentPage === 'index.html' && (href === 'index.html' || href === '#home1')))) {
+          link.classList.add('active');
+          activeItem = link;
+        }
+      });
+
+      // Special check for Home dropdown (if on index.html or home-2.html)
+      const homeLink = document.querySelector('#desktopHomeDropdown > a, #desktopHomeDropdown > button');
+      if (homeLink) {
+        if (currentPage === 'index.html' || currentPage === 'home-2.html') {
+          homeLink.classList.add('active');
+          activeItem = homeLink;
+        } else {
+          homeLink.classList.remove('active');
+        }
+      }
+
+      // Home dropdown items active styling
+      const homeItems = document.querySelectorAll('#desktopHomeDropdown .dropdown-item');
+      homeItems.forEach(item => {
+        const href = item.getAttribute('href');
+        if (href && href === currentPage) {
+          item.classList.add('text-brand-crimson', 'font-black', 'bg-rose-50', 'dark:bg-rose-950/50');
+        } else {
+          item.classList.remove('text-brand-crimson', 'font-black', 'bg-rose-50', 'dark:bg-rose-950/50');
+        }
+      });
+
+      // Mobile drawer links active styling
+      const mobileItems = document.querySelectorAll('#mobileDrawer a');
+      mobileItems.forEach(item => {
+        item.classList.remove('active', 'active-drawer-link');
+        const href = item.getAttribute('href');
+        if (href && href === currentPage) {
+          item.classList.add('active', 'active-drawer-link');
+        }
+      });
+
+      return activeItem;
+    }
+
+    function setupNavGlider() {
+      if (!navLinksContainer || !navGlider) return;
+
+      const snapGliderToActive = () => {
+        const activeLink = navLinksContainer.querySelector('.nav-item-link.active');
+        if (activeLink) {
+          const containerRect = navLinksContainer.getBoundingClientRect();
+          const linkRect = activeLink.getBoundingClientRect();
+          const leftOffset = linkRect.left - containerRect.left;
+          const width = linkRect.width;
+
+          navGlider.style.opacity = '1';
+          navGlider.style.transform = 'scale(1)';
+
+          if (window.Motion && window.Motion.animate) {
+            window.Motion.animate(navGlider, 
+              { transform: `translateX(${leftOffset}px)`, width: `${width}px` }, 
+              { duration: 0.28, easing: window.Motion.spring({ stiffness: 450, damping: 28 }) }
+            );
+          } else {
+            navGlider.style.transform = `translateX(${leftOffset}px)`;
+            navGlider.style.width = `${width}px`;
+          }
+        } else {
+          navGlider.style.opacity = '0';
+          navGlider.style.transform = 'scale(0.9)';
+        }
+      };
+
+      const links = navLinksContainer.querySelectorAll('.nav-item-link');
+
+      links.forEach(link => {
+        link.addEventListener('mouseenter', () => {
+          const containerRect = navLinksContainer.getBoundingClientRect();
+          const linkRect = link.getBoundingClientRect();
+          const leftOffset = linkRect.left - containerRect.left;
+          const width = linkRect.width;
+
+          navGlider.style.opacity = '1';
+          navGlider.style.transform = 'scale(1)';
+
+          if (window.Motion && window.Motion.animate) {
+            window.Motion.animate(navGlider, 
+              { transform: `translateX(${leftOffset}px)`, width: `${width}px` }, 
+              { duration: 0.25, easing: window.Motion.spring({ stiffness: 450, damping: 28 }) }
+            );
+          } else {
+            navGlider.style.transform = `translateX(${leftOffset}px)`;
+            navGlider.style.width = `${width}px`;
+          }
+        });
+      });
+
+      const dashboardBtn = document.getElementById('desktopDashboardDropdown');
+      if (dashboardBtn) {
+        dashboardBtn.addEventListener('mouseenter', () => {
+          navGlider.style.opacity = '0';
+        });
+      }
+
+      navLinksContainer.addEventListener('mouseleave', () => {
+        snapGliderToActive();
+      });
+
+      window.addEventListener('resize', snapGliderToActive);
+
+      // Initial alignment
+      setTimeout(snapGliderToActive, 120);
+    }
+
+    // ----------------------------------------------------
+    // FRAMER MOTION: LOGO HOVER KARATE SPRING BOUNCE
+    // ----------------------------------------------------
+    function setupLogoHoverAnimation() {
+      if (!brandLogo || !logoIconContainer) return;
+
+      brandLogo.addEventListener('mouseenter', () => {
+        if (window.Motion && window.Motion.animate) {
+          window.Motion.animate(logoIconContainer, 
+            { rotate: [-10, 8, -4, 0], scale: [1, 1.15, 1] }, 
+            { duration: 0.45, easing: window.Motion.spring({ stiffness: 450, damping: 18 }) }
+          );
+        }
+      });
+    }
+
+    // ----------------------------------------------------
+    // FRAMER MOTION: DROPDOWN SPRING POPUPS
+    // ----------------------------------------------------
+    function setupDropdownAnimations() {
+      const dropdownGroups = document.querySelectorAll('.group');
+
+      dropdownGroups.forEach(group => {
+        const menu = group.querySelector('.creative-dropdown');
+        if (!menu) return;
+
+        group.addEventListener('mouseenter', () => {
+          if (window.Motion && window.Motion.animate) {
+            window.Motion.animate(menu, 
+              { opacity: [0, 1], scale: [0.92, 1], y: [-6, 0] }, 
+              { duration: 0.22, easing: window.Motion.spring({ stiffness: 400, damping: 25 }) }
+            );
+          }
+        });
+      });
+    }
+
+    // ----------------------------------------------------
+    // THEME CONTROLS (WITH 360° SPRING SPIN)
+    // ----------------------------------------------------
+    function toggleTheme() {
+      setTheme(!isDarkMode);
+    }
+
+    function setTheme(dark) {
+      isDarkMode = dark;
+      if (dark) {
+        htmlElem.classList.add('dark');
+        htmlElem.classList.remove('light');
+        if (themeIcon) themeIcon.className = 'fa-solid fa-sun text-amber-400';
+        if (mobileThemeLabel) mobileThemeLabel.textContent = 'Dark';
+        localStorage.setItem('dojo_theme', 'dark');
+      } else {
+        htmlElem.classList.remove('dark');
+        htmlElem.classList.add('light');
+        if (themeIcon) themeIcon.className = 'fa-solid fa-moon text-slate-700';
+        if (mobileThemeLabel) mobileThemeLabel.textContent = 'Light';
+        localStorage.setItem('dojo_theme', 'light');
+      }
+
+      // Framer Motion 360° spring spin
+      if (window.Motion && window.Motion.animate && themeIcon) {
+        window.Motion.animate(themeIcon, 
+          { rotate: [0, 360], scale: [0.7, 1.2, 1] }, 
+          { duration: 0.4, easing: window.Motion.spring({ stiffness: 380, damping: 22 }) }
+        );
+      }
+    }
+
+    // ----------------------------------------------------
+    // RTL CONTROLS (WITH 3D ROTATE FLIP)
+    // ----------------------------------------------------
+    function toggleRTL() {
+      setRTL(!isRTL);
+    }
+
+    function setRTL(rtl) {
+      isRTL = rtl;
+      if (rtl) {
+        htmlElem.setAttribute('dir', 'rtl');
+        localStorage.setItem('dojo_rtl', 'true');
+      } else {
+        htmlElem.setAttribute('dir', 'ltr');
+        localStorage.setItem('dojo_rtl', 'false');
+      }
+
+      // Framer Motion icon spin & flip
+      if (window.Motion && window.Motion.animate) {
+        if (rtlIcon) {
+          window.Motion.animate(rtlIcon, 
+            { rotateY: rtl ? [0, 180] : [180, 0], scale: [0.8, 1.2, 1] }, 
+            { duration: 0.35, easing: window.Motion.spring({ stiffness: 420, damping: 20 }) }
+          );
+        }
+        window.Motion.animate('#mainNavbar', 
+          { scale: [0.99, 1] }, 
+          { duration: 0.22 }
+        );
+      }
+    }
+
+    // ----------------------------------------------------
+    // MOBILE HAMBURGER & DRAWER (WITH STAGGERED SPRING)
+    // ----------------------------------------------------
+    function toggleMobileMenu() {
+      isMobileMenuOpen = !isMobileMenuOpen;
+      hamburgerBtn.setAttribute('aria-expanded', isMobileMenuOpen);
+
+      if (isMobileMenuOpen) {
+        bar1.classList.add('rotate-45', 'translate-y-1.5');
+        bar2.classList.add('opacity-0');
+        bar3.classList.add('-rotate-45', '-translate-y-1.5');
+
+        mobileDrawerOverlay.classList.remove('pointer-events-none');
+        mobileDrawerOverlay.classList.remove('opacity-0');
+        mobileDrawerOverlay.classList.add('opacity-100');
+
+        mobileDrawer.classList.remove('translate-x-full', 'rtl:-translate-x-full');
+        mobileDrawer.classList.add('translate-x-0');
+
+        if (window.Motion && window.Motion.animate) {
+          const isCurrentRTL = htmlElem.getAttribute('dir') === 'rtl';
+          const startX = isCurrentRTL ? '-100%' : '100%';
+          
+          // Drawer spring entrance
+          window.Motion.animate(mobileDrawer, 
+            { transform: [`translateX(${startX})`, 'translateX(0%)'] }, 
+            { duration: 0.35, easing: window.Motion.spring({ stiffness: 360, damping: 28 }) }
+          );
+
+          // Staggered reveal of drawer items
+          const drawerItems = document.querySelectorAll('.drawer-anim-item');
+          if (drawerItems.length) {
+            window.Motion.animate(drawerItems, 
+              { transform: ['translateX(20px)', 'translateX(0px)'], opacity: [0, 1] }, 
+              { delay: window.Motion.stagger(0.03), easing: window.Motion.spring({ stiffness: 400, damping: 26 }) }
+            );
+          }
+        }
+      } else {
+        bar1.classList.remove('rotate-45', 'translate-y-1.5');
+        bar2.classList.remove('opacity-0');
+        bar3.classList.remove('-rotate-45', '-translate-y-1.5');
+
+        mobileDrawerOverlay.classList.add('opacity-0');
+        mobileDrawerOverlay.classList.add('pointer-events-none');
+        mobileDrawerOverlay.classList.remove('opacity-100');
+
+        mobileDrawer.classList.add('translate-x-full', 'rtl:-translate-x-full');
+        mobileDrawer.classList.remove('translate-x-0');
+      }
+    }
+
+    function toggleAccordion(contentId, arrowId) {
+      const content = document.getElementById(contentId);
+      const arrow = document.getElementById(arrowId);
+      if (content) {
+        const isHidden = content.classList.contains('hidden');
+        if (isHidden) {
+          content.classList.remove('hidden');
+          if (arrow) arrow.classList.add('rotate-180');
+          if (window.Motion && window.Motion.animate) {
+            window.Motion.animate(content, { opacity: [0, 1], y: [-6, 0] }, { duration: 0.2 });
+          }
+        } else {
+          content.classList.add('hidden');
+          if (arrow) arrow.classList.remove('rotate-180');
+        }
+      }
+    }
+
+    // ----------------------------------------------------
+    // 3D LOGIN MODAL WITH MOTION
+    // ----------------------------------------------------
+    function openLoginModal() {
+      window.location.href = 'login.html';
+    }
+
+    function closeLoginModal() {
+      loginModalBackdrop.classList.add('opacity-0', 'pointer-events-none');
+      loginModalBackdrop.classList.remove('opacity-100');
+      loginModalContent.classList.remove('scale-100');
+      loginModalContent.classList.add('scale-95');
+    }
+
+    function handleLoginSubmit(e) {
+      e.preventDefault();
+      alert('Login Successful!');
+      closeLoginModal();
+    }
+
+    function openNotice(title) {
+      alert(`Navigating to: ${title}`);
+    }
+  </script>
+
+
+  <!-- Motion One (Framer Motion equivalent for vanilla HTML) -->
+  <script src="https://cdn.jsdelivr.net/npm/motion@10.16.2/dist/motion.js"></script>
+  <script>
+    function initSafetyAnimations() {
+      if (typeof Motion === 'undefined') {
+        console.warn("Motion One library not loaded; skipping animation triggers.");
+        return;
+      }
+
+      const { animate, inView, stagger, spring } = Motion;
+
+      // SECTION 1: CHILD SAFETY & TRAINING RULES - "SHIELD CITADEL HORIZON"
+      inView('#section-child-training-safety', () => {
+        animate('#section-child-training-safety h1', 
+          { x: [-35, 0], opacity: [0, 1] }, 
+          { duration: 0.7, easing: spring({ stiffness: 380, damping: 26 }) }
+        );
+
+        const ruleCards = document.querySelectorAll('#trainingSafetyRulesGrid > div');
+        if (ruleCards.length) {
+          animate(ruleCards, 
+            { y: [30, 0], opacity: [0, 1] }, 
+            { delay: stagger(0.1, { start: 0.15 }), duration: 0.6, easing: spring({ stiffness: 360, damping: 24 }) }
+          );
+        }
+      });
+
+      // SECTION 2: PROTECTIVE EQUIPMENT - "GEAR ARMOR ANATOMY POP"
+      inView('#section-protective-equipment', () => {
+        animate('#section-protective-equipment h2', 
+          { scale: [0.94, 1], opacity: [0, 1] }, 
+          { duration: 0.6, easing: spring({ stiffness: 400, damping: 25 }) }
+        );
+
+        const gearCards = document.querySelectorAll('#gearAnatomyGrid > div');
+        if (gearCards.length) {
+          animate(gearCards, 
+            { scale: [0.92, 1], opacity: [0, 1] }, 
+            { delay: stagger(0.09, { start: 0.1 }), duration: 0.55, easing: spring({ stiffness: 390, damping: 24 }) }
+          );
+        }
+      });
+
+      // SECTION 3: INSTRUCTOR GUIDANCE - "MENTORSHIP ORBIT FLOW"
+      inView('#section-instructor-safe-practices', () => {
+        animate('#section-instructor-safe-practices h2', 
+          { y: [-20, 0], opacity: [0, 1] }, 
+          { duration: 0.6, easing: spring({ stiffness: 400, damping: 25 }) }
+        );
+
+        const flowSteps = document.querySelectorAll('#safePracticesFlow > div');
+        if (flowSteps.length) {
+          animate(flowSteps, 
+            { x: [-25, 0], opacity: [0, 1] }, 
+            { delay: stagger(0.08, { start: 0.2 }), duration: 0.5, easing: spring({ stiffness: 370, damping: 25 }) }
+          );
+        }
+      });
+
+      // SECTION 4: PARENT GUIDELINES - "PARENT CHARTER GLASS FADE"
+      inView('#section-parent-guidelines', () => {
+        animate('#section-parent-guidelines h2', 
+          { opacity: [0, 1], y: [25, 0] }, 
+          { duration: 0.65, easing: spring({ stiffness: 390, damping: 25 }) }
+        );
+
+        const parentItems = document.querySelectorAll('#parentGuidelinesList > div');
+        if (parentItems.length) {
+          animate(parentItems, 
+            { x: [-30, 0], opacity: [0, 1] }, 
+            { delay: stagger(0.1, { start: 0.15 }), duration: 0.55, easing: spring({ stiffness: 380, damping: 25 }) }
+          );
+        }
+      });
+
+      // SECTION 5: ATTENDANCE & PICKUP - "SECURE GATE SCAN PULSE"
+      inView('#section-attendance-pickup', () => {
+        animate('#section-attendance-pickup h2', 
+          { scale: [0.92, 1], opacity: [0, 1] }, 
+          { duration: 0.65, easing: spring({ stiffness: 380, damping: 24 }) }
+        );
+
+        const pickupSteps = document.querySelectorAll('#pickupPolicySteps > div');
+        if (pickupSteps.length) {
+          animate(pickupSteps, 
+            { x: [30, 0], opacity: [0, 1] }, 
+            { delay: stagger(0.1, { start: 0.15 }), duration: 0.55, easing: spring({ stiffness: 390, damping: 25 }) }
+          );
+        }
+      });
+
+      // SECTION 6: HEALTH & FITNESS - "VITALITY MATRIX STAGGER"
+      inView('#section-health-fitness', () => {
+        animate('#section-health-fitness h2', 
+          { y: [-20, 0], opacity: [0, 1] }, 
+          { duration: 0.6, easing: spring({ stiffness: 400, damping: 25 }) }
+        );
+
+        const healthCards = document.querySelectorAll('#healthConsiderationsGrid > div');
+        if (healthCards.length) {
+          animate(healthCards, 
+            { y: [25, 0], opacity: [0, 1] }, 
+            { delay: stagger(0.1, { start: 0.15 }), duration: 0.5, easing: spring({ stiffness: 370, damping: 23 }) }
+          );
+        }
+      });
+
+      // SECTION 7: EMERGENCY & RESOURCES - "EMERGENCY COMMAND BEACON"
+      inView('#section-emergency-resources', () => {
+        animate('#section-emergency-resources h2', 
+          { y: [25, 0], opacity: [0, 1] }, 
+          { duration: 0.65, easing: spring({ stiffness: 380, damping: 25 }) }
+        );
+
+        const emCards = document.querySelectorAll('#emergencyProceduresDeck > div:not(:first-child)');
+        if (emCards.length) {
+          animate(emCards, 
+            { x: [-25, 0], opacity: [0, 1] }, 
+            { delay: stagger(0.08, { start: 0.15 }), duration: 0.5, easing: spring({ stiffness: 400, damping: 25 }) }
+          );
+        }
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initSafetyAnimations);
+    } else {
+      initSafetyAnimations();
+    }
+  </script>
+</body>
+</html>

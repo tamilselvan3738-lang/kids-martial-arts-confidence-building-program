@@ -1,0 +1,2345 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="assets/logo-icon.svg" />
+  <link rel="shortcut icon" href="assets/logo-icon.svg" />
+  <link rel="apple-touch-icon" href="assets/logo-icon.svg" />
+  <title>Parent Portal &amp; Student Dashboard | Kids Martial Arts &amp; Confidence Building Program</title>
+  <meta name="description" content="Parent Portal for tracking enrolled children, belt progression, training attendance, class schedules, belt testing registrations, and achievement records." />
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- FontAwesome 6 Pro CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  
+  <!-- Google Fonts: Outfit & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  
+  <!-- Tailwind Custom Configuration -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              crimson: '#DC2626',
+              rose: '#E11D48',
+              gold: '#F59E0B',
+              dark: '#0B0F19'
+            }
+          },
+          fontFamily: {
+            outfit: ['Outfit', 'sans-serif'],
+            jakarta: ['Plus Jakarta Sans', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar for Sleek Portal Experience */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #090d16;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #dc2626;
+    }
+
+    .nav-item-active {
+      background: linear-gradient(135deg, rgba(220, 38, 38, 0.18) 0%, rgba(245, 158, 11, 0.12) 100%);
+      border-left: 3px solid #dc2626;
+      color: #ffffff !important;
+    }
+    html[dir="rtl"] .nav-item-active {
+      border-left: none;
+      border-right: 3px solid #dc2626;
+    }
+
+    /* Glow subtle effects */
+    .glow-crimson {
+      box-shadow: 0 0 25px -5px rgba(220, 38, 38, 0.35);
+    }
+    .glow-gold {
+      box-shadow: 0 0 25px -5px rgba(245, 158, 11, 0.35);
+    }
+  
+
+    /* ==========================================================================
+       ENTERPRISE MOBILE-FIRST RESPONSIVE MASTER STYLESHEET
+       Strict mobile optimization for 320px, 480px, 768px, 1024px
+       Zero horizontal overflow | Adaptive typography | Fluid grid & flex layout
+       ========================================================================== */
+
+    /* 1. Global Box-Sizing & Overflow Quarantine */
+    *, *::before, *::after {
+      box-sizing: border-box !important;
+    }
+
+    html {
+      width: 100% !important;
+      max-width: 100% !important;
+      overflow-x: hidden;
+      overflow-x: clip !important;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      width: 100% !important;
+      max-width: 100% !important;
+      overflow-x: clip !important;
+      position: relative !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    /* Guaranteed Persistent Sticky Navbar Across All Screen Sizes */
+    #mainHeader,
+    header {
+      position: -webkit-sticky !important;
+      position: sticky !important;
+      top: 0 !important;
+      z-index: 50 !important;
+    }
+
+    /* 2. Media & Visual Elements Strict Fluid Bounds */
+    img, svg, video, canvas, audio, iframe, embed, object {
+      max-width: 100% !important;
+      height: auto;
+    }
+
+    /* 3. Text Overflow Immunity */
+    h1, h2, h3, h4, h5, h6, p, span, a, button, li, dt, dd, blockquote, label {
+      overflow-wrap: break-word !important;
+      word-wrap: break-word !important;
+      max-width: 100%;
+    }
+
+    /* 4. Section & Container Strict Layout Integrity */
+    section {
+      width: 100% !important;
+      max-width: 100% !important;
+      position: relative !important;
+      overflow-x: hidden;
+      overflow-x: clip !important;
+      overflow-y: visible !important;
+    }
+
+    .container, .max-w-7xl, .max-w-6xl, .max-w-5xl, .max-w-4xl, .max-w-3xl, .max-w-2xl {
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+
+    /* 5. Responsive Form Controls & Interactive Buttons */
+    input, select, textarea {
+      max-width: 100% !important;
+    }
+
+    button, a.btn-3d, .btn-3d {
+      max-width: 100% !important;
+      white-space: normal;
+    }
+
+    /* 6. Breakpoint Optimization: <= 1024px (Small Laptops & Tablets) */
+    @media (max-width: 1024px) {
+      .max-w-7xl, .max-w-6xl {
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+      }
+      header nav, header {
+        max-width: 100% !important;
+      }
+    }
+
+    /* 7. Breakpoint Optimization: <= 768px (Tablets & Mobile Landscape) */
+    @media (max-width: 768px) {
+      /* Fluid Headings */
+      h1, .text-5xl, .text-6xl, .text-7xl {
+        font-size: clamp(1.85rem, 5.5vw, 2.75rem) !important;
+        line-height: 1.15 !important;
+      }
+      h2, .text-3xl, .text-4xl {
+        font-size: clamp(1.4rem, 4.2vw, 2.1rem) !important;
+        line-height: 1.22 !important;
+      }
+      h3, .text-2xl {
+        font-size: clamp(1.2rem, 3.2vw, 1.55rem) !important;
+        line-height: 1.28 !important;
+      }
+
+      /* Consistent Section Spacing */
+      section {
+        padding-top: clamp(2.5rem, 6vw, 4rem) !important;
+        padding-bottom: clamp(2.5rem, 6vw, 4rem) !important;
+      }
+
+      /* Stack two-column split heroes & banners */
+      .grid.lg\:grid-cols-2, .grid.lg\:grid-cols-3, .grid.lg\:grid-cols-4 {
+        grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+      }
+    }
+
+    /* 8. Breakpoint Optimization: <= 480px (Standard Mobile Portrait) */
+    @media (max-width: 480px) {
+      /* Uniform padding on all main containers */
+      .px-4, .px-6, .px-8, .sm\:px-6, .lg\:px-8 {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+      }
+
+      /* Mobile Adaptive Typography */
+      h1, .text-5xl, .text-6xl, .text-7xl {
+        font-size: clamp(1.55rem, 7vw, 2.15rem) !important;
+        line-height: 1.18 !important;
+      }
+      h2, .text-3xl, .text-4xl {
+        font-size: clamp(1.3rem, 5.2vw, 1.7rem) !important;
+        line-height: 1.25 !important;
+      }
+      h3, .text-2xl {
+        font-size: clamp(1.1rem, 4vw, 1.35rem) !important;
+        line-height: 1.3 !important;
+      }
+      p, .text-base, .text-lg {
+        font-size: 0.925rem !important;
+        line-height: 1.55 !important;
+      }
+
+      /* Stack card grids vertically on mobile */
+      .grid.sm\:grid-cols-2,
+      .grid.sm\:grid-cols-3,
+      .grid.sm\:grid-cols-4,
+      .grid.md\:grid-cols-2,
+      .grid.md\:grid-cols-3 {
+        grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+      }
+
+      /* Full width buttons in CTAs */
+      .flex.flex-wrap.items-center.gap-3 > button,
+      .flex.flex-wrap.items-center.gap-3 > a.btn-3d,
+      .hero-btn-group > * {
+        width: 100% !important;
+        justify-content: center !important;
+        text-align: center !important;
+      }
+
+      /* Modals fit comfortably */
+      #loginModalContent, .modal-content {
+        width: 95% !important;
+        max-width: 95% !important;
+        padding: 1.25rem !important;
+      }
+
+      /* Mobile drawer fits without overflow */
+      #mobileDrawer {
+        width: min(85vw, 290px) !important;
+      }
+    }
+
+    /* 9. Breakpoint Optimization: <= 320px (Small Screen / iPhone SE) */
+    @media (max-width: 320px) {
+      .px-4, .px-6, .px-8, .sm\:px-6, .lg\:px-8 {
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+      }
+
+      /* Ultra-compact Typography */
+      h1, .text-5xl, .text-6xl, .text-7xl {
+        font-size: 1.4rem !important;
+        line-height: 1.2 !important;
+      }
+      h2, .text-3xl, .text-4xl {
+        font-size: 1.2rem !important;
+        line-height: 1.22 !important;
+      }
+      h3, .text-2xl {
+        font-size: 1.05rem !important;
+      }
+      body, p, .text-base {
+        font-size: 0.85rem !important;
+      }
+      .text-sm {
+        font-size: 0.8rem !important;
+      }
+      .text-xs {
+        font-size: 0.7rem !important;
+      }
+
+      /* Compact Buttons */
+      .btn-3d {
+        padding-left: 0.65rem !important;
+        padding-right: 0.65rem !important;
+        font-size: 0.75rem !important;
+      }
+
+      /* Force all multi-col grids to 1 col (except drawer inline buttons) */
+      .grid-cols-2, .grid-cols-3, .grid-cols-4, .grid-cols-5, .grid-cols-6 {
+        grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+      }
+      #mobileDrawer .grid-cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      }
+    }
+
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-jakarta min-h-screen flex flex-col antialiased selection:bg-brand-crimson selection:text-white transition-colors duration-300">
+
+  <!-- ========================================================
+       TOP GLOBAL CONSOLE BAR (STICKY NAVBAR)
+       Mobile & Tablet View: Logo on LEFT, Hamburger Menu on RIGHT
+       Desktop View (lg+): Logo on left, Global Search in center, Action Controls on right
+       ======================================================== -->
+  <header class="sticky top-0 z-50 w-full border-b border-slate-800/80 bg-slate-950/95 backdrop-blur-xl px-4 sm:px-6 lg:px-8 py-3 transition-colors duration-300">
+    <div class="w-full max-w-[1920px] mx-auto flex items-center justify-between gap-4">
+      
+      <!-- LEFT: EXACT NAVBAR LOGO MATCHING INDEX.HTML -->
+      <div class="flex items-center gap-3 shrink-0">
+        <a href="index.html" id="brandLogo" class="group flex items-center gap-2 sm:gap-2.5 shrink-0 focus:outline-none" aria-label="Kids Martial Arts & Confidence Building Program">
+          
+          <!-- Compact Shield Logo Emblem (~28px) with Spring Hover -->
+          <div id="logoIconContainer" class="relative w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-gradient-to-b from-rose-500 via-brand-crimson to-rose-700 p-0.5 shadow-sm shadow-rose-950/20 shrink-0 cursor-pointer">
+            <div class="w-full h-full bg-slate-950 rounded-[5px] flex items-center justify-center overflow-hidden relative">
+              <div class="absolute inset-0 bg-radial-gradient from-amber-400/25 to-transparent"></div>
+              
+              <!-- Clean Scaled Vector Emblem -->
+              <svg viewBox="0 0 100 100" class="w-5 h-5 sm:w-5.5 sm:h-5.5 text-white" fill="none">
+                <circle cx="50" cy="50" r="26" fill="#F59E0B" fill-opacity="0.2" />
+                <!-- 3 Top Stars -->
+                <polygon points="34,16 35.5,19 39,19.5 36.5,22 37,25 34,23.5 31,25 31.5,22 29,19.5 32.5,19" fill="#FDE047" />
+                <polygon points="50,11 52,15 57,15.5 53.5,19 54.5,23.5 50,21 45.5,23.5 46.5,19 43,15.5 48,15" fill="#FDE047" />
+                <polygon points="66,16 67.5,19 71,19.5 68.5,22 69,25 66,23.5 63,25 63.5,22 61,19.5 64.5,19" fill="#FDE047" />
+                <!-- Kicking Martial Artist Silhouette -->
+                <circle cx="43" cy="30" r="6" fill="#FFFFFF" />
+                <path d="M40 31 Q33 30 28 35" stroke="#FDE047" stroke-width="2" stroke-linecap="round" />
+                <path d="M41 36 L48 39 L47 52 L39 51 Z" fill="#FFFFFF" />
+                <path d="M42 38 L34 41" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" />
+                <path d="M47 39 L57 35 L62 38" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" />
+                <path d="M45 50 L56 46 L73 39" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" />
+                <path d="M73 39 L76 34 L80 39 L75 42 Z" fill="#FDE047" />
+                <path d="M40 51 L35 59 L42 63" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" />
+                <path d="M38 50 C42 51 46 51 48 50" stroke="#0F172A" stroke-width="3.5" stroke-linecap="round" />
+                <path d="M42 51 L38 65 M44 51 L47 67" stroke="#0F172A" stroke-width="2.5" stroke-linecap="round" />
+                <circle cx="39" cy="62" r="1.2" fill="#F59E0B" />
+                <circle cx="45" cy="64" r="1.2" fill="#F59E0B" />
+              </svg>
+            </div>
+            
+            <div class="absolute -top-1 -right-1 rtl:-left-1 rtl:-right-auto w-3 h-3 rounded-full bg-amber-400 border border-slate-950 flex items-center justify-center text-[6px] font-black text-slate-950">
+              ★
+            </div>
+          </div>
+
+          <!-- Delicate Compact Typography -->
+          <div class="flex flex-col text-left rtl:text-right">
+            <span class="font-outfit font-black text-xs sm:text-[13.5px] tracking-tight leading-none text-slate-900 dark:text-white group-hover:text-brand-crimson transition-colors">
+              <span class="text-brand-crimson">KIDS</span> MARTIAL ARTS
+            </span>
+            <span class="text-[7.5px] sm:text-[8px] font-bold text-amber-500 dark:text-amber-400 tracking-wider uppercase font-outfit leading-tight mt-0.5">
+              &amp; CONFIDENCE BUILDING PROGRAM
+            </span>
+          </div>
+        </a>
+
+        <!-- System Pill Badge (Desktop Only, xl+) -->
+        <span class="hidden xl:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-900 border border-slate-700/80 text-[10px] font-bold uppercase tracking-wider text-slate-400">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+          <span>PARENT PORTAL • v4.8 ACTIVE</span>
+        </span>
+      </div>
+
+      <!-- CENTER: Global Omni-Search Bar (Desktop Only, lg+) -->
+      <div class="hidden lg:flex flex-1 max-w-xl mx-4">
+        <div class="relative w-full">
+          <i class="fa-solid fa-magnifying-glass absolute left-3.5 rtl:left-auto rtl:right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+          <input 
+            id="userGlobalSearchInput"
+            type="text" 
+            placeholder="Search classes, belt testing, progress records, payments..." 
+            class="w-full pl-9 pr-16 rtl:pl-16 rtl:pr-9 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-brand-crimson focus:ring-1 focus:ring-brand-crimson transition-all"
+          />
+          <div class="absolute right-2.5 rtl:right-auto rtl:left-2.5 top-1/2 -translate-y-1/2 flex items-center gap-1 px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-[10px] font-mono text-slate-400 pointer-events-none">
+            <span>Ctrl</span><span>K</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Desktop Action Controls (Desktop Only, lg+) -->
+      <div class="hidden lg:flex items-center gap-2.5 xl:gap-3">
+        
+        <!-- Back to Home -->
+        <a 
+          href="index.html" 
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700/80 hover:border-slate-500 text-slate-300 hover:text-white text-xs font-bold transition-colors"
+          title="Back to Public Site"
+        >
+          <i class="fa-solid fa-house text-xs"></i>
+          <span>Back to Home</span>
+        </a>
+
+        <!-- Switch to Admin Dashboard -->
+        <a href="admin-dashboard.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-rose-500/10 border border-rose-500/30 hover:bg-rose-500/20 text-rose-400 text-xs font-bold transition-all" title="Switch to Admin Portal">
+          <i class="fa-solid fa-user-shield text-xs"></i>
+          <span>Admin Portal</span>
+        </a>
+
+        <!-- Refresh Metrics Button -->
+        <button 
+          id="refreshMetricsBtn" 
+          type="button" 
+          onclick="triggerRefreshMetrics()"
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-500/10 border border-amber-500/30 hover:bg-amber-500/20 text-amber-400 text-xs font-bold transition-all"
+          title="Refresh All Telemetry"
+        >
+          <i class="fa-solid fa-arrows-rotate text-xs"></i>
+          <span>Refresh Telemetry</span>
+        </button>
+
+        <!-- Theme Toggle (Sun/Moon) -->
+        <button 
+          id="themeToggleBtn" 
+          type="button" 
+          onclick="toggleThemeMode()"
+          class="w-8 h-8 rounded-xl bg-slate-900 border border-slate-700/80 hover:border-amber-400/50 text-amber-400 flex items-center justify-center text-xs transition-colors"
+          title="Toggle Light / Dark Mode"
+        >
+          <i class="fa-solid fa-sun" id="themeIcon"></i>
+        </button>
+
+        <!-- RTL Toggle -->
+        <button 
+          id="rtlToggleBtn" 
+          type="button" 
+          onclick="toggleRTLMode()"
+          class="px-2.5 h-8 rounded-xl bg-slate-900 border border-slate-700/80 hover:border-brand-crimson/50 text-slate-300 text-xs font-bold transition-colors"
+          title="Toggle Right-To-Left"
+        >
+          RTL
+        </button>
+
+        <!-- Notifications Bell -->
+        <button 
+          id="notificationsBellBtn" 
+          type="button" 
+          onclick="showTab('view-notifications')"
+          class="relative w-8 h-8 rounded-xl bg-slate-900 border border-slate-700/80 hover:border-brand-crimson text-slate-300 flex items-center justify-center text-xs transition-colors"
+          title="Notifications"
+        >
+          <i class="fa-regular fa-bell"></i>
+          <span class="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-brand-crimson animate-pulse"></span>
+        </button>
+
+        <!-- Parent Profile Pill -->
+        <div 
+          onclick="showTab('view-my-profile')"
+          class="flex items-center gap-2.5 pl-2 border-l border-slate-800 cursor-pointer hover:opacity-90 transition-opacity"
+        >
+          <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-brand-crimson to-amber-500 p-0.5 shrink-0">
+            <div class="w-full h-full rounded-[10px] bg-slate-950 flex items-center justify-center font-outfit font-black text-xs text-amber-400">
+              SJ
+            </div>
+          </div>
+          <div class="flex flex-col text-left rtl:text-right">
+            <span class="text-xs font-black text-white font-outfit leading-tight">Sarah Jenkins</span>
+            <span class="text-[10px] font-bold text-slate-400 leading-tight">Parent • 2 Warriors</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: Mobile & Tablet Hamburger Menu Button (lg:hidden) -->
+      <!-- Positioned on the right of the navbar on mobile & tab! -->
+      <div class="flex lg:hidden items-center shrink-0">
+        <button 
+          id="userMobileMenuBtn" 
+          type="button" 
+          onclick="openMobileDrawer()"
+          aria-label="Open Navigation Drawer"
+          class="flex items-center justify-center w-10 h-10 rounded-xl bg-slate-900 border border-slate-700/80 text-slate-300 hover:text-white hover:border-brand-crimson hover:bg-slate-800 active:scale-95 transition-all focus:outline-none"
+        >
+          <i class="fa-solid fa-bars-staggered text-lg"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ========================================================
+       MAIN DASHBOARD CONTAINER (SIDEBAR + ACTIVE TABBED VIEW)
+       ======================================================== -->
+  <div class="flex-1 flex max-w-[1920px] w-full mx-auto relative overflow-hidden">
+
+    <!-- ====================================================
+         LEFT SIDEBAR NAVIGATION (Desktop: Sticky, Mobile: Right Drawer)
+         ==================================================== -->
+    <aside 
+      id="userSidebarDrawer" 
+      class="fixed inset-y-0 right-0 rtl:right-auto rtl:left-0 z-50 w-84 max-w-[90vw] bg-slate-950 border-l rtl:border-l-0 rtl:border-r border-slate-800/80 flex flex-col justify-between p-4 sm:p-5 transition-transform duration-300 translate-x-full rtl:-translate-x-full lg:translate-x-0 lg:static lg:z-auto lg:w-84 lg:h-[calc(100vh-61px)] lg:border-r lg:border-l-0 overflow-y-auto shrink-0 shadow-2xl lg:shadow-none"
+    >
+      
+      <!-- Top Section of Sidebar: Mobile Controls & Nav Links -->
+      <div class="space-y-4">
+        
+        <!-- MOBILE & TABLET DRAWER HEADER (lg:hidden): User Profile & Close (X) Button -->
+        <div class="lg:hidden flex items-center justify-between pb-3 border-b border-slate-800/80">
+          <div class="flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-crimson to-amber-500 p-0.5 shrink-0 shadow-sm">
+              <div class="w-full h-full rounded-[10px] bg-slate-950 flex items-center justify-center font-outfit font-black text-xs text-amber-400">
+                SJ
+              </div>
+            </div>
+            <div class="flex flex-col text-left rtl:text-right">
+              <span class="text-xs font-black text-white font-outfit leading-tight">Sarah Jenkins</span>
+              <span class="text-[10px] font-bold text-slate-400 leading-tight">Parent • 2 Warriors</span>
+            </div>
+          </div>
+
+          <!-- Close Drawer Button -->
+          <button 
+            id="userDrawerCloseBtn" 
+            type="button" 
+            onclick="closeMobileDrawer()" 
+            aria-label="Close navigation drawer"
+            class="w-8 h-8 rounded-xl bg-slate-900 border border-slate-700/80 text-slate-400 hover:text-white hover:border-brand-crimson flex items-center justify-center text-sm transition-colors"
+          >
+            <i class="fa-solid fa-xmark text-base"></i>
+          </button>
+        </div>
+
+        <!-- MOBILE & TABLET SEARCH BAR (lg:hidden) -->
+        <div class="lg:hidden relative">
+          <i class="fa-solid fa-magnifying-glass absolute left-3 rtl:left-auto rtl:right-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+          <input 
+            id="userDrawerSearchInput"
+            type="text" 
+            placeholder="Search modules, children, classes..." 
+            class="w-full pl-8 pr-3 rtl:pl-3 rtl:pr-8 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-brand-crimson focus:ring-1 focus:ring-brand-crimson transition-all"
+          />
+        </div>
+
+        <!-- MOBILE & TABLET QUICK UTILITIES (lg:hidden) -->
+        <div class="lg:hidden space-y-2 pb-3 border-b border-slate-800/80">
+          <div class="grid grid-cols-2 gap-2 text-xs font-bold">
+            <!-- Theme Mode -->
+            <button 
+              type="button" 
+              onclick="toggleThemeMode()" 
+              class="flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-amber-400/50 text-amber-400 transition-colors"
+            >
+              <i class="fa-solid fa-sun" id="drawerThemeIcon"></i>
+              <span class="text-[11px] text-slate-300">Theme</span>
+            </button>
+
+            <!-- RTL Mode -->
+            <button 
+              type="button" 
+              onclick="toggleRTLMode()" 
+              class="flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-brand-crimson text-slate-300 hover:text-white transition-colors"
+            >
+              <i class="fa-solid fa-right-left text-[11px]"></i>
+              <span class="text-[11px]">RTL Mode</span>
+            </button>
+
+            <!-- Refresh Metrics -->
+            <button 
+              type="button" 
+              onclick="triggerRefreshMetrics()" 
+              class="flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-amber-500/50 text-amber-400 transition-colors"
+            >
+              <i class="fa-solid fa-arrows-rotate text-[11px]" id="drawerRefreshIcon"></i>
+              <span class="text-[11px] text-slate-300">Refresh</span>
+            </button>
+
+            <!-- Notifications -->
+            <button 
+              type="button" 
+              onclick="showTab('view-notifications')" 
+              class="relative flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-brand-crimson text-slate-300 hover:text-white transition-colors"
+            >
+              <i class="fa-regular fa-bell text-[11px]"></i>
+              <span class="text-[11px]">Alerts</span>
+              <span class="w-2 h-2 rounded-full bg-brand-crimson animate-pulse"></span>
+            </button>
+          </div>
+
+          <!-- Back to Public Site Link -->
+          <a 
+            href="index.html" 
+            class="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-slate-600 text-slate-300 hover:text-white text-[11px] font-bold transition-colors"
+          >
+            <i class="fa-solid fa-house text-xs text-slate-400"></i>
+            <span>Back to Public Site (index.html)</span>
+          </a>
+        </div>
+
+        <!-- Status Header Card (Matching Portal Style) -->
+        <div class="p-3.5 rounded-2xl bg-slate-900/80 border border-slate-800/80 flex items-center justify-between">
+          <div class="flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-black font-outfit text-sm border border-amber-500/30">
+              PR
+            </div>
+            <div>
+              <div class="text-xs font-black text-white font-outfit flex items-center gap-1.5">
+                <span>PARENT PORTAL</span>
+              </div>
+              <div class="text-[10px] font-bold text-slate-400 flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                <span>Account Active • 2 Warriors</span>
+              </div>
+            </div>
+          </div>
+          <span class="px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-black uppercase tracking-wider">
+            Verified
+          </span>
+        </div>
+
+        <!-- Navigation Section Label -->
+        <div class="px-1 flex items-center justify-between text-[10px] font-black text-slate-500 uppercase tracking-wider">
+          <span>Portal Navigation</span>
+          <span>12 Modules</span>
+        </div>
+
+        <!-- Navigation Menu List (All 12 Modules + Logout) -->
+        <nav class="space-y-1" id="sidebarNavList">
+          
+          <!-- 1. Dashboard Overview -->
+          <button 
+            type="button" 
+            data-target="view-dashboard-overview"
+            class="user-nav-btn w-full nav-item-active flex items-center justify-between gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white transition-all text-left rtl:text-right group"
+          >
+            <div class="flex items-center gap-2.5 min-w-0">
+              <i class="fa-solid fa-chart-pie w-4 text-center shrink-0"></i>
+              <span class="whitespace-nowrap truncate font-jakarta">Dashboard Overview</span>
+            </div>
+            <span class="shrink-0 whitespace-nowrap px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-400 text-[10px] font-black uppercase tracking-wider">
+              Live
+            </span>
+          </button>
+
+          <!-- 2. My Profile -->
+          <button 
+            type="button" 
+            data-target="view-my-profile"
+            class="user-nav-btn w-full flex items-center justify-between gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-900/80 hover:text-white transition-all text-left rtl:text-right group"
+          >
+            <div class="flex items-center gap-2.5 min-w-0">
+              <i class="fa-solid fa-id-card w-4 text-center shrink-0"></i>
+              <span class="whitespace-nowrap truncate font-jakarta">My Profile</span>
+            </div>
+            <span class="shrink-0 whitespace-nowrap px-2 py-0.5 rounded-md bg-slate-800 text-slate-400 text-[10px] font-bold">
+              Parent ID
+            </span>
+          </button>
+
+          <!-- 3. My Children -->
+          <button 
+            type="button" 
+            data-target="view-my-children"
+            class="user-nav-btn w-full flex items-center justify-between gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-900/80 hover:text-white transition-all text-left rtl:text-right group"
+          >
+            <div class="flex items-center gap-2.5 min-w-0">
+              <i class="fa-solid fa-children w-4 text-center shrink-0"></i>
+              <span class="whitespace-nowrap truncate font-jakarta">My Children</span>
+            </div>
+            <span class="shrink-0 whitespace-nowrap px-2 py-0.5 rounded-md bg-brand-crimson/20 text-brand-crimson text-[10px] font-bold">
+              2 Enrolled
+            </span>
+          </button>
+
+          <!-- 4. Program Enrollment -->
+          <button 
+            type="button" 
+            data-target="view-program-enrollment"
+            class="user-nav-btn w-full flex items-center justify-between gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-900/80 hover:text-white transition-all text-left rtl:text-right group"
+          >
+            <div class="flex items-center gap-2.5 min-w-0">
+              <i class="fa-solid fa-graduation-cap w-4 text-center shrink-0"></i>
+              <span class="whitespace-nowrap truncate font-jakarta">Program Enrollment</span>
+            </div>
+            <span class="shrink-0 whitespace-nowrap px-2 py-0.5 rounded-md bg-blue-500/20 text-blue-400 text-[10px] font-bold">
+              Open
+            </span>
+          </button>
+
+          <!-- 5. My Child's Progress -->
+          <button 
+            type="button" 
+            data-target="view-my-childs-progress"
+            class="user-nav-btn w-full flex items-center justify-between gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-900/80 hover:text-white transition-all text-left rtl:text-right group"
+          >
+            <div class="flex items-center gap-2.5 min-w-0">
+              <i class="fa-solid fa-chart-line w-4 text-center shrink-0"></i>
+              <span class="whitespace-nowrap truncate font-jakarta">My Child's Progress</span>
+            </div>
+            <span class="shrink-0 whitespace-nowrap px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-400 text-[10px] font-bold">
+              84% Level
+            </span>
+          </button>
+
+          <!-- 6. Class Schedule -->
+          <button 
+            type="button" 
+            data-target="view-class-schedule"
+            class="user-nav-btn w-full flex items-center justify-between gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-900/80 hover:text-white transition-all text-left rtl:text-right group"
+          >
+            <div class="flex items-center gap-2.5 min-w-0">
+              <i class="fa-solid fa-calendar-week w-4 text-center shrink-0"></i>
+              <span class="whitespace-nowrap truncate font-jakarta">Class Schedule</span>
+            </div>
+            <span class="shrink-0 whitespace-nowrap px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-400 text-[10px] font-bold">
+              2 This Wk
+            </span>
+          </button>
+
+          <!-- 7. Attendance -->
+          <button 
+            type="button" 
+            data-target="view-attendance"
+            class="user-nav-btn w-full flex items-center justify-between gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-900/80 hover:text-white transition-all text-left rtl:text-right group"
+          >
+            <div class="flex items-center gap-2.5 min-w-0">
+              <i class="fa-solid fa-clipboard-user w-4 text-center shrink-0"></i>
+              <span class="whitespace-nowrap truncate font-jakarta">Attendance</span>
+            </div>
+            <span class="shrink-0 whitespace-nowrap px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 text-[10px] font-bold">
+              95.4%
+            </span>
+          </button>
+
+          <!-- 8. Belt Testing -->
+          <button 
+            type="button" 
+            data-target="view-belt-testing"
+            class="user-nav-btn w-full flex items-center justify-between gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-900/80 hover:text-white transition-all text-left rtl:text-right group"
+          >
+            <div class="flex items-center gap-2.5 min-w-0">
+              <i class="fa-solid fa-award w-4 text-center shrink-0"></i>
+              <span class="whitespace-nowrap truncate font-jakarta">Belt Testing</span>
+            </div>
+            <span class="shrink-0 whitespace-nowrap px-2 py-0.5 rounded-md bg-purple-500/20 text-purple-400 text-[10px] font-bold">
+              1 Eligible
+            </span>
+          </button>
+
+          <!-- 9. Achievements -->
+          <button 
+            type="button" 
+            data-target="view-achievements"
+            class="user-nav-btn w-full flex items-center justify-between gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-900/80 hover:text-white transition-all text-left rtl:text-right group"
+          >
+            <div class="flex items-center gap-2.5 min-w-0">
+              <i class="fa-solid fa-medal w-4 text-center shrink-0"></i>
+              <span class="whitespace-nowrap truncate font-jakarta">Achievements</span>
+            </div>
+            <span class="shrink-0 whitespace-nowrap px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-400 text-[10px] font-bold">
+              8 Badges
+            </span>
+          </button>
+
+          <!-- 10. Payments & Enrollment -->
+          <button 
+            type="button" 
+            data-target="view-payments-enrollment"
+            class="user-nav-btn w-full flex items-center justify-between gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-900/80 hover:text-white transition-all text-left rtl:text-right group"
+          >
+            <div class="flex items-center gap-2.5 min-w-0">
+              <i class="fa-solid fa-credit-card w-4 text-center shrink-0"></i>
+              <span class="whitespace-nowrap truncate font-jakarta">Payments &amp; Enrollment</span>
+            </div>
+            <span class="shrink-0 whitespace-nowrap px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 text-[10px] font-bold">
+              $0 Due
+            </span>
+          </button>
+
+          <!-- 11. Notifications -->
+          <button 
+            type="button" 
+            data-target="view-notifications"
+            class="user-nav-btn w-full flex items-center justify-between gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-900/80 hover:text-white transition-all text-left rtl:text-right group"
+          >
+            <div class="flex items-center gap-2.5 min-w-0">
+              <i class="fa-solid fa-bullhorn w-4 text-center shrink-0"></i>
+              <span class="whitespace-nowrap truncate font-jakarta">Notifications</span>
+            </div>
+            <span class="shrink-0 whitespace-nowrap px-2 py-0.5 rounded-md bg-rose-500/20 text-rose-400 text-[10px] font-bold">
+              4 New
+            </span>
+          </button>
+
+          <!-- 12. Support -->
+          <button 
+            type="button" 
+            data-target="view-support"
+            class="user-nav-btn w-full flex items-center justify-between gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-900/80 hover:text-white transition-all text-left rtl:text-right group"
+          >
+            <div class="flex items-center gap-2.5 min-w-0">
+              <i class="fa-solid fa-headset w-4 text-center shrink-0"></i>
+              <span class="whitespace-nowrap truncate font-jakarta">Support</span>
+            </div>
+            <span class="shrink-0 whitespace-nowrap px-2 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 text-[10px] font-bold">
+              Help
+            </span>
+          </button>
+
+        </nav>
+      </div>
+
+      <!-- Bottom: Logout Action Button -->
+      <div class="pt-4 border-t border-slate-800/80">
+        <a href="login.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold text-slate-400 hover:bg-rose-500/10 hover:text-rose-400 transition-colors text-left rtl:text-right"
+        >
+          <div class="flex items-center gap-2.5">
+            <i class="fa-solid fa-arrow-right-from-bracket w-4 text-center"></i>
+            <span>Logout</span>
+          </div>
+          <span class="px-2 py-0.5 rounded-md bg-slate-800 text-slate-400 text-[10px] font-bold">
+            Sign Out
+          </span>
+        </a>
+      </div>
+
+    </aside>
+
+    <!-- Mobile Drawer Overlay Backdrop -->
+    <div id="userSidebarOverlay" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-40 hidden lg:hidden"></div>
+
+    <!-- ====================================================
+         MAIN VIEWPORT AREA (DYNAMIC TABBED CONTENT)
+         ==================================================== -->
+    <main class="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto max-h-[calc(100vh-61px)]">
+      
+      <!-- ================================================
+           VIEW 1: DASHBOARD OVERVIEW
+           ================================================ -->
+      <div id="view-dashboard-overview" class="user-view-panel space-y-8">
+        
+        <!-- Welcome Ribbon (Title, Subtitle & Action Buttons) -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div class="space-y-1 text-left rtl:text-right">
+            <h1 class="text-2xl sm:text-3xl font-black font-outfit text-white tracking-tight">
+              Dashboard Overview
+            </h1>
+            <p class="text-xs sm:text-sm text-slate-400 font-jakarta max-w-2xl">
+              Welcome back, Sarah Jenkins! Tracking Leo &amp; Maya's martial arts discipline, belt progression, and confidence building milestones.
+            </p>
+          </div>
+
+          <div class="flex items-center flex-wrap gap-2.5 shrink-0">
+            <button 
+              type="button" 
+              onclick="showTab('view-belt-testing')" 
+              class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-brand-crimson to-rose-600 hover:from-rose-600 hover:to-brand-crimson text-white font-bold font-outfit text-xs uppercase tracking-wider shadow-lg shadow-rose-950/30 transition-all transform hover:-translate-y-0.5 active:translate-y-0 flex items-center gap-2"
+            >
+              <i class="fa-solid fa-award"></i>
+              <span>Register for Testing</span>
+            </button>
+            <button 
+              type="button" 
+              onclick="showTab('view-my-children')" 
+              class="px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 hover:border-amber-400 text-slate-200 hover:text-white font-bold font-outfit text-xs transition-colors flex items-center gap-2"
+            >
+              <i class="fa-solid fa-user-plus text-amber-400"></i>
+              <span>Add New Child</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 6 STAT CARDS GRID (Exact match to required hierarchy items) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+          
+          <!-- Card 1: Enrolled Children -->
+          <div class="p-4 sm:p-5 rounded-2xl bg-slate-900/90 border border-slate-800/80 relative overflow-hidden shadow-lg hover:border-blue-500/50 transition-all duration-300">
+            <div class="flex items-center justify-between text-slate-400 text-xs font-bold uppercase tracking-wider mb-2">
+              <span class="truncate">Enrolled Children</span>
+              <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center shrink-0">
+                <i class="fa-solid fa-children text-xs"></i>
+              </div>
+            </div>
+            <div class="text-2xl sm:text-3xl font-black text-white font-outfit tracking-tight mb-1">2</div>
+            <div class="text-[11px] text-blue-400 font-bold flex items-center gap-1">
+              <span>Leo &amp; Maya</span>
+            </div>
+          </div>
+
+          <!-- Card 2: Current Belt Levels -->
+          <div class="p-4 sm:p-5 rounded-2xl bg-slate-900/90 border border-slate-800/80 relative overflow-hidden shadow-lg hover:border-amber-500/50 transition-all duration-300">
+            <div class="flex items-center justify-between text-slate-400 text-xs font-bold uppercase tracking-wider mb-2">
+              <span class="truncate">Current Belt Levels</span>
+              <div class="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center shrink-0">
+                <i class="fa-solid fa-ribbon text-xs"></i>
+              </div>
+            </div>
+            <div class="text-2xl sm:text-3xl font-black text-amber-400 font-outfit tracking-tight mb-1">Yellow &amp; Green</div>
+            <div class="text-[11px] text-slate-400 font-bold">
+              <span>Junior Ranks Active</span>
+            </div>
+          </div>
+
+          <!-- Card 3: Training Progress -->
+          <div class="p-4 sm:p-5 rounded-2xl bg-slate-900/90 border border-slate-800/80 relative overflow-hidden shadow-lg hover:border-emerald-500/50 transition-all duration-300">
+            <div class="flex items-center justify-between text-slate-400 text-xs font-bold uppercase tracking-wider mb-2">
+              <span class="truncate">Training Progress</span>
+              <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0">
+                <i class="fa-solid fa-chart-line text-xs"></i>
+              </div>
+            </div>
+            <div class="text-2xl sm:text-3xl font-black text-emerald-400 font-outfit tracking-tight mb-1">84%</div>
+            <div class="text-[11px] text-emerald-400 font-bold flex items-center gap-1">
+              <i class="fa-solid fa-arrow-trend-up"></i> +6% This Month
+            </div>
+          </div>
+
+          <!-- Card 4: Upcoming Classes -->
+          <div class="p-4 sm:p-5 rounded-2xl bg-slate-900/90 border border-slate-800/80 relative overflow-hidden shadow-lg hover:border-purple-500/50 transition-all duration-300">
+            <div class="flex items-center justify-between text-slate-400 text-xs font-bold uppercase tracking-wider mb-2">
+              <span class="truncate">Upcoming Classes</span>
+              <div class="w-8 h-8 rounded-lg bg-purple-500/10 text-purple-400 flex items-center justify-center shrink-0">
+                <i class="fa-solid fa-calendar-day text-xs"></i>
+              </div>
+            </div>
+            <div class="text-2xl sm:text-3xl font-black text-white font-outfit tracking-tight mb-1">2</div>
+            <div class="text-[11px] text-purple-400 font-bold">
+              <span>Today 4:30 &amp; Tomorrow</span>
+            </div>
+          </div>
+
+          <!-- Card 5: Upcoming Testing Dates -->
+          <div class="p-4 sm:p-5 rounded-2xl bg-slate-900/90 border border-slate-800/80 relative overflow-hidden shadow-lg hover:border-rose-500/50 transition-all duration-300">
+            <div class="flex items-center justify-between text-slate-400 text-xs font-bold uppercase tracking-wider mb-2">
+              <span class="truncate">Upcoming Testing Dates</span>
+              <div class="w-8 h-8 rounded-lg bg-rose-500/10 text-rose-400 flex items-center justify-center shrink-0">
+                <i class="fa-solid fa-stopwatch text-xs"></i>
+              </div>
+            </div>
+            <div class="text-xl sm:text-2xl font-black text-rose-400 font-outfit tracking-tight mb-1">Nov 15, 2026</div>
+            <div class="text-[11px] text-slate-400 font-bold">
+              <span>Autumn Gala • 1 Eligible</span>
+            </div>
+          </div>
+
+          <!-- Card 6: Recent Achievements -->
+          <div class="p-4 sm:p-5 rounded-2xl bg-slate-900/90 border border-slate-800/80 relative overflow-hidden shadow-lg hover:border-yellow-500/50 transition-all duration-300">
+            <div class="flex items-center justify-between text-slate-400 text-xs font-bold uppercase tracking-wider mb-2">
+              <span class="truncate">Recent Achievements</span>
+              <div class="w-8 h-8 rounded-lg bg-yellow-500/10 text-yellow-400 flex items-center justify-center shrink-0">
+                <i class="fa-solid fa-medal text-xs"></i>
+              </div>
+            </div>
+            <div class="text-2xl sm:text-3xl font-black text-yellow-400 font-outfit tracking-tight mb-1">8 Badges</div>
+            <div class="text-[11px] text-yellow-400 font-bold">
+              <span>+2 New Stripes</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- TWO ACTIVE WARRIOR CARDS -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          
+          <!-- Warrior 1: Leo Jenkins -->
+          <div class="p-6 rounded-3xl bg-slate-900/90 border border-slate-800/90 shadow-xl relative overflow-hidden">
+            <div class="flex items-start justify-between gap-4 pb-4 border-b border-slate-800">
+              <div class="flex items-center gap-3.5">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-amber-400 to-yellow-600 p-0.5 shrink-0 shadow-md">
+                  <div class="w-full h-full rounded-[14px] bg-slate-950 flex items-center justify-center font-outfit font-black text-base text-amber-400">
+                    LJ
+                  </div>
+                </div>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <h3 class="text-lg font-black text-white font-outfit">Leo Jenkins</h3>
+                    <span class="px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30 text-[10px] font-bold">
+                      Yellow Belt
+                    </span>
+                  </div>
+                  <p class="text-xs text-slate-400 mt-0.5">Little Tigers Program • Age 8 • Sensei Vance</p>
+                </div>
+              </div>
+              <button onclick="showTab('view-my-childs-progress')" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200 transition-colors">
+                View Progress
+              </button>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 py-4 text-center">
+              <div class="p-3 rounded-xl bg-slate-950/60 border border-slate-800/60">
+                <span class="text-[10px] font-bold text-slate-400 uppercase">Belt Striping</span>
+                <div class="text-sm font-black text-amber-400 font-outfit mt-1">2 / 3 Stripes</div>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-950/60 border border-slate-800/60">
+                <span class="text-[10px] font-bold text-slate-400 uppercase">Attendance</span>
+                <div class="text-sm font-black text-emerald-400 font-outfit mt-1">96.0% (24/25)</div>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-950/60 border border-slate-800/60">
+                <span class="text-[10px] font-bold text-slate-400 uppercase">Next Class</span>
+                <div class="text-sm font-black text-cyan-400 font-outfit mt-1">Today 4:30 PM</div>
+              </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="space-y-1.5 pt-2">
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-slate-400 font-bold">Kata Form #2 &amp; Stance Mastery</span>
+                <span class="text-amber-400 font-black">78%</span>
+              </div>
+              <div class="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-amber-500 to-yellow-400 rounded-full" style="width: 78%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Warrior 2: Maya Jenkins -->
+          <div class="p-6 rounded-3xl bg-slate-900/90 border border-slate-800/90 shadow-xl relative overflow-hidden">
+            <div class="flex items-start justify-between gap-4 pb-4 border-b border-slate-800">
+              <div class="flex items-center gap-3.5">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-400 to-teal-600 p-0.5 shrink-0 shadow-md">
+                  <div class="w-full h-full rounded-[14px] bg-slate-950 flex items-center justify-center font-outfit font-black text-base text-emerald-400">
+                    MJ
+                  </div>
+                </div>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <h3 class="text-lg font-black text-white font-outfit">Maya Jenkins</h3>
+                    <span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-bold">
+                      Green Belt
+                    </span>
+                  </div>
+                  <p class="text-xs text-slate-400 mt-0.5">Junior Champions Program • Age 11 • Sensei Elena</p>
+                </div>
+              </div>
+              <button onclick="showTab('view-my-childs-progress')" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200 transition-colors">
+                View Progress
+              </button>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 py-4 text-center">
+              <div class="p-3 rounded-xl bg-slate-950/60 border border-slate-800/60">
+                <span class="text-[10px] font-bold text-slate-400 uppercase">Belt Striping</span>
+                <div class="text-sm font-black text-emerald-400 font-outfit mt-1">4 / 4 Complete</div>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-950/60 border border-slate-800/60">
+                <span class="text-[10px] font-bold text-slate-400 uppercase">Attendance</span>
+                <div class="text-sm font-black text-emerald-400 font-outfit mt-1">94.8% (38/40)</div>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-950/60 border border-slate-800/60">
+                <span class="text-[10px] font-bold text-slate-400 uppercase">Next Class</span>
+                <div class="text-sm font-black text-purple-400 font-outfit mt-1">Tomorrow 5:15 PM</div>
+              </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="space-y-1.5 pt-2">
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-slate-400 font-bold">Testing Eligibility: Purple Belt Graduation</span>
+                <span class="text-emerald-400 font-black">100% Ready</span>
+              </div>
+              <div class="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full" style="width: 100%;"></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- ================================================
+           VIEW 2: MY PROFILE
+           ================================================ -->
+      <div id="view-my-profile" class="user-view-panel hidden space-y-6">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+          <div>
+            <h2 class="text-2xl font-black font-outfit text-white">My Profile</h2>
+            <p class="text-xs text-slate-400 font-jakarta">Parent Information, Contact Details, Profile Photo, Emergency Contact &amp; Change Password</p>
+          </div>
+          <button onclick="alert('Profile details saved successfully!');" class="px-4 py-2 rounded-xl bg-brand-crimson text-white font-bold text-xs">
+            Save Changes
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          
+          <!-- Column 1: Profile Photo & Parent Information -->
+          <div class="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-5">
+            <h3 class="text-sm font-black text-white font-outfit uppercase tracking-wider border-b border-slate-800 pb-2">Profile Photo</h3>
+            <div class="flex flex-col items-center text-center space-y-3">
+              <div class="w-24 h-24 rounded-3xl bg-gradient-to-tr from-brand-crimson to-amber-500 p-1 shadow-xl">
+                <div class="w-full h-full rounded-[22px] bg-slate-950 flex items-center justify-center font-outfit font-black text-3xl text-amber-400">
+                  SJ
+                </div>
+              </div>
+              <div>
+                <h4 class="text-base font-black text-white font-outfit">Sarah Jenkins</h4>
+                <p class="text-xs text-slate-400">Parent Account • ID #PRT-88219</p>
+              </div>
+              <button onclick="alert('Photo uploader opened');" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200 transition-colors">
+                Change Profile Photo
+              </button>
+            </div>
+
+            <div class="pt-4 border-t border-slate-800 space-y-3 text-xs">
+              <h4 class="font-black text-white uppercase text-[11px] tracking-wider">Parent Information</h4>
+              <div class="flex justify-between py-1 border-b border-slate-800/60">
+                <span class="text-slate-400">Full Name</span>
+                <span class="text-white font-bold">Sarah Jenkins</span>
+              </div>
+              <div class="flex justify-between py-1 border-b border-slate-800/60">
+                <span class="text-slate-400">Relationship</span>
+                <span class="text-white font-bold">Mother / Guardian</span>
+              </div>
+              <div class="flex justify-between py-1 border-b border-slate-800/60">
+                <span class="text-slate-400">Account Status</span>
+                <span class="text-emerald-400 font-bold">Verified Active</span>
+              </div>
+              <div class="flex justify-between py-1">
+                <span class="text-slate-400">Member Since</span>
+                <span class="text-white font-bold">January 2025</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 2: Contact Details & Emergency Contact -->
+          <div class="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-5">
+            <h3 class="text-sm font-black text-white font-outfit uppercase tracking-wider border-b border-slate-800 pb-2">Contact Details</h3>
+            <div class="space-y-4 text-xs">
+              <div>
+                <label class="block text-slate-400 font-bold mb-1">Primary Email Address</label>
+                <input type="email" value="sarah.jenkins@familymail.com" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white font-mono focus:border-brand-crimson outline-none" />
+              </div>
+              <div>
+                <label class="block text-slate-400 font-bold mb-1">Primary Phone Number</label>
+                <input type="tel" value="+1 (555) 234-5678" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white font-mono focus:border-brand-crimson outline-none" />
+              </div>
+              <div>
+                <label class="block text-slate-400 font-bold mb-1">Home Address</label>
+                <input type="text" value="742 Evergreen Terrace, Springfield, OR" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white focus:border-brand-crimson outline-none" />
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-slate-800 space-y-3">
+              <h3 class="text-sm font-black text-white font-outfit uppercase tracking-wider border-b border-slate-800 pb-2">Emergency Contact</h3>
+              <div class="space-y-3 text-xs">
+                <div>
+                  <label class="block text-slate-400 font-bold mb-1">Secondary Emergency Contact Name</label>
+                  <input type="text" value="David Jenkins (Father)" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white focus:border-brand-crimson outline-none" />
+                </div>
+                <div>
+                  <label class="block text-slate-400 font-bold mb-1">Emergency Phone Number</label>
+                  <input type="tel" value="+1 (555) 019-2834" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white font-mono focus:border-brand-crimson outline-none" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 3: Change Password -->
+          <div class="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-5">
+            <h3 class="text-sm font-black text-white font-outfit uppercase tracking-wider border-b border-slate-800 pb-2">Change Password</h3>
+            <div class="space-y-4 text-xs">
+              <div>
+                <label class="block text-slate-400 font-bold mb-1">Current Password</label>
+                <input type="password" value="••••••••••••" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white font-mono focus:border-brand-crimson outline-none" />
+              </div>
+              <div>
+                <label class="block text-slate-400 font-bold mb-1">New Password</label>
+                <input type="password" placeholder="Enter new strong password" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white font-mono focus:border-brand-crimson outline-none" />
+              </div>
+              <div>
+                <label class="block text-slate-400 font-bold mb-1">Confirm New Password</label>
+                <input type="password" placeholder="Re-enter new password" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white font-mono focus:border-brand-crimson outline-none" />
+              </div>
+              <button onclick="alert('Password updated successfully!');" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-brand-crimson text-white font-bold text-xs transition-colors">
+                Update Password
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ================================================
+           VIEW 3: MY CHILDREN
+           ================================================ -->
+      <div id="view-my-children" class="user-view-panel hidden space-y-6">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+          <div>
+            <h2 class="text-2xl font-black font-outfit text-white">My Children</h2>
+            <p class="text-xs text-slate-400 font-jakarta" data-submodules="Age & Date of Birth">Child Profiles, Add New Child, Child Personal Details, Age &amp; Date of Birth, Medical Information, Emergency Information &amp; Edit Child Profile</p>
+          </div>
+          <button onclick="alert('Add New Child modal opened');" class="px-4 py-2 rounded-xl bg-brand-crimson text-white font-bold text-xs flex items-center gap-1.5">
+            <i class="fa-solid fa-plus"></i>
+            <span>Add New Child</span>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          
+          <!-- Child 1: Leo Jenkins Profile -->
+          <div class="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-5">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-sm">
+                  LJ
+                </div>
+                <div>
+                  <h3 class="text-base font-black text-white font-outfit">Leo Jenkins</h3>
+                  <span class="text-xs text-amber-400 font-bold">Child Profiles • Little Tigers</span>
+                </div>
+              </div>
+              <button onclick="alert('Editing Leo Jenkins Profile');" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-white transition-colors">
+                Edit Child Profile
+              </button>
+            </div>
+
+            <div class="space-y-3 text-xs">
+              <h4 class="font-black text-white uppercase text-[11px] tracking-wider text-slate-400">Child Personal Details</h4>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 p-3 rounded-xl bg-slate-950/60 border border-slate-800/60">
+                <div>
+                  <span class="text-slate-500 block">First &amp; Last Name</span>
+                  <span class="text-white font-bold">Leo Jenkins</span>
+                </div>
+                <div>
+                  <span class="text-slate-500 block">Age &amp; Date of Birth</span>
+                  <span class="text-white font-bold">8 Years • Mar 14, 2018</span>
+                </div>
+                <div>
+                  <span class="text-slate-500 block">Gender</span>
+                  <span class="text-white font-bold">Male</span>
+                </div>
+                <div>
+                  <span class="text-slate-500 block">Belt Rank</span>
+                  <span class="text-amber-400 font-bold">Yellow Belt (2 Stripes)</span>
+                </div>
+              </div>
+
+              <h4 class="font-black text-white uppercase text-[11px] tracking-wider text-slate-400 pt-2">Medical Information</h4>
+              <div class="p-3 rounded-xl bg-slate-950/60 border border-slate-800/60">
+                <p class="text-slate-300">Mild peanut allergy. Inhaler stored in red training gear bag for sports-induced asthma.</p>
+              </div>
+
+              <h4 class="font-black text-white uppercase text-[11px] tracking-wider text-slate-400 pt-2">Emergency Information</h4>
+              <div class="p-3 rounded-xl bg-slate-950/60 border border-slate-800/60 flex justify-between">
+                <div>
+                  <span class="text-slate-500 block">Emergency Contact</span>
+                  <span class="text-white font-bold">David Jenkins (Father)</span>
+                </div>
+                <div>
+                  <span class="text-slate-500 block">Emergency Phone</span>
+                  <span class="text-white font-bold font-mono">+1 555-019-2834</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Child 2: Maya Jenkins Profile -->
+          <div class="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-5">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-sm">
+                  MJ
+                </div>
+                <div>
+                  <h3 class="text-base font-black text-white font-outfit">Maya Jenkins</h3>
+                  <span class="text-xs text-emerald-400 font-bold">Child Profiles • Junior Champions</span>
+                </div>
+              </div>
+              <button onclick="alert('Editing Maya Jenkins Profile');" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-white transition-colors">
+                Edit Child Profile
+              </button>
+            </div>
+
+            <div class="space-y-3 text-xs">
+              <h4 class="font-black text-white uppercase text-[11px] tracking-wider text-slate-400">Child Personal Details</h4>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 p-3 rounded-xl bg-slate-950/60 border border-slate-800/60">
+                <div>
+                  <span class="text-slate-500 block">First &amp; Last Name</span>
+                  <span class="text-white font-bold">Maya Jenkins</span>
+                </div>
+                <div>
+                  <span class="text-slate-500 block">Age &amp; Date of Birth</span>
+                  <span class="text-white font-bold">11 Years • Aug 22, 2015</span>
+                </div>
+                <div>
+                  <span class="text-slate-500 block">Gender</span>
+                  <span class="text-white font-bold">Female</span>
+                </div>
+                <div>
+                  <span class="text-slate-500 block">Belt Rank</span>
+                  <span class="text-emerald-400 font-bold">Green Belt (4 Stripes)</span>
+                </div>
+              </div>
+
+              <h4 class="font-black text-white uppercase text-[11px] tracking-wider text-slate-400 pt-2">Medical Information</h4>
+              <div class="p-3 rounded-xl bg-slate-950/60 border border-slate-800/60">
+                <p class="text-slate-300">No medical conditions or known allergies. Medical release waiver on file.</p>
+              </div>
+
+              <h4 class="font-black text-white uppercase text-[11px] tracking-wider text-slate-400 pt-2">Emergency Information</h4>
+              <div class="p-3 rounded-xl bg-slate-950/60 border border-slate-800/60 flex justify-between">
+                <div>
+                  <span class="text-slate-500 block">Emergency Contact</span>
+                  <span class="text-white font-bold">Sarah Jenkins (Mother)</span>
+                </div>
+                <div>
+                  <span class="text-slate-500 block">Emergency Phone</span>
+                  <span class="text-white font-bold font-mono">+1 555-234-5678</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ================================================
+           VIEW 4: PROGRAM ENROLLMENT
+           ================================================ -->
+      <div id="view-program-enrollment" class="user-view-panel hidden space-y-6">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+          <div>
+            <h2 class="text-2xl font-black font-outfit text-white">Program Enrollment</h2>
+            <p class="text-xs text-slate-400 font-jakarta">Available Programs, Recommended Belt Level, Select Child, Choose Program, Select Training Schedule, Enrollment Details &amp; Enrollment Confirmation</p>
+          </div>
+        </div>
+
+        <!-- Available Programs & Recommended Belt Level Guide -->
+        <div class="space-y-4">
+          <h3 class="text-sm font-black text-white font-outfit uppercase tracking-wider text-slate-400">Available Programs &amp; Recommended Belt Level</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            
+            <div class="p-5 rounded-2xl bg-slate-900/90 border border-amber-500/30 space-y-3">
+              <span class="px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-400 text-[10px] font-black uppercase">Ages 4 - 7</span>
+              <h4 class="text-lg font-black text-white font-outfit">Little Tigers</h4>
+              <p class="text-xs text-slate-400 leading-relaxed">Focuses on balance, listening skills, motor coordination, respect, and foundational martial arts stances.</p>
+              <div class="text-xs text-amber-400 font-bold">Recommended Belt Level: White to Yellow Belt</div>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-slate-900/90 border border-emerald-500/30 space-y-3">
+              <span class="px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-400 text-[10px] font-black uppercase">Ages 8 - 12</span>
+              <h4 class="text-lg font-black text-white font-outfit">Junior Champions</h4>
+              <p class="text-xs text-slate-400 leading-relaxed">Teaches self-defense, focus, Kata precision, bully defense confidence, and emotional self-regulation.</p>
+              <div class="text-xs text-emerald-400 font-bold">Recommended Belt Level: Orange to Blue Belt</div>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-slate-900/90 border border-purple-500/30 space-y-3">
+              <span class="px-2 py-0.5 rounded-md bg-purple-500/20 text-purple-400 text-[10px] font-black uppercase">Ages 13 - 17</span>
+              <h4 class="text-lg font-black text-white font-outfit">Elite Warriors</h4>
+              <p class="text-xs text-slate-400 leading-relaxed">Advanced striking, combinations, leadership mentorship, sparring fundamentals, and Black Belt prep.</p>
+              <div class="text-xs text-purple-400 font-bold">Recommended Belt Level: Blue to Black Belt</div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 5-Step Enrollment Wizard -->
+        <div class="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-6">
+          <h3 class="text-base font-black text-white font-outfit">Interactive Enrollment Wizard</h3>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-xs">
+            <div>
+              <label class="block text-slate-400 font-bold mb-1">Select Child</label>
+              <select class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white font-bold outline-none">
+                <option>Leo Jenkins (Age 8)</option>
+                <option>Maya Jenkins (Age 11)</option>
+                <option>+ Add New Child</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-slate-400 font-bold mb-1">Choose Program</label>
+              <select class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white font-bold outline-none">
+                <option>Junior Champions (8-12)</option>
+                <option>Little Tigers (4-7)</option>
+                <option>Elite Warriors (13-17)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-slate-400 font-bold mb-1">Select Training Schedule</label>
+              <select class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white font-bold outline-none">
+                <option>Tue / Thu • 4:30 PM</option>
+                <option>Mon / Wed • 5:15 PM</option>
+                <option>Sat • 10:00 AM</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-slate-400 font-bold mb-1">Enrollment Details</label>
+              <input type="text" value="Standard Uniform Pack Included" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-300 font-bold outline-none" readonly />
+            </div>
+          </div>
+
+          <div class="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-between">
+            <div class="text-xs">
+              <span class="font-black text-emerald-400 block font-outfit text-sm">Enrollment Confirmation Ready</span>
+              <span class="text-slate-400">All membership terms, uniform fitting, and insurance coverage are active for selected warriors.</span>
+            </div>
+            <button onclick="alert('Enrollment Confirmation generated! Receipt emailed.');" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs whitespace-nowrap">
+              Confirm Enrollment
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================
+           VIEW 5: MY CHILD'S PROGRESS
+           ================================================ -->
+      <div id="view-my-childs-progress" class="user-view-panel hidden space-y-6">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+          <div>
+            <h2 class="text-2xl font-black font-outfit text-white">My Child's Progress</h2>
+            <p class="text-xs text-slate-400 font-jakarta">Current Belt, Belt Progression, Skills Completed, Skills In Progress, Instructor Feedback, Attendance Progress, Confidence Milestones &amp; Achievement History</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          
+          <!-- Column 1: Current Belt & Belt Progression -->
+          <div class="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-5">
+            <h3 class="text-sm font-black text-white font-outfit uppercase tracking-wider border-b border-slate-800 pb-2">Current Belt &amp; Belt Progression</h3>
+            
+            <div class="p-4 rounded-2xl bg-gradient-to-r from-emerald-950/60 to-slate-900 border border-emerald-500/40 text-center space-y-2">
+              <span class="text-[10px] font-bold text-emerald-400 uppercase tracking-widest">Active Belt Rank</span>
+              <div class="text-2xl font-black text-white font-outfit">Green Belt (Maya)</div>
+              <div class="w-full h-4 rounded-md bg-emerald-500 border border-emerald-300 flex items-center justify-center text-[10px] font-black text-slate-950 gap-1">
+                <span class="inline-flex items-center gap-0.5"><i class="fa-solid fa-star text-[8px]"></i><i class="fa-solid fa-star text-[8px]"></i><i class="fa-solid fa-star text-[8px]"></i><i class="fa-solid fa-star text-[8px]"></i></span> 4 Stripes
+              </div>
+              <p class="text-xs text-slate-300">Ready for upcoming Belt Testing Gala to Purple Belt!</p>
+            </div>
+
+            <div class="space-y-2 text-xs">
+              <span class="text-slate-400 font-bold uppercase text-[11px] block">Belt Progression Roadmap</span>
+              <div class="flex items-center justify-between p-2 rounded-lg bg-slate-950/60 border border-slate-800">
+                <span class="text-slate-400">White Belt</span>
+                <span class="text-emerald-400 font-bold">Graduated <i class="fa-solid fa-check ml-1 text-xs"></i></span>
+              </div>
+              <div class="flex items-center justify-between p-2 rounded-lg bg-slate-950/60 border border-slate-800">
+                <span class="text-slate-400">Yellow Belt</span>
+                <span class="text-emerald-400 font-bold">Graduated <i class="fa-solid fa-check ml-1 text-xs"></i></span>
+              </div>
+              <div class="flex items-center justify-between p-2 rounded-lg bg-slate-950/60 border border-slate-800">
+                <span class="text-slate-400">Orange Belt</span>
+                <span class="text-emerald-400 font-bold">Graduated <i class="fa-solid fa-check ml-1 text-xs"></i></span>
+              </div>
+              <div class="flex items-center justify-between p-2 rounded-lg bg-emerald-500/20 border border-emerald-500/40">
+                <span class="text-white font-black">Green Belt</span>
+                <span class="text-emerald-400 font-bold">Current Belt <i class="fa-solid fa-star ml-1 text-xs text-amber-400"></i></span>
+              </div>
+              <div class="flex items-center justify-between p-2 rounded-lg bg-slate-950/60 border border-slate-800 opacity-60">
+                <span class="text-slate-400">Purple Belt</span>
+                <span class="text-purple-400 font-bold">Next Target</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 2: Skills Completed & Skills In Progress -->
+          <div class="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-5">
+            <h3 class="text-sm font-black text-white font-outfit uppercase tracking-wider border-b border-slate-800 pb-2">Skills Evaluation</h3>
+            
+            <div class="space-y-3 text-xs">
+              <span class="text-emerald-400 font-black uppercase text-[11px] block flex items-center gap-1.5">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>Skills Completed</span>
+              </span>
+              <ul class="space-y-1.5 text-slate-300">
+                <li class="flex items-center gap-2 p-2 rounded-lg bg-slate-950/60 border border-slate-800">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                  <span>Basic Horse Stance &amp; Front Stance balance</span>
+                </li>
+                <li class="flex items-center gap-2 p-2 rounded-lg bg-slate-950/60 border border-slate-800">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                  <span>Form Kata #2 complete memorization</span>
+                </li>
+                <li class="flex items-center gap-2 p-2 rounded-lg bg-slate-950/60 border border-slate-800">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                  <span>Front snap kick &amp; roundhouse chambering</span>
+                </li>
+              </ul>
+
+              <span class="text-amber-400 font-black uppercase text-[11px] block pt-3 flex items-center gap-1.5">
+                <i class="fa-solid fa-spinner"></i>
+                <span>Skills In Progress</span>
+              </span>
+              <ul class="space-y-1.5 text-slate-300">
+                <li class="flex items-center gap-2 p-2 rounded-lg bg-slate-950/60 border border-slate-800">
+                  <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                  <span>Side kick extension &amp; heel drive</span>
+                </li>
+                <li class="flex items-center gap-2 p-2 rounded-lg bg-slate-950/60 border border-slate-800">
+                  <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                  <span>Controlled light-contact one-step sparring</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Column 3: Instructor Feedback & Confidence Milestones -->
+          <div class="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-5">
+            <h3 class="text-sm font-black text-white font-outfit uppercase tracking-wider border-b border-slate-800 pb-2">Feedback &amp; Milestones</h3>
+            
+            <div class="space-y-3 text-xs">
+              <span class="text-white font-black uppercase text-[11px] block text-slate-400">Instructor Feedback</span>
+              <div class="p-3 rounded-xl bg-slate-950/60 border border-slate-800 space-y-1">
+                <div class="flex items-center justify-between text-[11px] font-bold text-amber-400">
+                  <span>Sensei Marcus Vance</span>
+                  <span class="text-slate-500">Oct 28</span>
+                </div>
+                <p class="text-slate-300 italic">"Maya has displayed extraordinary mat leadership this month. Her Kata rhythm is sharp and she inspires the younger students."</p>
+              </div>
+
+              <span class="text-white font-black uppercase text-[11px] block text-slate-400 pt-2">Attendance Progress &amp; Confidence Milestones</span>
+              <div class="p-3 rounded-xl bg-slate-950/60 border border-slate-800 space-y-2">
+                <div class="flex justify-between font-bold">
+                  <span class="text-slate-400">Attendance Progress</span>
+                  <span class="text-emerald-400">95.4% (38 Sessions)</span>
+                </div>
+                <div class="flex justify-between font-bold">
+                  <span class="text-slate-400">Confidence Milestones</span>
+                  <span class="text-white">Led Warmup Drill</span>
+                </div>
+                <div class="flex justify-between font-bold">
+                  <span class="text-slate-400">Achievement History</span>
+                  <span class="text-amber-400">6 Stripe Milestones</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ================================================
+           VIEW 6: CLASS SCHEDULE
+           ================================================ -->
+      <div id="view-class-schedule" class="user-view-panel hidden space-y-6">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+          <div>
+            <h2 class="text-2xl font-black font-outfit text-white">Class Schedule</h2>
+            <p class="text-xs text-slate-400 font-jakarta">Weekly Training Schedule, Upcoming Classes, Class Details, Training Location, Instructor Information &amp; Schedule Updates</p>
+          </div>
+          <button onclick="alert('Schedule synced to Google/Apple Calendar');" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs">
+            <i class="fa-solid fa-calendar-check mr-1"></i> Sync Calendar
+          </button>
+        </div>
+
+        <!-- Weekly Training Schedule Table -->
+        <div class="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-4">
+          <h3 class="text-sm font-black text-white font-outfit uppercase tracking-wider text-slate-400">Weekly Training Schedule</h3>
+          
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-950/80 text-slate-400 border-b border-slate-800 uppercase font-black tracking-wider text-[10px]">
+                <tr>
+                  <th class="py-3 px-4">Day</th>
+                  <th class="py-3 px-4">Class Details</th>
+                  <th class="py-3 px-4">Child Enrolled</th>
+                  <th class="py-3 px-4">Training Location</th>
+                  <th class="py-3 px-4">Instructor Information</th>
+                  <th class="py-3 px-4">Status</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800 text-slate-300">
+                <tr class="hover:bg-slate-800/40">
+                  <td class="py-3.5 px-4 font-bold text-white">Tuesday</td>
+                  <td class="py-3.5 px-4">4:30 PM - 5:15 PM (Little Tigers Form Kata)</td>
+                  <td class="py-3.5 px-4 font-bold text-amber-400">Leo Jenkins</td>
+                  <td class="py-3.5 px-4">Training Location: Dojo Ring A</td>
+                  <td class="py-3.5 px-4">Sensei Marcus Vance</td>
+                  <td class="py-3.5 px-4"><span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-[10px]">Upcoming Classes</span></td>
+                </tr>
+                <tr class="hover:bg-slate-800/40">
+                  <td class="py-3.5 px-4 font-bold text-white">Wednesday</td>
+                  <td class="py-3.5 px-4">5:15 PM - 6:00 PM (Junior Champions Sparring)</td>
+                  <td class="py-3.5 px-4 font-bold text-emerald-400">Maya Jenkins</td>
+                  <td class="py-3.5 px-4">Training Location: Dojo Ring B</td>
+                  <td class="py-3.5 px-4">Sensei Elena Rostova</td>
+                  <td class="py-3.5 px-4"><span class="px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-400 font-bold text-[10px]">Upcoming Classes</span></td>
+                </tr>
+                <tr class="hover:bg-slate-800/40">
+                  <td class="py-3.5 px-4 font-bold text-white">Thursday</td>
+                  <td class="py-3.5 px-4">4:30 PM - 5:15 PM (Little Tigers Balance &amp; Stance)</td>
+                  <td class="py-3.5 px-4 font-bold text-amber-400">Leo Jenkins</td>
+                  <td class="py-3.5 px-4">Training Location: Dojo Ring A</td>
+                  <td class="py-3.5 px-4">Sensei Marcus Vance</td>
+                  <td class="py-3.5 px-4"><span class="px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 font-bold text-[10px]">Scheduled</span></td>
+                </tr>
+                <tr class="hover:bg-slate-800/40">
+                  <td class="py-3.5 px-4 font-bold text-white">Saturday</td>
+                  <td class="py-3.5 px-4">10:00 AM - 11:00 AM (Family Leadership &amp; Board Breaking)</td>
+                  <td class="py-3.5 px-4 font-bold text-purple-400">Both Children</td>
+                  <td class="py-3.5 px-4">Training Location: Main Arena</td>
+                  <td class="py-3.5 px-4">Head Sensei &amp; Master Staff</td>
+                  <td class="py-3.5 px-4"><span class="px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-400 font-bold text-[10px]">Special Event</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Schedule Updates Alert -->
+          <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-between text-xs">
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-circle-info text-amber-400"></i>
+              <span class="text-slate-300"><strong class="text-white">Schedule Updates:</strong> Mat Ring A sanitized daily between 4:00 PM and 4:25 PM. No schedule interruptions.</span>
+            </div>
+            <span class="text-slate-500 text-[10px]">Updated today</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================
+           VIEW 7: ATTENDANCE
+           ================================================ -->
+      <div id="view-attendance" class="user-view-panel hidden space-y-6">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+          <div>
+            <h2 class="text-2xl font-black font-outfit text-white">Attendance</h2>
+            <p class="text-xs text-slate-400 font-jakarta">Attendance Calendar, Present Sessions, Missed Sessions, Attendance Percentage, Attendance History &amp; Attendance Notifications</p>
+          </div>
+        </div>
+
+        <!-- Attendance Metrics -->
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+          <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-800">
+            <span class="text-xs font-bold text-slate-400">Present Sessions</span>
+            <div class="text-2xl font-black text-emerald-400 font-outfit mt-1">42 Classes</div>
+            <span class="text-[10px] text-emerald-400">100% on-time check-in</span>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-800">
+            <span class="text-xs font-bold text-slate-400">Missed Sessions</span>
+            <div class="text-2xl font-black text-rose-400 font-outfit mt-1">2 Classes</div>
+            <span class="text-[10px] text-slate-400">Excused / Flu recovery</span>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-800">
+            <span class="text-xs font-bold text-slate-400">Attendance Percentage</span>
+            <div class="text-2xl font-black text-white font-outfit mt-1">95.4%</div>
+            <span class="text-[10px] text-emerald-400">Top 5% of Dojo</span>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-800">
+            <span class="text-xs font-bold text-slate-400">Attendance Notifications</span>
+            <div class="text-2xl font-black text-amber-400 font-outfit mt-1">Active SMS</div>
+            <span class="text-[10px] text-slate-400">Instant check-in alerts</span>
+          </div>
+        </div>
+
+        <!-- Attendance Calendar & Attendance History -->
+        <div class="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-4">
+          <h3 class="text-sm font-black text-white font-outfit uppercase tracking-wider text-slate-400">Attendance Calendar &amp; Attendance History</h3>
+          
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-950/80 text-slate-400 border-b border-slate-800 uppercase font-black tracking-wider text-[10px]">
+                <tr>
+                  <th class="py-3 px-4">Date</th>
+                  <th class="py-3 px-4">Child Name</th>
+                  <th class="py-3 px-4">Class</th>
+                  <th class="py-3 px-4">Check-In Time</th>
+                  <th class="py-3 px-4">Status</th>
+                  <th class="py-3 px-4">Sensei Verified</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800 text-slate-300">
+                <tr class="hover:bg-slate-800/40">
+                  <td class="py-3 px-4 font-bold text-white">Oct 29, 2026</td>
+                  <td class="py-3 px-4 text-amber-400 font-bold">Leo Jenkins</td>
+                  <td class="py-3 px-4">Little Tigers Kata</td>
+                  <td class="py-3 px-4 font-mono text-slate-400">4:28 PM</td>
+                  <td class="py-3 px-4"><span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-[10px]">Present</span></td>
+                  <td class="py-3 px-4 text-slate-400">Sensei Vance</td>
+                </tr>
+                <tr class="hover:bg-slate-800/40">
+                  <td class="py-3 px-4 font-bold text-white">Oct 28, 2026</td>
+                  <td class="py-3 px-4 text-emerald-400 font-bold">Maya Jenkins</td>
+                  <td class="py-3 px-4">Junior Champions Sparring</td>
+                  <td class="py-3 px-4 font-mono text-slate-400">5:12 PM</td>
+                  <td class="py-3 px-4"><span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-[10px]">Present</span></td>
+                  <td class="py-3 px-4 text-slate-400">Sensei Elena</td>
+                </tr>
+                <tr class="hover:bg-slate-800/40">
+                  <td class="py-3 px-4 font-bold text-white">Oct 24, 2026</td>
+                  <td class="py-3 px-4 text-amber-400 font-bold">Leo Jenkins</td>
+                  <td class="py-3 px-4">Little Tigers Balance</td>
+                  <td class="py-3 px-4 font-mono text-slate-400">4:31 PM</td>
+                  <td class="py-3 px-4"><span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-[10px]">Present</span></td>
+                  <td class="py-3 px-4 text-slate-400">Sensei Vance</td>
+                </tr>
+                <tr class="hover:bg-slate-800/40">
+                  <td class="py-3 px-4 font-bold text-white">Oct 17, 2026</td>
+                  <td class="py-3 px-4 text-emerald-400 font-bold">Maya Jenkins</td>
+                  <td class="py-3 px-4">Junior Champions Form</td>
+                  <td class="py-3 px-4 font-mono text-slate-500">-</td>
+                  <td class="py-3 px-4"><span class="px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-400 font-bold text-[10px]">Missed (Excused)</span></td>
+                  <td class="py-3 px-4 text-slate-400">Parent Notified</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================
+           VIEW 8: BELT TESTING
+           ================================================ -->
+      <div id="view-belt-testing" class="user-view-panel hidden space-y-6">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+          <div>
+            <h2 class="text-2xl font-black font-outfit text-white">Belt Testing</h2>
+            <p class="text-xs text-slate-400 font-jakarta">Eligible Children, Available Testing Dates, Testing Requirements, Register for Testing, Testing Confirmation, Testing Status &amp; Testing Results</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          
+          <!-- Eligible Children Card -->
+          <div class="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-4">
+            <h3 class="text-sm font-black text-white font-outfit uppercase tracking-wider border-b border-slate-800 pb-2">Eligible Children</h3>
+            <div class="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="font-black text-white text-sm font-outfit">Maya Jenkins</span>
+                <span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 text-[10px] font-bold">Eligible</span>
+              </div>
+              <p class="text-xs text-slate-300">Candidate for <strong>Purple Belt Graduation</strong> at the Autumn Gala!</p>
+              <div class="text-[11px] text-emerald-400 font-bold">Testing Status: Ready to Register</div>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-950/60 border border-slate-800 space-y-2 opacity-75">
+              <div class="flex items-center justify-between">
+                <span class="font-black text-white text-sm font-outfit">Leo Jenkins</span>
+                <span class="px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-400 text-[10px] font-bold">1 Stripe Away</span>
+              </div>
+              <p class="text-xs text-slate-400">Needs 1 more stripe in Form Kata for Orange Belt eligibility.</p>
+              <div class="text-[11px] text-amber-400 font-bold">Target: Winter Gala (Jan 2027)</div>
+            </div>
+          </div>
+
+          <!-- Available Testing Dates & Requirements -->
+          <div class="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-4">
+            <h3 class="text-sm font-black text-white font-outfit uppercase tracking-wider border-b border-slate-800 pb-2">Available Testing Dates</h3>
+            <div class="space-y-3 text-xs">
+              <div class="p-3 rounded-xl bg-slate-950/60 border border-slate-800 space-y-1">
+                <div class="flex items-center justify-between font-bold text-white">
+                  <span>Autumn Belt Testing Gala</span>
+                  <span class="text-amber-400">Nov 15, 2026</span>
+                </div>
+                <p class="text-slate-400">Main Arena • Session A: 9:00 AM | Session B: 1:30 PM</p>
+              </div>
+
+              <h4 class="font-black text-white uppercase text-[11px] tracking-wider text-slate-400 pt-2">Testing Requirements</h4>
+              <ul class="space-y-1.5 text-slate-300">
+                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Minimum 30 attended classes (Maya: 38)</li>
+                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> All 4 curriculum stripes earned</li>
+                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Examiner recommendation approved</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Register for Testing & Confirmation -->
+          <div class="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-4">
+            <h3 class="text-sm font-black text-white font-outfit uppercase tracking-wider border-b border-slate-800 pb-2">Register for Testing</h3>
+            <div class="space-y-3 text-xs">
+              <div>
+                <label class="block text-slate-400 font-bold mb-1">Select Candidate</label>
+                <select class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white font-bold outline-none">
+                  <option>Maya Jenkins (Green -> Purple Belt)</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-slate-400 font-bold mb-1">Choose Session</label>
+                <select class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white font-bold outline-none">
+                  <option>Session A (9:00 AM - 11:30 AM)</option>
+                  <option>Session B (1:30 PM - 4:00 PM)</option>
+                </select>
+              </div>
+              <button onclick="alert('Testing Confirmation slip generated! Candidate registered.');" class="w-full py-2.5 rounded-xl bg-brand-crimson text-white font-bold transition-colors">
+                Confirm Testing Registration ($55)
+              </button>
+              <div class="text-center text-slate-500 text-[10px]">
+                Testing Results will be published within 2 hours of gala completion.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ================================================
+           VIEW 9: ACHIEVEMENTS
+           ================================================ -->
+      <div id="view-achievements" class="user-view-panel hidden space-y-6">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+          <div>
+            <h2 class="text-2xl font-black font-outfit text-white">Achievements</h2>
+            <p class="text-xs text-slate-400 font-jakarta">Belt Achievements, Skill Badges, Attendance Milestones, Leadership Achievements, Confidence Milestones &amp; Achievement Certificates</p>
+          </div>
+          <button onclick="alert('Downloading all certificates as ZIP archive');" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs flex items-center gap-1.5">
+            <i class="fa-solid fa-download"></i>
+            <span>Download All Certificates</span>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          
+          <!-- Belt Achievements -->
+          <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-amber-400 uppercase tracking-wider">Belt Achievements</span>
+              <i class="fa-solid fa-certificate text-amber-400"></i>
+            </div>
+            <h3 class="text-lg font-black text-white font-outfit">Green Belt Promotion</h3>
+            <p class="text-xs text-slate-400">Awarded to Maya Jenkins upon mastery of intermediate form combinations &amp; board breaking.</p>
+            <span class="text-[10px] text-slate-500 block font-mono">Cert #BAP-2026-9921</span>
+          </div>
+
+          <!-- Skill Badges -->
+          <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider">Skill Badges</span>
+              <i class="fa-solid fa-shield-halved text-blue-400"></i>
+            </div>
+            <h3 class="text-lg font-black text-white font-outfit">Tiger Focus Specialist</h3>
+            <p class="text-xs text-slate-400">Awarded to Leo Jenkins for 4 straight weeks of uninterrupted focus during mat form drills.</p>
+            <span class="text-[10px] text-slate-500 block font-mono">Badge #SKL-FOCUS-04</span>
+          </div>
+
+          <!-- Attendance Milestones -->
+          <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Attendance Milestones</span>
+              <i class="fa-solid fa-calendar-check text-emerald-400"></i>
+            </div>
+            <h3 class="text-lg font-black text-white font-outfit">50-Class Iron Warrior</h3>
+            <p class="text-xs text-slate-400">Achieved by Maya Jenkins for completing 50 training sessions in 2026.</p>
+            <span class="text-[10px] text-slate-500 block font-mono">Milestone #ATN-50-2026</span>
+          </div>
+
+          <!-- Leadership Achievements -->
+          <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-purple-400 uppercase tracking-wider">Leadership Achievements</span>
+              <i class="fa-solid fa-star text-purple-400"></i>
+            </div>
+            <h3 class="text-lg font-black text-white font-outfit">Junior Mat Captain</h3>
+            <p class="text-xs text-slate-400">Demonstrated exemplary leadership assisting younger white belt candidates during warmup.</p>
+            <span class="text-[10px] text-slate-500 block font-mono">Award #LDR-CPT-018</span>
+          </div>
+
+          <!-- Confidence Milestones -->
+          <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-rose-400 uppercase tracking-wider">Confidence Milestones</span>
+              <i class="fa-solid fa-heart-pulse text-rose-400"></i>
+            </div>
+            <h3 class="text-lg font-black text-white font-outfit">Public Demonstration Honor</h3>
+            <p class="text-xs text-slate-400">Successfully performed Kata demonstration in front of entire academy spectator grandstand.</p>
+            <span class="text-[10px] text-slate-500 block font-mono">Milestone #CNF-PUB-2026</span>
+          </div>
+
+          <!-- Achievement Certificates -->
+          <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-amber-400 uppercase tracking-wider">Achievement Certificates</span>
+              <i class="fa-solid fa-file-pdf text-amber-400"></i>
+            </div>
+            <h3 class="text-lg font-black text-white font-outfit">Official Graduation Diploma</h3>
+            <p class="text-xs text-slate-400">Certified by Grandmaster Marcus Vance and Academy Examination Board.</p>
+            <button onclick="alert('Downloading PDF certificate');" class="px-3 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold">
+              Download PDF
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ================================================
+           VIEW 10: PAYMENTS & ENROLLMENT
+           ================================================ -->
+      <div id="view-payments-enrollment" class="user-view-panel hidden space-y-6">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+          <div>
+            <h2 class="text-2xl font-black font-outfit text-white">Payments &amp; Enrollment</h2>
+            <p class="text-xs text-slate-400 font-jakarta">Current Enrollment, Program Fees, Payment History, Pending Payments, Testing Fees &amp; Download Receipts</p>
+          </div>
+          <button onclick="alert('Downloading all billing receipts');" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs flex items-center gap-1.5">
+            <i class="fa-solid fa-download"></i>
+            <span>Download Receipts</span>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+          <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-800">
+            <span class="text-xs font-bold text-slate-400">Current Enrollment</span>
+            <div class="text-xl font-black text-white font-outfit mt-1">2 Active Plans</div>
+            <span class="text-[10px] text-emerald-400">Autopay Active</span>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-800">
+            <span class="text-xs font-bold text-slate-400">Program Fees</span>
+            <div class="text-xl font-black text-white font-outfit mt-1">$345.00 / mo</div>
+            <span class="text-[10px] text-slate-400">Family 10% Discount applied</span>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-800">
+            <span class="text-xs font-bold text-slate-400">Pending Payments</span>
+            <div class="text-xl font-black text-emerald-400 font-outfit mt-1">$0.00 Due</div>
+            <span class="text-[10px] text-slate-400">Next billing Nov 01, 2026</span>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-800">
+            <span class="text-xs font-bold text-slate-400">Testing Fees</span>
+            <div class="text-xl font-black text-amber-400 font-outfit mt-1">$55.00 Paid</div>
+            <span class="text-[10px] text-emerald-400">Nov 15 Gala Registered</span>
+          </div>
+        </div>
+
+        <!-- Payment History Table -->
+        <div class="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-4">
+          <h3 class="text-sm font-black text-white font-outfit uppercase tracking-wider text-slate-400">Payment History &amp; Download Receipts</h3>
+          
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-950/80 text-slate-400 border-b border-slate-800 uppercase font-black tracking-wider text-[10px]">
+                <tr>
+                  <th class="py-3 px-4">Invoice #</th>
+                  <th class="py-3 px-4">Date</th>
+                  <th class="py-3 px-4">Description</th>
+                  <th class="py-3 px-4">Amount</th>
+                  <th class="py-3 px-4">Status</th>
+                  <th class="py-3 px-4">Receipt</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800 text-slate-300">
+                <tr class="hover:bg-slate-800/40">
+                  <td class="py-3 px-4 font-mono font-bold text-white">#INV-2026-1002</td>
+                  <td class="py-3 px-4 text-slate-400">Oct 01, 2026</td>
+                  <td class="py-3 px-4 font-bold text-white">Monthly Tuition: Leo &amp; Maya (Family Tier)</td>
+                  <td class="py-3 px-4 font-mono font-bold text-white">$345.00</td>
+                  <td class="py-3 px-4"><span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-[10px]">Paid</span></td>
+                  <td class="py-3 px-4"><button onclick="alert('Downloading PDF Receipt #INV-2026-1002');" class="text-brand-crimson hover:underline font-bold">Download Receipts</button></td>
+                </tr>
+                <tr class="hover:bg-slate-800/40">
+                  <td class="py-3 px-4 font-mono font-bold text-white">#INV-2026-0944</td>
+                  <td class="py-3 px-4 text-slate-400">Sep 28, 2026</td>
+                  <td class="py-3 px-4 font-bold text-white">Testing Fees: Maya Jenkins Purple Belt Gala</td>
+                  <td class="py-3 px-4 font-mono font-bold text-white">$55.00</td>
+                  <td class="py-3 px-4"><span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-[10px]">Paid</span></td>
+                  <td class="py-3 px-4"><button onclick="alert('Downloading PDF Receipt #INV-2026-0944');" class="text-brand-crimson hover:underline font-bold">Download Receipts</button></td>
+                </tr>
+                <tr class="hover:bg-slate-800/40">
+                  <td class="py-3 px-4 font-mono font-bold text-white">#INV-2026-0901</td>
+                  <td class="py-3 px-4 text-slate-400">Sep 01, 2026</td>
+                  <td class="py-3 px-4 font-bold text-white">Monthly Tuition: Leo &amp; Maya (Family Tier)</td>
+                  <td class="py-3 px-4 font-mono font-bold text-white">$345.00</td>
+                  <td class="py-3 px-4"><span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-[10px]">Paid</span></td>
+                  <td class="py-3 px-4"><button onclick="alert('Downloading PDF Receipt #INV-2026-0901');" class="text-brand-crimson hover:underline font-bold">Download Receipts</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================
+           VIEW 11: NOTIFICATIONS
+           ================================================ -->
+      <div id="view-notifications" class="user-view-panel hidden space-y-6">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+          <div>
+            <h2 class="text-2xl font-black font-outfit text-white">Notifications</h2>
+            <p class="text-xs text-slate-400 font-jakarta">Class Reminders, Testing Reminders, Progress Updates, Instructor Messages, Achievement Notifications &amp; Academy Announcements</p>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          
+          <!-- Class Reminders -->
+          <div class="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 flex items-start gap-3">
+            <div class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center shrink-0">
+              <i class="fa-solid fa-chalkboard-user"></i>
+            </div>
+            <div class="text-xs flex-grow">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-white">Class Reminders: Maya's Green Belt Sparring Class Tomorrow</span>
+                <span class="text-slate-500">2 hours ago</span>
+              </div>
+              <p class="text-slate-400 mt-0.5">Please ensure Maya brings her headgear and mouthguard for tomorrow's 5:15 PM sparring session.</p>
+            </div>
+          </div>
+
+          <!-- Testing Reminders -->
+          <div class="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 flex items-start gap-3">
+            <div class="w-8 h-8 rounded-lg bg-rose-500/20 text-rose-400 flex items-center justify-center shrink-0">
+              <i class="fa-solid fa-stopwatch"></i>
+            </div>
+            <div class="text-xs flex-grow">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-white">Testing Reminders: Autumn Belt Testing Gala Confirmation</span>
+                <span class="text-slate-500">Yesterday</span>
+              </div>
+              <p class="text-slate-400 mt-0.5">Maya is registered for Session A (Nov 15, 9:00 AM). Candidate uniform check starts at 8:30 AM.</p>
+            </div>
+          </div>
+
+          <!-- Progress Updates -->
+          <div class="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 flex items-start gap-3">
+            <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0">
+              <i class="fa-solid fa-ribbon"></i>
+            </div>
+            <div class="text-xs flex-grow">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-white">Progress Updates: Leo Earned Yellow Belt Red Stripe!</span>
+                <span class="text-slate-500">2 days ago</span>
+              </div>
+              <p class="text-slate-400 mt-0.5">Leo demonstrated excellent focus in Form Kata #2 during Tuesday's training clinic.</p>
+            </div>
+          </div>
+
+          <!-- Instructor Messages -->
+          <div class="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 flex items-start gap-3">
+            <div class="w-8 h-8 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center shrink-0">
+              <i class="fa-solid fa-comment-dots"></i>
+            </div>
+            <div class="text-xs flex-grow">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-white">Instructor Messages: Note from Sensei Marcus Vance</span>
+                <span class="text-slate-500">3 days ago</span>
+              </div>
+              <p class="text-slate-400 mt-0.5">"Sarah, Leo's balance on his front kicks has noticeably improved over the last 3 classes. Great job encouraging him at home!"</p>
+            </div>
+          </div>
+
+          <!-- Achievement Notifications -->
+          <div class="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 flex items-start gap-3">
+            <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+              <i class="fa-solid fa-medal"></i>
+            </div>
+            <div class="text-xs flex-grow">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-white">Achievement Notifications: 50-Class Iron Warrior Badge Unlocked</span>
+                <span class="text-slate-500">Oct 24</span>
+              </div>
+              <p class="text-slate-400 mt-0.5">Maya unlocked the prestigious 50-Class Attendance Badge! Official certificate is ready in Achievements.</p>
+            </div>
+          </div>
+
+          <!-- Academy Announcements -->
+          <div class="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 flex items-start gap-3">
+            <div class="w-8 h-8 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center shrink-0">
+              <i class="fa-solid fa-bullhorn"></i>
+            </div>
+            <div class="text-xs flex-grow">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-white">Academy Announcements: Thanksgiving Holiday Schedule &amp; Winter Camp</span>
+                <span class="text-slate-500">Oct 20</span>
+              </div>
+              <p class="text-slate-400 mt-0.5">Dojo holiday closure dates and early-bird registration for Winter Leadership Camp are now available.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ================================================
+           VIEW 12: SUPPORT
+           ================================================ -->
+      <div id="view-support" class="user-view-panel hidden space-y-6">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+          <div>
+            <h2 class="text-2xl font-black font-outfit text-white">Support</h2>
+            <p class="text-xs text-slate-400 font-jakarta">Parent Help Center, Contact Instructor, Enrollment Support &amp; Submit Support Request</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          
+          <!-- Parent Help Center & Quick Contacts -->
+          <div class="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-5">
+            <h3 class="text-sm font-black text-white font-outfit uppercase tracking-wider border-b border-slate-800 pb-2">Parent Help Center</h3>
+            
+            <div class="space-y-3 text-xs">
+              <div class="p-3 rounded-xl bg-slate-950/60 border border-slate-800">
+                <h4 class="font-bold text-white mb-1">How do belt stripes work?</h4>
+                <p class="text-slate-400">Students earn stripes on their current belt for mastering specific Kata forms, attendance consistency, and personal discipline.</p>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-950/60 border border-slate-800">
+                <h4 class="font-bold text-white mb-1">What if my child misses a class?</h4>
+                <p class="text-slate-400">Makeup classes can be attended during any Saturday all-ranks clinic without advance booking.</p>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-slate-800 space-y-3">
+              <h3 class="text-sm font-black text-white font-outfit uppercase tracking-wider border-b border-slate-800 pb-2">Contact Instructor &amp; Enrollment Support</h3>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-slate-950/60 border border-slate-800">
+                  <span class="text-slate-500 block">Contact Instructor</span>
+                  <span class="text-amber-400 font-bold block mt-0.5">Sensei Marcus Vance</span>
+                  <span class="text-slate-400 text-[11px]">vance@kidsmartialarts.com</span>
+                </div>
+                <div class="p-3 rounded-xl bg-slate-950/60 border border-slate-800">
+                  <span class="text-slate-500 block">Enrollment Support</span>
+                  <span class="text-emerald-400 font-bold block mt-0.5">+1 (555) 543-7722</span>
+                  <span class="text-slate-400 text-[11px]">support@kidsmartialarts.com</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Submit Support Request Form -->
+          <div class="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-5">
+            <h3 class="text-sm font-black text-white font-outfit uppercase tracking-wider border-b border-slate-800 pb-2">Submit Support Request</h3>
+            
+            <form onsubmit="event.preventDefault(); alert('Support request submitted successfully! A Sensei or Administrator will contact you within 24 hours.');" class="space-y-4 text-xs">
+              <div>
+                <label class="block text-slate-400 font-bold mb-1">Request Category</label>
+                <select class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white font-bold outline-none">
+                  <option>Class Schedule &amp; Makeup Classes</option>
+                  <option>Belt Testing &amp; Promotion Criteria</option>
+                  <option>Billing, Tuition &amp; Receipts</option>
+                  <option>Medical or Dietary Update</option>
+                  <option>Direct Instructor Feedback</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-slate-400 font-bold mb-1">Select Child (Optional)</label>
+                <select class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white font-bold outline-none">
+                  <option>Leo Jenkins (Little Tigers)</option>
+                  <option>Maya Jenkins (Junior Champions)</option>
+                  <option>Both Children / General Account</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-slate-400 font-bold mb-1">Subject</label>
+                <input type="text" placeholder="Brief description of your question or request" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white focus:border-brand-crimson outline-none" required />
+              </div>
+
+              <div>
+                <label class="block text-slate-400 font-bold mb-1">Message Details</label>
+                <textarea rows="4" placeholder="How can our senseis and parent support staff assist your family?" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white focus:border-brand-crimson outline-none" required></textarea>
+              </div>
+
+              <button type="submit" class="w-full py-3 rounded-xl bg-brand-crimson hover:bg-rose-600 text-white font-bold font-outfit text-xs transition-colors shadow-lg shadow-rose-950/40">
+                Submit Support Request
+              </button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- ========================================================
+       LOGOUT CONFIRMATION MODAL
+       ======================================================== -->
+  <div id="logoutModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md hidden transition-all duration-300">
+    <div class="w-full max-w-md rounded-3xl bg-slate-900 border border-slate-800 p-6 sm:p-8 shadow-2xl space-y-6 text-center">
+      <div class="w-16 h-16 mx-auto rounded-2xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-2xl border border-rose-500/20">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+      </div>
+      <div>
+        <h3 class="text-xl font-black font-outfit text-white">Sign Out of Parent Portal?</h3>
+        <p class="text-xs text-slate-400 mt-2 font-jakarta leading-relaxed">
+          Are you sure you want to end your session? You will be safely signed out and redirected to the login portal.
+        </p>
+      </div>
+      <div class="flex items-center gap-3 pt-2">
+        <button 
+          type="button" 
+          onclick="closeLogoutModal()" 
+          class="flex-1 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs transition-colors"
+        >
+          Cancel
+        </button>
+        <a 
+          href="login.html" 
+          class="flex-1 py-3 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs transition-colors text-center shadow-lg shadow-rose-900/40"
+        >
+          Logout
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       CORE INTERACTIVE SCRIPT (TABS, THEME, RTL, RIGHT-SIDE DRAWER)
+       ======================================================== -->
+  <script>
+    // 1. Tab Switching Engine
+    const navButtons = document.querySelectorAll('.user-nav-btn');
+    const viewPanels = document.querySelectorAll('.user-view-panel');
+    const mobileDrawer = document.getElementById('userSidebarDrawer');
+    const drawerBackdrop = document.getElementById('userSidebarOverlay');
+    const mobileMenuBtn = document.getElementById('userMobileMenuBtn');
+    const drawerCloseBtn = document.getElementById('userDrawerCloseBtn');
+
+    function showTab(targetId) {
+      // Hide all panels
+      viewPanels.forEach(panel => panel.classList.add('hidden'));
+
+      // Show selected panel
+      const targetPanel = document.getElementById(targetId);
+      if (targetPanel) {
+        targetPanel.classList.remove('hidden');
+      }
+
+      // Update Nav Button Styles
+      navButtons.forEach(btn => {
+        if (btn.getAttribute('data-target') === targetId) {
+          btn.classList.add('nav-item-active');
+          btn.classList.remove('text-slate-400');
+          btn.classList.add('text-slate-200');
+        } else {
+          btn.classList.remove('nav-item-active');
+          btn.classList.add('text-slate-400');
+          btn.classList.remove('text-slate-200');
+        }
+      });
+
+      // Close mobile drawer if open
+      closeMobileDrawer();
+
+      // Scroll viewport back to top
+      const mainContainer = document.querySelector('main');
+      if (mainContainer) mainContainer.scrollTop = 0;
+    }
+
+    navButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-target');
+        showTab(targetId);
+      });
+    });
+
+    // 2. Right-Side Mobile Drawer Controls
+    function openMobileDrawer() {
+      if (mobileDrawer) {
+        mobileDrawer.classList.remove('translate-x-full', 'rtl:-translate-x-full');
+      }
+      if (drawerBackdrop) {
+        drawerBackdrop.classList.remove('hidden');
+      }
+      document.body.classList.add('overflow-hidden', 'lg:overflow-auto');
+    }
+
+    function closeMobileDrawer() {
+      if (mobileDrawer) {
+        mobileDrawer.classList.add('translate-x-full', 'rtl:-translate-x-full');
+      }
+      if (drawerBackdrop) {
+        drawerBackdrop.classList.add('hidden');
+      }
+      document.body.classList.remove('overflow-hidden', 'lg:overflow-auto');
+    }
+
+    if (mobileMenuBtn) {
+      mobileMenuBtn.addEventListener('click', openMobileDrawer);
+    }
+    if (drawerCloseBtn) {
+      drawerCloseBtn.addEventListener('click', closeMobileDrawer);
+    }
+    if (drawerBackdrop) {
+      drawerBackdrop.addEventListener('click', closeMobileDrawer);
+    }
+
+    // 3. Theme Toggle (Dark / Light)
+    function toggleThemeMode() {
+      const htmlEl = document.documentElement;
+      const themeIcons = document.querySelectorAll('#themeIcon, #drawerThemeIcon');
+      if (htmlEl.classList.contains('dark')) {
+        htmlEl.classList.remove('dark');
+        htmlEl.classList.add('light');
+        document.body.classList.remove('bg-slate-950', 'text-slate-100');
+        document.body.classList.add('bg-slate-100', 'text-slate-900');
+        themeIcons.forEach(icon => {
+          icon.classList.remove('fa-sun');
+          icon.classList.add('fa-moon');
+        });
+      } else {
+        htmlEl.classList.add('dark');
+        htmlEl.classList.remove('light');
+        document.body.classList.add('bg-slate-950', 'text-slate-100');
+        document.body.classList.remove('bg-slate-100', 'text-slate-900');
+        themeIcons.forEach(icon => {
+          icon.classList.remove('fa-moon');
+          icon.classList.add('fa-sun');
+        });
+      }
+    }
+
+    // 4. RTL Toggle
+    function toggleRTLMode() {
+      const htmlEl = document.documentElement;
+      const currentDir = htmlEl.getAttribute('dir');
+      const newDir = currentDir === 'rtl' ? 'ltr' : 'rtl';
+      htmlEl.setAttribute('dir', newDir);
+    }
+
+    // 5. Refresh Telemetry Simulation
+    function triggerRefreshMetrics() {
+      const icons = document.querySelectorAll('#refreshMetricsBtn i, #drawerRefreshIcon');
+      icons.forEach(icon => icon.classList.add('fa-spin'));
+      setTimeout(() => {
+        icons.forEach(icon => icon.classList.remove('fa-spin'));
+        alert('Parent telemetry and children progress metrics refreshed successfully!');
+      }, 700);
+    }
+
+    // 6. Quick Module Search Filtering
+    function setupSearchFilter(inputId) {
+      const input = document.getElementById(inputId);
+      if (!input) return;
+      input.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        navButtons.forEach(btn => {
+          const text = btn.innerText.toLowerCase();
+          if (text.includes(query)) {
+            btn.style.display = 'flex';
+          } else {
+            btn.style.display = 'none';
+          }
+        });
+      });
+    }
+    setupSearchFilter('userGlobalSearchInput');
+    setupSearchFilter('userDrawerSearchInput');
+
+    // 7. Shortcut Key Handlers (Ctrl+K and Escape)
+    window.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        if (window.innerWidth < 1024) {
+          openMobileDrawer();
+          const drawerSearch = document.getElementById('userDrawerSearchInput');
+          if (drawerSearch) drawerSearch.focus();
+        } else {
+          const searchInput = document.getElementById('userGlobalSearchInput');
+          if (searchInput) searchInput.focus();
+        }
+      }
+      if (e.key === 'Escape') {
+        closeMobileDrawer();
+        closeLogoutModal();
+      }
+    });
+
+    // 8. Logout Modal Controls
+    function openLogoutModal() {
+      window.location.href = 'login.html';
+    }
+
+    function closeLogoutModal() {
+      const modal = document.getElementById('logoutModal');
+      if (modal) modal.classList.add('hidden');
+    }
+  </script>
+</body>
+</html>

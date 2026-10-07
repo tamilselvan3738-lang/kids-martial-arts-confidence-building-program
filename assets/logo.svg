@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 120" width="100%" height="100%" fill="none">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF385C" />
+      <stop offset="50%" stop-color="#E11D48" />
+      <stop offset="100%" stop-color="#9F1239" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE047" />
+      <stop offset="50%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+    <linearGradient id="beltGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1E293B" />
+      <stop offset="70%" stop-color="#0F172A" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#F8FAFC" />
+    </linearGradient>
+    <linearGradient id="sunGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FEF08A" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#F59E0B" stop-opacity="0.1" />
+    </linearGradient>
+
+    <!-- Drop Shadows -->
+    <filter id="shadowFilter" x="-20%" y="-20%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#000000" flood-opacity="0.35" />
+    </filter>
+    <filter id="glowFilter" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- ================= LOGO ICON EMBLEM ================= -->
+  <g transform="translate(10, 10)">
+    <!-- Outer Golden Crest Glow -->
+    <path d="M50 4 C85 4 96 18 96 46 C96 82 56 104 50 106 C44 104 4 82 4 46 C4 18 15 4 50 4 Z"
+          fill="url(#goldGrad)" filter="url(#shadowFilter)" />
+
+    <!-- Dark Shield Outline / Base -->
+    <path d="M50 7 C81 7 92 19 92 46 C92 78 55 99 50 101 C45 99 8 78 8 46 C8 19 19 7 50 7 Z"
+          fill="#0F172A" />
+
+    <!-- Inner Fiery Crimson Shield -->
+    <path d="M50 11 C78 11 87 22 87 47 C87 74 54 94 50 96 C46 94 13 74 13 47 C13 22 22 11 50 11 Z"
+          fill="url(#shieldGrad)" />
+
+    <!-- Rising Sun Halo Behind Martial Artist -->
+    <circle cx="50" cy="46" r="28" fill="url(#sunGrad)" opacity="0.6" />
+    <path d="M50 20 L50 72 M24 46 L76 46 M32 28 L68 64 M32 64 L68 28" stroke="#FEF08A" stroke-width="1.5" stroke-dasharray="3 3" opacity="0.4" />
+
+    <!-- Martial Arts Kid Silhouette (Dynamic Flying Kick Pose) -->
+    <!-- Head with focus headband -->
+    <circle cx="43" cy="30" r="6" fill="#FFFFFF" />
+    <!-- Headband trailing ribbons -->
+    <path d="M40 31 Q33 30 28 35 M40 33 Q34 35 29 41" stroke="#FEF08A" stroke-width="2" stroke-linecap="round" />
+
+    <!-- Torso (Karate Gi) -->
+    <path d="M41 36 L48 39 L47 52 L39 51 Z" fill="#FFFFFF" />
+    <path d="M44 38 L43 51" stroke="#E2E8F0" stroke-width="1" />
+
+    <!-- Left Arm / Fist (Guard Position) -->
+    <path d="M42 38 L34 41 L34 37" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="34" cy="37" r="2.2" fill="#FEF08A" />
+
+    <!-- Right Arm (Extended Counter-Balance Fist) -->
+    <path d="M47 39 L57 35 L62 38" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+
+    <!-- Dynamic Flying Kick Right Leg (Kicking High) -->
+    <path d="M45 50 L56 46 L71 39" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Foot Impact Star -->
+    <path d="M71 39 L74 34 L78 39 L73 42 Z" fill="#FEF08A" />
+
+    <!-- Left Leg (Chambered Tuck) -->
+    <path d="M40 51 L35 59 L42 63" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+
+    <!-- Martial Arts Belt Around Torso with Flying Tails -->
+    <path d="M38 50 C42 51 46 51 48 50" stroke="#0F172A" stroke-width="3.5" stroke-linecap="round" />
+    <path d="M42 51 L38 65 M44 51 L47 67" stroke="#0F172A" stroke-width="2.5" stroke-linecap="round" />
+    <!-- Golden Rank Stripes on Belt -->
+    <circle cx="39" cy="62" r="1.2" fill="#F59E0B" />
+    <circle cx="45" cy="64" r="1.2" fill="#F59E0B" />
+
+    <!-- Energy Swirl / Motion Arc -->
+    <path d="M22 62 C26 76 64 78 78 52" stroke="#FEF08A" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.8" />
+    <path d="M74 54 L78 52 L79 57" stroke="#FEF08A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+
+    <!-- 3 Mini Confidence Stars across crest top -->
+    <g fill="url(#goldGrad)">
+      <!-- Left Star -->
+      <polygon points="34,16 35.5,19 39,19.5 36.5,22 37,25 34,23.5 31,25 31.5,22 29,19.5 32.5,19" />
+      <!-- Center Main Star (Largest - Confidence) -->
+      <polygon points="50,11 52,15 57,15.5 53.5,19 54.5,23.5 50,21 45.5,23.5 46.5,19 43,15.5 48,15" />
+      <!-- Right Star -->
+      <polygon points="66,16 67.5,19 71,19.5 68.5,22 69,25 66,23.5 63,25 63.5,22 61,19.5 64.5,19" />
+    </g>
+  </g>
+
+  <!-- ================= TYPOGRAPHY & PROGRAM BRANDING ================= -->
+  <g transform="translate(125, 20)">
+    <!-- Small Category Kicker / Subtitle -->
+    <g transform="translate(0, 8)">
+      <rect x="0" y="-12" width="138" height="18" rx="9" fill="#0F172A" fill-opacity="0.85" />
+      <circle cx="9" cy="-3" r="3" fill="#E11D48" />
+      <text x="18" y="-1" font-family="'Outfit', 'Montserrat', 'Inter', system-ui, sans-serif" font-size="9" font-weight="800" fill="#F59E0B" letter-spacing="1.5">
+        DISCIPLINE • FOCUS
+      </text>
+    </g>
+
+    <!-- Main Title: KIDS MARTIAL ARTS -->
+    <g transform="translate(0, 36)">
+      <!-- Drop Shadow for 3D Athletic Impact -->
+      <text x="1.5" y="1.5" font-family="'Outfit', 'Montserrat', 'Impact', system-ui, sans-serif" font-size="32" font-weight="900" font-style="italic" fill="#0F172A" opacity="0.3" letter-spacing="0.5">
+        KIDS MARTIAL ARTS
+      </text>
+      <!-- Main Text -->
+      <text x="0" y="0" font-family="'Outfit', 'Montserrat', 'Impact', system-ui, sans-serif" font-size="32" font-weight="900" font-style="italic" fill="url(#textGrad)" letter-spacing="0.5">
+        <tspan fill="#E11D48">KIDS</tspan> MARTIAL ARTS
+      </text>
+    </g>
+
+    <!-- Confidence Ribbon Badge: & CONFIDENCE BUILDING PROGRAM -->
+    <g transform="translate(0, 48)">
+      <!-- 3D Banner Shadow -->
+      <path d="M 0 4 L 380 4 L 372 26 L 8 26 Z" fill="#991B1B" opacity="0.6" />
+      <!-- 3D Banner Body -->
+      <path d="M 2 2 L 378 2 L 370 24 L 10 24 Z" fill="url(#beltGrad)" stroke="url(#goldGrad)" stroke-width="1.2" />
+
+      <!-- Golden Accent Edge -->
+      <path d="M 2 2 L 18 2 L 26 24 L 10 24 Z" fill="url(#goldGrad)" />
+      <polygon points="14,13 15.5,10 18,12 16,14 17,17 14,15 11,17 12,14 10,12 12.5,10" fill="#991B1B" transform="scale(0.7) translate(3,3)" />
+
+      <!-- Belt Accent Stripes on Right Side -->
+      <rect x="345" y="4" width="4" height="18" rx="1" fill="#F59E0B" />
+      <rect x="353" y="4" width="4" height="18" rx="1" fill="#F59E0B" />
+
+      <!-- Subtext -->
+      <text x="32" y="17" font-family="'Outfit', 'Montserrat', system-ui, sans-serif" font-size="11.5" font-weight="800" fill="#F8FAFC" letter-spacing="2">
+        &amp; CONFIDENCE BUILDING PROGRAM
+      </text>
+
+      <!-- Mini Star at End -->
+      <polygon points="334,13 336,8 338,13 343,13 339,16 341,21 336,18 331,21 333,16 329,13" fill="#F59E0B" transform="scale(0.65) translate(185,-2)" />
+    </g>
+  </g>
+</svg>

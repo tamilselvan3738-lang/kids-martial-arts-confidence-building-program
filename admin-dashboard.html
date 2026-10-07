@@ -1,0 +1,1974 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="assets/logo-icon.svg" />
+  <link rel="shortcut icon" href="assets/logo-icon.svg" />
+  <link rel="apple-touch-icon" href="assets/logo-icon.svg" />
+  <title>Admin Operations & Dojo Telemetry Console - Kids Martial Arts Academy</title>
+  <meta name="description" content="Next-generation administrative telemetry and dojo operations console for Kids Martial Arts & Confidence Building Academy.">
+
+  <!-- Google Fonts: Outfit & Plus Jakarta Sans (Matching index.html) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              crimson: '#E11D48',
+              rose: '#F43F5E',
+              dark: '#0F172A',
+              card: '#131B2A',
+              border: '#1E293B',
+              accent: '#F59E0B'
+            }
+          },
+          fontFamily: {
+            outfit: ['Outfit', 'sans-serif'],
+            jakarta: ['"Plus Jakarta Sans"', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* Custom Scrollbar for Dashboard Console */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.6);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(100, 116, 139, 0.4);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(225, 29, 72, 0.6);
+    }
+
+    .glass-panel {
+      background: rgba(19, 27, 42, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(51, 65, 85, 0.5);
+    }
+    .light .glass-panel {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+    }
+
+    /* Active Nav Item Glow */
+    .nav-item-active {
+      background: rgba(245, 158, 11, 0.12) !important;
+      border: 1px solid rgba(245, 158, 11, 0.6) !important;
+      color: #F59E0B !important;
+      box-shadow: 0 0 15px rgba(245, 158, 11, 0.15);
+    }
+    .light .nav-item-active {
+      background: rgba(245, 158, 11, 0.15) !important;
+      border: 1px solid rgba(245, 158, 11, 0.8) !important;
+      color: #D97706 !important;
+    }
+
+    /* Ambient Glow Dot */
+    @keyframes pulse-slow {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.08); }
+    }
+    .glow-ambient {
+      animation: pulse-slow 6s ease-in-out infinite;
+    }
+  
+
+    /* ==========================================================================
+       ENTERPRISE MOBILE-FIRST RESPONSIVE MASTER STYLESHEET
+       Strict mobile optimization for 320px, 480px, 768px, 1024px
+       Zero horizontal overflow | Adaptive typography | Fluid grid & flex layout
+       ========================================================================== */
+
+    /* 1. Global Box-Sizing & Overflow Quarantine */
+    *, *::before, *::after {
+      box-sizing: border-box !important;
+    }
+
+    html {
+      width: 100% !important;
+      max-width: 100% !important;
+      overflow-x: hidden;
+      overflow-x: clip !important;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      width: 100% !important;
+      max-width: 100% !important;
+      overflow-x: clip !important;
+      position: relative !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    /* Guaranteed Persistent Sticky Navbar Across All Screen Sizes */
+    #mainHeader,
+    header {
+      position: -webkit-sticky !important;
+      position: sticky !important;
+      top: 0 !important;
+      z-index: 50 !important;
+    }
+
+    /* 2. Media & Visual Elements Strict Fluid Bounds */
+    img, svg, video, canvas, audio, iframe, embed, object {
+      max-width: 100% !important;
+      height: auto;
+    }
+
+    /* 3. Text Overflow Immunity */
+    h1, h2, h3, h4, h5, h6, p, span, a, button, li, dt, dd, blockquote, label {
+      overflow-wrap: break-word !important;
+      word-wrap: break-word !important;
+      max-width: 100%;
+    }
+
+    /* 4. Section & Container Strict Layout Integrity */
+    section {
+      width: 100% !important;
+      max-width: 100% !important;
+      position: relative !important;
+      overflow-x: hidden;
+      overflow-x: clip !important;
+      overflow-y: visible !important;
+    }
+
+    .container, .max-w-7xl, .max-w-6xl, .max-w-5xl, .max-w-4xl, .max-w-3xl, .max-w-2xl {
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+
+    /* 5. Responsive Form Controls & Interactive Buttons */
+    input, select, textarea {
+      max-width: 100% !important;
+    }
+
+    button, a.btn-3d, .btn-3d {
+      max-width: 100% !important;
+      white-space: normal;
+    }
+
+    /* 6. Breakpoint Optimization: <= 1024px (Small Laptops & Tablets) */
+    @media (max-width: 1024px) {
+      .max-w-7xl, .max-w-6xl {
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+      }
+      header nav, header {
+        max-width: 100% !important;
+      }
+    }
+
+    /* 7. Breakpoint Optimization: <= 768px (Tablets & Mobile Landscape) */
+    @media (max-width: 768px) {
+      /* Fluid Headings */
+      h1, .text-5xl, .text-6xl, .text-7xl {
+        font-size: clamp(1.85rem, 5.5vw, 2.75rem) !important;
+        line-height: 1.15 !important;
+      }
+      h2, .text-3xl, .text-4xl {
+        font-size: clamp(1.4rem, 4.2vw, 2.1rem) !important;
+        line-height: 1.22 !important;
+      }
+      h3, .text-2xl {
+        font-size: clamp(1.2rem, 3.2vw, 1.55rem) !important;
+        line-height: 1.28 !important;
+      }
+
+      /* Consistent Section Spacing */
+      section {
+        padding-top: clamp(2.5rem, 6vw, 4rem) !important;
+        padding-bottom: clamp(2.5rem, 6vw, 4rem) !important;
+      }
+
+      /* Stack two-column split heroes & banners */
+      .grid.lg\:grid-cols-2, .grid.lg\:grid-cols-3, .grid.lg\:grid-cols-4 {
+        grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+      }
+    }
+
+    /* 8. Breakpoint Optimization: <= 480px (Standard Mobile Portrait) */
+    @media (max-width: 480px) {
+      /* Uniform padding on all main containers */
+      .px-4, .px-6, .px-8, .sm\:px-6, .lg\:px-8 {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+      }
+
+      /* Mobile Adaptive Typography */
+      h1, .text-5xl, .text-6xl, .text-7xl {
+        font-size: clamp(1.55rem, 7vw, 2.15rem) !important;
+        line-height: 1.18 !important;
+      }
+      h2, .text-3xl, .text-4xl {
+        font-size: clamp(1.3rem, 5.2vw, 1.7rem) !important;
+        line-height: 1.25 !important;
+      }
+      h3, .text-2xl {
+        font-size: clamp(1.1rem, 4vw, 1.35rem) !important;
+        line-height: 1.3 !important;
+      }
+      p, .text-base, .text-lg {
+        font-size: 0.925rem !important;
+        line-height: 1.55 !important;
+      }
+
+      /* Stack card grids vertically on mobile */
+      .grid.sm\:grid-cols-2,
+      .grid.sm\:grid-cols-3,
+      .grid.sm\:grid-cols-4,
+      .grid.md\:grid-cols-2,
+      .grid.md\:grid-cols-3 {
+        grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+      }
+
+      /* Full width buttons in CTAs */
+      .flex.flex-wrap.items-center.gap-3 > button,
+      .flex.flex-wrap.items-center.gap-3 > a.btn-3d,
+      .hero-btn-group > * {
+        width: 100% !important;
+        justify-content: center !important;
+        text-align: center !important;
+      }
+
+      /* Modals fit comfortably */
+      #loginModalContent, .modal-content {
+        width: 95% !important;
+        max-width: 95% !important;
+        padding: 1.25rem !important;
+      }
+
+      /* Mobile drawer fits without overflow */
+      #mobileDrawer {
+        width: min(85vw, 290px) !important;
+      }
+    }
+
+    /* 9. Breakpoint Optimization: <= 320px (Small Screen / iPhone SE) */
+    @media (max-width: 320px) {
+      .px-4, .px-6, .px-8, .sm\:px-6, .lg\:px-8 {
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+      }
+
+      /* Ultra-compact Typography */
+      h1, .text-5xl, .text-6xl, .text-7xl {
+        font-size: 1.4rem !important;
+        line-height: 1.2 !important;
+      }
+      h2, .text-3xl, .text-4xl {
+        font-size: 1.2rem !important;
+        line-height: 1.22 !important;
+      }
+      h3, .text-2xl {
+        font-size: 1.05rem !important;
+      }
+      body, p, .text-base {
+        font-size: 0.85rem !important;
+      }
+      .text-sm {
+        font-size: 0.8rem !important;
+      }
+      .text-xs {
+        font-size: 0.7rem !important;
+      }
+
+      /* Compact Buttons */
+      .btn-3d {
+        padding-left: 0.65rem !important;
+        padding-right: 0.65rem !important;
+        font-size: 0.75rem !important;
+      }
+
+      /* Force all multi-col grids to 1 col (except drawer inline buttons) */
+      .grid-cols-2, .grid-cols-3, .grid-cols-4, .grid-cols-5, .grid-cols-6 {
+        grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+      }
+      #mobileDrawer .grid-cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      }
+    }
+
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-jakarta min-h-screen flex flex-col antialiased selection:bg-brand-crimson selection:text-white transition-colors duration-300">
+
+  <!-- ========================================================
+       TOP GLOBAL CONSOLE BAR (STICKY NAVBAR)
+       Mobile & Tablet View: Exact Logo + Hamburger Menu
+        Desktop View (lg+): Logo on left, Global Search in center, Action Controls on right
+        ======================================================== -->
+  <header class="sticky top-0 z-50 w-full border-b border-slate-800/80 bg-slate-950/95 backdrop-blur-xl px-4 sm:px-6 lg:px-8 py-3 transition-colors duration-300">
+    <div class="w-full max-w-[1920px] mx-auto flex items-center justify-between gap-4">
+      
+      <!-- LEFT: EXACT NAVBAR LOGO MATCHING INDEX.HTML -->
+      <div class="flex items-center gap-3 shrink-0">
+        <a href="index.html" id="brandLogo" class="group flex items-center gap-2 sm:gap-2.5 shrink-0 focus:outline-none" aria-label="Kids Martial Arts & Confidence Building Program">
+          
+          <!-- Compact Shield Logo Emblem (~28px) with Spring Hover -->
+          <div id="logoIconContainer" class="relative w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-gradient-to-b from-rose-500 via-brand-crimson to-rose-700 p-0.5 shadow-sm shadow-rose-950/20 shrink-0 cursor-pointer">
+            <div class="w-full h-full bg-slate-950 rounded-[5px] flex items-center justify-center overflow-hidden relative">
+              <div class="absolute inset-0 bg-radial-gradient from-amber-400/25 to-transparent"></div>
+              
+              <!-- Clean Scaled Vector Emblem -->
+              <svg viewBox="0 0 100 100" class="w-5 h-5 sm:w-5.5 sm:h-5.5 text-white" fill="none">
+                <circle cx="50" cy="50" r="26" fill="#F59E0B" fill-opacity="0.2" />
+                <!-- 3 Top Stars -->
+                <polygon points="34,16 35.5,19 39,19.5 36.5,22 37,25 34,23.5 31,25 31.5,22 29,19.5 32.5,19" fill="#FDE047" />
+                <polygon points="50,11 52,15 57,15.5 53.5,19 54.5,23.5 50,21 45.5,23.5 46.5,19 43,15.5 48,15" fill="#FDE047" />
+                <polygon points="66,16 67.5,19 71,19.5 68.5,22 69,25 66,23.5 63,25 63.5,22 61,19.5 64.5,19" fill="#FDE047" />
+                <!-- Kicking Martial Artist Silhouette -->
+                <circle cx="43" cy="30" r="6" fill="#FFFFFF" />
+                <path d="M40 31 Q33 30 28 35" stroke="#FDE047" stroke-width="2" stroke-linecap="round" />
+                <path d="M41 36 L48 39 L47 52 L39 51 Z" fill="#FFFFFF" />
+                <path d="M42 38 L34 41" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" />
+                <path d="M47 39 L57 35 L62 38" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" />
+                <path d="M45 50 L56 46 L73 39" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" />
+                <path d="M73 39 L76 34 L80 39 L75 42 Z" fill="#FDE047" />
+                <path d="M40 51 L35 59 L42 63" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" />
+                <path d="M38 50 C42 51 46 51 48 50" stroke="#0F172A" stroke-width="3.5" stroke-linecap="round" />
+                <path d="M42 51 L38 65 M44 51 L47 67" stroke="#0F172A" stroke-width="2.5" stroke-linecap="round" />
+                <circle cx="39" cy="62" r="1.2" fill="#F59E0B" />
+                <circle cx="45" cy="64" r="1.2" fill="#F59E0B" />
+              </svg>
+            </div>
+            
+            <div class="absolute -top-1 -right-1 rtl:-left-1 rtl:-right-auto w-3 h-3 rounded-full bg-amber-400 border border-slate-950 flex items-center justify-center text-[6px] font-black text-slate-950">
+              ★
+            </div>
+          </div>
+
+          <!-- Delicate Compact Typography -->
+          <div class="flex flex-col text-left rtl:text-right">
+            <span class="font-outfit font-black text-xs sm:text-[13.5px] tracking-tight leading-none text-slate-900 dark:text-white group-hover:text-brand-crimson transition-colors">
+              <span class="text-brand-crimson">KIDS</span> MARTIAL ARTS
+            </span>
+            <span class="text-[7.5px] sm:text-[8px] font-bold text-amber-500 dark:text-amber-400 tracking-wider uppercase font-outfit leading-tight mt-0.5">
+              &amp; CONFIDENCE BUILDING PROGRAM
+            </span>
+          </div>
+        </a>
+
+        <!-- System Pill Badge (Desktop Only, xl+) -->
+        <span class="hidden xl:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-900 border border-slate-700/80 text-[10px] font-bold uppercase tracking-wider text-slate-400">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+          <span>ADMIN CONSOLE v4.8</span>
+        </span>
+      </div>
+
+      <!-- CENTER: Global Omni-Search Bar (Desktop Only, lg+) -->
+      <div class="hidden lg:flex flex-1 max-w-xl mx-4">
+        <div class="relative w-full">
+          <i class="fa-solid fa-magnifying-glass absolute left-3.5 rtl:left-auto rtl:right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+          <input 
+            id="adminGlobalSearchInput"
+            type="text" 
+            placeholder="Search students, parents, instructors, belts, classes..." 
+            class="w-full pl-9 pr-16 rtl:pl-16 rtl:pr-9 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-brand-crimson focus:ring-1 focus:ring-brand-crimson transition-all"
+          />
+          <div class="absolute right-2.5 rtl:right-auto rtl:left-2.5 top-1/2 -translate-y-1/2 flex items-center gap-1 px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-[10px] font-mono text-slate-400 pointer-events-none">
+            <span>Ctrl</span><span>K</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Desktop Action Controls (Desktop Only, lg+) -->
+      <div class="hidden lg:flex items-center gap-2.5 xl:gap-3">
+        
+        <!-- Back to Home -->
+        <a 
+          href="index.html" 
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700/80 hover:border-slate-500 text-slate-300 hover:text-white text-xs font-bold transition-colors"
+          title="Back to Public Site"
+        >
+          <i class="fa-solid fa-house text-xs"></i>
+          <span>Back to Home</span>
+        </a>
+
+        <!-- Switch to User Dashboard -->
+        <a href="user-dashboard.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-500/10 border border-amber-500/30 hover:bg-amber-500/20 text-amber-400 text-xs font-bold transition-all" title="Switch to Parent / Student Portal">
+          <i class="fa-solid fa-user-graduate text-xs"></i>
+          <span>User Portal</span>
+        </a>
+
+        <!-- Refresh Metrics Button -->
+        <button 
+          id="refreshMetricsBtn" 
+          type="button" 
+          onclick="triggerRefreshMetrics()"
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-500/10 border border-amber-500/30 hover:bg-amber-500/20 text-amber-400 text-xs font-bold transition-all"
+          title="Refresh All Telemetry"
+        >
+          <i class="fa-solid fa-arrows-rotate text-xs"></i>
+          <span>Refresh Metrics</span>
+        </button>
+
+        <!-- Theme Toggle (Sun/Moon) -->
+        <button 
+          id="themeToggleBtn" 
+          type="button" 
+          onclick="toggleThemeMode()"
+          class="w-8 h-8 rounded-xl bg-slate-900 border border-slate-700/80 hover:border-amber-400/50 text-amber-400 flex items-center justify-center text-xs transition-colors"
+          title="Toggle Light / Dark Mode"
+        >
+          <i class="fa-solid fa-sun" id="themeIcon"></i>
+        </button>
+
+        <!-- RTL Toggle -->
+        <button 
+          id="rtlToggleBtn" 
+          type="button" 
+          onclick="toggleRTLMode()"
+          class="px-2.5 h-8 rounded-xl bg-slate-900 border border-slate-700/80 hover:border-brand-crimson/50 text-slate-300 text-xs font-bold transition-colors"
+          title="Toggle Right-To-Left"
+        >
+          RTL
+        </button>
+
+        <!-- Notifications Bell -->
+        <button 
+          id="notificationsBellBtn" 
+          type="button" 
+          onclick="showTab('view-notifications')"
+          class="relative w-8 h-8 rounded-xl bg-slate-900 border border-slate-700/80 hover:border-brand-crimson text-slate-300 flex items-center justify-center text-xs transition-colors"
+          title="Notifications"
+        >
+          <i class="fa-regular fa-bell"></i>
+          <span class="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-brand-crimson animate-pulse"></span>
+        </button>
+
+        <!-- User Profile Pill -->
+        <div class="flex items-center gap-2.5 pl-2 border-l border-slate-800">
+          <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-brand-crimson to-amber-500 p-0.5 shrink-0">
+            <div class="w-full h-full rounded-[10px] bg-slate-950 flex items-center justify-center font-outfit font-black text-xs text-amber-400">
+              MS
+            </div>
+          </div>
+          <div class="flex flex-col text-left rtl:text-right">
+            <span class="text-xs font-black text-white font-outfit leading-tight">Marcus Vance, COO</span>
+            <span class="text-[10px] font-bold text-slate-400 leading-tight">Head Sensei • Super Admin</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: Mobile & Tablet Hamburger Menu Button (lg:hidden) -->
+      <!-- Perfectly positioned on the right of the navbar on mobile & tab! -->
+      <div class="flex lg:hidden items-center shrink-0">
+        <button 
+          id="adminMobileMenuBtn" 
+          type="button" 
+          onclick="openMobileDrawer()"
+          aria-label="Open Navigation Drawer"
+          class="flex items-center justify-center w-10 h-10 rounded-xl bg-slate-900 border border-slate-700/80 text-slate-300 hover:text-white hover:border-brand-crimson hover:bg-slate-800 active:scale-95 transition-all focus:outline-none"
+        >
+          <i class="fa-solid fa-bars-staggered text-lg"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ========================================================
+       MAIN DASHBOARD CONTAINER (SIDEBAR + ACTIVE TABBED VIEW)
+       ======================================================== -->
+  <div class="flex-1 flex max-w-[1920px] w-full mx-auto relative overflow-hidden">
+
+    <!-- ====================================================
+         LEFT SIDEBAR NAVIGATION (Desktop: Sticky, Mobile: Right Drawer)
+         ==================================================== -->
+    <aside 
+      id="adminSidebarDrawer" 
+      class="fixed inset-y-0 right-0 rtl:right-auto rtl:left-0 z-50 w-84 max-w-[90vw] bg-slate-950 border-l rtl:border-l-0 rtl:border-r border-slate-800/80 flex flex-col justify-between p-4 sm:p-5 transition-transform duration-300 translate-x-full rtl:-translate-x-full lg:translate-x-0 lg:static lg:z-auto lg:w-84 lg:h-[calc(100vh-61px)] lg:border-r lg:border-l-0 overflow-y-auto shrink-0 shadow-2xl lg:shadow-none"
+    >
+      
+      <!-- Top Section of Sidebar: Mobile Controls & Nav Links -->
+      <div class="space-y-4">
+        
+        <!-- MOBILE & TABLET DRAWER HEADER (lg:hidden): User Profile & Close (X) Button -->
+        <div class="lg:hidden flex items-center justify-between pb-3 border-b border-slate-800/80">
+          <div class="flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-crimson to-amber-500 p-0.5 shrink-0 shadow-sm">
+              <div class="w-full h-full rounded-[10px] bg-slate-950 flex items-center justify-center font-outfit font-black text-xs text-amber-400">
+                MS
+              </div>
+            </div>
+            <div class="flex flex-col text-left rtl:text-right">
+              <span class="text-xs font-black text-white font-outfit leading-tight">Marcus Vance, COO</span>
+              <span class="text-[10px] font-bold text-slate-400 leading-tight">Head Sensei • Super Admin</span>
+            </div>
+          </div>
+
+          <!-- Close Drawer Button -->
+          <button 
+            id="adminDrawerCloseBtn" 
+            type="button" 
+            onclick="closeMobileDrawer()" 
+            aria-label="Close navigation drawer"
+            class="w-8 h-8 rounded-xl bg-slate-900 border border-slate-700/80 text-slate-400 hover:text-white hover:border-brand-crimson flex items-center justify-center text-sm transition-colors"
+          >
+            <i class="fa-solid fa-xmark text-base"></i>
+          </button>
+        </div>
+
+        <!-- MOBILE & TABLET SEARCH BAR (lg:hidden) -->
+        <div class="lg:hidden relative">
+          <i class="fa-solid fa-magnifying-glass absolute left-3 rtl:left-auto rtl:right-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+          <input 
+            id="adminDrawerSearchInput"
+            type="text" 
+            placeholder="Search modules, students, belts..." 
+            class="w-full pl-8 pr-3 rtl:pl-3 rtl:pr-8 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-brand-crimson focus:ring-1 focus:ring-brand-crimson transition-all"
+          />
+        </div>
+
+        <!-- MOBILE & TABLET QUICK UTILITIES (lg:hidden) -->
+        <div class="lg:hidden space-y-2 pb-3 border-b border-slate-800/80">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-bold">
+            <!-- Theme Mode -->
+            <button 
+              type="button" 
+              onclick="toggleThemeMode()" 
+              class="flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-amber-400/50 text-amber-400 transition-colors"
+            >
+              <i class="fa-solid fa-sun" id="drawerThemeIcon"></i>
+              <span class="text-[11px] text-slate-300">Theme</span>
+            </button>
+
+            <!-- RTL Mode -->
+            <button 
+              type="button" 
+              onclick="toggleRTLMode()" 
+              class="flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-brand-crimson text-slate-300 hover:text-white transition-colors"
+            >
+              <i class="fa-solid fa-right-left text-[11px]"></i>
+              <span class="text-[11px]">RTL Mode</span>
+            </button>
+
+            <!-- Refresh Metrics -->
+            <button 
+              type="button" 
+              onclick="triggerRefreshMetrics()" 
+              class="flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-amber-500/50 text-amber-400 transition-colors"
+            >
+              <i class="fa-solid fa-arrows-rotate text-[11px]" id="drawerRefreshIcon"></i>
+              <span class="text-[11px] text-slate-300">Refresh</span>
+            </button>
+
+            <!-- Notifications -->
+            <button 
+              type="button" 
+              onclick="showTab('view-notifications')" 
+              class="relative flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-brand-crimson text-slate-300 hover:text-white transition-colors"
+            >
+              <i class="fa-regular fa-bell text-[11px]"></i>
+              <span class="text-[11px]">Alerts</span>
+              <span class="w-2 h-2 rounded-full bg-brand-crimson animate-pulse"></span>
+            </button>
+          </div>
+
+          <!-- Back to Public Site Link -->
+          <a 
+            href="index.html" 
+            class="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-slate-600 text-slate-300 hover:text-white text-[11px] font-bold transition-colors"
+          >
+            <i class="fa-solid fa-house text-xs text-slate-400"></i>
+            <span>Back to Public Site (index.html)</span>
+          </a>
+        </div>
+
+        <!-- Status Header Card (Matching Screenshot) -->
+        <div class="p-3.5 rounded-2xl bg-slate-900/80 border border-slate-800/80 flex items-center justify-between">
+          <div class="flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-black font-outfit text-sm border border-amber-500/30">
+              AD
+            </div>
+            <div>
+              <div class="text-xs font-black text-white font-outfit flex items-center gap-1.5">
+                <span>ADMIN CONSOLE</span>
+              </div>
+              <div class="text-[10px] font-bold text-slate-400 flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                <span>Node Online • v4.8</span>
+              </div>
+            </div>
+          </div>
+          <span class="px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-black uppercase tracking-wider">
+            Active
+          </span>
+        </div>
+
+        <!-- Navigation Section Label -->
+        <div class="px-1 flex items-center justify-between text-[10px] font-black text-slate-500 uppercase tracking-wider">
+          <span>Console Navigation</span>
+          <span>11 Modules</span>
+        </div>
+
+        <!-- Navigation Menu List (All 11 Single-Line Items) -->
+        <nav class="space-y-1" id="sidebarNavList">
+          
+          <!-- 1. Dashboard Overview -->
+          <button 
+            type="button" 
+            data-target="view-dashboard-overview"
+            class="admin-nav-btn w-full nav-item-active flex items-center justify-between gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white transition-all text-left rtl:text-right group"
+          >
+            <div class="flex items-center gap-2.5 min-w-0">
+              <i class="fa-solid fa-chart-line w-4 text-center shrink-0"></i>
+              <span class="whitespace-nowrap truncate font-jakarta">Dashboard Overview</span>
+            </div>
+            <span class="shrink-0 whitespace-nowrap px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-400 text-[10px] font-black uppercase tracking-wider">
+              Live
+            </span>
+          </button>
+
+          <!-- 2. Student Management -->
+          <button 
+            type="button" 
+            data-target="view-student-management"
+            class="admin-nav-btn w-full flex items-center justify-between gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-900/80 hover:text-white transition-all text-left rtl:text-right group"
+          >
+            <div class="flex items-center gap-2.5 min-w-0">
+              <i class="fa-solid fa-user-graduate w-4 text-center shrink-0"></i>
+              <span class="whitespace-nowrap truncate font-jakarta">Student Management</span>
+            </div>
+            <span class="shrink-0 whitespace-nowrap px-2 py-0.5 rounded-md bg-slate-800 text-slate-400 text-[10px] font-bold">
+              1,280
+            </span>
+          </button>
+
+          <!-- 3. Parent Management -->
+          <button 
+            type="button" 
+            data-target="view-parent-management"
+            class="admin-nav-btn w-full flex items-center justify-between gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-900/80 hover:text-white transition-all text-left rtl:text-right group"
+          >
+            <div class="flex items-center gap-2.5 min-w-0">
+              <i class="fa-solid fa-people-roof w-4 text-center shrink-0"></i>
+              <span class="whitespace-nowrap truncate font-jakarta">Parent Management</span>
+            </div>
+            <span class="shrink-0 whitespace-nowrap px-2 py-0.5 rounded-md bg-slate-800 text-slate-400 text-[10px] font-bold">
+              890
+            </span>
+          </button>
+
+          <!-- 4. Program Management -->
+          <button 
+            type="button" 
+            data-target="view-program-management"
+            class="admin-nav-btn w-full flex items-center justify-between gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-900/80 hover:text-white transition-all text-left rtl:text-right group"
+          >
+            <div class="flex items-center gap-2.5 min-w-0">
+              <i class="fa-solid fa-dumbbell w-4 text-center shrink-0"></i>
+              <span class="whitespace-nowrap truncate font-jakarta">Program Management</span>
+            </div>
+            <span class="shrink-0 whitespace-nowrap px-2 py-0.5 rounded-md bg-slate-800 text-slate-400 text-[10px] font-bold">
+              8 Tiers
+            </span>
+          </button>
+
+          <!-- 5. Instructor Management -->
+          <button 
+            type="button" 
+            data-target="view-instructor-management"
+            class="admin-nav-btn w-full flex items-center justify-between gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-900/80 hover:text-white transition-all text-left rtl:text-right group"
+          >
+            <div class="flex items-center gap-2.5 min-w-0">
+              <i class="fa-solid fa-chalkboard-user w-4 text-center shrink-0 text-slate-400 group-hover:text-amber-400 transition-colors"></i>
+              <span class="whitespace-nowrap truncate font-jakarta">Instructor Management</span>
+            </div>
+            <span class="shrink-0 whitespace-nowrap px-2 py-0.5 rounded-md bg-slate-800 text-slate-400 text-[10px] font-bold">
+              12 Active
+            </span>
+          </button>
+
+          <!-- 6. Class Management -->
+          <button 
+            type="button" 
+            data-target="view-class-management"
+            class="admin-nav-btn w-full flex items-center justify-between gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-900/80 hover:text-white transition-all text-left rtl:text-right group"
+          >
+            <div class="flex items-center gap-2.5 min-w-0">
+              <i class="fa-solid fa-calendar-days w-4 text-center shrink-0"></i>
+              <span class="whitespace-nowrap truncate font-jakarta">Class Management</span>
+            </div>
+            <span class="shrink-0 whitespace-nowrap px-2 py-0.5 rounded-md bg-slate-800 text-slate-400 text-[10px] font-bold">
+              24 Today
+            </span>
+          </button>
+
+          <!-- 7. Belt & Progress Management -->
+          <button 
+            type="button" 
+            data-target="view-belt-progress-management"
+            class="admin-nav-btn w-full flex items-center justify-between gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-900/80 hover:text-white transition-all text-left rtl:text-right group"
+          >
+            <div class="flex items-center gap-2.5 min-w-0">
+              <i class="fa-solid fa-award w-4 text-center shrink-0"></i>
+              <span class="whitespace-nowrap truncate font-jakarta">Belt &amp; Progress Management</span>
+            </div>
+            <span class="shrink-0 whitespace-nowrap px-2 py-0.5 rounded-md bg-slate-800 text-slate-400 text-[10px] font-bold">
+              142 Tests
+            </span>
+          </button>
+
+          <!-- 8. Testing Management -->
+          <button 
+            type="button" 
+            data-target="view-testing-management"
+            class="admin-nav-btn w-full flex items-center justify-between gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-900/80 hover:text-white transition-all text-left rtl:text-right group"
+          >
+            <div class="flex items-center gap-2.5 min-w-0">
+              <i class="fa-solid fa-clipboard-check w-4 text-center shrink-0"></i>
+              <span class="whitespace-nowrap truncate font-jakarta">Testing Management</span>
+            </div>
+            <span class="shrink-0 whitespace-nowrap px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-400 text-[10px] font-bold">
+              28 Pend
+            </span>
+          </button>
+
+          <!-- 9. Attendance Management -->
+          <button 
+            type="button" 
+            data-target="view-attendance-management"
+            class="admin-nav-btn w-full flex items-center justify-between gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-900/80 hover:text-white transition-all text-left rtl:text-right group"
+          >
+            <div class="flex items-center gap-2.5 min-w-0">
+              <i class="fa-solid fa-clipboard-user w-4 text-center shrink-0 text-slate-400 group-hover:text-emerald-400 transition-colors"></i>
+              <span class="whitespace-nowrap truncate font-jakarta">Attendance Management</span>
+            </div>
+            <span class="shrink-0 whitespace-nowrap px-2 py-0.5 rounded-md bg-slate-800 text-slate-400 text-[10px] font-bold">
+              96.8%
+            </span>
+          </button>
+
+          <!-- 10. Payment Management -->
+          <button 
+            type="button" 
+            data-target="view-payment-management"
+            class="admin-nav-btn w-full flex items-center justify-between gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-900/80 hover:text-white transition-all text-left rtl:text-right group"
+          >
+            <div class="flex items-center gap-2.5 min-w-0">
+              <i class="fa-solid fa-credit-card w-4 text-center shrink-0"></i>
+              <span class="whitespace-nowrap truncate font-jakarta">Payment Management</span>
+            </div>
+            <span class="shrink-0 whitespace-nowrap px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 text-[10px] font-bold">
+              $84.9k
+            </span>
+          </button>
+
+          <!-- 11. Notifications -->
+          <button 
+            type="button" 
+            data-target="view-notifications"
+            class="admin-nav-btn w-full flex items-center justify-between gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-900/80 hover:text-white transition-all text-left rtl:text-right group"
+          >
+            <div class="flex items-center gap-2.5 min-w-0">
+              <i class="fa-solid fa-bullhorn w-4 text-center shrink-0"></i>
+              <span class="whitespace-nowrap truncate font-jakarta">Notifications</span>
+            </div>
+            <span class="shrink-0 whitespace-nowrap px-2 py-0.5 rounded-md bg-rose-500/20 text-rose-400 text-[10px] font-bold">
+              5 New
+            </span>
+          </button>
+
+        </nav>
+      </div>
+
+      <!-- Bottom: Logout Action Button -->
+      <div class="pt-4 border-t border-slate-800/80">
+        <a href="login.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold text-slate-400 hover:bg-rose-500/10 hover:text-rose-400 transition-colors text-left rtl:text-right"
+        >
+          <div class="flex items-center gap-2.5">
+            <i class="fa-solid fa-arrow-right-from-bracket w-4 text-center"></i>
+            <span>Logout</span>
+          </div>
+          <span class="px-2 py-0.5 rounded-md bg-slate-800 text-slate-400 text-[10px] font-bold">
+            Sign Out
+          </span>
+        </a>
+      </div>
+
+    </aside>
+
+    <!-- Mobile Drawer Overlay Backdrop -->
+    <div id="adminSidebarOverlay" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-30 hidden lg:hidden"></div>
+
+    <!-- ====================================================
+         MAIN VIEWPORT AREA (DYNAMIC TABBED CONTENT)
+         ==================================================== -->
+    <main class="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto max-h-[calc(100vh-61px)]">
+      
+      <!-- ================================================
+           VIEW 1: DASHBOARD OVERVIEW (EXACT CLONE OF REFERENCE SCREENSHOT)
+           ================================================ -->
+      <div id="view-dashboard-overview" class="admin-view-panel space-y-8">
+        
+        <!-- Header Ribbon (Title, Subtitle & Action Buttons) -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="space-y-1 text-left rtl:text-right">
+            <h1 class="text-2xl sm:text-3xl font-black font-outfit text-white tracking-tight">
+              Operations &amp; Academy Telemetry Overview
+            </h1>
+            <p class="text-xs sm:text-sm text-slate-400 font-jakarta max-w-3xl">
+              Real-time student progress, attendance telemetry, belt testing pipelines, and multi-channel parent communication.
+            </p>
+          </div>
+
+          <div class="flex items-center gap-3 shrink-0">
+            <button 
+              type="button" 
+              onclick="showTab('view-student-management')" 
+              class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-500 text-slate-950 font-black font-outfit text-xs uppercase tracking-wider shadow-lg shadow-amber-500/20 transition-all transform hover:-translate-y-0.5 active:translate-y-0 flex items-center gap-2"
+            >
+              <i class="fa-solid fa-plus"></i>
+              <span>+ Add Student</span>
+            </button>
+            <button 
+              type="button" 
+              onclick="showTab('view-testing-management')" 
+              class="px-5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 hover:border-amber-400 text-slate-200 hover:text-white font-bold font-outfit text-xs transition-colors flex items-center gap-2"
+            >
+              <i class="fa-solid fa-calendar-check text-cyan-400"></i>
+              <span>Book Slot</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 8 STAT CARDS GRID (2x4 Grid with Neon Sparklines - Exact Match to Screenshot) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5" id="statCardsGrid">
+          
+          <!-- Card 1: Total Students -->
+          <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800/80 relative overflow-hidden shadow-lg hover:border-blue-500/50 transition-all duration-300">
+            <div class="flex items-center justify-between text-slate-400 text-xs font-bold uppercase tracking-wider mb-2">
+              <span>Total Students</span>
+              <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center">
+                <i class="fa-solid fa-user-group text-xs"></i>
+              </div>
+            </div>
+            <div class="text-3xl font-black text-white font-outfit tracking-tight mb-2">3,428</div>
+            <div class="flex items-center justify-between text-xs">
+              <span class="text-emerald-400 font-bold flex items-center gap-1">
+                <i class="fa-solid fa-arrow-trend-up"></i> +14.2% MTD
+              </span>
+              <!-- SVG Sparkline Wave (Orange/Yellow) -->
+              <svg class="w-20 h-6 text-amber-500" viewBox="0 0 100 30" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <path d="M0 22 Q25 8 50 20 T100 12" />
+              </svg>
+            </div>
+          </div>
+
+          <!-- Card 2: Active Enrollments -->
+          <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800/80 relative overflow-hidden shadow-lg hover:border-cyan-500/50 transition-all duration-300">
+            <div class="flex items-center justify-between text-slate-400 text-xs font-bold uppercase tracking-wider mb-2">
+              <span>Active Enrollments</span>
+              <div class="w-8 h-8 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center">
+                <i class="fa-solid fa-id-card-clip text-xs"></i>
+              </div>
+            </div>
+            <div class="text-3xl font-black text-white font-outfit tracking-tight mb-2">1,842</div>
+            <div class="flex items-center justify-between text-xs">
+              <span class="text-cyan-400 font-bold flex items-center gap-1">
+                <i class="fa-solid fa-arrow-trend-up"></i> +8.5% this month
+              </span>
+              <!-- SVG Sparkline Wave (Cyan) -->
+              <svg class="w-20 h-6 text-cyan-400" viewBox="0 0 100 30" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <path d="M0 25 Q30 22 55 10 T100 14" />
+              </svg>
+            </div>
+          </div>
+
+          <!-- Card 3: Pending Approvals -->
+          <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800/80 relative overflow-hidden shadow-lg hover:border-amber-500/50 transition-all duration-300">
+            <div class="flex items-center justify-between text-slate-400 text-xs font-bold uppercase tracking-wider mb-2">
+              <span>Pending Approvals</span>
+              <div class="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center">
+                <i class="fa-regular fa-clock text-xs"></i>
+              </div>
+            </div>
+            <div class="text-3xl font-black text-white font-outfit tracking-tight mb-2">48</div>
+            <div class="flex items-center justify-between text-xs">
+              <span class="text-amber-400 font-bold flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span> Live in review queue
+              </span>
+              <!-- SVG Sparkline Wave (Pink/Rose) -->
+              <svg class="w-20 h-6 text-rose-500" viewBox="0 0 100 30" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <path d="M0 15 Q25 24 50 18 T100 12" />
+              </svg>
+            </div>
+          </div>
+
+          <!-- Card 4: Upcoming Classes & Inspections -->
+          <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800/80 relative overflow-hidden shadow-lg hover:border-blue-500/50 transition-all duration-300">
+            <div class="flex items-center justify-between text-slate-400 text-xs font-bold uppercase tracking-wider mb-2">
+              <span>Upcoming Classes</span>
+              <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center">
+                <i class="fa-regular fa-calendar-check text-xs"></i>
+              </div>
+            </div>
+            <div class="text-3xl font-black text-white font-outfit tracking-tight mb-2">28</div>
+            <div class="flex items-center justify-between text-xs">
+              <span class="text-slate-400 font-bold">
+                <span class="text-emerald-400">18 Completed</span> • 10 Today
+              </span>
+              <!-- SVG Sparkline Wave (Blue) -->
+              <svg class="w-20 h-6 text-blue-400" viewBox="0 0 100 30" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <path d="M0 24 Q35 12 60 22 T100 8" />
+              </svg>
+            </div>
+          </div>
+
+          <!-- Card 5: Upcoming Belt Tests -->
+          <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800/80 relative overflow-hidden shadow-lg hover:border-purple-500/50 transition-all duration-300">
+            <div class="flex items-center justify-between text-slate-400 text-xs font-bold uppercase tracking-wider mb-2">
+              <span>Upcoming Belt Tests</span>
+              <div class="w-8 h-8 rounded-lg bg-purple-500/10 text-purple-400 flex items-center justify-center">
+                <i class="fa-solid fa-lock text-xs"></i>
+              </div>
+            </div>
+            <div class="text-3xl font-black text-white font-outfit tracking-tight mb-2">64</div>
+            <div class="flex items-center justify-between text-xs">
+              <span class="text-purple-400 font-bold">
+                Next 7 Days Confirmed
+              </span>
+              <!-- SVG Sparkline Wave (Purple) -->
+              <svg class="w-20 h-6 text-purple-400" viewBox="0 0 100 30" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <path d="M0 20 Q30 14 55 24 T100 16" />
+              </svg>
+            </div>
+          </div>
+
+          <!-- Card 6: Registered Parents -->
+          <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800/80 relative overflow-hidden shadow-lg hover:border-emerald-500/50 transition-all duration-300">
+            <div class="flex items-center justify-between text-slate-400 text-xs font-bold uppercase tracking-wider mb-2">
+              <span>Registered Parents</span>
+              <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
+                <i class="fa-solid fa-user-check text-xs"></i>
+              </div>
+            </div>
+            <div class="text-3xl font-black text-white font-outfit tracking-tight mb-2">4,210</div>
+            <div class="flex items-center justify-between text-xs">
+              <span class="text-emerald-400 font-bold flex items-center gap-1">
+                <i class="fa-solid fa-arrow-trend-up"></i> +18.4% MTD Growth
+              </span>
+              <!-- SVG Sparkline Wave (Emerald) -->
+              <svg class="w-20 h-6 text-emerald-400" viewBox="0 0 100 30" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <path d="M0 26 Q35 22 65 14 T100 18" />
+              </svg>
+            </div>
+          </div>
+
+          <!-- Card 7: Active Instructors -->
+          <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800/80 relative overflow-hidden shadow-lg hover:border-amber-500/50 transition-all duration-300">
+            <div class="flex items-center justify-between text-slate-400 text-xs font-bold uppercase tracking-wider mb-2">
+              <span>Active Instructors</span>
+              <div class="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center">
+                <i class="fa-solid fa-building-user text-xs"></i>
+              </div>
+            </div>
+            <div class="text-3xl font-black text-white font-outfit tracking-tight mb-2">890</div>
+            <div class="flex items-center justify-between text-xs">
+              <span class="text-amber-400 font-bold">
+                Verified Faculty Network
+              </span>
+              <!-- SVG Sparkline Wave (Gold) -->
+              <svg class="w-20 h-6 text-amber-400" viewBox="0 0 100 30" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <path d="M0 24 Q30 20 60 16 T100 12" />
+              </svg>
+            </div>
+          </div>
+
+          <!-- Card 8: Revenue Overview -->
+          <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800/80 relative overflow-hidden shadow-lg hover:border-emerald-500/50 transition-all duration-300">
+            <div class="flex items-center justify-between text-slate-400 text-xs font-bold uppercase tracking-wider mb-2">
+              <span>Revenue Overview</span>
+              <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
+                <i class="fa-solid fa-dollar-sign text-xs"></i>
+              </div>
+            </div>
+            <div class="text-3xl font-black text-white font-outfit tracking-tight mb-2">$184,950</div>
+            <div class="flex items-center justify-between text-xs">
+              <span class="text-emerald-400 font-bold flex items-center gap-1">
+                <i class="fa-solid fa-arrow-trend-up"></i> +18.2% vs Prev Mo
+              </span>
+              <!-- SVG Sparkline Wave (Emerald) -->
+              <svg class="w-20 h-6 text-emerald-400" viewBox="0 0 100 30" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <path d="M0 26 Q30 18 60 14 T100 10" />
+              </svg>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- LOWER SECTION (2 COLUMNS: PENDING APPROVALS QUEUE & ACADEMY ACTIVITY STREAM) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          
+          <!-- Column 1: Pending Approvals & Live Queue (7 Cols) -->
+          <div class="lg:col-span-7 p-6 rounded-2xl bg-slate-900/90 border border-slate-800/80 shadow-xl space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+              <div>
+                <h3 class="text-base font-black text-white font-outfit flex items-center gap-2">
+                  <span>Pending Approvals &amp; Live Queue</span>
+                </h3>
+                <p class="text-xs text-slate-400 font-jakarta">Candidate submissions awaiting belt certification &amp; diagnostic audit</p>
+              </div>
+              <a href="javascript:void(0)" onclick="showTab('view-testing-management')" class="text-xs font-bold text-blue-400 hover:text-blue-300 flex items-center gap-1">
+                <span>View All 3,428</span>
+                <i class="fa-solid fa-chevron-right text-[10px]"></i>
+              </a>
+            </div>
+
+            <!-- Table of Pending Approvals -->
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs text-slate-300">
+                <thead class="text-[10px] uppercase font-bold text-slate-500 bg-slate-950/60 border-b border-slate-800">
+                  <tr>
+                    <th class="py-2.5 px-3">Student Name</th>
+                    <th class="py-2.5 px-3">Current &rarr; Target</th>
+                    <th class="py-2.5 px-3">Attendance</th>
+                    <th class="py-2.5 px-3">Form Score</th>
+                    <th class="py-2.5 px-3 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-800/60 font-medium">
+                  <tr class="hover:bg-slate-800/40 transition-colors">
+                    <td class="py-3 px-3">
+                      <div class="font-black text-white font-outfit">Leo Sterling</div>
+                      <div class="text-[10px] text-slate-500">ID: #ST-8924 • Little Warriors</div>
+                    </td>
+                    <td class="py-3 px-3">
+                      <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-bold">White</span>
+                      <span class="text-slate-500 mx-1">&rarr;</span>
+                      <span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold">Yellow</span>
+                    </td>
+                    <td class="py-3 px-3 font-bold text-emerald-400">94.2% (26/28)</td>
+                    <td class="py-3 px-3 font-bold text-white">92 / 100</td>
+                    <td class="py-3 px-3 text-right space-x-1.5">
+                      <button onclick="alert('Leo Sterling approved for Yellow Belt Testing!');" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 font-bold hover:bg-emerald-500 hover:text-white transition-colors">
+                        Approve
+                      </button>
+                    </td>
+                  </tr>
+
+                  <tr class="hover:bg-slate-800/40 transition-colors">
+                    <td class="py-3 px-3">
+                      <div class="font-black text-white font-outfit">Maya Lin</div>
+                      <div class="text-[10px] text-slate-500">ID: #ST-7712 • Junior Champions</div>
+                    </td>
+                    <td class="py-3 px-3">
+                      <span class="px-2 py-0.5 rounded bg-orange-500/20 text-orange-300 font-bold">Orange</span>
+                      <span class="text-slate-500 mx-1">&rarr;</span>
+                      <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold">Green</span>
+                    </td>
+                    <td class="py-3 px-3 font-bold text-emerald-400">96.0% (32/34)</td>
+                    <td class="py-3 px-3 font-bold text-white">96 / 100</td>
+                    <td class="py-3 px-3 text-right space-x-1.5">
+                      <button onclick="alert('Maya Lin approved for Green Belt Testing!');" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 font-bold hover:bg-emerald-500 hover:text-white transition-colors">
+                        Approve
+                      </button>
+                    </td>
+                  </tr>
+
+                  <tr class="hover:bg-slate-800/40 transition-colors">
+                    <td class="py-3 px-3">
+                      <div class="font-black text-white font-outfit">Sofia Patel</div>
+                      <div class="text-[10px] text-slate-500">ID: #ST-6604 • Teen Cadets</div>
+                    </td>
+                    <td class="py-3 px-3">
+                      <span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-bold">Blue</span>
+                      <span class="text-slate-500 mx-1">&rarr;</span>
+                      <span class="px-2 py-0.5 rounded bg-amber-700/20 text-amber-500 font-bold">Brown</span>
+                    </td>
+                    <td class="py-3 px-3 font-bold text-emerald-400">89.4% (30/34)</td>
+                    <td class="py-3 px-3 font-bold text-white">88 / 100</td>
+                    <td class="py-3 px-3 text-right space-x-1.5">
+                      <button onclick="alert('Sofia Patel approved for Brown Belt Testing!');" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 font-bold hover:bg-emerald-500 hover:text-white transition-colors">
+                        Approve
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Column 2: Academy Activity & Real-Time Event Stream (5 Cols) -->
+          <div class="lg:col-span-5 p-6 rounded-2xl bg-slate-900/90 border border-slate-800/80 shadow-xl space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+              <div>
+                <h3 class="text-base font-black text-white font-outfit flex items-center gap-2">
+                  <span>Academy Activity</span>
+                </h3>
+                <p class="text-xs text-slate-400 font-jakarta">Live operational events &amp; telemetry stream</p>
+              </div>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] font-bold">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> Real-Time
+              </span>
+            </div>
+
+            <!-- Activity Stream Items -->
+            <div class="space-y-3.5" id="liveActivityFeed">
+              
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-950/50 border border-slate-800/60">
+                <div class="w-8 h-8 rounded-lg bg-emerald-500/15 text-emerald-400 flex items-center justify-center shrink-0 text-xs">
+                  <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <div class="text-xs flex-grow">
+                  <span class="font-bold text-white">Leo Vance</span> checked into <span class="text-amber-400">Little Warriors (Ring A)</span>.
+                  <div class="text-[10px] text-slate-500 mt-0.5">2 minutes ago • Biometric Kiosk</div>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-950/50 border border-slate-800/60">
+                <div class="w-8 h-8 rounded-lg bg-blue-500/15 text-blue-400 flex items-center justify-center shrink-0 text-xs">
+                  <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <div class="text-xs flex-grow">
+                  <span class="font-bold text-white">Coach Elena</span> logged 3 skill stripes for <span class="text-white">Junior Champions</span> cohort.
+                  <div class="text-[10px] text-slate-500 mt-0.5">14 minutes ago • Coach Tablet</div>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-950/50 border border-slate-800/60">
+                <div class="w-8 h-8 rounded-lg bg-purple-500/15 text-purple-400 flex items-center justify-center shrink-0 text-xs">
+                  <i class="fa-solid fa-credit-card"></i>
+                </div>
+                <div class="text-xs flex-grow">
+                  Tuition autopay processed ($220) for <span class="font-bold text-white">Ethan Brooks</span>.
+                  <div class="text-[10px] text-slate-500 mt-0.5">38 minutes ago • Stripe Billing</div>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-950/50 border border-slate-800/60">
+                <div class="w-8 h-8 rounded-lg bg-amber-500/15 text-amber-400 flex items-center justify-center shrink-0 text-xs">
+                  <i class="fa-solid fa-bullhorn"></i>
+                </div>
+                <div class="text-xs flex-grow">
+                  <span class="font-bold text-white">Head Sensei Marcus</span> published the Autumn Belt Gala schedule.
+                  <div class="text-[10px] text-slate-500 mt-0.5">1 hour ago • Academy Announcement</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- ================================================
+           VIEW 2: STUDENT MANAGEMENT
+           ================================================ -->
+      <div id="view-student-management" class="admin-view-panel hidden space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+          <div>
+            <h2 class="text-2xl font-black font-outfit text-white">Student Management</h2>
+            <p class="text-xs text-slate-400 font-jakarta">Student Profiles, Belt Levels, Enrollment Status, Attendance Records, Progress Records &amp; Student Account Status</p>
+          </div>
+          <button onclick="alert('Add New Student Dialog opened.');" class="px-4 py-2 rounded-xl bg-gradient-to-r from-brand-crimson to-rose-600 text-white font-bold text-xs flex items-center gap-2">
+            <i class="fa-solid fa-user-plus"></i>
+            <span>Register New Student</span>
+          </button>
+        </div>
+
+        <!-- Student Filters & Search -->
+        <div class="flex flex-wrap items-center justify-between gap-3 bg-slate-900/80 p-3 rounded-2xl border border-slate-800">
+          <div class="flex flex-wrap gap-2 text-xs">
+            <button class="px-3 py-1.5 rounded-lg bg-amber-500/20 text-amber-400 font-bold border border-amber-500/40">All Students (1,280)</button>
+            <button class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-400 font-bold hover:text-white">Little Warriors (340)</button>
+            <button class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-400 font-bold hover:text-white">Junior Champions (520)</button>
+            <button class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-400 font-bold hover:text-white">Teen Cadets (280)</button>
+            <button class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-400 font-bold hover:text-white">Black Belt Journey (140)</button>
+          </div>
+          <input type="text" placeholder="Search All Students by name..." class="px-3 py-1.5 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white focus:outline-none focus:border-brand-crimson" />
+        </div>
+
+        <!-- Student Data Table -->
+        <div class="overflow-x-auto rounded-2xl border border-slate-800 bg-slate-900/90">
+          <table class="w-full text-left text-xs text-slate-300">
+            <thead class="text-[10px] uppercase font-bold text-slate-400 bg-slate-950/80 border-b border-slate-800">
+              <tr>
+                <th class="py-3 px-4">Student Profiles</th>
+                <th class="py-3 px-4">Program &amp; Age</th>
+                <th class="py-3 px-4">Belt Levels</th>
+                <th class="py-3 px-4">Enrollment Status</th>
+                <th class="py-3 px-4">Attendance Records</th>
+                <th class="py-3 px-4">Progress Records</th>
+                <th class="py-3 px-4">Student Account Status</th>
+                <th class="py-3 px-4 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-800/80 font-medium">
+              <tr class="hover:bg-slate-800/40">
+                <td class="py-3 px-4">
+                  <div class="font-bold text-white">Lucas Sterling</div>
+                  <div class="text-[10px] text-slate-500">Parent: Sarah Sterling • #ST-01</div>
+                </td>
+                <td class="py-3 px-4">Little Warriors (Age 5)</td>
+                <td class="py-3 px-4"><span class="px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-white font-bold">White Belt (2 Stripes)</span></td>
+                <td class="py-3 px-4"><span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 font-bold">Active Enrolled</span></td>
+                <td class="py-3 px-4 text-emerald-400 font-bold">96.4% Attendance Records</td>
+                <td class="py-3 px-4 text-slate-300">Stripe 2 Verified</td>
+                <td class="py-3 px-4 text-emerald-400 font-bold">Student Account Status: Good Standing</td>
+                <td class="py-3 px-4 text-right">
+                  <button onclick="alert('Viewing Lucas Sterling Profile');" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-white font-bold text-[11px]">View</button>
+                </td>
+              </tr>
+              <tr class="hover:bg-slate-800/40">
+                <td class="py-3 px-4">
+                  <div class="font-bold text-white">Emily Tanaka</div>
+                  <div class="text-[10px] text-slate-500">Parent: Ken Tanaka • #ST-02</div>
+                </td>
+                <td class="py-3 px-4">Junior Champions (Age 9)</td>
+                <td class="py-3 px-4"><span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 font-bold">Yellow Belt (3 Stripes)</span></td>
+                <td class="py-3 px-4"><span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 font-bold">Active Enrolled</span></td>
+                <td class="py-3 px-4 text-emerald-400 font-bold">92.0% Attendance Records</td>
+                <td class="py-3 px-4 text-slate-300">Stripe 3 Verified</td>
+                <td class="py-3 px-4 text-emerald-400 font-bold">Student Account Status: Good Standing</td>
+                <td class="py-3 px-4 text-right">
+                  <button onclick="alert('Viewing Emily Tanaka Profile');" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-white font-bold text-[11px]">View</button>
+                </td>
+              </tr>
+              <tr class="hover:bg-slate-800/40">
+                <td class="py-3 px-4">
+                  <div class="font-bold text-white">Ethan Brooks</div>
+                  <div class="text-[10px] text-slate-500">Parent: Jessica Brooks • #ST-03</div>
+                </td>
+                <td class="py-3 px-4">Teen Cadets (Age 13)</td>
+                <td class="py-3 px-4"><span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 font-bold">Blue Belt (1 Stripe)</span></td>
+                <td class="py-3 px-4"><span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 font-bold">Active Enrolled</span></td>
+                <td class="py-3 px-4 text-emerald-400 font-bold">98.5% Attendance Records</td>
+                <td class="py-3 px-4 text-slate-300">Stripe 1 Verified</td>
+                <td class="py-3 px-4 text-emerald-400 font-bold">Student Account Status: Good Standing</td>
+                <td class="py-3 px-4 text-right">
+                  <button onclick="alert('Viewing Ethan Brooks Profile');" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-white font-bold text-[11px]">View</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ================================================
+           VIEW 3: PARENT MANAGEMENT
+           ================================================ -->
+      <div id="view-parent-management" class="admin-view-panel hidden space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+          <div>
+            <h2 class="text-2xl font-black font-outfit text-white">Parent Management</h2>
+            <p class="text-xs text-slate-400 font-jakarta">Registered Parents, Parent Profiles, Linked Children, Enrollment Records &amp; Parent Account Status</p>
+          </div>
+          <button onclick="alert('Parent announcement modal opened');" class="px-4 py-2 rounded-xl bg-amber-500 text-slate-950 font-black font-outfit text-xs flex items-center gap-2">
+            <i class="fa-solid fa-envelope"></i>
+            <span>Broadcast Message to Registered Parents</span>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-3">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-blue-500/15 text-blue-400 flex items-center justify-center font-bold">RH</div>
+              <div>
+                <h4 class="text-sm font-black text-white font-outfit">Robert Henderson</h4>
+                <div class="text-[11px] text-slate-400">Parent Profiles #PR-8901</div>
+              </div>
+            </div>
+            <div class="text-xs text-slate-300 space-y-1">
+              <div><span class="text-slate-500 font-bold">Linked Children:</span> Leo (Age 6), Liam (Age 9)</div>
+              <div><span class="text-slate-500 font-bold">Enrollment Records:</span> 2 Active Contracts</div>
+              <div><span class="text-slate-500 font-bold">Phone:</span> (555) 234-8901</div>
+            </div>
+            <div class="text-[10px] font-black uppercase text-emerald-400">Parent Account Status: Verified Active</div>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-3">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-rose-500/15 text-rose-400 flex items-center justify-center font-bold">ML</div>
+              <div>
+                <h4 class="text-sm font-black text-white font-outfit">Maria Lopez</h4>
+                <div class="text-[11px] text-slate-400">Parent Profiles #PR-8902</div>
+              </div>
+            </div>
+            <div class="text-xs text-slate-300 space-y-1">
+              <div><span class="text-slate-500 font-bold">Linked Children:</span> Carlos (Age 8)</div>
+              <div><span class="text-slate-500 font-bold">Enrollment Records:</span> 1 Active Contract</div>
+              <div><span class="text-slate-500 font-bold">Phone:</span> (555) 789-0123</div>
+            </div>
+            <div class="text-[10px] font-black uppercase text-emerald-400">Parent Account Status: Verified Active</div>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-3">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-400 flex items-center justify-center font-bold">DK</div>
+              <div>
+                <h4 class="text-sm font-black text-white font-outfit">David Kim</h4>
+                <div class="text-[11px] text-slate-400">Parent Profiles #PR-8903</div>
+              </div>
+            </div>
+            <div class="text-xs text-slate-300 space-y-1">
+              <div><span class="text-slate-500 font-bold">Linked Children:</span> Chloe (Age 12)</div>
+              <div><span class="text-slate-500 font-bold">Enrollment Records:</span> 1 Active Contract</div>
+              <div><span class="text-slate-500 font-bold">Phone:</span> (555) 456-7890</div>
+            </div>
+            <div class="text-[10px] font-black uppercase text-emerald-400">Parent Account Status: Verified Active</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================
+           VIEW 4: PROGRAM MANAGEMENT
+           ================================================ -->
+      <div id="view-program-management" class="admin-view-panel hidden space-y-6">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+          <div>
+            <h2 class="text-2xl font-black font-outfit text-white">Program Management</h2>
+            <p class="text-xs text-slate-400 font-jakarta">All Programs, Age Groups, Belt Levels, Program Requirements, Training Modules &amp; Program Availability</p>
+          </div>
+          <button onclick="alert('Creating new syllabus program module');" class="px-4 py-2 rounded-xl bg-blue-600 text-white font-bold text-xs flex items-center gap-2">
+            <i class="fa-solid fa-plus"></i>
+            <span>Add Training Modules</span>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-3">
+            <span class="px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 text-[10px] font-black uppercase">Age Groups: 4-6</span>
+            <h3 class="text-base font-black text-white font-outfit">Little Warriors</h3>
+            <p class="text-xs text-slate-400 font-jakarta">Beginner movement skills, balance, coordination, safe breakfalls.</p>
+            <div class="text-[11px] text-slate-400">Program Requirements: 24 Classes • 3 Stripes</div>
+            <div class="text-xs font-bold text-slate-300 border-t border-slate-800 pt-2 flex justify-between">
+              <span>Program Availability: 16 / 18</span>
+              <span class="text-emerald-400 font-bold">Open</span>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-3">
+            <span class="px-2 py-0.5 rounded bg-brand-crimson/10 text-brand-crimson text-[10px] font-black uppercase">Age Groups: 7-11</span>
+            <h3 class="text-base font-black text-white font-outfit">Junior Champions</h3>
+            <p class="text-xs text-slate-400 font-jakarta">Fundamental forms, controlled sparring, anti-bullying verbal boundaries.</p>
+            <div class="text-[11px] text-slate-400">Program Requirements: 32 Classes • Kata Exam</div>
+            <div class="text-xs font-bold text-slate-300 border-t border-slate-800 pt-2 flex justify-between">
+              <span>Program Availability: 20 / 20</span>
+              <span class="text-rose-400 font-bold">Waitlist</span>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-3">
+            <span class="px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 text-[10px] font-black uppercase">Age Groups: 12-16</span>
+            <h3 class="text-base font-black text-white font-outfit">Teen Cadets</h3>
+            <p class="text-xs text-slate-400 font-jakarta">Advanced combinations, strategy, junior sensei mentoring, mental focus.</p>
+            <div class="text-[11px] text-slate-400">Program Requirements: 40 Classes • Sparring</div>
+            <div class="text-xs font-bold text-slate-300 border-t border-slate-800 pt-2 flex justify-between">
+              <span>Program Availability: 14 / 18</span>
+              <span class="text-emerald-400 font-bold">Open</span>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-3">
+            <span class="px-2 py-0.5 rounded bg-purple-500/10 text-purple-400 text-[10px] font-black uppercase">Age Groups: 10+</span>
+            <h3 class="text-base font-black text-white font-outfit">Black Belt Journey</h3>
+            <p class="text-xs text-slate-400 font-jakarta">Comprehensive Dan requirements, leadership thesis, demonstration choreography.</p>
+            <div class="text-[11px] text-slate-400">Program Requirements: Master Thesis • Board Break</div>
+            <div class="text-xs font-bold text-slate-300 border-t border-slate-800 pt-2 flex justify-between">
+              <span>Program Availability: 12 / 15</span>
+              <span class="text-emerald-400 font-bold">Open</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================
+           VIEW 5: INSTRUCTOR MANAGEMENT
+           ================================================ -->
+      <div id="view-instructor-management" class="admin-view-panel hidden space-y-6">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+          <div>
+            <h2 class="text-2xl font-black font-outfit text-white">Instructor Management</h2>
+            <p class="text-xs text-slate-400 font-jakarta">Instructor Profiles, Qualifications, Assigned Classes, Instructor Schedules &amp; Instructor Status</p>
+          </div>
+          <button onclick="alert('Assign new coach schedules');" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs">
+            Edit Shift Schedule
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 flex items-start gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-brand-crimson/20 text-rose-400 flex items-center justify-center font-black text-xl shrink-0">
+              MS
+            </div>
+            <div class="space-y-1 flex-grow">
+              <div class="flex items-center justify-between">
+                <h4 class="text-base font-black text-white font-outfit">Marcus Sterling</h4>
+                <span class="px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-400 text-[10px] font-bold">Instructor Status: Active On Mat</span>
+              </div>
+              <div class="text-xs text-amber-400 font-bold">Head Sensei • 5th Dan Black Belt</div>
+              <p class="text-xs text-slate-400 font-jakarta">Assigned Classes: Junior Champions, Black Belt Preparation</p>
+              <div class="text-[11px] text-slate-300">Instructor Schedules: Mon-Thu 04:00 PM - 08:30 PM, Sat 09:00 AM - 02:00 PM</div>
+              <div class="text-[11px] text-slate-500 pt-1">Qualifications: SafeSport Certified • Pediatric CPR/AED • USANKF Master Examiner</div>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 flex items-start gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-teal-500/20 text-teal-400 flex items-center justify-center font-black text-xl shrink-0">
+              EV
+            </div>
+            <div class="space-y-1 flex-grow">
+              <div class="flex items-center justify-between">
+                <h4 class="text-base font-black text-white font-outfit">Elena Vance</h4>
+                <span class="px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-400 text-[10px] font-bold">Instructor Status: Teaching Ring B</span>
+              </div>
+              <div class="text-xs text-teal-400 font-bold">Junior Head Coach • 3rd Dan Taekwondo</div>
+              <p class="text-xs text-slate-400 font-jakarta">Assigned Classes: Little Warriors, Youth Kata Team</p>
+              <div class="text-[11px] text-slate-300">Instructor Schedules: Mon-Fri 09:00 AM - 01:00 PM, Sat 08:00 AM - 12:00 PM</div>
+              <div class="text-[11px] text-slate-500 pt-1">Qualifications: Early Childhood Kinesiology B.S. • SafeSport Certified</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================
+           VIEW 6: CLASS MANAGEMENT
+           ================================================ -->
+      <div id="view-class-management" class="admin-view-panel hidden space-y-6">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+          <div>
+            <h2 class="text-2xl font-black font-outfit text-white">Class Management</h2>
+            <p class="text-xs text-slate-400 font-jakarta">Training Classes, Class Schedules, Class Capacity, Assigned Instructors, Student Attendance &amp; Schedule Adjustments</p>
+          </div>
+          <button onclick="alert('Schedule Adjustments modal triggered');" class="px-4 py-2 rounded-xl bg-amber-500 text-slate-950 font-black text-xs">
+            + Schedule Adjustments
+          </button>
+        </div>
+
+        <div class="space-y-3">
+          <div class="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <span class="w-12 h-12 rounded-xl bg-amber-500/15 text-amber-400 flex flex-col items-center justify-center font-outfit font-black text-xs">
+                <span>09:00</span><span class="text-[9px]">AM</span>
+              </span>
+              <div>
+                <h4 class="text-sm font-black text-white font-outfit">Training Classes: Little Warriors Stance &amp; Balance</h4>
+                <div class="text-xs text-slate-400">Class Schedules: Mon/Wed 09:00 AM • Assigned Instructors: Coach Elena Vance</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 text-xs font-bold">
+              <span class="text-slate-400">Class Capacity: <span class="text-emerald-400">16 / 18</span></span>
+              <span class="text-emerald-400">Student Attendance: 94.2%</span>
+              <button onclick="alert('Viewing class roster');" class="px-3 py-1.5 rounded-lg bg-slate-800 text-white hover:bg-slate-700">Roster</button>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <span class="w-12 h-12 rounded-xl bg-brand-crimson/15 text-rose-400 flex flex-col items-center justify-center font-outfit font-black text-xs">
+                <span>11:00</span><span class="text-[9px]">AM</span>
+              </span>
+              <div>
+                <h4 class="text-sm font-black text-white font-outfit">Training Classes: Junior Champions Pinan Kata</h4>
+                <div class="text-xs text-slate-400">Class Schedules: Tue/Thu 11:00 AM • Assigned Instructors: Head Sensei Marcus</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 text-xs font-bold">
+              <span class="text-slate-400">Class Capacity: <span class="text-rose-400">20 / 20</span></span>
+              <span class="text-emerald-400">Student Attendance: 96.0%</span>
+              <button onclick="alert('Viewing class roster');" class="px-3 py-1.5 rounded-lg bg-slate-800 text-white hover:bg-slate-700">Roster</button>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <span class="w-12 h-12 rounded-xl bg-blue-500/15 text-blue-400 flex flex-col items-center justify-center font-outfit font-black text-xs">
+                <span>02:00</span><span class="text-[9px]">PM</span>
+              </span>
+              <div>
+                <h4 class="text-sm font-black text-white font-outfit">Training Classes: Teen Cadets Sparring &amp; Defense</h4>
+                <div class="text-xs text-slate-400">Class Schedules: Mon/Fri 02:00 PM • Assigned Instructors: Coach David Chen</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 text-xs font-bold">
+              <span class="text-slate-400">Class Capacity: <span class="text-emerald-400">14 / 18</span></span>
+              <span class="text-emerald-400">Student Attendance: 91.5%</span>
+              <button onclick="alert('Viewing class roster');" class="px-3 py-1.5 rounded-lg bg-slate-800 text-white hover:bg-slate-700">Roster</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================
+           VIEW 7: BELT & PROGRESS MANAGEMENT
+           ================================================ -->
+      <div id="view-belt-progress-management" class="admin-view-panel hidden space-y-6">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+          <div>
+            <h2 class="text-2xl font-black font-outfit text-white">Belt &amp; Progress Management</h2>
+            <p class="text-xs text-slate-400 font-jakarta">Belt Levels, Skill Requirements, Student Progress, Belt Promotions, Achievement Records &amp; Progress Reports</p>
+          </div>
+          <button onclick="alert('Single click stripe promotion modal');" class="px-4 py-2 rounded-xl bg-emerald-600 text-white font-bold text-xs">
+            + Process Belt Promotions
+          </button>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="text-base font-black text-white font-outfit">Student Progress &amp; Achievement Records</h3>
+            <span class="text-xs text-blue-400 font-bold">Progress Reports Generated Weekly</span>
+          </div>
+          <p class="text-xs text-slate-400">Skill Requirements verified: Chambering, Kiai Power, Stance Geometry, Disciplinary Conduct.</p>
+          <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 text-center">
+            <div class="p-3 rounded-xl bg-slate-950 border border-slate-700 text-white">
+              <div class="h-2 w-full bg-white rounded-full mb-2"></div>
+              <div class="text-xs font-black">White Belt</div>
+              <div class="text-[10px] text-slate-400">320 Students</div>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-950 border border-slate-700 text-amber-400">
+              <div class="h-2 w-full bg-amber-400 rounded-full mb-2"></div>
+              <div class="text-xs font-black">Yellow Belt</div>
+              <div class="text-[10px] text-slate-400">260 Students</div>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-950 border border-slate-700 text-orange-400">
+              <div class="h-2 w-full bg-orange-500 rounded-full mb-2"></div>
+              <div class="text-xs font-black">Orange Belt</div>
+              <div class="text-[10px] text-slate-400">210 Students</div>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-950 border border-slate-700 text-emerald-400">
+              <div class="h-2 w-full bg-emerald-500 rounded-full mb-2"></div>
+              <div class="text-xs font-black">Green Belt</div>
+              <div class="text-[10px] text-slate-400">180 Students</div>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-950 border border-slate-700 text-blue-400">
+              <div class="h-2 w-full bg-blue-500 rounded-full mb-2"></div>
+              <div class="text-xs font-black">Blue Belt</div>
+              <div class="text-[10px] text-slate-400">140 Students</div>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-950 border border-slate-700 text-amber-700">
+              <div class="h-2 w-full bg-amber-700 rounded-full mb-2"></div>
+              <div class="text-xs font-black">Brown Belt</div>
+              <div class="text-[10px] text-slate-400">90 Students</div>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-950 border border-slate-700 text-rose-500">
+              <div class="h-2 w-full bg-gradient-to-r from-red-600 to-black rounded-full mb-2"></div>
+              <div class="text-xs font-black">Junior Dan</div>
+              <div class="text-[10px] text-slate-400">50 Students</div>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-950 border border-slate-700 text-slate-300">
+              <div class="h-2 w-full bg-slate-900 border border-slate-600 rounded-full mb-2"></div>
+              <div class="text-xs font-black">Black Belt</div>
+              <div class="text-[10px] text-slate-400">30 Alumni</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================
+           VIEW 8: TESTING MANAGEMENT
+           ================================================ -->
+      <div id="view-testing-management" class="admin-view-panel hidden space-y-6">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+          <div>
+            <h2 class="text-2xl font-black font-outfit text-white">Testing Management</h2>
+            <p class="text-xs text-slate-400 font-jakarta">Testing Sessions, Testing Dates, Eligible Students, Testing Registrations, Evaluation Results, Belt Promotion Approval &amp; Testing History</p>
+          </div>
+          <button onclick="alert('Testing history archive opened');" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs">
+            View Testing History
+          </button>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="px-2.5 py-1 rounded bg-amber-500/20 text-amber-400 text-xs font-black uppercase">Testing Sessions: Q1 Gala</span>
+            <span class="text-xs text-slate-400">Testing Dates: Saturday, Nov 14, 2026</span>
+          </div>
+          <h3 class="text-lg font-black text-white font-outfit">Autumn Belt Testing Registrations &amp; Evaluation Results</h3>
+          <p class="text-xs text-slate-400 font-jakarta">Eligible Students submitted by coaches awaiting final Belt Promotion Approval from Master Board.</p>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2 border-t border-slate-800 text-xs">
+            <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+              <span class="text-slate-400 block">Testing Registrations</span>
+              <span class="text-xl font-black text-white font-outfit">64 Candidates</span>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+              <span class="text-slate-400 block">Eligible Students Verified</span>
+              <span class="text-xl font-black text-emerald-400 font-outfit">58 Cleared</span>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+              <span class="text-slate-400 block">Belt Promotion Approval</span>
+              <span class="text-xl font-black text-amber-400 font-outfit">Pending Sign-off</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================
+           VIEW 9: ATTENDANCE MANAGEMENT
+           ================================================ -->
+      <div id="view-attendance-management" class="admin-view-panel hidden space-y-6">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+          <div>
+            <h2 class="text-2xl font-black font-outfit text-white">Attendance Management</h2>
+            <p class="text-xs text-slate-400 font-jakarta">Daily Attendance, Class Attendance, Attendance Exceptions, Attendance Reports &amp; Attendance History</p>
+          </div>
+          <button onclick="alert('Viewing comprehensive Attendance History');" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs">
+            Attendance History Log
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800">
+            <div class="text-xs font-bold text-slate-400 uppercase">Daily Attendance</div>
+            <div class="text-3xl font-black text-white font-outfit mt-1">214 / 220</div>
+            <div class="text-xs text-emerald-400 font-bold mt-1">97.2% Checked In</div>
+          </div>
+          <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800">
+            <div class="text-xs font-bold text-slate-400 uppercase">Class Attendance</div>
+            <div class="text-3xl font-black text-white font-outfit mt-1">24 Sessions</div>
+            <div class="text-xs text-slate-400 font-bold mt-1">All Rings Supervised</div>
+          </div>
+          <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800">
+            <div class="text-xs font-bold text-slate-400 uppercase">Attendance Exceptions</div>
+            <div class="text-3xl font-black text-amber-400 font-outfit mt-1">6 Excused</div>
+            <div class="text-xs text-slate-400 font-bold mt-1">Makeups Credited</div>
+          </div>
+          <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800">
+            <div class="text-xs font-bold text-slate-400 uppercase">Attendance Reports</div>
+            <div class="text-3xl font-black text-emerald-400 font-outfit mt-1">96.8% Avg</div>
+            <div class="text-xs text-slate-400 font-bold mt-1">Quarterly Consistency</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================
+           VIEW 10: PAYMENT MANAGEMENT
+           ================================================ -->
+      <div id="view-payment-management" class="admin-view-panel hidden space-y-6">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+          <div>
+            <h2 class="text-2xl font-black font-outfit text-white">Payment Management</h2>
+            <p class="text-xs text-slate-400 font-jakarta">Program Payments, Testing Payments, Pending Payments, Completed Payments &amp; Payment Reports</p>
+          </div>
+          <button onclick="alert('Exporting Payment Reports CSV');" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs flex items-center gap-2">
+            <i class="fa-solid fa-file-invoice-dollar"></i>
+            <span>Generate Payment Reports</span>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+          <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-800">
+            <div class="text-xs font-bold text-slate-400">Program Payments</div>
+            <div class="text-xl font-black text-white font-outfit mt-1">$84,950</div>
+            <div class="text-[10px] text-emerald-400 mt-1">Monthly Tuition Inflow</div>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-800">
+            <div class="text-xs font-bold text-slate-400">Testing Payments</div>
+            <div class="text-xl font-black text-white font-outfit mt-1">$6,400</div>
+            <div class="text-[10px] text-amber-400 mt-1">Gala Registration Fees</div>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-800">
+            <div class="text-xs font-bold text-slate-400">Pending Payments</div>
+            <div class="text-xl font-black text-amber-400 font-outfit mt-1">$1,250</div>
+            <div class="text-[10px] text-slate-400 mt-1">Auto-Draft Queued</div>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-800">
+            <div class="text-xs font-bold text-slate-400">Completed Payments</div>
+            <div class="text-xl font-black text-emerald-400 font-outfit mt-1">$90,100</div>
+            <div class="text-[10px] text-emerald-400 mt-1">98.6% Settlement Rate</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================
+           VIEW 11: NOTIFICATIONS & BROADCASTS
+           ================================================ -->
+      <div id="view-notifications" class="admin-view-panel hidden space-y-6">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+          <div>
+            <h2 class="text-2xl font-black font-outfit text-white">Notifications</h2>
+            <p class="text-xs text-slate-400 font-jakarta">Parent Announcements, Class Notifications, Testing Notifications, Progress Notifications &amp; Academy Announcements</p>
+          </div>
+          <button onclick="alert('Academy Announcements composer modal opened');" class="px-4 py-2 rounded-xl bg-brand-crimson text-white font-bold text-xs">
+            + New Academy Announcements
+          </button>
+        </div>
+
+        <div class="space-y-3">
+          <div class="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 flex items-start gap-3">
+            <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0">
+              <i class="fa-solid fa-bullhorn"></i>
+            </div>
+            <div class="text-xs flex-grow">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-white">Parent Announcements: Autumn Testing Gala Dates</span>
+                <span class="text-slate-500">2 hours ago</span>
+              </div>
+              <p class="text-slate-400 mt-0.5">Dispatched to all parents of White through Blue belt candidates via SMS &amp; Mobile App.</p>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 flex items-start gap-3">
+            <div class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center shrink-0">
+              <i class="fa-solid fa-chalkboard-user"></i>
+            </div>
+            <div class="text-xs flex-grow">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-white">Class Notifications: Ring A Mat Sterilization Complete</span>
+                <span class="text-slate-500">4 hours ago</span>
+              </div>
+              <p class="text-slate-400 mt-0.5">Class schedule confirmed on time for evening Little Warriors sessions.</p>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 flex items-start gap-3">
+            <div class="w-8 h-8 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center shrink-0">
+              <i class="fa-solid fa-bell"></i>
+            </div>
+            <div class="text-xs flex-grow">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-white">Testing Notifications: Eligibility Slips Generated</span>
+                <span class="text-slate-500">Yesterday</span>
+              </div>
+              <p class="text-slate-400 mt-0.5">Automated Testing Notifications issued to 58 qualified warrior candidates.</p>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 flex items-start gap-3">
+            <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+              <i class="fa-solid fa-award"></i>
+            </div>
+            <div class="text-xs flex-grow">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-white">Progress Notifications: Monthly Stripe Milestones</span>
+                <span class="text-slate-500">2 days ago</span>
+              </div>
+              <p class="text-slate-400 mt-0.5">Progress Notifications sent to parents for red and blue stripe achievements.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- ========================================================
+       LOGOUT CONFIRMATION MODAL
+       ======================================================== -->
+  <div id="logoutModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md hidden transition-all duration-300">
+    <div class="w-full max-w-md rounded-3xl bg-slate-900 border border-slate-800 p-6 sm:p-8 shadow-2xl space-y-6 text-center">
+      <div class="w-16 h-16 mx-auto rounded-2xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-2xl border border-rose-500/20">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+      </div>
+      <div>
+        <h3 class="text-xl font-black font-outfit text-white">Sign Out of Admin Console?</h3>
+        <p class="text-xs text-slate-400 mt-2 font-jakarta leading-relaxed">
+          Are you sure you want to end your administrative session? You will be safely signed out and redirected to the login portal.
+        </p>
+      </div>
+      <div class="flex items-center gap-3 pt-2">
+        <button 
+          type="button" 
+          onclick="closeLogoutModal()" 
+          class="flex-1 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs transition-colors"
+        >
+          Cancel
+        </button>
+        <a 
+          href="login.html" 
+          class="flex-1 py-3 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs transition-colors text-center shadow-lg shadow-rose-900/40"
+        >
+          Yes, Logout
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       CORE INTERACTIVE SCRIPT (TABS, THEME, RTL, HAMBURGER)
+       ======================================================== -->
+  <script>
+    // 1. Tab Switching Engine
+    const navButtons = document.querySelectorAll('.admin-nav-btn');
+    const viewPanels = document.querySelectorAll('.admin-view-panel');
+    const mobileDrawer = document.getElementById('adminSidebarDrawer');
+    const drawerBackdrop = document.getElementById('adminSidebarOverlay') || document.getElementById('adminDrawerBackdrop');
+    const mobileMenuBtn = document.getElementById('adminMobileMenuBtn');
+
+    function showTab(targetId) {
+      // Hide all panels
+      viewPanels.forEach(panel => panel.classList.add('hidden'));
+
+      // Show selected panel
+      const targetPanel = document.getElementById(targetId);
+      if (targetPanel) {
+        targetPanel.classList.remove('hidden');
+      }
+
+      // Update Nav Button Styles
+      navButtons.forEach(btn => {
+        if (btn.getAttribute('data-target') === targetId) {
+          btn.classList.add('nav-item-active');
+          btn.classList.remove('text-slate-400');
+          btn.classList.add('text-slate-200');
+        } else {
+          btn.classList.remove('nav-item-active');
+          btn.classList.add('text-slate-400');
+          btn.classList.remove('text-slate-200');
+        }
+      });
+
+      // Close mobile drawer if open
+      closeMobileDrawer();
+    }
+
+    navButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-target');
+        showTab(targetId);
+      });
+    });
+
+    // 2. Mobile Drawer Controls
+    const drawerCloseBtn = document.getElementById('adminDrawerCloseBtn');
+
+    function openMobileDrawer() {
+      if (mobileDrawer) {
+        mobileDrawer.classList.remove('translate-x-full', 'rtl:-translate-x-full');
+      }
+      if (drawerBackdrop) {
+        drawerBackdrop.classList.remove('hidden');
+      }
+      document.body.classList.add('overflow-hidden', 'lg:overflow-auto');
+    }
+
+    function closeMobileDrawer() {
+      if (mobileDrawer) {
+        mobileDrawer.classList.add('translate-x-full', 'rtl:-translate-x-full');
+      }
+      if (drawerBackdrop) {
+        drawerBackdrop.classList.add('hidden');
+      }
+      document.body.classList.remove('overflow-hidden', 'lg:overflow-auto');
+    }
+
+    if (mobileMenuBtn) {
+      mobileMenuBtn.addEventListener('click', openMobileDrawer);
+    }
+    if (drawerCloseBtn) {
+      drawerCloseBtn.addEventListener('click', closeMobileDrawer);
+    }
+    if (drawerBackdrop) {
+      drawerBackdrop.addEventListener('click', closeMobileDrawer);
+    }
+
+    // 3. Theme Toggle (Dark / Light)
+    function toggleThemeMode() {
+      const htmlEl = document.documentElement;
+      const themeIcons = document.querySelectorAll('#themeIcon, #drawerThemeIcon');
+      if (htmlEl.classList.contains('dark')) {
+        htmlEl.classList.remove('dark');
+        htmlEl.classList.add('light');
+        document.body.classList.remove('bg-slate-950', 'text-slate-100');
+        document.body.classList.add('bg-slate-100', 'text-slate-900');
+        themeIcons.forEach(icon => {
+          icon.classList.remove('fa-sun');
+          icon.classList.add('fa-moon');
+        });
+      } else {
+        htmlEl.classList.add('dark');
+        htmlEl.classList.remove('light');
+        document.body.classList.add('bg-slate-950', 'text-slate-100');
+        document.body.classList.remove('bg-slate-100', 'text-slate-900');
+        themeIcons.forEach(icon => {
+          icon.classList.remove('fa-moon');
+          icon.classList.add('fa-sun');
+        });
+      }
+    }
+
+    // 4. RTL Toggle
+    function toggleRTLMode() {
+      const htmlEl = document.documentElement;
+      const currentDir = htmlEl.getAttribute('dir');
+      const newDir = currentDir === 'rtl' ? 'ltr' : 'rtl';
+      htmlEl.setAttribute('dir', newDir);
+    }
+
+    // 5. Refresh Metrics Simulation
+    function triggerRefreshMetrics() {
+      const icons = document.querySelectorAll('#refreshMetricsBtn i, #drawerRefreshIcon');
+      icons.forEach(icon => icon.classList.add('fa-spin'));
+      setTimeout(() => {
+        icons.forEach(icon => icon.classList.remove('fa-spin'));
+        alert('Academy telemetry and live metrics refreshed successfully!');
+      }, 700);
+    }
+
+    // 6. Quick Module Search Filtering
+    function setupSearchFilter(inputId) {
+      const input = document.getElementById(inputId);
+      if (!input) return;
+      input.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        navButtons.forEach(btn => {
+          const text = btn.innerText.toLowerCase();
+          if (text.includes(query)) {
+            btn.style.display = 'flex';
+          } else {
+            btn.style.display = 'none';
+          }
+        });
+      });
+    }
+    setupSearchFilter('adminGlobalSearchInput');
+    setupSearchFilter('adminDrawerSearchInput');
+
+    // 7. Shortcut Key Handlers (Ctrl+K and Escape)
+    window.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        if (window.innerWidth < 1024) {
+          openMobileDrawer();
+          const drawerSearch = document.getElementById('adminDrawerSearchInput');
+          if (drawerSearch) drawerSearch.focus();
+        } else {
+          const searchInput = document.getElementById('adminGlobalSearchInput');
+          if (searchInput) searchInput.focus();
+        }
+      }
+      if (e.key === 'Escape') {
+        closeMobileDrawer();
+        closeLogoutModal();
+      }
+    });
+
+    // 8. Logout Modal Controls
+    function openLogoutModal() {
+      window.location.href = 'login.html';
+    }
+
+    function closeLogoutModal() {
+      const modal = document.getElementById('logoutModal');
+      if (modal) modal.classList.add('hidden');
+    }
+  </script>
+</body>
+</html>
