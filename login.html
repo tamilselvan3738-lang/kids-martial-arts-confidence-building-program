@@ -51,6 +51,34 @@
 
   <!-- Motion (Official Framer Motion Engine) -->
   <script src="https://cdn.jsdelivr.net/npm/motion@11.11.17/dist/motion.js"></script>
+  <script>
+    // Ensure Motion.spring can be used directly as an easing generator (Framer Motion compatibility)
+    if (window.Motion && window.Motion.spring) {
+      const _origSpring = window.Motion.spring;
+      window.Motion.spring = function(opts) {
+        if (opts && opts.keyframes) {
+          return _origSpring.apply(this, arguments);
+        }
+        const stiffness = (opts && opts.stiffness) || 100;
+        const damping = (opts && opts.damping) || 10;
+        const mass = (opts && opts.mass) || 1;
+        const velocity = (opts && opts.velocity) || 0;
+        const w0 = Math.sqrt(stiffness / mass);
+        const zeta = damping / (2 * Math.sqrt(stiffness * mass));
+        return function(t) {
+          if (t <= 0) return 0;
+          if (t >= 1) return 1;
+          if (zeta < 1) {
+            const wd = w0 * Math.sqrt(1 - zeta * zeta);
+            return 1 - Math.exp(-zeta * w0 * t) * (Math.cos(wd * t) + ((zeta * w0 - velocity) / wd) * Math.sin(wd * t));
+          } else {
+            return 1 - (1 + w0 * t) * Math.exp(-w0 * t);
+          }
+        };
+      };
+    }
+  </script>
+
 
   <style>
     * {

@@ -51,6 +51,34 @@
 
   <!-- Motion (Official Framer Motion Engine) -->
   <script src="https://cdn.jsdelivr.net/npm/motion@11.11.17/dist/motion.js"></script>
+  <script>
+    // Ensure Motion.spring can be used directly as an easing generator (Framer Motion compatibility)
+    if (window.Motion && window.Motion.spring) {
+      const _origSpring = window.Motion.spring;
+      window.Motion.spring = function(opts) {
+        if (opts && opts.keyframes) {
+          return _origSpring.apply(this, arguments);
+        }
+        const stiffness = (opts && opts.stiffness) || 100;
+        const damping = (opts && opts.damping) || 10;
+        const mass = (opts && opts.mass) || 1;
+        const velocity = (opts && opts.velocity) || 0;
+        const w0 = Math.sqrt(stiffness / mass);
+        const zeta = damping / (2 * Math.sqrt(stiffness * mass));
+        return function(t) {
+          if (t <= 0) return 0;
+          if (t >= 1) return 1;
+          if (zeta < 1) {
+            const wd = w0 * Math.sqrt(1 - zeta * zeta);
+            return 1 - Math.exp(-zeta * w0 * t) * (Math.cos(wd * t) + ((zeta * w0 - velocity) / wd) * Math.sin(wd * t));
+          } else {
+            return 1 - (1 + w0 * t) * Math.exp(-w0 * t);
+          }
+        };
+      };
+    }
+  </script>
+
 
   <style>
     * {
@@ -237,6 +265,8 @@
 
     /* Nav Item Link Styling */
     .nav-item-link {
+      white-space: nowrap;
+      flex-shrink: 0;
       position: relative;
       font-family: 'Outfit', sans-serif;
       font-weight: 600;
@@ -246,6 +276,8 @@
       transition: color 0.18s ease, background-color 0.18s ease;
     }
     .dark .nav-item-link {
+      white-space: nowrap;
+      flex-shrink: 0;
       color: #94A3B8;
     }
     .nav-item-link:hover {
@@ -567,14 +599,14 @@
   <div id="ambientCursorSpotlight" class="fixed top-0 left-0 w-96 h-96 rounded-full pointer-events-none -translate-x-1/2 -translate-y-1/2 z-0 opacity-0 transition-opacity duration-300 mix-blend-screen" style="background: radial-gradient(circle, rgba(225, 29, 72, 0.12) 0%, rgba(245, 158, 11, 0.05) 50%, transparent 75%); filter: blur(35px);"></div>
 
   <!-- EXACT NAVBAR FROM NAVBAR.HTML -->
-  <header id="mainHeader" class="sticky top-0 z-50 w-full px-3 sm:px-6 lg:px-8 pt-4 pb-2">
-    <nav id="mainNavbar" class="navbar-creative-island max-w-7xl mx-auto rounded-2xl px-3 sm:px-4.5 py-1.5 sm:py-2 transition-all duration-300">
+  <header id="mainHeader" class="sticky top-0 z-50 w-full px-3 sm:px-4 lg:px-2.5 xl:px-8 pt-4 pb-2">
+    <nav id="mainNavbar" class="navbar-creative-island max-w-7xl mx-auto rounded-2xl px-2.5 sm:px-3 xl:px-4.5 py-1.5 sm:py-2 transition-all duration-300">
       <div class="flex items-center justify-between gap-2 lg:gap-3">
 
         <!-- ====================================================
              1. LEFT: COMPACT LOGO (FURTHER REDUCED SIZE)
              ==================================================== -->
-        <a href="index.html" id="brandLogo" class="group flex items-center gap-2 shrink-0 focus:outline-none" aria-label="Kids Martial Arts & Confidence Building Program">
+        <a href="index.html" id="brandLogo" class="group flex items-center gap-1.5 xl:gap-2 shrink-0 focus:outline-none" aria-label="Kids Martial Arts & Confidence Building Program">
           
           <!-- Compact Shield Logo Emblem (~28px) with Spring Hover -->
           <div id="logoIconContainer" class="relative w-7 h-7 sm:w-7.5 sm:h-7.5 rounded-lg bg-gradient-to-b from-rose-500 via-brand-crimson to-rose-700 p-0.5 shadow-sm shadow-rose-950/20 shrink-0 cursor-pointer">
@@ -623,14 +655,14 @@
         <!-- ====================================================
              2. CENTER (LAPTOP VIEW): NAVBAR MENU
              ==================================================== -->
-        <div id="navLinksContainer" class="hidden lg:flex items-center justify-center space-x-0.5 xl:space-x-1 rtl:space-x-reverse relative py-1">
+        <div id="navLinksContainer" class="hidden lg:flex items-center justify-center space-x-0 xl:space-x-1 rtl:space-x-reverse relative py-1 shrink-0">
           
           <!-- Dynamic Framer Motion Gliding Pill Background -->
           <div id="navGlider"></div>
 
           <!-- 2.1 HOME (ON HOVER: ONLY SHOW HOME 1 AND HOME 2) -->
           <div class="relative group" id="desktopHomeDropdown">
-            <a href="index.html" class="nav-item-link  px-2.5 py-1.5 text-xs xl:text-sm flex items-center gap-1 focus:outline-none" aria-haspopup="true">
+            <a href="index.html" class="nav-item-link px-1 lg:px-1.5 xl:px-2.5 py-1.5 text-xs xl:text-sm whitespace-nowrap flex items-center gap-1 focus:outline-none" aria-haspopup="true">
               <span>Home</span>
               <i class="fa-solid fa-chevron-down text-[8px] opacity-60 group-hover:rotate-180 transition-transform duration-200"></i>
             </a>
@@ -647,45 +679,45 @@
           </div>
 
           <!-- 2.2 ABOUT -->
-          <a href="about.html" class="nav-item-link  px-2.5 py-1.5 text-xs xl:text-sm">
+          <a href="about.html" class="nav-item-link px-1 lg:px-1.5 xl:px-2.5 py-1.5 text-xs xl:text-sm whitespace-nowrap">
             About
           </a>
 
           <!-- 2.3 PROGRAMS (ONLY PROGRAMS - NO OPTIONS ON HOVER) -->
-          <a href="programs.html" class="nav-item-link active px-2.5 py-1.5 text-xs xl:text-sm">
+          <a href="programs.html" class="nav-item-link active px-1 lg:px-1.5 xl:px-2.5 py-1.5 text-xs xl:text-sm whitespace-nowrap">
             Programs
           </a>
 
           <!-- 2.4 BELT SYSTEM -->
-          <a href="belt-system.html" class="nav-item-link  px-2.5 py-1.5 text-xs xl:text-sm flex items-center gap-1.5">
+          <a href="belt-system.html" class="nav-item-link px-1 lg:px-1.5 xl:px-2.5 py-1.5 text-xs xl:text-sm whitespace-nowrap flex items-center gap-1.5">
             <span>Belt System</span>
-            <span class="w-1.5 h-1.5 rounded-full inline-block bg-gradient-to-r from-amber-400 to-rose-500"></span>
+            <span class="w-1.5 h-1.5 rounded-full inline-block bg-gradient-to-r from-amber-400 to-rose-500 shrink-0"></span>
           </a>
 
           <!-- 2.5 INSTRUCTORS -->
-          <a href="instructors.html" class="nav-item-link  px-2.5 py-1.5 text-xs xl:text-sm">
+          <a href="instructors.html" class="nav-item-link px-1 lg:px-1.5 xl:px-2.5 py-1.5 text-xs xl:text-sm whitespace-nowrap">
             Instructors
           </a>
 
           <!-- 2.6 EVENTS -->
-          <a href="events.html" class="nav-item-link  px-2.5 py-1.5 text-xs xl:text-sm">
+          <a href="events.html" class="nav-item-link px-1 lg:px-1.5 xl:px-2.5 py-1.5 text-xs xl:text-sm whitespace-nowrap">
             Events
           </a>
 
           <!-- 2.7 SAFETY -->
-          <a href="safety.html" class="nav-item-link  px-2.5 py-1.5 text-xs xl:text-sm flex items-center gap-1">
+          <a href="safety.html" class="nav-item-link px-1 lg:px-1.5 xl:px-2.5 py-1.5 text-xs xl:text-sm whitespace-nowrap flex items-center gap-1">
             <i class="fa-solid fa-shield-heart text-[10px] text-emerald-500"></i>
             <span>Safety</span>
           </a>
 
           <!-- 2.8 CONTACT -->
-          <a href="contact.html" class="nav-item-link  px-2.5 py-1.5 text-xs xl:text-sm">
+          <a href="contact.html" class="nav-item-link px-1 lg:px-1.5 xl:px-2.5 py-1.5 text-xs xl:text-sm whitespace-nowrap">
             Contact
           </a>
 
           <!-- 2.9 DASHBOARD (IMMEDIATELY AFTER CONTACT - NO GAP) -->
           <div class="relative group ml-1 rtl:ml-0 rtl:mr-1" id="desktopDashboardDropdown">
-            <button class="btn-3d btn-3d-dashboard px-2.5 py-1.5 text-xs rounded-xl flex items-center gap-1.5" title="Dojo Dashboards" aria-haspopup="true">
+            <button class="btn-3d btn-3d-dashboard px-1.5 xl:px-2.5 py-1.5 text-xs rounded-xl flex items-center gap-1 xl:gap-1.5 whitespace-nowrap" title="Dojo Dashboards" aria-haspopup="true">
               <i class="fa-solid fa-gauge-high text-amber-500 text-[10px]"></i>
               <span>Dashboard</span>
               <i class="fa-solid fa-chevron-down text-[8px] opacity-60 group-hover:rotate-180 transition-transform duration-200"></i>
@@ -710,20 +742,20 @@
         <div class="hidden lg:flex items-center space-x-1.5 xl:space-x-2 rtl:space-x-reverse shrink-0">
 
           <!-- Prominent Gap After Dashboard in Laptop View -->
-          <div class="w-6 sm:w-8 xl:w-10 shrink-0" aria-hidden="true"></div>
+          <div class="w-2 xl:w-8 shrink-0" aria-hidden="true"></div>
 
           <!-- 3.1 DARK MODE TOGGLE (3D SWITCH) -->
-          <button id="themeToggleBtn" onclick="toggleTheme()" class="btn-3d btn-3d-switch w-7.5 h-7.5 sm:w-8 sm:h-8 rounded-xl flex items-center justify-center text-xs" title="Toggle Dark/Light Mode" aria-label="Toggle theme">
+          <button id="themeToggleBtn" onclick="toggleTheme()" class="btn-3d btn-3d-switch w-7 h-7 xl:w-8 xl:h-8 rounded-xl flex items-center justify-center text-xs" title="Toggle Dark/Light Mode" aria-label="Toggle theme">
             <i id="themeIcon" class="fa-solid fa-sun text-amber-400"></i>
           </button>
 
           <!-- 3.2 RTL TOGGLE (ONLY RIGHT-LEFT ICON - NO TEXT) -->
-          <button id="rtlToggleBtn" onclick="toggleRTL()" class="btn-3d btn-3d-switch w-7.5 h-7.5 sm:w-8 sm:h-8 rounded-xl flex items-center justify-center text-xs" title="Toggle RTL / LTR" aria-label="Toggle RTL">
+          <button id="rtlToggleBtn" onclick="toggleRTL()" class="btn-3d btn-3d-switch w-7 h-7 xl:w-8 xl:h-8 rounded-xl flex items-center justify-center text-xs" title="Toggle RTL / LTR" aria-label="Toggle RTL">
             <i id="rtlIcon" class="fa-solid fa-right-left text-[11px] text-brand-crimson"></i>
           </button>
 
           <!-- 3.3 3D LOGIN BUTTON -->
-          <a href="login.html" id="loginBtnTrigger" class="btn-3d btn-3d-login px-3.5 py-1.5 text-xs rounded-xl flex items-center gap-1.5 shadow-md" aria-label="Login">
+          <a href="login.html" id="loginBtnTrigger" class="btn-3d btn-3d-login px-2.5 xl:px-3.5 py-1.5 text-xs rounded-xl flex items-center gap-1 xl:gap-1.5 shadow-md whitespace-nowrap" aria-label="Login">
             <i class="fa-solid fa-lock text-[10px] text-rose-200"></i>
             <span>Login</span>
           </a>
@@ -749,6 +781,7 @@
   </header>
 
   <!-- EXACT MOBILE DRAWER FROM NAVBAR.HTML -->
+  <div id="mobileDrawerOverlay" onclick="toggleMobileMenu()" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
   <aside id="mobileDrawer" class="fixed top-0 right-0 rtl:right-auto rtl:left-0 w-72 max-w-[85vw] h-full bg-white dark:bg-slate-900 border-l rtl:border-l-0 rtl:border-r border-slate-200 dark:border-slate-800 z-50 shadow-2xl flex flex-col transform translate-x-full rtl:-translate-x-full transition-transform duration-300 ease-out">
     
     <!-- Drawer Header: Exact Navbar Logo Lockup -->
