@@ -248,6 +248,149 @@
     }
   
 
+    
+    /* 3D Tactile Buttons Master Styles */
+    .btn-3d {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.12s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                  box-shadow 0.12s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  filter 0.15s ease;
+      transform: translateY(0);
+      text-decoration: none;
+    }
+
+    /* High-contrast 3D Crimson Button for Hero & Key Conversions */
+    .btn-3d-crimson {
+      background: linear-gradient(180deg, #FF385C 0%, #E11D48 55%, #BE123C 100%) !important;
+      color: #FFFFFF !important;
+      box-shadow: 0 4px 0 #881337, 0 8px 18px rgba(225, 29, 72, 0.35);
+      border-top: 1px solid rgba(255, 255, 255, 0.45);
+      border-left: 1px solid rgba(255, 255, 255, 0.2);
+      border-right: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .btn-3d-crimson:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 0 #881337, 0 12px 22px rgba(225, 29, 72, 0.45);
+      filter: brightness(1.05);
+      color: #FFFFFF !important;
+    }
+    .btn-3d-crimson:active {
+      transform: translateY(3.5px);
+      box-shadow: 0 0.5px 0 #881337, 0 3px 6px rgba(225, 29, 72, 0.2);
+    }
+
+    .btn-3d-login {
+      background: linear-gradient(180deg, #FF3B62 0%, #E11D48 60%, #BE123C 100%);
+      color: #FFFFFF !important;
+      box-shadow: 0 4px 0 #881337, 0 8px 16px rgba(225, 29, 72, 0.35);
+      border-top: 1px solid rgba(255, 255, 255, 0.45);
+      border-left: 1px solid rgba(255, 255, 255, 0.2);
+      border-right: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .btn-3d-login:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 0 #881337, 0 12px 20px rgba(225, 29, 72, 0.45);
+      filter: brightness(1.05);
+      color: #FFFFFF !important;
+    }
+    .btn-3d-login:active {
+      transform: translateY(3.5px);
+      box-shadow: 0 0.5px 0 #881337, 0 3px 6px rgba(225, 29, 72, 0.2);
+    }
+
+    .btn-3d-dashboard {
+      background: linear-gradient(180deg, #F1F5F9 0%, #E2E8F0 100%);
+      color: #1E293B;
+      box-shadow: 0 3px 0 #94A3B8, 0 5px 10px rgba(0, 0, 0, 0.05);
+      border-top: 1px solid rgba(255, 255, 255, 0.85);
+    }
+    .dark .btn-3d-dashboard {
+      background: linear-gradient(180deg, #26334D 0%, #172033 100%);
+      color: #F8FAFC;
+      box-shadow: 0 3px 0 #0A0F1A, 0 5px 10px rgba(0, 0, 0, 0.45);
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    }
+    .btn-3d-dashboard:hover {
+      transform: translateY(-1.5px);
+      box-shadow: 0 4.5px 0 #94A3B8, 0 8px 14px rgba(0, 0, 0, 0.08);
+    }
+    .dark .btn-3d-dashboard:hover {
+      box-shadow: 0 4.5px 0 #0A0F1A, 0 8px 14px rgba(0, 0, 0, 0.55);
+    }
+    .btn-3d-dashboard:active {
+      transform: translateY(2.5px);
+      box-shadow: 0 0.5px 0 #94A3B8, 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    .dark .btn-3d-dashboard:active {
+      box-shadow: 0 0.5px 0 #0A0F1A, 0 2px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .btn-3d-switch {
+      background: linear-gradient(180deg, #F8FAFC 0%, #E2E8F0 100%);
+      color: #334155;
+      box-shadow: 0 3px 0 #94A3B8, 0 4px 8px rgba(0, 0, 0, 0.06);
+      border-top: 1px solid rgba(255, 255, 255, 0.85);
+    }
+    .dark .btn-3d-switch {
+      background: linear-gradient(180deg, #1E293B 0%, #0F172A 100%);
+      color: #E2E8F0;
+      box-shadow: 0 3px 0 #020617, 0 4px 8px rgba(0, 0, 0, 0.45);
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .btn-3d-switch:hover {
+      transform: translateY(-1.5px);
+      box-shadow: 0 4.5px 0 #94A3B8, 0 6px 12px rgba(0, 0, 0, 0.1);
+    }
+    .dark .btn-3d-switch:hover {
+      box-shadow: 0 4.5px 0 #020617, 0 6px 12px rgba(0, 0, 0, 0.5);
+    }
+    .btn-3d-switch:active {
+      transform: translateY(2.5px);
+      box-shadow: 0 0.5px 0 #94A3B8, 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    .dark .btn-3d-switch:active {
+      box-shadow: 0 0.5px 0 #020617, 0 2px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .btn-3d-hamburger {
+      background: linear-gradient(180deg, #FF3B62 0%, #E11D48 100%);
+      color: white;
+      box-shadow: 0 3.5px 0 #881337, 0 6px 12px rgba(225, 29, 72, 0.35);
+      border-top: 1px solid rgba(255, 255, 255, 0.35);
+    }
+    .btn-3d-hamburger:hover {
+      transform: translateY(-1.5px);
+      box-shadow: 0 5px 0 #881337, 0 8px 14px rgba(225, 29, 72, 0.45);
+    }
+    .btn-3d-hamburger:active {
+      transform: translateY(2.5px);
+      box-shadow: 0 0.5px 0 #881337, 0 2px 4px rgba(225, 29, 72, 0.2);
+    }
+
+    .btn-3d-gold {
+      background: linear-gradient(180deg, #FDE047 0%, #F59E0B 60%, #D97706 100%);
+      color: #0F172A;
+      box-shadow: 0 4px 0 #92400E, 0 8px 16px rgba(245, 158, 11, 0.35);
+      border-top: 1px solid rgba(255, 255, 255, 0.6);
+    }
+    .btn-3d-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 0 #92400E, 0 12px 20px rgba(245, 158, 11, 0.45);
+      filter: brightness(1.05);
+    }
+    .btn-3d-gold:active {
+      transform: translateY(3.5px);
+      box-shadow: 0 0.5px 0 #92400E, 0 3px 6px rgba(245, 158, 11, 0.2);
+    }
+
     /* ==========================================================================
        ENTERPRISE MOBILE-FIRST RESPONSIVE MASTER STYLESHEET
        Strict mobile optimization for 320px, 480px, 768px, 1024px
@@ -957,7 +1100,7 @@
 
             <!-- Hero Action CTAs -->
             <div class="flex flex-wrap items-center gap-4 pt-2">
-              <a href="#section-home2-vip-pass" class="btn-3d btn-3d-crimson px-7 py-3.5 rounded-xl font-bold text-sm text-white flex items-center gap-2.5 shadow-lg shadow-brand-crimson/25 hover:shadow-brand-crimson/40 transition-all">
+              <a href="#section-home2-vip-pass" class="btn-3d btn-3d-crimson bg-brand-crimson px-7 py-3.5 rounded-xl font-bold text-sm text-white flex items-center gap-2.5 shadow-lg shadow-brand-crimson/25 hover:shadow-brand-crimson/40 transition-all">
                 <span>Claim 14-Day VIP Confidence Pass</span>
                 <i class="fa-solid fa-ticket text-xs"></i>
               </a>
@@ -1860,7 +2003,7 @@
 
                     <button 
                       type="submit" 
-                      class="btn-3d btn-3d-crimson w-full py-3.5 rounded-xl text-xs font-black uppercase tracking-wider text-white shadow-lg shadow-brand-crimson/25 hover:shadow-brand-crimson/40 transition-all flex items-center justify-center gap-2 mt-2"
+                      class="btn-3d btn-3d-crimson bg-brand-crimson w-full py-3.5 rounded-xl text-xs font-black uppercase tracking-wider text-white shadow-lg shadow-brand-crimson/25 hover:shadow-brand-crimson/40 transition-all flex items-center justify-center gap-2 mt-2"
                     >
                       <span>Claim VIP Pass &amp; Free Uniform Kit</span>
                       <i class="fa-solid fa-arrow-right rtl:rotate-180 text-xs"></i>
@@ -1923,7 +2066,7 @@
       <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-xs font-mono text-slate-700 dark:text-slate-300 font-bold">
         Confirmation ID: <strong id="vipConfirmCode" class="text-brand-crimson">#MMA-CONF-8821</strong>
       </div>
-      <button type="button" onclick="closeVipModal()" class="btn-3d btn-3d-crimson w-full py-3 rounded-xl text-xs font-bold text-white shadow-md">
+      <button type="button" onclick="closeVipModal()" class="btn-3d btn-3d-crimson bg-brand-crimson w-full py-3 rounded-xl text-xs font-bold text-white shadow-md">
         Done &bull; Return to Academy Overview
       </button>
     </div>
