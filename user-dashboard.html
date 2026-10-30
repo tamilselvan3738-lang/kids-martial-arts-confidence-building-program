@@ -2233,7 +2233,8 @@
     function closeMobileDrawer() {
       if (mobileDrawer) {
         mobileDrawer.classList.add('translate-x-full', 'rtl:-translate-x-full');
-      }
+      mobileDrawer.style.transform = '';
+    }
       if (drawerBackdrop) {
         drawerBackdrop.classList.add('hidden');
       }
