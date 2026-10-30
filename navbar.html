@@ -246,6 +246,136 @@
     [dir="rtl"] .creative-dropdown {
       text-align: right;
     }
+
+    /* ========================================================
+       3D TACTILE BUTTONS & HAMBURGER SYSTEM
+       ======================================================== */
+    .btn-3d {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.12s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                  box-shadow 0.12s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  filter 0.15s ease;
+      transform: translateY(0);
+    }
+
+    .btn-3d-login {
+      background: linear-gradient(180deg, #FF3B62 0%, #E11D48 60%, #BE123C 100%);
+      color: #FFFFFF;
+      box-shadow: 0 4px 0 #881337, 0 8px 16px rgba(225, 29, 72, 0.35);
+      border-top: 1px solid rgba(255, 255, 255, 0.45);
+      border-left: 1px solid rgba(255, 255, 255, 0.2);
+      border-right: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .btn-3d-login:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 0 #881337, 0 12px 20px rgba(225, 29, 72, 0.45);
+      filter: brightness(1.05);
+    }
+    .btn-3d-login:active {
+      transform: translateY(3.5px);
+      box-shadow: 0 0.5px 0 #881337, 0 3px 6px rgba(225, 29, 72, 0.2);
+    }
+
+    .btn-3d-dashboard {
+      background: linear-gradient(180deg, #F1F5F9 0%, #E2E8F0 100%);
+      color: #1E293B;
+      box-shadow: 0 3px 0 #94A3B8, 0 5px 10px rgba(0, 0, 0, 0.05);
+      border-top: 1px solid rgba(255, 255, 255, 0.85);
+    }
+    .dark .btn-3d-dashboard {
+      background: linear-gradient(180deg, #26334D 0%, #172033 100%);
+      color: #F8FAFC;
+      box-shadow: 0 3px 0 #0A0F1A, 0 5px 10px rgba(0, 0, 0, 0.45);
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    }
+    .btn-3d-dashboard:hover {
+      transform: translateY(-1.5px);
+      box-shadow: 0 4.5px 0 #94A3B8, 0 8px 14px rgba(0, 0, 0, 0.08);
+    }
+    .dark .btn-3d-dashboard:hover {
+      box-shadow: 0 4.5px 0 #0A0F1A, 0 8px 14px rgba(0, 0, 0, 0.55);
+    }
+    .btn-3d-dashboard:active {
+      transform: translateY(2.5px);
+      box-shadow: 0 0.5px 0 #94A3B8, 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    .dark .btn-3d-dashboard:active {
+      box-shadow: 0 0.5px 0 #0A0F1A, 0 2px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .btn-3d-switch {
+      background: linear-gradient(180deg, #F8FAFC 0%, #E2E8F0 100%);
+      color: #334155;
+      box-shadow: 0 3px 0 #94A3B8, 0 4px 8px rgba(0, 0, 0, 0.06);
+      border-top: 1px solid rgba(255, 255, 255, 0.85);
+    }
+    .dark .btn-3d-switch {
+      background: linear-gradient(180deg, #1E293B 0%, #0F172A 100%);
+      color: #E2E8F0;
+      box-shadow: 0 3px 0 #020617, 0 4px 8px rgba(0, 0, 0, 0.45);
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .btn-3d-switch:hover {
+      transform: translateY(-1.5px);
+      box-shadow: 0 4.5px 0 #94A3B8, 0 6px 12px rgba(0, 0, 0, 0.1);
+    }
+    .dark .btn-3d-switch:hover {
+      box-shadow: 0 4.5px 0 #020617, 0 6px 12px rgba(0, 0, 0, 0.5);
+    }
+    .btn-3d-switch:active {
+      transform: translateY(2.5px);
+      box-shadow: 0 0.5px 0 #94A3B8, 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    .dark .btn-3d-switch:active {
+      box-shadow: 0 0.5px 0 #020617, 0 2px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .btn-3d-hamburger {
+      background: linear-gradient(180deg, #FF3B62 0%, #E11D48 60%, #BE123C 100%) !important;
+      color: #FFFFFF !important;
+      box-shadow: 0 3.5px 0 #881337, 0 6px 14px rgba(225, 29, 72, 0.4) !important;
+      border-top: 1px solid rgba(255, 255, 255, 0.45) !important;
+      border-left: 1px solid rgba(255, 255, 255, 0.2) !important;
+      border-right: 1px solid rgba(255, 255, 255, 0.15) !important;
+      border-bottom: 1px solid rgba(136, 19, 55, 0.4) !important;
+      flex-shrink: 0 !important;
+      padding: 0 !important;
+      cursor: pointer;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      z-index: 20;
+    }
+    .btn-3d-hamburger:hover {
+      transform: translateY(-1.5px);
+      box-shadow: 0 5px 0 #881337, 0 8px 16px rgba(225, 29, 72, 0.5) !important;
+      filter: brightness(1.05);
+    }
+    .btn-3d-hamburger:active {
+      transform: translateY(2.5px);
+      box-shadow: 0 0.5px 0 #881337, 0 2px 4px rgba(225, 29, 72, 0.25) !important;
+    }
+    .dark .btn-3d-hamburger {
+      box-shadow: 0 3.5px 0 #700c2a, 0 6px 14px rgba(0, 0, 0, 0.55) !important;
+    }
+    .dark .btn-3d-hamburger:hover {
+      box-shadow: 0 5px 0 #700c2a, 0 8px 18px rgba(225, 29, 72, 0.45) !important;
+    }
+    .dark .btn-3d-hamburger:active {
+      box-shadow: 0 0.5px 0 #700c2a, 0 2px 4px rgba(0, 0, 0, 0.4) !important;
+    }
+    .btn-3d-hamburger span {
+      background-color: #FFFFFF !important;
+      display: block;
+    }
   
 
     /* ==========================================================================
@@ -635,13 +765,13 @@
 
         </div>
 
-        <!-- ====================================================
+                <!-- ====================================================
              4. MOBILE & TABLET VIEW: HAMBURGER AT RIGHT
              ==================================================== -->
-        <div class="flex items-center lg:hidden">
+        <div class="flex items-center lg:hidden shrink-0 ml-auto rtl:ml-0 rtl:mr-auto">
           <!-- 3D Hamburger Menu Button -->
-          <button id="hamburgerBtn" onclick="toggleMobileMenu()" class="btn-3d btn-3d-hamburger w-8 h-8 rounded-xl flex items-center justify-center p-2 focus:outline-none" aria-label="Navigation Menu" aria-expanded="false">
-            <div class="w-4 h-3 flex flex-col justify-between items-center relative">
+          <button id="hamburgerBtn" onclick="toggleMobileMenu()" class="btn-3d btn-3d-hamburger w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center p-0 focus:outline-none shrink-0 shadow-md" aria-label="Navigation Menu" aria-expanded="false">
+            <div class="w-4 h-3 sm:w-4.5 sm:h-3.5 flex flex-col justify-between items-center relative pointer-events-none">
               <span id="bar1" class="w-full h-0.5 bg-white rounded-full transition-all duration-300 transform origin-left"></span>
               <span id="bar2" class="w-full h-0.5 bg-white rounded-full transition-all duration-300"></span>
               <span id="bar3" class="w-full h-0.5 bg-white rounded-full transition-all duration-300 transform origin-left"></span>
